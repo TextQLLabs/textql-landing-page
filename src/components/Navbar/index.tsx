@@ -49,11 +49,13 @@ export default function Navbar() {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
+            {/* Design System link - commented out
             {isDevelopment && (
               <Link to="/design-system">
                 <Button variant="ghost" size="sm">Design System</Button>
               </Link>
             )}
+            */}
             <a 
               href="https://app.textql.com" 
               target="_blank" 
@@ -127,6 +129,7 @@ export default function Navbar() {
             
             {/* Mobile Actions */}
             <div className="pt-4 border-t border-[#B8D8D0]/10 space-y-3">
+              {/* Design System link - commented out
               {isDevelopment && (
                 <Link 
                   to="/design-system"
@@ -136,6 +139,7 @@ export default function Navbar() {
                   Design System
                 </Link>
               )}
+              */}
               <a 
                 href="https://app.textql.com" 
                 target="_blank" 

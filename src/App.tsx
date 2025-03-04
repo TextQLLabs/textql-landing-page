@@ -35,7 +35,11 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/design-system" element={<DesignSystem />} />
+        {/* Design System route - commented out to prevent it from showing up
+        {isDevelopment && (
+          <Route path="/design-system" element={<DesignSystem />} />
+        )}
+        */}
         <Route element={<Layout />}>
           {/* Main Routes */}
           <Route

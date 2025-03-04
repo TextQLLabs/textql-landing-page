@@ -16,6 +16,8 @@ export default {
       "/terms", 
       "/privacy", 
       "/blog"
+      // Note: /design-system is intentionally not included here
+      // as it should only be accessible in development mode
     ];
   },
 } satisfies Config; 
