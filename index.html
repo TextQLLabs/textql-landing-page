@@ -15,7 +15,7 @@
     <meta http-equiv="Content-Security-Policy" content="frame-src 'self' app.termly.io;">
     
     <!-- Basic metadata -->
-    <meta name="description" content="Deploy AI agents to find trends across all of your data that makes you money" />
+    <meta name="description" content="TextQL helps enterprises discover valuable insights with AI agents that analyze all your data sources to identify profit-driving trends and opportunities" />
     <link rel="canonical" href="https://textql.com" />
     
     <!-- Open Graph -->
@@ -43,6 +43,7 @@
         "name": "TextQL",
         "url": "https://textql.com",
         "logo": "https://textql.com/images/logo.png",
+        "description": "Deploy AI agents to find trends across all of your data that makes you money",
         "sameAs": [
           "https://twitter.com/textql",
           "https://linkedin.com/company/textql"
@@ -51,7 +52,8 @@
           "@type": "ContactPoint",
           "email": "ethan@textql.com",
           "contactType": "customer service"
-        }
+        },
+        "knowsAbout": ["AI", "Data Analytics", "Enterprise Software", "Business Intelligence"]
       }
     </script>
     
@@ -63,9 +65,52 @@
     })
     </script>
     <title>Find Insights With AI | TextQL</title>
+    <!-- Add preconnect for key domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/src/main.tsx" as="script">
+    <link rel="preload" href="/fonts/your-main-font.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Add more keywords (use sparingly) -->
+    <meta name="keywords" content="AI data analysis, business intelligence, enterprise data, data insights, ontology, AI agents" />
+
+    <!-- Add author information -->
+    <meta name="author" content="TextQL Inc." />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // WebP support detection
+      const checkWebp = new Promise((resolve) => {
+        const webpImg = new Image();
+        webpImg.onload = webpImg.onerror = () => {
+          resolve(webpImg.height === 2);
+        };
+        webpImg.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
+      });
+      
+      checkWebp.then(hasWebp => {
+        document.documentElement.className += hasWebp ? ' webp' : ' no-webp';
+      });
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://textql.com"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Agents",
+        "item": "https://textql.com/agents"
+      }]
+    }
+    </script>
   </body>
 </html>
