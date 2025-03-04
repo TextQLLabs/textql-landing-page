@@ -847,6 +847,466 @@
         "Performance logs",
         "User feedback data"
       ]
+    },
+    "predictive-maintenance": {
+      "id": "predictive-maintenance",
+      "title": "Predictive Maintenance Optimization",
+      "description": "Maximize equipment reliability with IoT-powered predictive maintenance and failure prevention.",
+      "industryId": "manufacturing",
+      "tags": [
+        "maintenance",
+        "iot",
+        "prediction",
+        "reliability"
+      ],
+      "image": "https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=800&q=80",
+      "features": [
+        "IoT sensor monitoring",
+        "Failure prediction",
+        "Maintenance optimization",
+        "Cost reduction analysis",
+        "Performance tracking",
+        "Resource planning"
+      ],
+      "components": [
+        {
+          "name": "IoT Platform",
+          "description": "Comprehensive IoT sensor monitoring and data collection system"
+        },
+        {
+          "name": "Prediction Engine",
+          "description": "ML-powered failure prediction and analysis platform"
+        },
+        {
+          "name": "Maintenance Optimizer",
+          "description": "Intelligent maintenance scheduling and optimization system"
+        },
+        {
+          "name": "Resource Manager",
+          "description": "Advanced resource planning and allocation platform"
+        }
+      ],
+      "requirements": [
+        "IoT sensors",
+        "Equipment data",
+        "Maintenance history",
+        "Resource data",
+        "Cost tracking system"
+      ]
+    },
+    "preventive-care": {
+      "id": "preventive-care",
+      "title": "Preventive Care Optimization",
+      "description": "Enhance preventive care outcomes with proactive screening and patient engagement.",
+      "industryId": "healthcare",
+      "tags": [
+        "preventive",
+        "screening",
+        "engagement",
+        "outcomes"
+      ],
+      "image": "https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?auto=format&fit=crop&w=800&q=80",
+      "features": [
+        "Screening program management",
+        "Risk stratification",
+        "Patient outreach automation",
+        "Outcome tracking",
+        "Engagement monitoring",
+        "Intervention optimization"
+      ],
+      "components": [
+        {
+          "name": "Screening Manager",
+          "description": "Comprehensive screening program management platform"
+        },
+        {
+          "name": "Risk Analyzer",
+          "description": "Advanced risk stratification and analysis system"
+        },
+        {
+          "name": "Outreach Engine",
+          "description": "Automated patient engagement and communication platform"
+        },
+        {
+          "name": "Outcome Tracker",
+          "description": "Real-time outcome monitoring and analytics system"
+        }
+      ],
+      "requirements": [
+        "Patient records system",
+        "Communication platform",
+        "Risk assessment tools",
+        "Engagement tracking",
+        "Analytics platform"
+      ]
+    },
+    "production-efficiency": {
+      "id": "production-efficiency",
+      "title": "Production Efficiency Optimization",
+      "description": "Maximize manufacturing output and reduce waste through AI-powered production optimization and real-time analytics.",
+      "industryId": "manufacturing",
+      "tags": [
+        "production",
+        "optimization",
+        "efficiency",
+        "automation"
+      ],
+      "image": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+      "features": [
+        "Real-time production monitoring",
+        "Bottleneck detection",
+        "Waste reduction analysis",
+        "Output optimization",
+        "Quality control integration",
+        "Performance analytics"
+      ],
+      "components": [
+        {
+          "name": "Production Monitor",
+          "description": "Real-time production line monitoring and analysis system"
+        },
+        {
+          "name": "Optimization Engine",
+          "description": "AI-powered production scheduling and optimization platform"
+        },
+        {
+          "name": "Waste Analyzer",
+          "description": "Advanced waste detection and reduction system"
+        },
+        {
+          "name": "Performance Tracker",
+          "description": "Comprehensive production performance monitoring platform"
+        }
+      ],
+      "requirements": [
+        "Production line sensors",
+        "Quality control system",
+        "Machine data access",
+        "Process control system",
+        "Performance metrics data"
+      ]
+    },
+    "quality-control": {
+      "id": "quality-control",
+      "title": "Quality Control Enhancement",
+      "description": "Optimize manufacturing quality control with AI-powered defect detection and yield improvement.",
+      "industryId": "manufacturing",
+      "tags": [
+        "quality",
+        "inspection",
+        "defects",
+        "yield"
+      ],
+      "image": "https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?auto=format&fit=crop&w=800&q=80",
+      "features": [
+        "AI vision inspection",
+        "Defect prediction",
+        "Yield optimization",
+        "Quality analytics",
+        "Process control",
+        "Performance tracking"
+      ],
+      "components": [
+        {
+          "name": "Vision System",
+          "description": "AI-powered visual inspection and defect detection platform"
+        },
+        {
+          "name": "Quality Analyzer",
+          "description": "Advanced quality analysis and prediction system"
+        },
+        {
+          "name": "Yield Optimizer",
+          "description": "Intelligent yield optimization and improvement engine"
+        },
+        {
+          "name": "Process Monitor",
+          "description": "Real-time process control and monitoring platform"
+        }
+      ],
+      "requirements": [
+        "Vision system hardware",
+        "Quality control data",
+        "Process control system",
+        "Performance metrics",
+        "Training data sets"
+      ]
+    },
+    "risk-assessment": {
+      "id": "risk-assessment",
+      "title": "Risk Assessment & Pricing",
+      "description": "Optimize insurance risk assessment and pricing using AI-powered analytics and predictive modeling.",
+      "industryId": "insurance",
+      "tags": [
+        "risk",
+        "pricing",
+        "analytics",
+        "modeling"
+      ],
+      "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80",
+      "features": [
+        "Risk scoring",
+        "Predictive modeling",
+        "Dynamic pricing",
+        "Portfolio analysis",
+        "Market analysis",
+        "Competitive benchmarking"
+      ],
+      "components": [
+        {
+          "name": "Risk Analyzer",
+          "description": "Advanced risk assessment and scoring platform"
+        },
+        {
+          "name": "Pricing Engine",
+          "description": "Dynamic pricing and optimization system"
+        },
+        {
+          "name": "Portfolio Manager",
+          "description": "Portfolio risk analysis and management platform"
+        },
+        {
+          "name": "Market Analyzer",
+          "description": "Market analysis and competitive intelligence system"
+        }
+      ],
+      "requirements": [
+        "Historical claims data",
+        "Customer risk profiles",
+        "Market pricing data",
+        "Actuarial models",
+        "Competitive analysis data"
+      ]
+    },
+    "small-business": {
+      "id": "small-business",
+      "title": "Small Business Banking",
+      "description": "Optimize small business banking operations with automated lending decisions and personalized financial insights.",
+      "industryId": "banking",
+      "tags": [
+        "lending",
+        "small-business",
+        "automation",
+        "analytics"
+      ],
+      "image": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=800&q=80",
+      "features": [
+        "Automated lending decisions",
+        "Cash flow forecasting",
+        "Business health monitoring",
+        "Payment optimization",
+        "Financial insights",
+        "Risk assessment"
+      ],
+      "components": [
+        {
+          "name": "Lending Engine",
+          "description": "Automated business loan decisioning system"
+        },
+        {
+          "name": "Cash Flow Analyzer",
+          "description": "AI-powered cash flow prediction and analysis platform"
+        },
+        {
+          "name": "Business Monitor",
+          "description": "Real-time business health monitoring system"
+        },
+        {
+          "name": "Payment Optimizer",
+          "description": "Intelligent payment scheduling and optimization platform"
+        }
+      ],
+      "requirements": [
+        "Business banking data",
+        "Credit scoring system",
+        "Transaction history",
+        "Financial statements",
+        "Industry benchmarks"
+      ]
+    },
+    "store-traffic": {
+      "id": "store-traffic",
+      "title": "Store Traffic Analysis",
+      "description": "Analyze and optimize in-store traffic patterns and customer behavior to improve conversion rates and store performance.",
+      "industryId": "retail",
+      "tags": [
+        "analytics",
+        "retail",
+        "optimization",
+        "store-operations"
+      ],
+      "image": "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?auto=format&fit=crop&w=800&q=80",
+      "features": [
+        "Real-time traffic monitoring",
+        "Heat map analysis",
+        "Peak hour prediction",
+        "Staff scheduling optimization",
+        "Layout effectiveness analysis",
+        "Conversion tracking"
+      ],
+      "components": [
+        {
+          "name": "Traffic Monitor",
+          "description": "Real-time foot traffic tracking and analysis system"
+        },
+        {
+          "name": "Heat Map Generator",
+          "description": "Visual analysis tool for customer movement patterns"
+        },
+        {
+          "name": "Schedule Optimizer",
+          "description": "AI-powered staff scheduling and optimization platform"
+        },
+        {
+          "name": "Analytics Dashboard",
+          "description": "Comprehensive store performance monitoring system"
+        }
+      ],
+      "requirements": [
+        "Traffic counting sensors",
+        "Video analytics system",
+        "POS integration",
+        "Staff scheduling system",
+        "Store layout data"
+      ]
+    },
+    "telehealth": {
+      "id": "telehealth",
+      "title": "Telehealth Platform Optimization",
+      "description": "Maximize telehealth service delivery with enhanced virtual care capabilities and patient engagement.",
+      "industryId": "healthcare",
+      "tags": [
+        "telehealth",
+        "virtual-care",
+        "remote-health",
+        "digital"
+      ],
+      "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80",
+      "features": [
+        "Virtual consultation platform",
+        "Remote monitoring integration",
+        "Digital health records",
+        "Secure messaging",
+        "Appointment management",
+        "Patient engagement tools"
+      ],
+      "components": [
+        {
+          "name": "Virtual Platform",
+          "description": "Comprehensive telehealth service delivery platform"
+        },
+        {
+          "name": "Remote Monitor",
+          "description": "Remote patient monitoring and tracking system"
+        },
+        {
+          "name": "Digital Records",
+          "description": "Integrated digital health records platform"
+        },
+        {
+          "name": "Engagement Hub",
+          "description": "Patient engagement and communication center"
+        }
+      ],
+      "requirements": [
+        "Video platform",
+        "EHR integration",
+        "Monitoring devices",
+        "Security system",
+        "Communication platform"
+      ]
+    },
+    "wealth-management": {
+      "id": "wealth-management",
+      "title": "Wealth Management Optimization",
+      "description": "Transform wealth management services with AI-powered portfolio optimization and personalized advisory.",
+      "industryId": "banking",
+      "tags": [
+        "wealth",
+        "investment",
+        "advisory",
+        "personalization"
+      ],
+      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+      "features": [
+        "Portfolio optimization",
+        "Risk profiling",
+        "Investment recommendations",
+        "Goal tracking",
+        "Performance reporting",
+        "Client communication"
+      ],
+      "components": [
+        {
+          "name": "Portfolio Optimizer",
+          "description": "AI-powered portfolio optimization and rebalancing system"
+        },
+        {
+          "name": "Risk Profiler",
+          "description": "Advanced client risk assessment and profiling platform"
+        },
+        {
+          "name": "Advisory Engine",
+          "description": "Intelligent investment recommendation system"
+        },
+        {
+          "name": "Performance Tracker",
+          "description": "Comprehensive portfolio performance monitoring platform"
+        }
+      ],
+      "requirements": [
+        "Market data feed",
+        "Client portfolio data",
+        "Risk models",
+        "Investment product data",
+        "CRM integration"
+      ]
+    },
+    "workforce-optimization": {
+      "id": "workforce-optimization",
+      "title": "Workforce Optimization",
+      "description": "Maximize workforce efficiency with AI-powered scheduling and resource optimization.",
+      "industryId": "manufacturing",
+      "tags": [
+        "workforce",
+        "scheduling",
+        "optimization",
+        "productivity"
+      ],
+      "image": "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=800&q=80",
+      "features": [
+        "Smart shift scheduling",
+        "Labor utilization tracking",
+        "Productivity analysis",
+        "Overtime reduction",
+        "Performance monitoring",
+        "Resource planning"
+      ],
+      "components": [
+        {
+          "name": "Scheduling Engine",
+          "description": "AI-powered workforce scheduling and optimization platform"
+        },
+        {
+          "name": "Productivity Analyzer",
+          "description": "Advanced productivity analysis and tracking system"
+        },
+        {
+          "name": "Resource Optimizer",
+          "description": "Intelligent resource allocation and planning engine"
+        },
+        {
+          "name": "Performance Monitor",
+          "description": "Real-time performance monitoring and analytics platform"
+        }
+      ],
+      "requirements": [
+        "Workforce data",
+        "Time tracking system",
+        "Performance metrics",
+        "Scheduling platform",
+        "Resource management system"
+      ]
     }
   }
 }
