@@ -1,0 +1,114 @@
+{
+  "HomeHero": {
+    "badge": "Ana is now generally available",
+    "title": "Ana",
+    "subtitle": "finds insights you cannot",
+    "description": "Deploy agents across all of your databases & systems of record.",
+    "carouselText": "Ana finds insights in your existing data stack"
+  },
+  "JoinsSection": {
+    "header": "How Do We Find Insights Others Can't?",
+    "description": "Our agents can connect 100x more data sources than any other solution, finding insights across all your systems - regardless of how many databases your data lives in.",
+    "features": [
+      {
+        "title": "Intelligent Agent Architecture",
+        "description": "Our agent understands complex data relationships and can automatically determine optimal join paths across hundreds of tables."
+      },
+      {
+        "title": "Comprehensive Data Ontology",
+        "description": "A sophisticated semantic layer maps relationships between tables, enabling deterministic joins at scale."
+      },
+      {
+        "title": "Massive Compute Power",
+        "description": "Our infrastructure handles complex join operations efficiently, processing hundreds of tables without performance degradation."
+      }
+    ]
+  },
+  "JoinsChart": {
+    "location": "src/components/page-sections/agents/joins/JoinsChart.tsx",
+    "title": "Maximum Number of Tables AI Can Join Together",
+    "yAxisLabel": "Number of Table Sources They Can Connect",
+    "footnote": "*This excludes other data agent products that don't come with any out of the box advertised joining capabilities",
+    "competitors": [
+      {
+        "name": "TextQL Ana",
+        "joins": 250
+      },
+      {
+        "name": "Palantir AIP",
+        "joins": 24
+      },
+      {
+        "name": "Snowflake Cortex",
+        "joins": 8
+      },
+      {
+        "name": "Databricks Genie",
+        "joins": 6
+      },
+      {
+        "name": "Dystil AI",
+        "joins": 5
+      },
+      {
+        "name": "Looker AI",
+        "joins": 3
+      },
+      {
+        "name": "Tableau Pulse",
+        "joins": 2
+      }
+    ]
+  },
+  "EnterpriseSection": {
+    "title": "Secure & On Your Own Cloud",
+    "description": "Deploy TextQL in your infrastructure with enterprise-grade security and complete data sovereignty",
+    "buttonText": "Learn More About Enterprise",
+    "features": [
+      {
+        "title": "Enterprise-Grade Security",
+        "description": "SOC 2 Type II certified with end-to-end encryption"
+      },
+      {
+        "title": "Data Sovereignty",
+        "description": "Deploy in your own cloud with complete control"
+      },
+      {
+        "title": "Private Infrastructure",
+        "description": "Dedicated resources in your VPC"
+      },
+      {
+        "title": "Cloud Agnostic",
+        "description": "AWS, Azure, or GCP deployment options"
+      }
+    ]
+  },
+  "OntologySection": {
+    "title": "Powered by The Ontology",
+    "description": "Learn about the framework that lets TextQL join 100x more data together than other products",
+    "buttonText": "Learn How It Works"
+  },
+  "WorkflowCarousel": {
+    "title": "Discover How Ana Transforms Industries",
+    "description": "Explore our library of AI-powered workflows that Ana is using to help enterprises unlock insights and drive value today.",
+    "buttonText": "Explore All Workflows"
+  },
+  "Logos": [
+    "Snowflake",
+    "Databricks",
+    "Power BI",
+    "Tableau",
+    "dbt",
+    "Salesforce",
+    "Azure",
+    "AWS",
+    "Google Cloud",
+    "Looker",
+    "Teams",
+    "Slack",
+    "Alation",
+    "SAP",
+    "Oracle",
+    "Redshift"
+  ]
+}
