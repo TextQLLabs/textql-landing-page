@@ -38,5 +38,5 @@
     Content-Type = "application/xml"
 
 # Enable prerendering for SEO
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+# [[plugins]]
+#   package = "@netlify/plugin-nextjs"
