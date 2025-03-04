@@ -16,3 +16,9 @@ playground-temp
 temp
 TODOs.md
 .eslintcache
+
+# React Router SSR build files
+build/
+.react-router/
+**/ssr-manifest.json
+**/_redirects
