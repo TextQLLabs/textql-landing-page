@@ -1,5 +1,5 @@
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+// import { useEffect } from 'react';
 import Layout from './components/Layout';
 import { SEO } from './components/SEO';
 import { 
@@ -10,7 +10,7 @@ import {
   EnterpriseSection 
 } from './components/page-sections/home';
 import { CTA } from './components/sections';
-import DesignSystem from './pages/DesignSystem';
+// import DesignSystem from './pages/DesignSystem';
 import Pricing from './pages/Pricing';
 import Enterprise from './pages/Enterprise';
 import About from './pages/About';
@@ -22,15 +22,16 @@ import Blog from './pages/blog';
 import BlogPost from './pages/blog/[id]';
 import WorkflowLibrary from './pages/workflows';
 import WorkflowTemplate from './pages/workflows/[id]';
+import Events from './pages/Events';
 
 function App() {
-  const location = useLocation();
-  const isDevelopment = import.meta.env.DEV;
+  // const location = useLocation();
+  // const isDevelopment = import.meta.env.DEV;
 
   // Get current page metadata
-  const currentPath = location.pathname;
-  const baseUrl = 'https://textql.com';
-  const canonical = `${baseUrl}${currentPath}`;
+  // const currentPath = location.pathname;
+  // const baseUrl = 'https://textql.com';
+  // const canonical = `${baseUrl}${currentPath}`;
 
   return (
     <>
@@ -72,6 +73,7 @@ function App() {
           <Route path="/ontology" element={<Ontology />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/events" element={<Events />} />
           
           {/* Blog Routes */}
           <Route path="/blog" element={<Blog />} />

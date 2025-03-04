@@ -42,6 +42,11 @@ export const navigation: NavItem[] = [
         href: '/blog'
       },
       {
+        label: 'Events',
+        description: 'Meet our team and learn about TextQL in person',
+        href: '/events'
+      },
+      {
         label: 'Documentation',
         description: 'Learn how to integrate and use TextQL',
         href: 'https://docs.textql.com',
