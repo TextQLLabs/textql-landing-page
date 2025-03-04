@@ -1,6 +1,6 @@
 [build]
   command = "npm run build"
-  publish = "dist"
+  publish = "build/client"
 
 # Handle client-side routing
 [[redirects]]
@@ -37,6 +37,5 @@
   [headers.values]
     Content-Type = "application/xml"
 
-# Enable prerendering for SEO
-# [[plugins]]
-#   package = "@netlify/plugin-nextjs"
+# Enable prerendering for SEO is handled by React Router
+# No need for the Next.js plugin

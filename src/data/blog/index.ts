@@ -35,29 +35,29 @@ export function getPostContent(id: string): string {
   try {
     switch (id) {
       case 'sql-process':
-        return import.meta.glob('./sql-process/content.md', { as: 'raw', eager: true })['./sql-process/content.md'];
+        return getSQLProcessContent();
       case 'building-data-agent':
-        return import.meta.glob('./building-data-agent/content.md', { as: 'raw', eager: true })['./building-data-agent/content.md'];
+        return getBuildingDataAgentContent();
       case 'future-of-data':
-        return import.meta.glob('./future-of-data/content.md', { as: 'raw', eager: true })['./future-of-data/content.md'];
+        return getFutureOfDataContent();
       case 'ten-year-thesis':
-        return import.meta.glob('./ten-year-thesis/content.md', { as: 'raw', eager: true })['./ten-year-thesis/content.md'];
+        return getTenYearThesisContent();
       case 'sql-model':
-        return import.meta.glob('./sql-model/content.md', { as: 'raw', eager: true })['./sql-model/content.md'];
+        return getSQLModelContent();
       case 'fundraising':
-        return import.meta.glob('./fundraising/content.md', { as: 'raw', eager: true })['./fundraising/content.md'];
+        return getFundraisingContent();
       case 'nba-launchpad':
-        return import.meta.glob('./nba-launchpad/content.md', { as: 'raw', eager: true })['./nba-launchpad/content.md'];
+        return getNBALaunchpadContent();
       case 'soc2-report':
-        return import.meta.glob('./soc2-report/content.md', { as: 'raw', eager: true })['./soc2-report/content.md'];
+        return getSOC2ReportContent();
       case 'haskell-in-production':
-        return import.meta.glob('./haskell-in-production/content.md', { as: 'raw', eager: true })['./haskell-in-production/content.md'];
+        return getHaskellInProductionContent();
       case 'tableau-integration':
-        return import.meta.glob('./tableau-integration/content.md', { as: 'raw', eager: true })['./tableau-integration/content.md'];
+        return getTableauIntegrationContent();
       case 'embedding-models':
-        return import.meta.glob('./embedding-models/content.md', { as: 'raw', eager: true })['./embedding-models/content.md'];
+        return getEmbeddingModelsContent();
       case 'why-ontology':
-        return import.meta.glob('./why-ontology/content.md', { as: 'raw', eager: true })['./why-ontology/content.md'];
+        return getWhyOntologyContent();
       default:
         throw new Error(`Blog post content not found for id: ${id}`);
     }
@@ -65,4 +65,52 @@ export function getPostContent(id: string): string {
     console.error('Failed to load content for post ' + id + ':', error);
     return '';
   }
+}
+
+export function getSQLProcessContent(): string {
+  return import.meta.glob('./sql-process/content.md', { query: '?raw', import: 'default', eager: true })['./sql-process/content.md'] as string;
+}
+
+export function getBuildingDataAgentContent(): string {
+  return import.meta.glob('./building-data-agent/content.md', { query: '?raw', import: 'default', eager: true })['./building-data-agent/content.md'] as string;
+}
+
+export function getFutureOfDataContent(): string {
+  return import.meta.glob('./future-of-data/content.md', { query: '?raw', import: 'default', eager: true })['./future-of-data/content.md'] as string;
+}
+
+export function getTenYearThesisContent(): string {
+  return import.meta.glob('./ten-year-thesis/content.md', { query: '?raw', import: 'default', eager: true })['./ten-year-thesis/content.md'] as string;
+}
+
+export function getSQLModelContent(): string {
+  return import.meta.glob('./sql-model/content.md', { query: '?raw', import: 'default', eager: true })['./sql-model/content.md'] as string;
+}
+
+export function getFundraisingContent(): string {
+  return import.meta.glob('./fundraising/content.md', { query: '?raw', import: 'default', eager: true })['./fundraising/content.md'] as string;
+}
+
+export function getNBALaunchpadContent(): string {
+  return import.meta.glob('./nba-launchpad/content.md', { query: '?raw', import: 'default', eager: true })['./nba-launchpad/content.md'] as string;
+}
+
+export function getSOC2ReportContent(): string {
+  return import.meta.glob('./soc2-report/content.md', { query: '?raw', import: 'default', eager: true })['./soc2-report/content.md'] as string;
+}
+
+export function getHaskellInProductionContent(): string {
+  return import.meta.glob('./haskell-in-production/content.md', { query: '?raw', import: 'default', eager: true })['./haskell-in-production/content.md'] as string;
+}
+
+export function getTableauIntegrationContent(): string {
+  return import.meta.glob('./tableau-integration/content.md', { query: '?raw', import: 'default', eager: true })['./tableau-integration/content.md'] as string;
+}
+
+export function getEmbeddingModelsContent(): string {
+  return import.meta.glob('./embedding-models/content.md', { query: '?raw', import: 'default', eager: true })['./embedding-models/content.md'] as string;
+}
+
+export function getWhyOntologyContent(): string {
+  return import.meta.glob('./why-ontology/content.md', { query: '?raw', import: 'default', eager: true })['./why-ontology/content.md'] as string;
 }
