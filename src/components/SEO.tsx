@@ -10,6 +10,11 @@ interface SEOProps {
   noIndex?: boolean;
 }
 
+/**
+ * The SEO component adds page-specific metadata
+ * Note: Basic meta tags are already in root.tsx
+ * This component only overrides those defaults for specific pages
+ */
 export function SEO({
   title = 'Find Insights With AI | TextQL',
   description = 'Deploy AI agents to find trends across all of your data that makes you money',
@@ -19,52 +24,40 @@ export function SEO({
   twitterCard = 'summary_large_image',
   noIndex = false,
 }: SEOProps) {
-  // Use individual meta tags instead of the Meta component
+  // Update only page-specific meta tags
   return (
     <>
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={canonical} />
       
-      {/* Open Graph */}
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:url" content={canonical} />
-      <meta property="og:type" content={ogType} />
-      <meta property="og:image" content={ogImage} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:site_name" content="TextQL" />
-
-      {/* Twitter Card */}
-      <meta name="twitter:card" content={twitterCard} />
-      <meta name="twitter:site" content="@textql" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={ogImage} />
-
       {/* Indexing control */}
       {noIndex && <meta name="robots" content="noindex, nofollow" />}
       
-      {/* JSON-LD script */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'Organization',
-          name: 'TextQL',
-          url: 'https://textql.com',
-          logo: 'https://textql.com/images/logo.png',
-          sameAs: [
-            'https://twitter.com/textql',
-            'https://linkedin.com/company/textql'
-          ],
-          contactPoint: {
-            '@type': 'ContactPoint',
-            email: 'ethan@textql.com',
-            contactType: 'customer service'
-          }
-        })}
-      </script>
+      {/* Only add page-specific JSON-LD if needed */}
+      {ogType === 'article' && (
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            'headline': title,
+            'description': description,
+            'image': ogImage,
+            'publisher': {
+              '@type': 'Organization',
+              'name': 'TextQL',
+              'logo': {
+                '@type': 'ImageObject',
+                'url': 'https://textql.com/images/logo.png'
+              }
+            },
+            'mainEntityOfPage': {
+              '@type': 'WebPage',
+              '@id': canonical
+            }
+          })}
+        </script>
+      )}
     </>
   );
 }

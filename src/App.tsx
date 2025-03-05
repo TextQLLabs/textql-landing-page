@@ -1,5 +1,6 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-// import { useEffect } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Layout from './components/Layout';
 import { SEO } from './components/SEO';
 import { 
@@ -25,62 +26,61 @@ import WorkflowTemplate from './pages/workflows/[id]';
 import Events from './pages/Events';
 
 function App() {
-  // const location = useLocation();
-  // const isDevelopment = import.meta.env.DEV;
-
-  // Get current page metadata
-  // const currentPath = location.pathname;
-  // const baseUrl = 'https://textql.com';
-  // const canonical = `${baseUrl}${currentPath}`;
+  const location = useLocation();
+  
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   return (
-    <>
-      <Routes>
-        {/* Design System route - commented out to prevent it from showing up
-        {isDevelopment && (
-          <Route path="/design-system" element={<DesignSystem />} />
-        )}
-        */}
-        <Route element={<Layout />}>
-          {/* Main Routes */}
-          <Route
-            path="/"
-            element={
-              <main className="relative overflow-x-hidden">
-                <SEO 
-                  title="Find Insights With AI | TextQL"
-                  description="Deploy AI agents to find trends across all of your data that makes you money"
-                  canonical="https://textql.com"
-                  ogImage="https://textql.com/social-preview.png"
-                />
-                <HomeHero />
-                <JoinsSection />
-                <OntologySection />
-                <WorkflowCarousel />
-                <EnterpriseSection />
-                <CTA />
-              </main>
-            }
-          />
-          
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/enterprise" element={<Enterprise />} />
-          <Route path="/templates" element={<Navigate to="/workflows" replace />} />
-          <Route path="/workflows" element={<WorkflowLibrary />} />
-          <Route path="/workflows/:id" element={<WorkflowTemplate />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/agents" element={<Agents />} />
-          <Route path="/ontology" element={<Ontology />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/events" element={<Events />} />
-          
-          {/* Blog Routes */}
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:id" element={<BlogPost />} />
-        </Route>
-      </Routes>
-    </>
+    <TransitionGroup>
+      <CSSTransition
+        key={location.pathname}
+        classNames="page-transition"
+        timeout={300}
+      >
+        <Routes location={location}>
+          <Route element={<Layout />}>
+            {/* Main Routes */}
+            <Route
+              path="/"
+              element={
+                <main className="relative overflow-x-hidden">
+                  <SEO 
+                    title="Find Insights With AI | TextQL"
+                    description="Deploy AI agents to find trends across all of your data that makes you money"
+                    canonical="https://textql.com"
+                  />
+                  <HomeHero />
+                  <JoinsSection />
+                  <OntologySection />
+                  <WorkflowCarousel />
+                  <EnterpriseSection />
+                  <CTA />
+                </main>
+              }
+            />
+            
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/enterprise" element={<Enterprise />} />
+            <Route path="/templates" element={<Navigate to="/workflows" replace />} />
+            <Route path="/workflows" element={<WorkflowLibrary />} />
+            <Route path="/workflows/:id" element={<WorkflowTemplate />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/agents" element={<Agents />} />
+            <Route path="/ontology" element={<Ontology />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/events" element={<Events />} />
+            
+            {/* Blog Routes */}
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:id" element={<BlogPost />} />
+          </Route>
+        </Routes>
+      </CSSTransition>
+    </TransitionGroup>
   );
 }
 

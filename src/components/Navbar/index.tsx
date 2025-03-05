@@ -36,9 +36,9 @@ export default function Navbar() {
           : 'bg-black/30 backdrop-blur-sm'
       }`}>
         <div className="flex items-center justify-between px-4 md:px-6">
-          <a href="/" className="text-white hover:text-[#B8D8D0] transition-colors">
+          <Link to="/" className="text-white hover:text-[#B8D8D0] transition-colors">
             <TextLogo className="h-6 md:h-6 w-auto" />
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
@@ -96,29 +96,52 @@ export default function Navbar() {
             {navigation.map((item) => (
               <div key={item.label} className="py-2">
                 {item.href ? (
-                  <a
-                    href={item.href}
-                    target={item.external ? "_blank" : undefined}
-                    rel={item.external ? "noopener noreferrer" : undefined}
-                    className="block text-[#B8D8D0] hover:text-[#729E8C] transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.label}
-                  </a>
+                  item.external ? (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block text-[#B8D8D0] hover:text-[#729E8C] transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={item.href}
+                      className="block text-[#B8D8D0] hover:text-[#729E8C] transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  )
                 ) : (
                   <div className="space-y-2">
                     <div className="text-[#B8D8D0]">{item.label}</div>
                     {item.children && (
                       <div className="pl-4 space-y-2">
                         {item.children.map((child) => (
-                          <a
-                            key={child.href}
-                            href={child.href}
-                            className="block text-[#729E8C] hover:text-[#B8D8D0] transition-colors text-sm"
-                            onClick={() => setIsMenuOpen(false)}
-                          >
-                            {child.label}
-                          </a>
+                          child.external ? (
+                            <a
+                              key={child.href}
+                              href={child.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="block text-[#729E8C] hover:text-[#B8D8D0] transition-colors text-sm"
+                              onClick={() => setIsMenuOpen(false)}
+                            >
+                              {child.label}
+                            </a>
+                          ) : (
+                            <Link
+                              key={child.href}
+                              to={child.href}
+                              className="block text-[#729E8C] hover:text-[#B8D8D0] transition-colors text-sm"
+                              onClick={() => setIsMenuOpen(false)}
+                            >
+                              {child.label}
+                            </Link>
+                          )
                         ))}
                       </div>
                     )}

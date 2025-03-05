@@ -4,12 +4,9 @@ import { reactRouter } from '@react-router/dev/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    reactRouter(),
-  ],
+  plugins: [react(), reactRouter()],
   build: {
-    ssrManifest: true,
+    chunkSizeWarningLimit: 1000,
   },
   assetsInclude: ['**/*.md'],
 })

@@ -12,16 +12,23 @@ export function NavItem({ item }: NavItemProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   if (item.href) {
-    return (
+    return item.external ? (
       <a
         href={item.href}
-        target={item.external ? "_blank" : undefined}
-        rel={item.external ? "noopener noreferrer" : undefined}
+        target="_blank"
+        rel="noopener noreferrer"
         className="flex items-center gap-1.5 text-[#B8D8D0] hover:text-[#729E8C] transition-colors text-sm"
       >
         {item.label}
-        {item.external && <ArrowUpRight className="w-3.5 h-3.5" />}
+        <ArrowUpRight className="w-3.5 h-3.5" />
       </a>
+    ) : (
+      <Link
+        to={item.href}
+        className="flex items-center gap-1.5 text-[#B8D8D0] hover:text-[#729E8C] transition-colors text-sm"
+      >
+        {item.label}
+      </Link>
     );
   }
 

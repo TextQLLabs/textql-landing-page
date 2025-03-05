@@ -2,9 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- Cache control -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    
+    <!-- Favicons and icons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <!-- Add favicon and web app icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -14,72 +19,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Security-Policy" content="frame-src 'self' app.termly.io;">
     
-    <!-- Basic metadata -->
-    <meta name="description" content="TextQL helps enterprises discover valuable insights with AI agents that analyze all your data sources to identify profit-driving trends and opportunities" />
-    <link rel="canonical" href="https://textql.com" />
+    <!-- Performance optimizations -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://hermes.textql.com" crossorigin>
+    <link rel="preload" href="/src/entry.client.tsx" as="script">
     
-    <!-- Open Graph -->
-    <meta property="og:title" content="Find Insights With AI | TextQL" />
-    <meta property="og:description" content="Deploy AI agents to find trends across all of your data that makes you money" />
-    <meta property="og:url" content="https://textql.com" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://textql.com/social-preview.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="TextQL" />
+    <!-- Critical styles to prevent FOUC -->
+    <style>
+      html, body { background: #0A1F1C !important; }
+      #root { opacity: 1 !important; visibility: visible !important; }
+    </style>
     
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@textql" />
-    <meta name="twitter:title" content="Find Insights With AI | TextQL" />
-    <meta name="twitter:description" content="Deploy AI agents to find trends across all of your data that makes you money" />
-    <meta name="twitter:image" content="https://textql.com/social-preview.png" />
-    
-    <!-- Structured data for rich results -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "TextQL",
-        "url": "https://textql.com",
-        "logo": "https://textql.com/images/logo.png",
-        "description": "Deploy AI agents to find trends across all of your data that makes you money",
-        "sameAs": [
-          "https://twitter.com/textql",
-          "https://linkedin.com/company/textql"
-        ],
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "email": "ethan@textql.com",
-          "contactType": "customer service"
-        },
-        "knowsAbout": ["AI", "Data Analytics", "Enterprise Software", "Business Intelligence"]
-      }
-    </script>
-    
+    <!-- PostHog analytics - IMPORTANT -->
     <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
     posthog.init('phc_cmTpctVWkmjZZDI0vGNMD5wHY3ywg9FdQCA48kdfEp2', {
         api_host: 'https://hermes.textql.com',
-        person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
+        person_profiles: 'identified_only'
     })
     </script>
-    <title>Find Insights With AI | TextQL</title>
-    <!-- Add preconnect for key domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-
-    <!-- Preload critical assets -->
-    <link rel="preload" href="/src/main.tsx" as="script">
-
-    <!-- Add more keywords (use sparingly) -->
-    <meta name="keywords" content="AI data analysis, business intelligence, enterprise data, data insights, ontology, AI agents" />
-
-    <!-- Add author information -->
-    <meta name="author" content="TextQL Inc." />
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/src/entry.client.tsx"></script>
     <script>
       // WebP support detection
       const checkWebp = new Promise((resolve) => {
@@ -93,23 +55,6 @@
       checkWebp.then(hasWebp => {
         document.documentElement.className += hasWebp ? ' webp' : ' no-webp';
       });
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://textql.com"
-      },{
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Agents",
-        "item": "https://textql.com/agents"
-      }]
-    }
     </script>
   </body>
 </html>
