@@ -21,6 +21,7 @@ import BlogPost from './pages/blog/[id]';
 import WorkflowLibrary from './pages/workflows';
 import WorkflowTemplate from './pages/workflows/[id]';
 import Events from './pages/Events';
+import Demo from './pages/Demo';
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
         <Route path="/events" element={<Events />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:id" element={<BlogPost />} />
+        <Route path="/demo" element={<Demo />} />
       </Route>
     </Routes>
   );

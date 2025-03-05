@@ -15,7 +15,8 @@ export default {
       "/ontology",
       "/terms",
       "/privacy",
-      "/blog"
+      "/blog",
+      "/demo"
     ];
   },
 } satisfies Config; 
