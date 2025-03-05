@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Links,
   Meta,
@@ -13,13 +13,8 @@ export function Layout({
 }: {
   children: React.ReactNode;
 }) {
-  useEffect(() => {
-    // Remove no-fouc class immediately for pre-rendered content
-    document.body.classList.remove('no-fouc');
-  }, []);
-
   return (
-    <html lang="en">
+    <html lang="en" style={{ background: '#0A1F1C' }}>
       <head>
         <meta charSet="UTF-8" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -56,18 +51,6 @@ export function Layout({
         <Meta />
         <Links />
         
-        {/* Modified FOUC prevention style */}
-        <style dangerouslySetInnerHTML={{ __html: `
-          .no-fouc {
-            visibility: hidden;
-          }
-          
-          /* Show content immediately if JavaScript is disabled */
-          .no-js .no-fouc {
-            visibility: visible;
-          }
-        `}} />
-        
         <script type="application/ld+json">{`
           {
             "@context": "https://schema.org",
@@ -87,25 +70,23 @@ export function Layout({
           }
         `}</script>
         
-        <script>{`
-          !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-          posthog.init('phc_cmTpctVWkmjZZDI0vGNMD5wHY3ywg9FdQCA48kdfEp2', {
-              api_host: 'https://hermes.textql.com',
-              person_profiles: 'identified_only',
-          })
-        `}</script>
+        <style dangerouslySetInnerHTML={{ __html: `
+          html { background: #0A1F1C; }
+          body { display: block !important; }
+          #root { opacity: 1 !important; }
+        `}} />
       </head>
-      <body className="no-fouc">
-        {children}
+      <body style={{ background: '#0A1F1C', margin: 0 }}>
+        <div id="root" style={{ opacity: 1 }}>
+          {children}
+        </div>
         <ScrollRestoration />
         <Scripts />
-        
-        {/* Simplified content reveal script */}
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            document.body.classList.remove('no-fouc');
-          `
-        }} />
+        <script dangerouslySetInnerHTML={{ __html: `
+          // Posthog analytics
+          !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageViewId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+          posthog.init('phc_cmTpctVWkmjZZDI0vGNMD5wHY3ywg9FdQCA48kdfEp2',{api_host:'https://hermes.textql.com',person_profiles:'identified_only'});
+        `}} />
       </body>
     </html>
   );
