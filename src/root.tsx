@@ -14,7 +14,7 @@ export function Layout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" style={{ background: '#0A1F1C' }}>
+    <html lang="en" style={{ background: '#0A1F1C', overscrollBehavior: 'none' }}>
       <head>
         <meta charSet="UTF-8" />
         
@@ -72,7 +72,7 @@ export function Layout({
           #root { opacity: 1 !important; }
         `}} />
       </head>
-      <body style={{ background: '#0A1F1C', margin: 0 }}>
+      <body style={{ background: '#0A1F1C', margin: 0, overscrollBehavior: 'none' }}>
         <div id="root" style={{ opacity: 1 }}>
           {children}
         </div>

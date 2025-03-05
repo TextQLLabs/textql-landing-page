@@ -36,8 +36,14 @@
     
     <!-- Critical styles to prevent FOUC -->
     <style>
-      html, body { background: #0A1F1C !important; }
-      #root { opacity: 1 !important; visibility: visible !important; }
+      html, body { 
+        background: #0A1F1C !important; 
+        overscroll-behavior: none;
+      }
+      #root { 
+        opacity: 1 !important; 
+        visibility: visible !important; 
+      }
     </style>
     
     <!-- PostHog analytics - IMPORTANT -->

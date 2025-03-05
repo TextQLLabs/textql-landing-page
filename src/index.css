@@ -6,11 +6,13 @@
 :root {
   color-scheme: dark;
   background: #0A1F1C !important;
+  overscroll-behavior: none;
 }
 
 html {
   background: #0A1F1C !important;
   min-height: 100vh;
+  overscroll-behavior: none;
 }
 
 body {
@@ -20,6 +22,7 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   display: block !important;
+  overscroll-behavior: none;
 }
 
 #root {
