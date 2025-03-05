@@ -1,16 +1,35 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, useLocation } from 'react-router-dom';
+import ReactGA from 'react-ga4';
 import App from './App';
+import './index.css';
 
-// Simple hydration without streaming
+ReactGA.initialize('AW-16910294069');
+
+function RouteTracker() {
+  const location = useLocation();
+  
+  React.useEffect(() => {
+    ReactGA.send({ 
+      hitType: "pageview", 
+      page: location.pathname + location.search 
+    });
+  }, [location]);
+  
+  return null;
+}
+
 const root = document.getElementById("root");
 if (!root) throw new Error("#root element not found");
 
 createRoot(root).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <>
+        <RouteTracker />
+        <App />
+      </>
     </BrowserRouter>
   </React.StrictMode>
 ); 
