@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import {
   Links,
   Meta,
@@ -12,6 +13,11 @@ export function Layout({
 }: {
   children: React.ReactNode;
 }) {
+  useEffect(() => {
+    // Remove no-fouc class immediately for pre-rendered content
+    document.body.classList.remove('no-fouc');
+  }, []);
+
   return (
     <html lang="en">
       <head>
@@ -46,8 +52,21 @@ export function Layout({
         <meta name="twitter:image" content="https://textql.com/social-preview.png" />
         
         <title>Find Insights With AI | TextQL</title>
+        
         <Meta />
         <Links />
+        
+        {/* Modified FOUC prevention style */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          .no-fouc {
+            visibility: hidden;
+          }
+          
+          /* Show content immediately if JavaScript is disabled */
+          .no-js .no-fouc {
+            visibility: visible;
+          }
+        `}} />
         
         <script type="application/ld+json">{`
           {
@@ -76,15 +95,23 @@ export function Layout({
           })
         `}</script>
       </head>
-      <body>
+      <body className="no-fouc">
         {children}
         <ScrollRestoration />
         <Scripts />
+        
+        {/* Simplified content reveal script */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            document.body.classList.remove('no-fouc');
+          `
+        }} />
       </body>
     </html>
   );
 }
 
+// Root component using React Router's outlet
 export default function Root() {
   return <Outlet />;
 } 

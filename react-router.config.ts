@@ -2,9 +2,10 @@ import type { Config } from "@react-router/dev/config";
 
 export default {
   appDirectory: "src",
-  ssr: true,
+  // Disable SSR but keep pre-rendering
+  ssr: false,
   async prerender() {
-    // Add the routes you want to prerender here
+    // Pre-render all routes for SEO
     return [
       "/", 
       "/pricing", 
@@ -16,8 +17,6 @@ export default {
       "/terms", 
       "/privacy", 
       "/blog"
-      // Note: /design-system is intentionally not included here
-      // as it should only be accessible in development mode
     ];
   },
 } satisfies Config; 
