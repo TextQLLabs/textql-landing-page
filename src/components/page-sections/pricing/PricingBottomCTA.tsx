@@ -1,14 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import { Text, Button } from '../../ui';
-import { useNavigate } from 'react-router-dom';
 
 export function PricingBottomCTA() {
-  const navigate = useNavigate();
-
-  const handleDemoRequest = () => {
-    navigate('/demo');
-  };
-
   return (
     <section className="relative py-32 bg-[#2A3B35] overflow-hidden">
       {/* Background Pattern */}
@@ -29,15 +22,16 @@ export function PricingBottomCTA() {
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button 
-            variant="primary" 
-            size="lg"
-            className="group min-w-[200px]"
-            onClick={handleDemoRequest}
-          >
-            Request Demo
-            <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
-          </Button>
+          <a href="/demo" target="_blank" rel="noopener noreferrer" className="block">
+            <Button 
+              variant="primary" 
+              size="lg"
+              className="group min-w-[200px]"
+            >
+              Request Demo
+              <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </a>
 
           <Button 
             variant="ghost" 

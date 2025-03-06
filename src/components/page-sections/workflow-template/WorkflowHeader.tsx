@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ArrowLeft, Share2 } from 'lucide-react';
 import { Header } from '../../sections/Header';
 import { Button } from '../../ui';
-import { handleSimpleDemoRequest } from '../../../utils/demo-requests/simple';
 import type { Workflow } from '../../../data/workflows/types';
 
 interface WorkflowHeaderProps {
@@ -13,17 +12,11 @@ interface WorkflowHeaderProps {
 export function WorkflowHeader({ workflow }: WorkflowHeaderProps) {
   const [showCopied, setShowCopied] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
 
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href);
     setShowCopied(true);
     setTimeout(() => setShowCopied(false), 2000);
-  };
-
-  const onDemoRequest = (e: React.MouseEvent) => {
-    e.preventDefault();
-    navigate('/demo');
   };
 
   return (
@@ -58,14 +51,15 @@ export function WorkflowHeader({ workflow }: WorkflowHeaderProps) {
             {/* Actions */}
             <div className="flex items-center gap-4">
               {/* Demo Button */}
-              <Button 
-                variant="primary" 
-                size="lg" 
-                className="flex-1"
-                onClick={onDemoRequest}
-              >
-                Request Demo
-              </Button>
+              <a href="/demo" target="_blank" rel="noopener noreferrer" className="flex-1">
+                <Button 
+                  variant="primary" 
+                  size="lg" 
+                  className="w-full"
+                >
+                  Request Demo
+                </Button>
+              </a>
 
               {/* Share Button */}
               <div className="relative">

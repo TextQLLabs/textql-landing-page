@@ -1,4 +1,4 @@
-import { DEMO_CONFIG } from '../constants';
+import { DEMO_CONFIG, ENV } from '../constants';
 import type { DemoRequestOptions, DemoRequestResult } from './types';
 
 export const handleEmailDemoRequest = async ({ email, pathname }: DemoRequestOptions): Promise<DemoRequestResult> => {
@@ -16,19 +16,22 @@ export const handleEmailDemoRequest = async ({ email, pathname }: DemoRequestOpt
       "url": fullUrl
     };
 
-    // Send webhook with email
-    try {
-      await fetch(DEMO_CONFIG.WEBHOOK_URLS.SLACK.EMAIL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      });
-    } catch (webhookError) {
-      console.warn('Slack webhook error:', webhookError);
-      // Continue execution even if webhook fails
+    // Only send webhook if not in local development mode
+    if (!ENV.IS_LOCAL_DEV) {
+      try {
+        await fetch(DEMO_CONFIG.WEBHOOK_URLS.SLACK.EMAIL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+      } catch (webhookError) {
+        console.warn('Slack webhook error:', webhookError);
+      }
+    } else {
+      console.log('Local development mode: Skipping Slack webhook', payload);
     }
 
     // Safely construct the form URL with encoded email parameter

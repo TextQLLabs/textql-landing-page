@@ -1,4 +1,11 @@
 /**
+ * Environment configuration
+ */
+export const ENV = {
+  IS_LOCAL_DEV: import.meta.env.VITE_LOCAL_DEV_MODE === 'true'
+} as const;
+
+/**
  * Demo request configuration
  */
 export const DEMO_CONFIG = {
