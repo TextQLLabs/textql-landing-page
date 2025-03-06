@@ -8,7 +8,7 @@ export default function Ontology() {
       <SEO 
         title="The Ontology | TextQL"
         description="Discover how TextQL's Ontology connects your enterprise data at scale. AI's Interface for Enterprise Data."
-        canonical="https://textql.com/ontology"
+        canonical="https://textql.com/ontology/"
         ogImage="https://textql.com/social-preview.png"
       />
       

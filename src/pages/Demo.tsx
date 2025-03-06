@@ -55,7 +55,7 @@ export default function Demo() {
       <SEO 
         title="Request a Demo | TextQL AI Data Analysis Platform"
         description="Get a personalized demo of TextQL's AI-powered data analysis platform. See how our AI agents can help your enterprise discover valuable insights across all your data."
-        canonical="https://textql.com/demo"
+        canonical="https://textql.com/demo/"
       />
       <div className="text-center">
         <h1 className="text-2xl font-bold text-[#B8D8D0] mb-4">Redirecting to demo request form...</h1>
