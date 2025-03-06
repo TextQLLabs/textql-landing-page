@@ -10,27 +10,9 @@ export default defineConfig({
     reactRouter(),
     sitemap({
       hostname: 'https://textql.com',
-      exclude: [
-        '/404', 
-        '/__spa-fallback', 
-        '/design-system',
-        '/docs',
-        '/documentation',
-        '/events'
-      ],
       outDir: './build/client',
-      generateRobotsTxt: true,
-      robots: [
-        {
-          userAgent: '*',
-          allow: '/',
-          disallow: ['/404', '/__spa-fallback', '/design-system', '/docs/*', '/documentation/*', '/events']
-        }
-      ],
-      readable: true,
-      extensions: [],
+      // Define all routes as simple strings
       dynamicRoutes: [
-        // Main routes
         '/',
         '/blog',
         '/agents',
@@ -43,78 +25,49 @@ export default defineConfig({
         '/privacy',
         '/demo',
         // Blog posts
-        '/blog/building-data-agent',
-        '/blog/embedding-models',
-        '/blog/fundraising',
-        '/blog/future-of-data',
-        '/blog/haskell-in-production',
-        '/blog/nba-launchpad',
-        '/blog/soc2-report',
-        '/blog/sql-model',
-        '/blog/sql-process',
-        '/blog/tableau-integration',
-        '/blog/ten-year-thesis',
-        '/blog/why-ontology',
+        ...['building-data-agent', 'embedding-models', 'fundraising', 'future-of-data',
+            'haskell-in-production', 'nba-launchpad', 'soc2-report', 'sql-model',
+            'sql-process', 'tableau-integration', 'ten-year-thesis', 'why-ontology']
+            .map(slug => `/blog/${slug}`),
         // Workflows
-        '/workflows/ad-optimization',
-        '/workflows/audience-engagement',
-        '/workflows/claims-optimization',
-        '/workflows/content-performance',
-        '/workflows/customer-loyalty',
-        '/workflows/customer-retention',
-        '/workflows/digital-banking',
-        '/workflows/digital-channel',
-        '/workflows/digital-health',
-        '/workflows/digital-transformation',
-        '/workflows/fraud-prevention',
-        '/workflows/inventory-turnover',
-        '/workflows/mortgage-optimization',
-        '/workflows/operational-efficiency',
-        '/workflows/patient-care',
-        '/workflows/platform-innovation',
-        '/workflows/predictive-maintenance',
-        '/workflows/preventive-care',
-        '/workflows/production-efficiency',
-        '/workflows/quality-control',
-        '/workflows/risk-assessment',
-        '/workflows/small-business',
-        '/workflows/store-traffic',
-        '/workflows/streaming-quality',
-        '/workflows/supply-chain',
-        '/workflows/supply-chain-risk',
-        '/workflows/telehealth',
-        '/workflows/wealth-management',
-        '/workflows/workforce-optimization'
+        ...['ad-optimization', 'audience-engagement', 'claims-optimization', 'content-performance',
+            'customer-loyalty', 'customer-retention', 'digital-banking', 'digital-channel',
+            'digital-health', 'digital-transformation', 'fraud-prevention', 'inventory-turnover',
+            'mortgage-optimization', 'operational-efficiency', 'patient-care', 'platform-innovation',
+            'predictive-maintenance', 'preventive-care', 'production-efficiency', 'quality-control',
+            'risk-assessment', 'small-business', 'store-traffic', 'streaming-quality',
+            'supply-chain', 'supply-chain-risk', 'telehealth', 'wealth-management',
+            'workforce-optimization']
+            .map(slug => `/workflows/${slug}`)
       ],
+      // Define metadata using RoutesOptionMap
       changefreq: {
-        '*': 'monthly',
+        '*': 'weekly',
         '/': 'weekly',
         '/blog': 'daily',
         '/agents': 'weekly',
         '/ontology': 'weekly',
         '/enterprise': 'weekly',
-        '/pricing': 'weekly',
-        '/workflows': 'weekly',
-        '/about': 'monthly',
         '/terms': 'yearly',
         '/privacy': 'yearly',
-        '/demo': 'weekly'
+        '/blog/*': 'monthly',
+        '/workflows/*': 'monthly'
       },
       priority: {
-        '*': 0.7,
+        '*': 0.8,
         '/': 1.0,
         '/blog': 0.9,
-        '/agents': 0.8,
-        '/ontology': 0.8,
-        '/enterprise': 0.8,
-        '/pricing': 0.8,
-        '/workflows': 0.8,
-        '/about': 0.7,
+        '/agents': 0.9,
+        '/ontology': 0.9,
+        '/enterprise': 0.9,
         '/terms': 0.2,
         '/privacy': 0.2,
-        '/demo': 0.8
+        '/blog/*': 0.7,
+        '/workflows/*': 0.7
       },
-      lastmod: new Date()
+      lastmod: new Date(),
+      exclude: ['/404', '/__spa-fallback', '/design-system', '/docs/*', '/documentation/*', '/events'],
+      readable: true
     }),
   ],
   build: {
