@@ -20,7 +20,6 @@ export function Layout({
         
         {/* Essential meta tags for SEO - these appear in the pre-rendered HTML */}
         <meta name="description" content="TextQL helps enterprises discover valuable insights with AI agents that analyze all your data sources to identify profit-driving trends and opportunities" />
-        <link rel="canonical" href="https://textql.com" />
         <meta name="keywords" content="AI data analysis, business intelligence, enterprise data, data insights, ontology, AI agents" />
         <meta name="author" content="TextQL Inc." />
         
