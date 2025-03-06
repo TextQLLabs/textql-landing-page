@@ -4,10 +4,11 @@ import { reactRouter } from '@react-router/dev/vite'
 import sitemap from 'vite-plugin-sitemap'
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [
-    react(), 
-    reactRouter(),
+    react(),
+    // Only use React Router for production builds
+    command === 'build' ? reactRouter() : null,
     sitemap({
       hostname: 'https://textql.com',
       outDir: './build/client',
@@ -75,9 +76,9 @@ export default defineConfig({
       exclude: ['/404', '/__spa-fallback', '/design-system', '/docs/*', '/documentation/*', '/events'],
       readable: true
     }),
-  ],
+  ].filter(Boolean),
   build: {
     chunkSizeWarningLimit: 1000,
   },
   assetsInclude: ['**/*.md'],
-})
+}))

@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node scripts/dev.js",
+    "dev": "vite --host",
     "build": "react-router build && node copy-sitemap.js",
     "preview": "vite preview"
   },
