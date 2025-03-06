@@ -11,6 +11,7 @@ export default defineConfig({
     sitemap({
       hostname: 'https://textql.com',
       exclude: ['/404', '/__spa-fallback'],
+      outDir: './build/client',
       dynamicRoutes: [
         '/',
         '/blog',
