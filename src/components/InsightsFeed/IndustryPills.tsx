@@ -23,7 +23,7 @@ export const IndustryPills: React.FC<IndustryPillsProps> = ({
       className={`
         inline-flex items-center gap-1.5 px-3 py-1.5
         text-sm font-medium transition-all duration-200
-        rounded-sm whitespace-nowrap
+        rounded-sm whitespace-nowrap shrink-0
         ${selectedIndustry.id === industry.id
           ? 'bg-[#B8D8D0] text-black hover:bg-[#B8D8D0]/90' // Primary style when selected
           : 'bg-transparent text-[#B8D8D0] border border-[#B8D8D0]/20 hover:border-[#B8D8D0]/40' // Secondary style when not selected
@@ -92,9 +92,13 @@ export const IndustryPills: React.FC<IndustryPillsProps> = ({
         {renderMobileDropdown()}
       </div>
 
-      {/* Desktop View - Wrapped Pills */}
-      <div className="hidden md:flex flex-wrap justify-center gap-1.5">
-        {INDUSTRIES.map(renderIndustryButton)}
+      {/* Desktop View - Horizontal Scroll */}
+      <div className="hidden md:block w-full max-w-screen-xl mx-auto">
+        <div className="overflow-x-auto scrollbar-hide">
+          <div className="flex gap-1.5 pb-2">
+            {INDUSTRIES.map(renderIndustryButton)}
+          </div>
+        </div>
       </div>
     </>
   );
