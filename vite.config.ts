@@ -12,19 +12,7 @@ export default defineConfig({
       hostname: 'https://textql.com',
       exclude: ['/404', '/__spa-fallback'],
       outDir: './build/client',
-      dynamicRoutes: [
-        '/',
-        '/blog',
-        '/agents',
-        '/ontology',
-        '/enterprise',
-        '/pricing',
-        '/workflows',
-        '/about',
-        '/terms',
-        '/privacy',
-        '/demo'
-      ],
+      dynamicRoutes: [],
       changefreq: {
         '/': 'weekly',
         '/blog': 'daily',

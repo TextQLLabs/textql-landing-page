@@ -1,29 +1,4 @@
-# TextQL robots.txt
-# Updated: March 2025
-
 User-agent: *
 Allow: /
 
-# Prevent crawling of any duplicate or filtered content
-Disallow: /*?*filter=
-Disallow: /*?*sort=
-Disallow: /*?*page=
-Disallow: /*?*q=
-
-# Prevent crawling of utility pages
-Disallow: /api/
-Disallow: /assets/
-Disallow: /internal/
-
-# Control crawl rate for aggressive bots
-User-agent: AhrefsBot
-Crawl-delay: 10
-
-User-agent: SemrushBot
-Crawl-delay: 10
-
-User-agent: MJ12bot
-Disallow: /
-
-# Point to sitemaps
 Sitemap: https://textql.com/sitemap.xml
