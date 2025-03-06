@@ -1,5 +1,6 @@
-import { copyFileSync, existsSync, mkdirSync } from 'fs';
 import { dirname } from 'path';
+import { writeFileSync, existsSync, mkdirSync, copyFileSync } from 'fs';
+import { create } from 'xmlbuilder2';
 
 // Ensure the public directory exists
 const publicDir = './public';
@@ -7,30 +8,69 @@ if (!existsSync(publicDir)) {
   mkdirSync(publicDir, { recursive: true });
 }
 
-// Copy sitemap.xml if it exists
-const sitemapSource = './build/client/sitemap.xml';
-const sitemapDest = './public/sitemap.xml';
-if (existsSync(sitemapSource)) {
-  try {
-    copyFileSync(sitemapSource, sitemapDest);
-    console.log(`✅ Copied sitemap.xml to ${sitemapDest}`);
-  } catch (error) {
-    console.error(`❌ Error copying sitemap.xml: ${error.message}`);
-  }
-} else {
-  console.warn(`⚠️ Sitemap not found at ${sitemapSource}`);
-}
+// Define routes
+const routes = [
+  { url: '/', changefreq: 'weekly', priority: 1.0 },
+  { url: '/blog/', changefreq: 'daily', priority: 0.9 },
+  { url: '/agents/', changefreq: 'weekly', priority: 0.8 },
+  { url: '/ontology/', changefreq: 'weekly', priority: 0.8 },
+  { url: '/enterprise/', changefreq: 'weekly', priority: 0.8 },
+  { url: '/pricing/', changefreq: 'weekly', priority: 0.8 },
+  { url: '/workflows/', changefreq: 'weekly', priority: 0.8 },
+  { url: '/about/', changefreq: 'monthly', priority: 0.7 },
+  { url: '/terms/', changefreq: 'yearly', priority: 0.2 },
+  { url: '/privacy/', changefreq: 'yearly', priority: 0.2 },
+  { url: '/demo/', changefreq: 'weekly', priority: 0.8 },
+  // Blog posts
+  ...['building-data-agent', 'embedding-models', 'fundraising', 'future-of-data',
+      'haskell-in-production', 'nba-launchpad', 'soc2-report', 'sql-model',
+      'sql-process', 'tableau-integration', 'ten-year-thesis', 'why-ontology']
+      .map(slug => ({ 
+        url: `/blog/${slug}`, 
+        changefreq: 'monthly', 
+        priority: 0.7 
+      })),
+  // Workflows
+  ...['ad-optimization', 'audience-engagement', 'claims-optimization', 'content-performance',
+      'customer-loyalty', 'customer-retention', 'digital-banking', 'digital-channel',
+      'digital-health', 'digital-transformation', 'fraud-prevention', 'inventory-turnover',
+      'mortgage-optimization', 'operational-efficiency', 'patient-care', 'platform-innovation',
+      'predictive-maintenance', 'preventive-care', 'production-efficiency', 'quality-control',
+      'risk-assessment', 'small-business', 'store-traffic', 'streaming-quality',
+      'supply-chain', 'supply-chain-risk', 'telehealth', 'wealth-management',
+      'workforce-optimization']
+      .map(slug => ({ 
+        url: `/workflows/${slug}/`, 
+        changefreq: 'monthly', 
+        priority: 0.7 
+      }))
+];
 
-// Copy robots.txt if it exists
-const robotsSource = './build/client/robots.txt';
-const robotsDest = './public/robots.txt';
-if (existsSync(robotsSource)) {
-  try {
-    copyFileSync(robotsSource, robotsDest);
-    console.log(`✅ Copied robots.txt to ${robotsDest}`);
-  } catch (error) {
-    console.error(`❌ Error copying robots.txt: ${error.message}`);
-  }
-} else {
-  console.warn(`⚠️ robots.txt not found at ${robotsSource}`);
-} 
+// Generate sitemap
+const sitemap = create({ version: '1.0', encoding: 'UTF-8' })
+  .ele('urlset', {
+    xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9',
+    'xmlns:news': 'http://www.google.com/schemas/sitemap-news/0.9',
+    'xmlns:xhtml': 'http://www.w3.org/1999/xhtml',
+    'xmlns:image': 'http://www.google.com/schemas/sitemap-image/1.1',
+    'xmlns:video': 'http://www.google.com/schemas/sitemap-video/1.1'
+  });
+
+routes.forEach(({ url, changefreq, priority }) => {
+  sitemap.ele('url')
+    .ele('loc').txt(`https://textql.com${url}`).up()
+    .ele('lastmod').txt(new Date().toISOString()).up()
+    .ele('changefreq').txt(changefreq).up()
+    .ele('priority').txt(priority.toString()).up();
+});
+
+const sitemapXml = sitemap.end({ prettyPrint: true });
+
+// Write sitemap
+const sitemapDest = './public/sitemap.xml';
+try {
+  writeFileSync(sitemapDest, sitemapXml);
+  console.log(`✅ Generated sitemap.xml at ${sitemapDest}`);
+} catch (error) {
+  console.error(`❌ Error generating sitemap.xml: ${error.message}`);
+}
