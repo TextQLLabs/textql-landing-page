@@ -26,7 +26,7 @@ const routes = [
       'haskell-in-production', 'nba-launchpad', 'soc2-report', 'sql-model',
       'sql-process', 'tableau-integration', 'ten-year-thesis', 'why-ontology']
       .map(slug => ({ 
-        url: `/blog/${slug}`, 
+        url: `/blog/${slug}/`,
         changefreq: 'monthly', 
         priority: 0.7 
       })),
