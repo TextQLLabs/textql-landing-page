@@ -17,7 +17,7 @@ interface SEOProps {
  */
 export function SEO({
   title,
-  description = 'Deploy AI agents to find trends across all of your data that makes you money',
+  description = "TextQL helps enterprises discover valuable insights with AI agents that analyze all your data sources to identify profit-driving trends and opportunities",
   canonical = 'https://textql.com',
   ogImage = 'https://textql.com/social-preview.png',
   ogType = 'website',
@@ -28,12 +28,15 @@ export function SEO({
   return (
     <>
       <title>{title}</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="description" content={description} />
-      <link rel="canonical" href={canonical} />
-
       <meta property="og:title" content={title} />
       <meta name="twitter:title" content={title} />
+
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="canonical" href={canonical} />
+
+      <meta name="description" content={description} />
+      <meta property="og:description" content={description} />
+      <meta name="twitter:description" content={description} />
 
       {/* Indexing control */}
       {noIndex && <meta name="robots" content="noindex, nofollow" />}

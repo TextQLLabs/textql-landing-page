@@ -33,7 +33,7 @@ function App() {
             <main className="relative overflow-x-hidden">
               <SEO 
                 title="Find Insights With AI | TextQL"
-                description="Deploy AI agents to find trends across all of your data that makes you money"
+                description="TextQL helps enterprises discover valuable insights with AI agents that analyze all your data sources to identify profit-driving trends and opportunities"
                 canonical="https://textql.com"
               />
               <HomeHero />
