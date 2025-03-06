@@ -1,4 +1,4 @@
-import { writeFile } from 'fs/promises';
+import { writeFile, mkdir } from 'fs/promises';
 import { SitemapStream, streamToPromise } from 'sitemap';
 import { Readable } from 'stream';
 
@@ -12,24 +12,24 @@ async function generateSitemap() {
 
     // Static pages with their priorities and change frequencies
     const staticPages = [
-      { url: '/', priority: 1.0, changefreq: 'weekly' },
-      { url: '/blog', priority: 0.9, changefreq: 'daily' },
-      { url: '/agents', priority: 0.8, changefreq: 'weekly' },
-      { url: '/ontology', priority: 0.8, changefreq: 'weekly' },
-      { url: '/enterprise', priority: 0.8, changefreq: 'weekly' },
-      { url: '/pricing', priority: 0.8, changefreq: 'weekly' },
-      { url: '/workflows', priority: 0.8, changefreq: 'weekly' },
-      { url: '/about', priority: 0.7, changefreq: 'monthly' },
-      { url: '/terms', priority: 0.5, changefreq: 'yearly' },
-      { url: '/privacy', priority: 0.5, changefreq: 'yearly' },
-      { url: '/events', priority: 0.7, changefreq: 'monthly' },
-      { url: '/demo', priority: 0.8, changefreq: 'monthly' },
+      { url: '/', canonical: 'https://textql.com', priority: 1.0, changefreq: 'weekly' },
+      { url: '/blog', canonical: 'https://textql.com/blog', priority: 0.9, changefreq: 'daily' },
+      { url: '/agents', canonical: 'https://textql.com/agents', priority: 0.8, changefreq: 'weekly' },
+      { url: '/ontology', canonical: 'https://textql.com/ontology', priority: 0.8, changefreq: 'weekly' },
+      { url: '/enterprise', canonical: 'https://textql.com/enterprise', priority: 0.8, changefreq: 'weekly' },
+      { url: '/pricing', canonical: 'https://textql.com/pricing', priority: 0.8, changefreq: 'weekly' },
+      { url: '/workflows', canonical: 'https://textql.com/workflows', priority: 0.8, changefreq: 'weekly' },
+      { url: '/about', canonical: 'https://textql.com/about', priority: 0.7, changefreq: 'monthly' },
+      { url: '/terms', canonical: 'https://textql.com/terms', priority: 0.5, changefreq: 'yearly' },
+      { url: '/privacy', canonical: 'https://textql.com/privacy', priority: 0.5, changefreq: 'yearly' },
+      { url: '/events', canonical: 'https://textql.com/events', priority: 0.7, changefreq: 'monthly' },
+      { url: '/demo', canonical: 'https://textql.com/demo', priority: 0.8, changefreq: 'monthly' },
     ];
 
     // Add static pages to sitemap entries
     staticPages.forEach(page => {
       sitemapEntries.push({
-        url: page.url,
+        url: page.canonical,
         changefreq: page.changefreq,
         priority: page.priority,
         lastmod: today
@@ -55,7 +55,7 @@ async function generateSitemap() {
     // Add blog posts to sitemap entries
     blogPosts.forEach(post => {
       sitemapEntries.push({
-        url: post.url,
+        url: `https://textql.com${post.url}`,
         changefreq: 'monthly',
         priority: 0.7,
         lastmod: post.date
@@ -95,7 +95,7 @@ async function generateSitemap() {
     // Add workflows to sitemap entries
     workflows.forEach(workflow => {
       sitemapEntries.push({
-        url: `/workflows/${workflow}`,
+        url: `https://textql.com/workflows/${workflow}`,
         changefreq: 'monthly',
         priority: 0.7,
         lastmod: today
@@ -106,6 +106,9 @@ async function generateSitemap() {
     const stream = new SitemapStream({ hostname: 'https://textql.com' });
     const data = Readable.from(sitemapEntries).pipe(stream);
     const sitemap = await streamToPromise(data);
+    
+    // Ensure directory exists
+    await mkdir('./public', { recursive: true }).catch(() => {});
     
     // Write the sitemap to file
     await writeFile('./public/sitemap.xml', sitemap);
