@@ -74,7 +74,7 @@ export function OntologyExplanation() {
             {/* Documentation Links */}
             <div className="flex flex-col gap-4">
               <a 
-                href="https://docs.textql.com/core/how-it-works/ontology"
+                href="https://docs.textql.com/core/how-it-works/ontology/queries"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center justify-center gap-2 px-6 py-3 bg-[#2A3B35] text-white hover:bg-[#4A665C] transition-colors rounded-lg"
