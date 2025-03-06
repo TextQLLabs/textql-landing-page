@@ -90,8 +90,7 @@ export default function WorkflowLibrary() {
         variant="wide"
         heading="Ready to transform your business?"
         subheader="Get started with TextQL's AI-powered workflows today"
-        ctaText="Request Demo"
-        ctaHref="https://forms.default.com/740749"
+        useSimpleButton={true}
       />
     </div>
   );

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '../ui';
 import { TextLogo } from '../Logo';
 import { NavItem } from './NavItem';
@@ -12,6 +12,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isDevelopment = import.meta.env.DEV;
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,10 +23,9 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const onDemoRequest = async (e: React.MouseEvent) => {
+  const onDemoRequest = (e: React.MouseEvent) => {
     e.preventDefault();
-    const result = await handleSimpleDemoRequest(location.pathname);
-    window.open(result.formUrl, '_blank');
+    navigate('/demo');
   };
 
   return (

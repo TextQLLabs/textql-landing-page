@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { handleSimpleDemoRequest } from '../utils/demo-requests/simple';
+import { handleEmailDemoRequest } from '../utils/demo-requests/with-email';
 import { DEMO_CONFIG } from '../utils/constants';
 import { SEO } from '../components/SEO';
 
@@ -11,11 +12,24 @@ export default function Demo() {
     // Track this page visit and redirect to the demo form
     const handleRedirect = async () => {
       try {
-        // Send analytics data
-        const result = await handleSimpleDemoRequest('/demo');
+        // Check if we have an email in session storage
+        const email = sessionStorage.getItem('demo_email');
         
-        // Redirect to the form URL
-        window.location.href = result.formUrl;
+        if (email) {
+          // Clear the email from storage
+          sessionStorage.removeItem('demo_email');
+          
+          // Use email-based demo request
+          const result = await handleEmailDemoRequest({
+            email,
+            pathname: '/demo'
+          });
+          window.location.href = result.formUrl;
+        } else {
+          // Use simple demo request
+          const result = await handleSimpleDemoRequest('/demo');
+          window.location.href = result.formUrl;
+        }
       } catch (error) {
         console.error('Error redirecting to demo form:', error);
         // Fallback in case of error

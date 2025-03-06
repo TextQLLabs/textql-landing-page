@@ -21,7 +21,7 @@ export default function Ontology() {
         variant="wide"
         heading="Ready to unlock insights with TextQL's Ontology?"
         subheader="Deploy our intelligent data framework in your organization today"
-        ctaText="Request Demo"
+        useSimpleButton={true}
       />
     </div>
   );

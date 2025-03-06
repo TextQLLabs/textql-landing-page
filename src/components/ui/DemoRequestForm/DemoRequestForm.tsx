@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { ArrowRight, Check } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../Button';
 import { Input } from '../Input';
-import { handleEmailDemoRequest } from '../../../utils/demo-requests/with-email';
 import type { DemoRequestFormProps } from './types';
 
 export function DemoRequestForm({ 
@@ -13,8 +13,8 @@ export function DemoRequestForm({
 }: DemoRequestFormProps) {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState<string | undefined>(undefined);
+  const navigate = useNavigate();
 
   // Common personal email domains to block
   const PERSONAL_EMAIL_DOMAINS = [
@@ -48,7 +48,7 @@ export function DemoRequestForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
+    setError(undefined);
 
     if (!isWorkEmail(email)) {
       setError('Please enter a valid work email address');
@@ -58,19 +58,10 @@ export function DemoRequestForm({
     setIsSubmitting(true);
     
     try {
-      const result = await handleEmailDemoRequest({
-        email,
-        pathname: window.location.pathname
-      });
-
-      if (result.success) {
-        window.open(result.formUrl, '_blank');
-        setIsSuccess(true);
-        setEmail('');
-        onSubmit?.(email);
-      } else {
-        setError(result.error || 'Something went wrong. Please try again.');
-      }
+      // Store email in session storage for the /demo page to use
+      sessionStorage.setItem('demo_email', email);
+      onSubmit?.(email);
+      navigate('/demo');
     } catch (err) {
       console.error('Error submitting form:', err);
       setError('Something went wrong. Please try again.');
@@ -85,11 +76,6 @@ export function DemoRequestForm({
     wide: 'max-w-xl w-full space-y-4'
   };
 
-  const successColors = {
-    dark: 'text-emerald-400',
-    light: 'text-emerald-600'
-  };
-
   return (
     <div className={`${variants[variant]} ${className}`}>
       <form onSubmit={handleSubmit} className="relative">
@@ -100,8 +86,7 @@ export function DemoRequestForm({
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
-              setError(null);
-              setIsSuccess(false);
+              setError(undefined);
             }}
             required
             error={error}
@@ -125,13 +110,6 @@ export function DemoRequestForm({
           </div>
         </div>
       </form>
-      
-      {isSuccess && (
-        <div className={`flex items-center gap-2 text-sm ${successColors[theme]}`}>
-          <Check className="w-4 h-4" />
-          <p>Successfully submitted! Please check your new tab to complete the form.</p>
-        </div>
-      )}
     </div>
   );
 }

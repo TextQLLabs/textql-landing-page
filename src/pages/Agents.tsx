@@ -41,7 +41,7 @@ export default function Agents() {
         variant="wide"
         heading="Ready to deploy Ana in your organization?"
         subheader="Get started with TextQL's intelligent agent technology today"
-        ctaText="Request Demo"
+        useSimpleButton={true}
       />
     </div>
   );

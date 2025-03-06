@@ -42,7 +42,7 @@ const footerLinks = {
     links: [
       { 
         label: 'Get a Demo', 
-        href: 'https://forms.default.com/529417'
+        href: '/demo'
       },
       { label: 'Email', href: 'mailto:ethan@textql.com' },
       { label: 'LinkedIn', href: 'https://linkedin.com/company/textql' },
