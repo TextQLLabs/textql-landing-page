@@ -13,6 +13,35 @@
   for = "/sitemap.xml"
   [headers.values]
     Content-Type = "application/xml"
+    X-Robots-Tag = "noarchive"
+    Cache-Control = "max-age=3600"
+
+# Add headers for robots.txt
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Content-Type = "text/plain"
+    Cache-Control = "max-age=3600"
+
+# Handle docs redirects
+[[redirects]]
+  from = "/docs/*"
+  to = "https://docs.textql.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/documentation/*"
+  to = "https://docs.textql.com/:splat"
+  status = 301
+  force = true
+
+# Handle www subdomain
+[[redirects]]
+  from = "https://www.textql.com/*"
+  to = "https://textql.com/:splat"
+  status = 301
+  force = true
 
 # Enable prerendering for SEO is handled by React Router
 # No need for the Next.js plugin
