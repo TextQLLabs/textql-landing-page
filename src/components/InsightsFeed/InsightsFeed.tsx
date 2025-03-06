@@ -2,14 +2,20 @@ import React, { useState, useCallback, Suspense, lazy } from 'react';
 import { motion } from 'framer-motion';
 import { INDUSTRIES } from './constants';
 import { useInsightFeed } from '../../hooks/useInsightFeed';
+import { InsightsLayout } from './InsightsLayout'; // Import directly for faster initial load
 
-// Use lazy loading for components to reduce initial bundle size
-const InsightsLayout = lazy(() => 
-  import('./InsightsLayout').then(module => ({ default: module.InsightsLayout }))
-);
+// Only lazy load InsightCard since it's not needed immediately
 const InsightCard = lazy(() => 
   import('./InsightCard').then(module => ({ default: module.InsightCard }))
 );
+
+// Preload InsightCard after initial render
+const preloadInsightCard = () => {
+  const timer = setTimeout(() => {
+    import('./InsightCard');
+  }, 1000);
+  return () => clearTimeout(timer);
+};
 
 // Fallback loading component (no visible spinner)
 const LoadingFallback = () => (
@@ -24,6 +30,9 @@ export const InsightsFeed: React.FC = () => {
   const [showInsights, setShowInsights] = useState(false);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [isSearchCentered, setIsSearchCentered] = useState(true);
+
+  // Start preloading InsightCard after mount
+  React.useEffect(preloadInsightCard, []);
 
   // Memoize callback functions to prevent unnecessary re-renders
   const handleIndustryChange = useCallback((industry: typeof INDUSTRIES[0]) => {
@@ -52,42 +61,42 @@ export const InsightsFeed: React.FC = () => {
   };
 
   return (
-    <Suspense fallback={<LoadingFallback />}>
-      <InsightsLayout
-        selectedIndustry={selectedIndustry}
-        insightsCount={insights.length}
-        isInitialLoad={isInitialLoad}
-        isSearchCentered={isSearchCentered}
-        showInsights={showInsights}
-        onIndustrySelect={handleIndustryChange}
-        onSearchComplete={handleSearchComplete}
-      >
-        <div className="h-full overflow-y-auto hide-scrollbar pr-2">
-          <div className="space-y-2">
-            {insights.map((insight, index) => (
-              <motion.div
-                key={insight.id}
-                custom={index}
-                initial="hidden"
-                animate="visible"
-                variants={cardVariants}
-                // Optimize motion performance by reducing GPU overhead
-                style={{ willChange: 'transform, opacity' }}
-                // Only animate if needed to reduce CPU/GPU usage
-                layoutId={`insight-${insight.id}`}
-              >
-                <Suspense fallback={<LoadingFallback />}>
-                  <InsightCard 
-                    insight={insight}
-                    isExpanded={insight.id === expandedId}
-                    onExpandToggle={(expanded) => handleExpandToggle(insight.id, expanded)}
-                  />
-                </Suspense>
-              </motion.div>
-            ))}
-          </div>
+    <InsightsLayout
+      selectedIndustry={selectedIndustry}
+      insightsCount={insights.length}
+      isInitialLoad={isInitialLoad}
+      isSearchCentered={isSearchCentered}
+      showInsights={showInsights}
+      onIndustrySelect={handleIndustryChange}
+      onSearchComplete={handleSearchComplete}
+    >
+      <div className="h-full overflow-y-auto hide-scrollbar pr-2">
+        <div className="space-y-2">
+          {insights.map((insight, index) => (
+            <motion.div
+              key={insight.id}
+              custom={index}
+              initial="hidden"
+              animate="visible"
+              variants={cardVariants}
+              // Optimize motion performance by reducing GPU overhead
+              style={{ willChange: 'transform, opacity' }}
+              // Only animate if needed to reduce CPU/GPU usage
+              layoutId={`insight-${insight.id}`}
+            >
+              <Suspense fallback={
+                <div className="w-full min-h-[100px] bg-black/20 rounded-sm" />
+              }>
+                <InsightCard 
+                  insight={insight}
+                  isExpanded={insight.id === expandedId}
+                  onExpandToggle={(expanded) => handleExpandToggle(insight.id, expanded)}
+                />
+              </Suspense>
+            </motion.div>
+          ))}
         </div>
-      </InsightsLayout>
-    </Suspense>
+      </div>
+    </InsightsLayout>
   );
 };
