@@ -24,7 +24,6 @@ export function Layout({
         <meta name="author" content="TextQL Inc." />
         
         {/* Open Graph / Social Media */}
-        <meta property="og:title" content="Find Insights With AI | TextQL" />
         <meta property="og:description" content="Deploy AI agents to find trends across all of your data that makes you money" />
         <meta property="og:url" content="https://textql.com" />
         <meta property="og:type" content="website" />
@@ -35,11 +34,8 @@ export function Layout({
         
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@textql" />
-        <meta name="twitter:title" content="Find Insights With AI | TextQL" />
         <meta name="twitter:description" content="Deploy AI agents to find trends across all of your data that makes you money" />
         <meta name="twitter:image" content="https://textql.com/social-preview.png" />
-        
-        <title>Find Insights With AI | TextQL</title>
         
         <Meta />
         <Links />

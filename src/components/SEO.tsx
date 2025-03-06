@@ -16,7 +16,7 @@ interface SEOProps {
  * This component only overrides those defaults for specific pages
  */
 export function SEO({
-  title = 'Find Insights With AI | TextQL',
+  title,
   description = 'Deploy AI agents to find trends across all of your data that makes you money',
   canonical = 'https://textql.com',
   ogImage = 'https://textql.com/social-preview.png',
@@ -31,7 +31,10 @@ export function SEO({
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="description" content={description} />
       <link rel="canonical" href={canonical} />
-      
+
+      <meta property="og:title" content={title} />
+      <meta name="twitter:title" content={title} />
+
       {/* Indexing control */}
       {noIndex && <meta name="robots" content="noindex, nofollow" />}
       
