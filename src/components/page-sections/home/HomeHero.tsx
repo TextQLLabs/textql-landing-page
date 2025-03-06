@@ -1,7 +1,7 @@
-import { Badge, DemoRequestForm, Carousel } from '../../ui';
-import { WaveBackground } from '../../animations';
-import { InsightsFeed } from '../../InsightsFeed/InsightsFeed';
-import { logos } from './constants';
+import { Badge, DemoRequestForm, Carousel } from "../../ui";
+import { WaveBackground } from "../../animations";
+import { InsightsFeed } from "../../InsightsFeed/InsightsFeed";
+import { logos } from "./constants";
 
 interface HomeHeroProps {
   showLogoCarousel?: boolean;
@@ -13,7 +13,7 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
       <div className="absolute inset-0 z-0">
         <WaveBackground />
       </div>
-      
+
       {/* Main Content - Centered with flex */}
       <div className="relative z-10 flex-grow mx-auto max-w-7xl px-6 pt-32 pb-20 flex flex-col justify-center">
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-[1fr,600px]">
@@ -32,7 +32,7 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
                 Ana
               </h1>
               <h2 className="text-4xl md:text-7xl font-light leading-[1.1] text-white opacity-0 animate-slide-up animation-delay-200">
-                finds insights
+                finds stuff
                 <br />
                 you cannot
               </h2>
