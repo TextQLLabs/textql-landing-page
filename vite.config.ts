@@ -14,13 +14,23 @@ export default defineConfig({
         '/404', 
         '/__spa-fallback', 
         '/design-system',
-        // Exclude any paths that redirect
         '/docs',
         '/documentation',
-        '/events'  // This seems to redirect based on the code
+        '/events'
       ],
       outDir: './build/client',
+      generateRobotsTxt: true,
+      robots: [
+        {
+          userAgent: '*',
+          allow: '/',
+          disallow: ['/404', '/__spa-fallback', '/design-system', '/docs/*', '/documentation/*', '/events']
+        }
+      ],
+      readable: true,
+      extensions: [],
       dynamicRoutes: [
+        // Main routes
         '/',
         '/blog',
         '/agents',
@@ -32,7 +42,7 @@ export default defineConfig({
         '/terms',
         '/privacy',
         '/demo',
-        // Blog posts - verified these exist in src/data/blog
+        // Blog posts
         '/blog/building-data-agent',
         '/blog/embedding-models',
         '/blog/fundraising',
@@ -45,7 +55,7 @@ export default defineConfig({
         '/blog/tableau-integration',
         '/blog/ten-year-thesis',
         '/blog/why-ontology',
-        // Workflows - verified these exist in src/data/workflows
+        // Workflows
         '/workflows/ad-optimization',
         '/workflows/audience-engagement',
         '/workflows/claims-optimization',
@@ -77,10 +87,9 @@ export default defineConfig({
         '/workflows/workforce-optimization'
       ],
       changefreq: {
+        '*': 'monthly',
         '/': 'weekly',
         '/blog': 'daily',
-        '/blog/*': 'weekly',
-        '/workflows/*': 'monthly',
         '/agents': 'weekly',
         '/ontology': 'weekly',
         '/enterprise': 'weekly',
@@ -92,10 +101,9 @@ export default defineConfig({
         '/demo': 'weekly'
       },
       priority: {
+        '*': 0.7,
         '/': 1.0,
         '/blog': 0.9,
-        '/blog/*': 0.7,
-        '/workflows/*': 0.7,
         '/agents': 0.8,
         '/ontology': 0.8,
         '/enterprise': 0.8,
