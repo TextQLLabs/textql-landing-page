@@ -1,5 +1,7 @@
 import { Database, RefreshCw, FileSpreadsheet, Settings } from 'lucide-react';
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { appJourneySteps } from './DataSourcesSection';
 
 const connectorFeatures = [
   {
@@ -36,7 +38,7 @@ export function DataMovementSection() {
           </h2>
         </div>
         
-        <div className="max-w-4xl mx-auto mb-8">
+        <div className="max-w-4xl mx-auto">
           <div className="relative mb-12">
             <div className="absolute top-8 left-[calc(8%+8px)] right-[calc(8%+8px)] h-[2px] bg-gray-200"></div>
             
@@ -65,11 +67,27 @@ export function DataMovementSection() {
             </div>
           </div>
           
-          <div className="text-center max-w-2xl mx-auto">
-            <p className="text-[#4A665C] text-lg transition-opacity duration-300">
-              {connectorFeatures[activeStep].description}
-            </p>
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeStep}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="max-w-4xl mx-auto"
+            >
+              <div className="aspect-[16/9] rounded-lg overflow-hidden border border-[#2A3B35]/20 shadow-lg mb-6">
+                <img 
+                  src={appJourneySteps[activeStep].image}
+                  alt={appJourneySteps[activeStep].title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <p className="text-[#4A665C] text-lg text-center">
+                {connectorFeatures[activeStep].description}
+              </p>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </section>

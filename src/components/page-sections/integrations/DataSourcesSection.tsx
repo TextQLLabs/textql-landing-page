@@ -1,6 +1,7 @@
 import { ExternalLink } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { useState } from 'react';
 
 // Import custom logos directly
 import tableauLogo from '/images/logos/custom/Tableau-Logo.png';
@@ -83,81 +84,106 @@ const supportedConnectors = [
   }
 ];
 
-interface AppJourneyStepProps {
-  title: string;
-  image: string;
-  index: number;
+interface StepNavigationProps {
+  steps: typeof appJourneySteps;
+  currentStep: number;
+  onStepClick: (index: number) => void;
 }
 
-function AppJourneyStep({ title, image, index }: AppJourneyStepProps) {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.2
-  });
-
+function StepNavigation({ steps, currentStep, onStepClick }: StepNavigationProps) {
   return (
-    <motion.div 
-      ref={ref}
-      initial={{ opacity: 0, x: 50 }}
-      animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-      transition={{ duration: 0.5, delay: index * 0.2 }}
-      className="flex flex-col"
-    >
-      <div className="relative aspect-[16/10] rounded-lg overflow-hidden border border-[#2A3B35]/20 shadow-sm hover:shadow-lg transition-all">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-transparent h-16 z-10" />
-        <h3 className="absolute top-4 left-4 text-white font-medium z-20 flex items-center">
-          <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white/20 text-sm mr-2">
-            {index + 1}
-          </span>
-          {title}
-        </h3>
-        <motion.div
-          initial={{ scale: 1.1, opacity: 0 }}
-          animate={inView ? { scale: 1, opacity: 1 } : { scale: 1.1, opacity: 0 }}
-          transition={{ duration: 0.6, delay: index * 0.2 }}
-          className="w-full h-full"
+    <div className="relative flex justify-between items-center max-w-4xl mx-auto mb-12 px-6">
+      {/* Horizontal line that intersects circles */}
+      <div className="absolute h-[2px] bg-[#2A3B35]/20 left-[8%] right-[8%] top-6" />
+      
+      {steps.map((step, index) => (
+        <div
+          key={step.title}
+          className="relative flex flex-col items-center"
         >
-          <img 
-            src={image} 
-            alt={title}
-            className="w-full h-full object-cover"
-          />
-        </motion.div>
-      </div>
-      <motion.p
-        initial={{ opacity: 0, y: 10 }}
-        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-        transition={{ duration: 0.4, delay: (index * 0.2) + 0.2 }}
-        className="text-[#4A665C] text-sm mt-3 text-center"
-      >
-        Step {index + 1}: {title}
-      </motion.p>
-    </motion.div>
+          <button
+            onClick={() => onStepClick(index)}
+            className="relative z-10 mb-3"
+          >
+            <div 
+              className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-colors
+                ${currentStep === index 
+                  ? 'bg-[#2A3B35] border-[#2A3B35] text-white' 
+                  : 'bg-white border-[#2A3B35]/20 text-[#2A3B35]/60 hover:border-[#2A3B35]/40'
+                }`}
+            >
+              {index + 1}
+            </div>
+          </button>
+          <span className={`text-sm font-medium transition-colors whitespace-nowrap
+            ${currentStep === index ? 'text-[#2A3B35]' : 'text-[#2A3B35]/60'}`}
+          >
+            {step.title}
+          </span>
+        </div>
+      ))}
+    </div>
   );
 }
 
-const appJourneySteps = [
+export const appJourneySteps = [
   {
     title: 'Simple Setup',
     image: setupImage,
-    description: 'Get started by adding your first connector'
+    description: 'Get started quickly by connecting your first data source to TextQL.'
   },
   {
     title: 'Automatic Sync',
     image: syncImage,
-    description: 'Data syncs automatically in the background'
+    description: 'Data syncs automatically in the background, keeping your insights up to date.'
   },
   {
     title: 'Table Preview',
     image: previewImage,
-    description: 'Preview and explore your connected data'
+    description: 'Preview tables and assets previously connected to TextQL before running complex queries.'
   },
   {
     title: 'Admin Controls',
     image: adminImage,
-    description: 'Manage all your connectors in one place'
+    description: 'Manage all your data connections in one centralized dashboard.'
   }
 ];
+
+function ConnectorJourney() {
+  const [currentStep, setCurrentStep] = useState(0);
+  
+  return (
+    <div>
+      <StepNavigation 
+        steps={appJourneySteps}
+        currentStep={currentStep}
+        onStepClick={setCurrentStep}
+      />
+      
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentStep}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.3 }}
+          className="max-w-4xl mx-auto"
+        >
+          <div className="aspect-[16/9] rounded-lg overflow-hidden border border-[#2A3B35]/20 shadow-lg mb-6">
+            <img 
+              src={appJourneySteps[currentStep].image}
+              alt={appJourneySteps[currentStep].title}
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <p className="text-[#4A665C] text-lg text-center">
+            {appJourneySteps[currentStep].description}
+          </p>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+}
 
 export function DataSourcesSection() {
   return (
@@ -169,7 +195,7 @@ export function DataSourcesSection() {
           </h2>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {supportedConnectors.map((connector) => (
             <ConnectorCard
               key={connector.description}
@@ -177,32 +203,6 @@ export function DataSourcesSection() {
               icon={connector.icon}
               learnMoreLink={connector.learnMoreLink}
               zoomFactor={connector.zoomFactor}
-            />
-          ))}
-        </div>
-
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl text-[#2A3B35] font-extralight">
-            Connector Management
-          </h2>
-          <p className="text-[#4A665C] mt-4">
-            Setting up your data connectors is simple and straightforward
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 gap-12">
-          {appJourneySteps.map((step, index) => (
-            <AppJourneyStep
-              key={step.title}
-              title={step.title}
-              image={step.image}
-              index={index}
             />
           ))}
         </div>
