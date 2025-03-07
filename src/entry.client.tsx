@@ -5,7 +5,7 @@ import ReactGA from 'react-ga4';
 import App from './App';
 import './index.css';
 
-ReactGA.initialize('AW-16910294069');
+ReactGA.initialize('GTM-NVJBC6P4');
 
 function RouteTracker() {
   const location = useLocation();
