@@ -36,7 +36,7 @@ const journeySteps = [
 ];
 
 export function DataMovementSection() {
-  const [activeStep, setActiveStep] = useState(1); // Start with Automatic Sync
+  const [activeStep, setActiveStep] = useState(0);
 
   return (
     <section className="py-16 bg-white border-t border-[#2A3B35]/10">
