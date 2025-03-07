@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../Button';
 import { Input } from '../Input';
 import type { DemoRequestFormProps } from './types';
@@ -13,6 +14,7 @@ export function DemoRequestForm({
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | undefined>(undefined);
+  const navigate = useNavigate();
 
   // Common personal email domains to block
   const PERSONAL_EMAIL_DOMAINS = [
@@ -59,10 +61,7 @@ export function DemoRequestForm({
       // Store email in session storage for the /demo page to use
       sessionStorage.setItem('demo_email', email);
       onSubmit?.(email);
-      
-      // Submit the hidden form to open in new tab
-      const hiddenForm = document.getElementById('hidden-demo-form') as HTMLFormElement;
-      hiddenForm.submit();
+      navigate('/demo');
     } catch (err) {
       console.error('Error submitting form:', err);
       setError('Something went wrong. Please try again.');
@@ -79,9 +78,6 @@ export function DemoRequestForm({
 
   return (
     <div className={`${variants[variant]} ${className}`}>
-      {/* Hidden form for new tab submission */}
-      <form id="hidden-demo-form" action="/demo" target="_blank" className="hidden" />
-      
       <form onSubmit={handleSubmit} className="relative">
         <div className="relative">
           <Input

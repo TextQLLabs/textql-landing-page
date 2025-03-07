@@ -1,5 +1,5 @@
 import { workflows } from '../../data/workflows';
-import { DEMO_CONFIG, ENV } from '../constants';
+import { DEMO_CONFIG } from '../constants';
 import type { DemoRequestPayload, DemoRequestResult } from './types';
 
 export const handleSimpleDemoRequest = async (pathname: string): Promise<DemoRequestResult> => {
@@ -25,22 +25,17 @@ export const handleSimpleDemoRequest = async (pathname: string): Promise<DemoReq
       "url": fullUrl
     };
 
-    // Only send webhook if not in local development mode
-    if (!ENV.IS_LOCAL_DEV) {
-      try {
-        await fetch(DEMO_CONFIG.WEBHOOK_URLS.SLACK.SIMPLE, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(payload)
-        });
-      } catch (slackError) {
-        console.warn('Slack webhook error:', slackError);
-      }
-    } else {
-      console.log('Local development mode: Skipping Slack webhook', payload);
+    try {
+      await fetch(DEMO_CONFIG.WEBHOOK_URLS.SLACK.SIMPLE, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+    } catch (slackError) {
+      console.warn('Slack webhook error:', slackError);
     }
 
     return {

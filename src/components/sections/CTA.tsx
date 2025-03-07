@@ -1,6 +1,7 @@
 import { DemoRequestForm } from '../ui';
 import { WaveGrid } from '../animations';
 import { Text } from '../ui';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../ui';
 
 interface CTAProps {
@@ -25,6 +26,11 @@ export function CTA({
   const bgColor = theme === 'dark' ? 'bg-black' : 'bg-[#F0F5F3]';
   const minHeight = isCompact ? 'min-h-[400px]' : 'min-h-[600px]';
   const textColor = theme === 'dark' ? 'text-[#B8D8D0]' : 'text-[#2A3B35]';
+  const navigate = useNavigate();
+
+  const handleDemoRequest = () => {
+    navigate('/demo');
+  };
 
   return (
     <section className={`relative ${minHeight} ${bgColor} overflow-hidden`}>
@@ -59,15 +65,14 @@ export function CTA({
             {/* Form or Button Section */}
             <div className="flex justify-center">
               {useSimpleButton ? (
-                <a href="/demo" target="_blank" rel="noopener noreferrer">
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    theme={theme}
-                  >
-                    Request Demo
-                  </Button>
-                </a>
+                <Button
+                  variant="primary"
+                  size="lg"
+                  onClick={handleDemoRequest}
+                  theme={theme}
+                >
+                  Request Demo
+                </Button>
               ) : (
                 <DemoRequestForm 
                   theme={theme} 
