@@ -14,7 +14,7 @@ export function IntegrationsHero() {
             Deploy agents across your data stack
           </Badge>
           
-          <h1 className="text-6xl font-extralight mb-6 text-[#B8D8D0]">
+          <h1 className="text-6xl font-extralight mb-10 text-[#B8D8D0]">
             TextQL Connectors
           </h1>
           
