@@ -6,12 +6,6 @@ import redshiftLogo from '/images/logos/custom/redshift-logo.png';
 import snowflakeLogo from '/images/logos/custom/Snowflake_Logo.png';
 import bigqueryLogo from '/images/logos/custom/Google-Cloud-Logo.png';
 
-// Import app journey images
-import setupImage from '/images/appjourneys/addconnector.png';
-import syncImage from '/images/appjourneys/sync connector.png';
-import previewImage from '/images/appjourneys/viewdata.png';
-import adminImage from '/images/appjourneys/listconnectors.png';
-
 interface ConnectorCardProps {
   description: string;
   icon: string;
@@ -35,19 +29,21 @@ function ConnectorCard({ description, icon, learnMoreLink, zoomFactor = 1 }: Con
       </div>
       
       {/* Content with Description */}
-      <div className="flex-1 p-5 flex flex-col">
-        <p className="text-[#4A665C] text-sm flex-grow mb-4">
+      <div className="flex-1 p-5 flex flex-col items-center">
+        <p className="text-[#4A665C] text-sm flex-grow mb-4 text-center">
           {description}
         </p>
         
         {learnMoreLink && (
           <div className="mt-auto pt-2">
             <a 
-              href={learnMoreLink} 
-              className="inline-flex items-center text-[#2A3B35] hover:text-[#4A665C] transition-colors text-sm"
+              href={learnMoreLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center text-[#2A3B35] hover:text-blue-600 transition-colors text-sm group"
             >
-              <span className="mr-2">Learn more</span>
-              <ExternalLink size={14} />
+              <span className="mr-2 group-hover:underline">Learn more</span>
+              <ExternalLink size={14} className="group-hover:text-blue-600" />
             </a>
           </div>
         )}
@@ -58,49 +54,26 @@ function ConnectorCard({ description, icon, learnMoreLink, zoomFactor = 1 }: Con
 
 const supportedConnectors = [
   {
-    description: 'Connect TextQL with your Tableau server to chat with your dashboards and visualizations.',
+    description: 'Ask questions directly to your Tableau dashboards and unlock insights from both visualizations and raw data.',
     icon: tableauLogo,
-    learnMoreLink: '#',
+    learnMoreLink: 'https://docs.textql.com/core/datasources/business-intel/tableau-connector',
     zoomFactor: 1.2
   },
   {
-    description: 'Connect TextQL to your Amazon Redshift database for natural language querying of your data warehouse.',
+    description: 'Transform complex Redshift queries into simple questions. Get lightning-fast answers from your data warehouse.',
     icon: redshiftLogo,
-    learnMoreLink: '#'
+    learnMoreLink: 'https://docs.textql.com/core/datasources/databases/redshift'
   },
   {
-    description: 'Integrate TextQL with your Snowflake instance to query your data using natural language.',
+    description: 'Elastic scaling and secure data sharing with Snowflake. From raw data to insights in seconds.',
     icon: snowflakeLogo,
-    learnMoreLink: '#'
+    learnMoreLink: 'https://docs.textql.com/core/datasources/databases/snowflake'
   },
   {
-    description: 'Connect TextQL to your Google BigQuery datasets for seamless natural language analytics.',
+    description: 'Explore petabyte-scale BigQuery datasets effortlessly. Intelligence at scale. Powered by Ana.',
     icon: bigqueryLogo,
-    learnMoreLink: '#',
+    learnMoreLink: 'https://docs.textql.com/core/datasources/databases/bigquery',
     zoomFactor: 1.2
-  }
-];
-
-export const appJourneySteps = [
-  {
-    title: 'Simple Setup',
-    image: setupImage,
-    description: 'Get started quickly by connecting your first data source to TextQL.'
-  },
-  {
-    title: 'Automatic Sync',
-    image: syncImage,
-    description: 'Data syncs automatically in the background, keeping your insights up to date.'
-  },
-  {
-    title: 'Table Preview',
-    image: previewImage,
-    description: 'Preview tables and assets previously connected to TextQL before running complex queries.'
-  },
-  {
-    title: 'Admin Controls',
-    image: adminImage,
-    description: 'Manage all your data connections in one centralized dashboard.'
   }
 ];
 
@@ -108,12 +81,6 @@ export function DataSourcesSection() {
   return (
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        {/* <div className="text-center mb-12">
-          <h2 className="text-3xl text-[#2A3B35] font-extralight">
-            Supported Connectors
-          </h2>
-        </div> */}
-        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {supportedConnectors.map((connector) => (
             <ConnectorCard

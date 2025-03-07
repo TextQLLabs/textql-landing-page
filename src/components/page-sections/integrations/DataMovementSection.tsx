@@ -1,28 +1,37 @@
 import { Database, RefreshCw, FileSpreadsheet, Settings } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { appJourneySteps } from './DataSourcesSection';
 
-const connectorFeatures = [
+// Import journey images
+import setupImage from '/images/appjourneys/addconnector.png';
+import syncImage from '/images/appjourneys/sync connector.png';
+import previewImage from '/images/appjourneys/viewdata.png';
+import adminImage from '/images/appjourneys/listconnectors.png';
+
+const journeySteps = [
   {
     title: 'Simple Setup',
     description: 'Easy connector setup with intuitive forms and guided configuration for all supported data sources.',
-    icon: Database
+    icon: Database,
+    image: setupImage
   },
   {
     title: 'Automatic Sync',
     description: 'Seamlessly sync your data sources to keep TextQL updated with the latest schema changes.',
-    icon: RefreshCw
+    icon: RefreshCw,
+    image: syncImage
   },
   {
     title: 'Table Preview',
     description: 'Preview tables and assets previously connected to TextQL before running complex queries.',
-    icon: FileSpreadsheet
+    icon: FileSpreadsheet,
+    image: previewImage
   },
   {
     title: 'Admin Controls',
     description: 'Comprehensive connector management with administrative tools for your organization.',
-    icon: Settings
+    icon: Settings,
+    image: adminImage
   }
 ];
 
@@ -43,14 +52,14 @@ export function DataMovementSection() {
             <div className="absolute top-8 left-[calc(8%+8px)] right-[calc(8%+8px)] h-[2px] bg-gray-200"></div>
 
             <div className="grid grid-cols-4 gap-4">
-              {connectorFeatures.map((feature, index) => (
-                <div key={feature.title} className="flex flex-col items-center">
+              {journeySteps.map((step, index) => (
+                <div key={step.title} className="flex flex-col items-center">
                   <div
                     className={`w-16 h-16 rounded-full flex items-center justify-center cursor-pointer z-10 transition-all duration-300
                       ${index === activeStep ? 'bg-[#2A3B35]' : 'bg-[#F0F5F3]'}`}
                     onMouseEnter={() => setActiveStep(index)}
                   >
-                    <feature.icon
+                    <step.icon
                       className={`w-6 h-6 ${index === activeStep ? 'text-white' : 'text-[#2A3B35]'}`}
                     />
                   </div>
@@ -59,7 +68,7 @@ export function DataMovementSection() {
                     <p className={`font-medium transition-colors duration-300 
                       ${index === activeStep ? 'text-[#2A3B35]' : 'text-gray-500'}`}
                     >
-                      {feature.title}
+                      {step.title}
                     </p>
                   </div>
                 </div>
@@ -78,13 +87,13 @@ export function DataMovementSection() {
             >
               <div className="aspect-[16/9] rounded-lg overflow-hidden border border-[#2A3B35]/20 shadow-lg mb-6">
                 <img
-                  src={appJourneySteps[activeStep].image}
-                  alt={appJourneySteps[activeStep].title}
-                  className="w-full h-full object-cover"
+                  src={journeySteps[activeStep].image}
+                  alt={journeySteps[activeStep].title}
+                  className="w-full h-full object-contain"
                 />
               </div>
               <p className="text-[#4A665C] text-lg text-center">
-                {connectorFeatures[activeStep].description}
+                {journeySteps[activeStep].description}
               </p>
             </motion.div>
           </AnimatePresence>
