@@ -3,6 +3,7 @@ import { IntegrationsHero } from '../components/page-sections/integrations/Integ
 import { DataSourcesSection } from '../components/page-sections/integrations/DataSourcesSection';
 import { DataMovementSection } from '../components/page-sections/integrations/DataMovementSection';
 import { CTASection } from '../components/page-sections/integrations/CTASection';
+import { AdditionalConnectorsSection } from '../components/page-sections/integrations/AdditionalConnectorsSection';
 
 export default function Integrations() {
   return (
@@ -15,6 +16,7 @@ export default function Integrations() {
 
       <IntegrationsHero />
       <DataSourcesSection />
+      <AdditionalConnectorsSection />
       <DataMovementSection />
       <CTASection />
     </>

@@ -1,19 +1,10 @@
 import { ExternalLink } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { useState } from 'react';
 
 // Import custom logos directly
 import tableauLogo from '/images/logos/custom/Tableau-Logo.png';
 import redshiftLogo from '/images/logos/custom/redshift-logo.png';
 import snowflakeLogo from '/images/logos/custom/Snowflake_Logo.png';
 import bigqueryLogo from '/images/logos/custom/Google-Cloud-Logo.png';
-
-// Import app journey images
-import setupImage from '/images/appjourneys/addconnector.png';
-import syncImage from '/images/appjourneys/sync connector.png';
-import previewImage from '/images/appjourneys/viewdata.png';
-import adminImage from '/images/appjourneys/listconnectors.png';
 
 interface ConnectorCardProps {
   description: string;
@@ -86,117 +77,10 @@ const supportedConnectors = [
   }
 ];
 
-interface StepNavigationProps {
-  steps: typeof appJourneySteps;
-  currentStep: number;
-  onStepClick: (index: number) => void;
-}
-
-function StepNavigation({ steps, currentStep, onStepClick }: StepNavigationProps) {
-  return (
-    <div className="relative flex justify-between items-center max-w-4xl mx-auto mb-12 px-6">
-      {/* Horizontal line that intersects circles */}
-      <div className="absolute h-[2px] bg-[#2A3B35]/20 left-[8%] right-[8%] top-6" />
-      
-      {steps.map((step, index) => (
-        <div
-          key={step.title}
-          className="relative flex flex-col items-center"
-        >
-          <button
-            onClick={() => onStepClick(index)}
-            className="relative z-10 mb-3"
-          >
-            <div 
-              className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-colors
-                ${currentStep === index 
-                  ? 'bg-[#2A3B35] border-[#2A3B35] text-white' 
-                  : 'bg-white border-[#2A3B35]/20 text-[#2A3B35]/60 hover:border-[#2A3B35]/40'
-                }`}
-            >
-              {index + 1}
-            </div>
-          </button>
-          <span className={`text-sm font-medium transition-colors whitespace-nowrap
-            ${currentStep === index ? 'text-[#2A3B35]' : 'text-[#2A3B35]/60'}`}
-          >
-            {step.title}
-          </span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-export const appJourneySteps = [
-  {
-    title: 'Simple Setup',
-    image: setupImage,
-    description: 'Get started quickly by connecting your first data source to TextQL.'
-  },
-  {
-    title: 'Automatic Sync',
-    image: syncImage,
-    description: 'Data syncs automatically in the background, keeping your insights up to date.'
-  },
-  {
-    title: 'Table Preview',
-    image: previewImage,
-    description: 'Preview tables and assets previously connected to TextQL before running complex queries.'
-  },
-  {
-    title: 'Admin Controls',
-    image: adminImage,
-    description: 'Manage all your data connections in one centralized dashboard.'
-  }
-];
-
-function ConnectorJourney() {
-  const [currentStep, setCurrentStep] = useState(0);
-  
-  return (
-    <div>
-      <StepNavigation 
-        steps={appJourneySteps}
-        currentStep={currentStep}
-        onStepClick={setCurrentStep}
-      />
-      
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentStep}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.3 }}
-          className="max-w-4xl mx-auto"
-        >
-          <div className="aspect-[16/9] rounded-lg overflow-hidden border border-[#2A3B35]/20 shadow-lg mb-6">
-            <img 
-              src={appJourneySteps[currentStep].image}
-              alt={appJourneySteps[currentStep].title}
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <p className="text-[#4A665C] text-lg text-center">
-            {appJourneySteps[currentStep].description}
-          </p>
-        </motion.div>
-      </AnimatePresence>
-    </div>
-  );
-}
-
 export function DataSourcesSection() {
   return (
-    <section className="py-16 bg-white">
+    <section className="pt-16 pb-4 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl text-[#2A3B35] font-extralight">
-            Supported Connectors
-          </h2>
-        </div>
-        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {supportedConnectors.map((connector) => (
             <ConnectorCard

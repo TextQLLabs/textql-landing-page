@@ -11,10 +11,10 @@ export function IntegrationsHero() {
             theme="dark" 
             className="text-lg px-6 py-2 mb-8"
           >
-            Connect Your Data
+            Deploy agents across your data stack
           </Badge>
           
-          <h1 className="text-6xl font-extralight mb-6 text-[#B8D8D0]">
+          <h1 className="text-6xl font-extralight mb-10 text-[#B8D8D0]">
             TextQL Connectors
           </h1>
           
