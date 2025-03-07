@@ -149,7 +149,6 @@ export function WaitlistForm({ isOpen, onClose, initialEmail }: WaitlistFormProp
         />
         <Input
           label="LinkedIn Profile URL"
-          link="https://linkedin.com/in/me"
           type="url"
           value={formData.linkedin}
           onChange={(e) => setFormData(prev => ({ ...prev, linkedin: e.target.value }))}
