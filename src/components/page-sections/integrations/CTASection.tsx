@@ -1,4 +1,13 @@
+import { Button } from '../../ui';
+import { useNavigate } from 'react-router-dom';
+
 export function CTASection() {
+  const navigate = useNavigate();
+
+  const handleDemoRequest = () => {
+    navigate('/demo');
+  };
+
   return (
     <section className="py-24 bg-black">
       <div className="max-w-7xl mx-auto px-6">
@@ -12,21 +21,21 @@ export function CTASection() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="/demo" 
-              className="bg-transparent hover:bg-[#B8D8D0]/10 text-[#B8D8D0] py-3 px-6 border border-[#B8D8D0] transition-colors"
+            <Button
+              variant="primary"
+              size="lg"
+              onClick={handleDemoRequest}
             >
               Book a demo
-            </a>
+            </Button>
             
-            <a 
-              href="https://docs.textql.com/connectors" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="bg-transparent hover:bg-[#B8D8D0]/10 text-[#B8D8D0] py-3 px-6 border border-[#B8D8D0] transition-colors"
+            <Button
+              variant="primary"
+              size="lg"
+              onClick={() => window.open('https://docs.textql.com/core/datasources/the-connectors-page', '_blank')}
             >
               View documentation
-            </a>
+            </Button>
           </div>
         </div>
       </div>
