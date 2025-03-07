@@ -1,4 +1,4 @@
-import { EventsHero, EventsList, UpcomingEvents } from '../components/page-sections/events';
+import { EventsHero } from '../components/page-sections/events';
 import { SEO } from '../components/SEO';
 
 export default function Events() {
