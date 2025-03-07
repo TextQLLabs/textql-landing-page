@@ -22,6 +22,7 @@ import WorkflowLibrary from './pages/workflows';
 import WorkflowTemplate from './pages/workflows/[id]';
 import Events from './pages/Events';
 import Demo from './pages/Demo';
+import Integrations from './pages/Integrations';
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/agents" element={<Agents />} />
         <Route path="/ontology" element={<Ontology />} />
+        <Route path="/integrations" element={<Integrations />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/events" element={<Events />} />
