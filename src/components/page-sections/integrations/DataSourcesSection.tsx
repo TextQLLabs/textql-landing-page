@@ -38,19 +38,21 @@ function ConnectorCard({ description, icon, learnMoreLink, zoomFactor = 1 }: Con
       </div>
       
       {/* Content with Description */}
-      <div className="flex-1 p-5 flex flex-col">
-        <p className="text-[#4A665C] text-sm flex-grow mb-4">
+      <div className="flex-1 p-5 flex flex-col items-center">
+        <p className="text-[#4A665C] text-sm flex-grow mb-4 text-center">
           {description}
         </p>
         
         {learnMoreLink && (
           <div className="mt-auto pt-2">
             <a 
-              href={learnMoreLink} 
-              className="inline-flex items-center text-[#2A3B35] hover:text-[#4A665C] transition-colors text-sm"
+              href={learnMoreLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center text-[#2A3B35] hover:text-blue-600 transition-colors text-sm group"
             >
-              <span className="mr-2">Learn more</span>
-              <ExternalLink size={14} />
+              <span className="mr-2 group-hover:underline">Learn more</span>
+              <ExternalLink size={14} className="group-hover:text-blue-600" />
             </a>
           </div>
         )}
@@ -61,25 +63,25 @@ function ConnectorCard({ description, icon, learnMoreLink, zoomFactor = 1 }: Con
 
 const supportedConnectors = [
   {
-    description: 'Connect TextQL with your Tableau server to chat with your dashboards and visualizations.',
+    description: 'Ask questions directly to your Tableau dashboards and unlock insights from both visualizations and raw data.',
     icon: tableauLogo,
-    learnMoreLink: '#',
+    learnMoreLink: 'https://docs.textql.com/core/datasources/business-intel/tableau-connector',
     zoomFactor: 1.2
   },
   {
-    description: 'Connect TextQL to your Amazon Redshift database for natural language querying of your data warehouse.',
+    description: 'Transform complex Redshift queries into simple questions. Get lightning-fast answers from your data warehouse.',
     icon: redshiftLogo,
-    learnMoreLink: '#'
+    learnMoreLink: 'https://docs.textql.com/core/datasources/databases/redshift'
   },
   {
-    description: 'Integrate TextQL with your Snowflake instance to query your data using natural language.',
+    description: 'Elastic scaling and secure data sharing with Snowflake. From raw data to insights in seconds.',
     icon: snowflakeLogo,
-    learnMoreLink: '#'
+    learnMoreLink: 'https://docs.textql.com/core/datasources/databases/snowflake'
   },
   {
-    description: 'Connect TextQL to your Google BigQuery datasets for seamless natural language analytics.',
+    description: 'Explore petabyte-scale BigQuery datasets effortlessly. Intelligence at scale. Powered by Ana.',
     icon: bigqueryLogo,
-    learnMoreLink: '#',
+    learnMoreLink: 'https://docs.textql.com/core/datasources/databases/bigquery',
     zoomFactor: 1.2
   }
 ];
