@@ -72,7 +72,7 @@ export function EventsHero() {
                   type="submit" 
                   variant="primary"
                 >
-                  Join waitlist
+                  Apply
                 </Button>
               </form>
             </div>
