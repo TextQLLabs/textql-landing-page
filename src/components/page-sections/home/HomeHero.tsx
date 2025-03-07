@@ -32,7 +32,7 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
                 Ana
               </h1>
               <h2 className="text-4xl md:text-7xl font-light leading-[1.1] text-white opacity-0 animate-slide-up animation-delay-200">
-                finds stuff
+                finds insights
                 <br />
                 you cannot
               </h2>
