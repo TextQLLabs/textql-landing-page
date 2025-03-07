@@ -37,24 +37,24 @@ export function DataMovementSection() {
             Connector Management
           </h2>
         </div>
-        
+
         <div className="max-w-4xl mx-auto">
           <div className="relative mb-12">
             <div className="absolute top-8 left-[calc(8%+8px)] right-[calc(8%+8px)] h-[2px] bg-gray-200"></div>
-            
+
             <div className="grid grid-cols-4 gap-4">
               {connectorFeatures.map((feature, index) => (
                 <div key={feature.title} className="flex flex-col items-center">
-                  <div 
+                  <div
                     className={`w-16 h-16 rounded-full flex items-center justify-center cursor-pointer z-10 transition-all duration-300
                       ${index === activeStep ? 'bg-[#2A3B35]' : 'bg-[#F0F5F3]'}`}
                     onMouseEnter={() => setActiveStep(index)}
                   >
-                    <feature.icon 
-                      className={`w-6 h-6 ${index === activeStep ? 'text-white' : 'text-[#2A3B35]'}`} 
+                    <feature.icon
+                      className={`w-6 h-6 ${index === activeStep ? 'text-white' : 'text-[#2A3B35]'}`}
                     />
                   </div>
-                  
+
                   <div className="mt-4 text-center">
                     <p className={`font-medium transition-colors duration-300 
                       ${index === activeStep ? 'text-[#2A3B35]' : 'text-gray-500'}`}
@@ -66,7 +66,7 @@ export function DataMovementSection() {
               ))}
             </div>
           </div>
-          
+
           <AnimatePresence mode="wait">
             <motion.div
               key={activeStep}
@@ -77,7 +77,7 @@ export function DataMovementSection() {
               className="max-w-4xl mx-auto"
             >
               <div className="aspect-[16/9] rounded-lg overflow-hidden border border-[#2A3B35]/20 shadow-lg mb-6">
-                <img 
+                <img
                   src={appJourneySteps[activeStep].image}
                   alt={appJourneySteps[activeStep].title}
                   className="w-full h-full object-cover"
