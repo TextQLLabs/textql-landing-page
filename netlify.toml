@@ -2,46 +2,41 @@
   command = "npm run build"
   publish = "dist"
 
-# This single redirect handles ALL client-side routing
+# Handle client-side routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  force = true
+
+# Specific route redirects
+[[redirects]]
+  from = "/enterprise"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/templates"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/pricing"
+  to = "/index.html"
+  status = 200
+
+# Handle 404s
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
 
 # Add headers for sitemap.xml
 [[headers]]
   for = "/sitemap.xml"
   [headers.values]
     Content-Type = "application/xml"
-    X-Robots-Tag = "noarchive"
-    Cache-Control = "max-age=3600"
 
-# Add headers for robots.txt
-[[headers]]
-  for = "/robots.txt"
-  [headers.values]
-    Content-Type = "text/plain"
-    Cache-Control = "max-age=3600"
-
-# Handle docs redirects
-[[redirects]]
-  from = "/docs/*"
-  to = "https://docs.textql.com/:splat"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "/documentation/*"
-  to = "https://docs.textql.com/:splat"
-  status = 301
-  force = true
-
-# Handle www subdomain
-[[redirects]]
-  from = "https://www.textql.com/*"
-  to = "https://textql.com/:splat"
-  status = 301
-  force = true
-
-# Enable prerendering for SEO is handled by React Router
-# No need for the Next.js plugin
+# Enable prerendering for SEO
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
