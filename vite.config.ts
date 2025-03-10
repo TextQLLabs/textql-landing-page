@@ -1,17 +1,14 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { reactRouter } from '@react-router/dev/vite'
 import sitemap from 'vite-plugin-sitemap'
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command }) => ({
+export default defineConfig({
   plugins: [
     react(),
-    // Only use React Router for production builds
-    command === 'build' ? reactRouter() : null,
     sitemap({
       hostname: 'https://textql.com',
-      outDir: './build/client',
+      outDir: './dist',
       // Define all routes as simple strings
       dynamicRoutes: [
         '/',
@@ -76,9 +73,10 @@ export default defineConfig(({ command }) => ({
       exclude: ['/404', '/__spa-fallback', '/design-system', '/docs/*', '/documentation/*', '/events'],
       readable: true
     }),
-  ].filter(Boolean),
+  ],
   build: {
+    outDir: 'dist',
     chunkSizeWarningLimit: 1000,
   },
   assetsInclude: ['**/*.md'],
-}))
+})

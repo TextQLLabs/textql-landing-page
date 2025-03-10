@@ -65,7 +65,7 @@ routes.forEach(({ url, changefreq, priority }) => {
 });
 
 const sitemapXml = sitemap.end({ prettyPrint: true });
-const sitemapDest = './build/client/sitemap.xml';
+const sitemapDest = './dist/sitemap.xml';
 
 try {
   writeFileSync(sitemapDest, sitemapXml);
