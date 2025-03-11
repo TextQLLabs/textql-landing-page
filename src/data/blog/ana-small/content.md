@@ -1,6 +1,6 @@
 ![Conglomerate v1 lite results](/images/blog/ana-small/ana-small-image-06.png)
 
-**Drawn to scale to the best of Spencer’s abilities. Scores represent text-to-SQL accuracy*
+**Scores represent text-to-SQL accuracy*
 
 TextQL’s pipeline, the entire system that turns a question into an answer, can seem complex. It is complex. To sanity check ourselves with the question “is any of this doing anything?” we built the most simple, barebones version of TextQL’s Ana that we could: [**Ana Small**](https://small.textql.com). In short, it’s really good.
 
