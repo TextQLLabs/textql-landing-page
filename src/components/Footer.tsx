@@ -126,13 +126,6 @@ export default function Footer() {
             </div>
           </div>
         </div>
-
-        {/* Giant TextQL Logo */}
-        <div className="w-full border-t border-white/10">
-          <div className="mx-auto max-w-site px-6 py-24">
-            <TextLogo className="w-full max-w-[800px] mx-auto opacity-[0.03]" />
-          </div>
-        </div>
       </div>
     </footer>
   );
