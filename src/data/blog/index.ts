@@ -13,10 +13,13 @@ import { post as tableauIntegration } from './tableau-integration';
 import { post as embeddingModels } from './embedding-models';
 import { post as whyOntology } from './why-ontology';
 import { post as sqlProcess } from './sql-process';
+import { post as anaSmall } from './ana-small';
 
 // Export all blog posts
+// most recent at top
 export const blogPosts: BlogPost[] = [
-  sqlProcess, // Most recent first
+  anaSmall,
+  sqlProcess, 
   whyOntology,
   embeddingModels,
   tableauIntegration,
@@ -27,13 +30,15 @@ export const blogPosts: BlogPost[] = [
   buildingDataAgent,
   futureOfData,
   tenYearThesis,
-  sqlModel
+  sqlModel,
 ];
 
 // Function to get post content
 export function getPostContent(id: string): string {
   try {
     switch (id) {
+      case 'ana-small':
+        return getAnaSmallContent();
       case 'sql-process':
         return getSQLProcessContent();
       case 'building-data-agent':
@@ -65,6 +70,10 @@ export function getPostContent(id: string): string {
     console.error('Failed to load content for post ' + id + ':', error);
     return '';
   }
+}
+
+export function getAnaSmallContent(): string {
+  return import.meta.glob('./ana-small/content.md', { query: '?raw', import: 'default', eager: true })['./ana-small/content.md'] as string;
 }
 
 export function getSQLProcessContent(): string {
