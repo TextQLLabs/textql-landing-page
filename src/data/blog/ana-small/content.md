@@ -1,4 +1,4 @@
-![Conglomerate v1 lite results](/images/blog/ana-small/ana-small-image05.jpg)
+![Conglomerate v1 lite results](/images/blog/ana-small/ana-small-image-06.png)
 
 **Drawn to scale to the best of Spencer’s abilities. Scores represent text-to-SQL accuracy*
 
