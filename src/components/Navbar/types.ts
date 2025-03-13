@@ -51,6 +51,11 @@ export const navigation: NavItem[] = [
         href: '/events'
       },
       {
+        label: 'Benchmark',
+        description: 'See how TextQL compares to other solutions',
+        href: '/benchmark'
+      },
+      {
         label: 'Documentation',
         description: 'Learn how to integrate and use TextQL',
         href: 'https://docs.textql.com',

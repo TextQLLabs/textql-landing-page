@@ -7,7 +7,7 @@ export function TextQLChat() {
       </div>
 
       {/* Chat Content */}
-      <div className="p-4 space-y-4 h-[400px] overflow-y-auto">
+      <div className="p-4 space-y-4 h-[calc(400px-48px)] overflow-y-auto scrollbar-hide">
         {/* User Message */}
         <div className="flex justify-end">
           <div className="max-w-[80%] bg-[#0f8a7a] rounded-lg px-4 py-2">

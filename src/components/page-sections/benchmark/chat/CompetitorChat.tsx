@@ -50,7 +50,7 @@ export function CompetitorChat({ competitor, onCompetitorChange }: CompetitorCha
       </div>
 
       {/* Chat Content */}
-      <div className="p-4 space-y-4 h-[400px] overflow-y-auto">
+      <div className="p-4 space-y-4 h-[calc(400px-48px)] overflow-y-auto scrollbar-hide">
         {/* User Message */}
         <div className="flex justify-end">
           <div 

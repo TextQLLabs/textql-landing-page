@@ -79,11 +79,11 @@ body {
 .animation-delay-400 { animation-delay: 400ms; }
 
 /* Hide scrollbar but allow scrolling */
-.hide-scrollbar::-webkit-scrollbar {
+.scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
 
-.hide-scrollbar {
+.scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
