@@ -24,6 +24,7 @@ import WorkflowTemplate from './pages/workflows/[id]';
 import Demo from './pages/Demo';
 import Integrations from './pages/Integrations';
 import Events from './pages/Events';
+import Benchmark from './pages/Benchmark';
 
 function App() {
   const location = useLocation();
@@ -72,6 +73,7 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/events" element={<Events />} />
+          <Route path="/benchmark" element={<Benchmark />} />
           
           {/* Blog Routes */}
           <Route path="/blog" element={<Blog />} />
