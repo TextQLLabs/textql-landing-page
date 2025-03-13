@@ -1,5 +1,5 @@
 import { Text } from '../components/ui';
-import { BenchmarkChart, ChatComparison, AccuracyDiagram } from '../components/page-sections/benchmark';
+import { BenchmarkChart, ChatComparison, AccuracyDiagram, EnterpriseStats } from '../components/page-sections/benchmark';
 
 export default function Benchmark() {
   return (
@@ -32,13 +32,16 @@ export default function Benchmark() {
         </div>
 
         {/* Enterprise Complexity Section */}
-        <div>
-          <Text variant="header" className="text-3xl md:text-5xl font-extralight mb-6">
-            Engineered for Real Enterprise Complexity
-          </Text>
-          <Text color="muted" className="text-xl leading-relaxed max-w-4xl">
-            Ana excels within intricate enterprise data environments, easily navigating extensive datasets featuring over 100 interconnected tables and thousands of metrics and dimensions. Built specifically to handle sophisticated logic and challenging analytical scenarios, Ana delivers precise, meaningful insights even under highly demanding conditions.
-          </Text>
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr,400px] gap-12">
+          <div>
+            <Text variant="header" className="text-3xl md:text-5xl font-extralight mb-6">
+              Engineered for Real Enterprise Complexity
+            </Text>
+            <Text color="muted" className="text-xl leading-relaxed">
+              Ana excels within intricate enterprise data environments, easily navigating extensive datasets featuring over 100 interconnected tables and thousands of metrics and dimensions. Built specifically to handle sophisticated logic and challenging analytical scenarios, Ana delivers precise, meaningful insights even under highly demanding conditions.
+            </Text>
+          </div>
+          <EnterpriseStats />
         </div>
 
         {/* Real-world Comparison Section */}
@@ -51,6 +54,11 @@ export default function Benchmark() {
           </Text>
           <div className="rounded-lg">
             <ChatComparison />
+          </div>
+          <div className="text-right mt-2">
+            <Text color="muted" className="text-sm italic">
+              Disclaimer: Competitor responses shown are illustrative; actual wording varied but similarly indicated no correct answer available.
+            </Text>
           </div>
         </div>
 
@@ -66,6 +74,17 @@ export default function Benchmark() {
             Ana uses structured options to prevent common mistakes and guarantee every answer makes sense within your business context.
           </Text>
           <AccuracyDiagram />
+        </div>
+      </div>
+      {/* Demo CTA */}
+      <div className="border-t border-[#B8D8D0]/10">
+        <div className="max-w-7xl mx-auto px-6 py-16 flex items-center justify-center gap-8">
+          <Text color="muted" className="text-xl">
+            Learn how Ana can work for your business
+          </Text>
+          <a href="/demo" className="inline-flex items-center gap-2 px-8 py-4 bg-[#0f8a7a] text-white hover:bg-[#0f8a7a]/90 transition-colors text-lg">
+            Book a Demo
+          </a>
         </div>
       </div>
     </div>
