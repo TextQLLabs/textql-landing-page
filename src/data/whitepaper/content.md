@@ -30,6 +30,8 @@ A clear answer:
 **Top Issue:** 40% didn't complete onboarding.  
 **Recommendation:** Resend onboarding emails to this group."
 
+<!-- ExecutionGraph -->
+
 No coding. No waiting for the data team. No deciphering dashboards. Maybe you really care about this result? Schedule this analysis and get the result in your inbox every week.
 
 ---
@@ -186,7 +188,6 @@ TextQL’s Agent Layer utilizes the Dakota State Framework—a dynamic state-mac
   - Users see a plain-English summary of steps taken (e.g., "Joined orders + customers, filtered for Q4, applied regional discounts")
   - No complex DAG of code cells to decipher
 
-<!-- ExecutionGraph -->
 
 ## Why This Matters
 
