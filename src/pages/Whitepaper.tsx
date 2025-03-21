@@ -3,7 +3,7 @@ import { SEO } from '../components/SEO';
 import { WhitepaperContent } from '../components/page-sections/whitepaper/WhitepaperContent';
 import { Button } from '../components/ui';
 import { WaveGrid } from '../components/animations';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Map, BarChart2, XCircle, Settings } from 'lucide-react';
 import { Badge } from '../components/ui';
 
 export default function Whitepaper() {
@@ -55,22 +55,22 @@ export default function Whitepaper() {
               
               <div className="md:mt-8 w-full md:w-auto">
                 <div className="p-5 bg-[#0D4A42]/30 border border-[#B8D8D0]/10 rounded-lg backdrop-blur-sm">
-                  <div className="flex flex-col space-y-4">
+                  <div className="flex flex-col space-y-5">
                     <div className="flex items-center">
-                      <div className="w-2 h-2 rounded-full bg-[#0f8a7a] mr-3"></div>
-                      <Text color="muted" theme="dark">Ontology Layer Architecture</Text>
+                      <Map className="w-5 h-5 mr-3 flex-shrink-0 text-[#B8D8D0]" />
+                      <Text color="muted" theme="dark">What is TextQL and how can it help you explore your data?</Text>
                     </div>
                     <div className="flex items-center">
-                      <div className="w-2 h-2 rounded-full bg-[#0f8a7a] mr-3"></div>
-                      <Text color="muted" theme="dark">Secure Compute Environment</Text>
+                      <BarChart2 className="w-5 h-5 mr-3 flex-shrink-0 text-[#B8D8D0]" />
+                      <Text color="muted" theme="dark">How does it beat existing, pure-LLM systems?</Text>
                     </div>
                     <div className="flex items-center">
-                      <div className="w-2 h-2 rounded-full bg-[#0f8a7a] mr-3"></div>
-                      <Text color="muted" theme="dark">Dakota State Framework</Text>
+                      <XCircle className="w-5 h-5 mr-3 flex-shrink-0 text-[#B8D8D0]" />
+                      <Text color="muted" theme="dark">Why won't AI advances alone completely solve the problem?</Text>
                     </div>
                     <div className="flex items-center">
-                      <div className="w-2 h-2 rounded-full bg-[#0f8a7a] mr-3"></div>
-                      <Text color="muted" theme="dark">Benchmark Results</Text>
+                      <Settings className="w-5 h-5 mr-3 flex-shrink-0 text-[#B8D8D0]" />
+                      <Text color="muted" theme="dark">How exactly does it work from the inside?</Text>
                     </div>
                   </div>
                 </div>

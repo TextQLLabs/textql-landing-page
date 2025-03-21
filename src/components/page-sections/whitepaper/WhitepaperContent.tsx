@@ -1,20 +1,26 @@
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 import { Text } from '../../ui';
 import { OQLTransformation, SchemaDynamicsVisual, ExecutionGraph } from './visualizations';
+import { getWhitepaperContent, whitepaperMetadata } from '../../../data/whitepaper';
+import { Components } from 'react-markdown';
+import { ReactNode, useMemo, ElementType, FC } from 'react';
 
 // Typography style constants for consistency
 const styles = {
   // Section headers
-  sectionHeader: "text-3xl md:text-4xl mb-6",
-  subsectionHeader: "text-2xl mb-4 mt-8",
+  sectionHeader: "text-3xl md:text-4xl mb-6 text-black",
+  subsectionHeader: "text-2xl mb-4 mt-8 text-black",
 
   // Paragraph styles
-  paragraphText: "mb-4",
+  paragraphText: "mb-4 text-black",
   emphasizedText: "font-italic",
   boldText: "font-bold",
 
   // List styles
   listContainer: "list-disc pl-8 mb-6",
-  listItem: "mb-2",
+  listItem: "mb-2 text-black",
 
   // Layout styles
   contentWrapper: "w-full max-w-[950px] mx-auto px-6",
@@ -23,247 +29,150 @@ const styles = {
   largerSpacer: "mb-8 mt-12",
 };
 
+type ContentSection = 
+  | { type: 'markdown'; content: string }
+  | { type: 'visualization'; component: FC };
+
 export function WhitepaperContent() {
+  const rawContent = getWhitepaperContent();
+  
+  // Split content into sections with visualizations
+  const contentSections = useMemo(() => {
+    // Split points
+    const schemaSplitText = "<!-- SchemaDynamicsVisual -->";
+    const oqlSplitText = "<!-- OQLTransformation -->";
+    const executionSplitText = "<!-- ExecutionGraph -->";
+    
+    // Find positions of each visualization
+    const schemaIndex = rawContent.indexOf(schemaSplitText);
+    const oqlIndex = rawContent.indexOf(oqlSplitText);
+    const executionIndex = rawContent.indexOf(executionSplitText);
+    
+    if (schemaIndex === -1 || oqlIndex === -1 || executionIndex === -1) {
+      console.warn("Could not find one or more visualization markers");
+    }
+    
+    // Split content
+    const sections: ContentSection[] = [];
+    
+    // First section (before first visualization)
+    sections.push({
+      type: 'markdown',
+      content: rawContent.substring(0, schemaIndex)
+    });
+    
+    // Schema visualization
+    sections.push({
+      type: 'visualization',
+      component: SchemaDynamicsVisual
+    });
+    
+    // Between schema and OQL
+    sections.push({
+      type: 'markdown',
+      content: rawContent.substring(schemaIndex + schemaSplitText.length, oqlIndex)
+    });
+    
+    // OQL visualization
+    sections.push({
+      type: 'visualization',
+      component: OQLTransformation
+    });
+    
+    // Between OQL and execution graph
+    sections.push({
+      type: 'markdown',
+      content: rawContent.substring(oqlIndex + oqlSplitText.length, executionIndex)
+    });
+    
+    // Execution graph visualization
+    sections.push({
+      type: 'visualization',
+      component: ExecutionGraph
+    });
+    
+    // Final section
+    sections.push({
+      type: 'markdown',
+      content: rawContent.substring(executionIndex + executionSplitText.length)
+    });
+    
+    return sections;
+  }, [rawContent]);
+
+  // Custom component to handle HTML blocks
+  const customComponents: Components = {
+    p: ({ children, ...props }: { children?: ReactNode }) => {
+      const htmlContent = String(children || '');
+      
+      if (htmlContent.includes('<iframe') || htmlContent.includes('<div')) {
+        return <div dangerouslySetInnerHTML={{ __html: htmlContent }} className="my-8" />;
+      }
+      
+      return <p className="text-black text-base leading-relaxed mb-4" {...props}>{children}</p>;
+    },
+    h1: ({ children }: { children?: ReactNode }) => (
+      <h1 className="text-3xl md:text-4xl mb-6 text-black font-bold">{children}</h1>
+    ),
+    h2: ({ children }: { children?: ReactNode }) => (
+      <h2 className="text-2xl mb-4 mt-8 text-black font-semibold">{children}</h2>
+    ),
+    h3: ({ children }: { children?: ReactNode }) => (
+      <h3 className="text-xl mb-3 mt-6 text-black font-medium">{children}</h3>
+    ),
+    ul: ({children, ...props}) => <ul className={styles.listContainer} {...props}>{children}</ul>,
+    ol: ({children, ...props}) => <ol className="list-decimal pl-8 mb-4 text-black" {...props}>{children}</ol>,
+    li: ({children, ...props}) => <li className="mb-2 text-black" {...props}>{children}</li>,
+    hr: () => <hr className="border-t border-gray-200 my-8" />,
+    strong: ({children, ...props}) => <strong className="font-semibold text-black" {...props}>{children}</strong>,
+    em: ({children, ...props}) => <em className="italic text-black" {...props}>{children}</em>,
+    a: ({ href, children, ...props }: { href?: string, children?: ReactNode }) => (
+      <a href={href} className="text-[#0D4A42] underline hover:text-[#0f8a7a]" {...props}>{children}</a>
+    ),
+    img: ({ src, alt, ...props }: { src?: string, alt?: string }) => (
+      <img
+        src={src}
+        alt={alt || ""}
+        className="max-w-full h-auto mx-auto my-8 rounded-lg"
+        {...props}
+      />
+    ),
+    code: ({ inline, children, ...props }: { inline?: boolean, className?: string, children?: ReactNode }) => {
+      if (inline) {
+        return <code className="bg-[#F0F5F3] px-1 py-0.5 rounded text-[#2A3B35] text-sm" {...props}>{children}</code>;
+      }
+      
+      return (
+        <pre className="bg-white border border-[#E5E5E5] rounded-md p-4 mb-6 text-sm font-mono overflow-x-auto">
+          <code {...props}>{children}</code>
+        </pre>
+      );
+    }
+  };
+
   return (
     <div className={styles.contentWrapper}>
       <div className={styles.innerContent}>
-        <Text variant="header" theme="light" className={styles.sectionHeader}>
-          What is TextQL?
-        </Text>
-
-        <Text theme="light" className={styles.paragraphText}>
-          TextQL is an enterprise data intelligence platform that transforms natural language questions into precise, actionable insights.
-        </Text>
-
-        <Text variant="header" theme="light" className={styles.subsectionHeader}>Imagine This:</Text>
-        <Text theme="light" className={styles.paragraphText}>
-          You're a product manager. Your CEO asks, <em>"Why did customer retention drop last month?"</em>
-        </Text>
-
-        <Text variant="header" theme="light" className={styles.subsectionHeader}>With TextQL:</Text>
-        <Text theme="light" className={styles.paragraphText}>
-          You type the question into a chatbox.
-        </Text>
-
-        <Text variant="header" theme="light" className={styles.subsectionHeader}>Behind the Scenes (But You Don't See This):</Text>
-        <Text theme="light" className={styles.paragraphText}>
-          TextQL's <strong>Ontology Layer</strong> understands "customer retention" means <em>active users divided by signups</em>, pulling data from 5 tables you've never heard of.
-        </Text>
-        <Text theme="light" className={styles.paragraphText}>
-          The <strong>Compute Layer</strong> runs a script to clean messy subscription dates, merges datasets from Salesforce and your app's database, and checks permissions.
-        </Text>
-        <Text theme="light" className={styles.paragraphText}>
-          The <strong>Dakota Agent</strong> guides the analysis: <em>"Comparing cohorts? Checking for payment failures?"</em>
-        </Text>
-
-        <Text variant="header" theme="light" className={styles.subsectionHeader}>What You Get in 10 Seconds:</Text>
-        <Text theme="light" className={styles.paragraphText}>
-          A clear answer:
-        </Text>
-        <Text theme="light" className={styles.paragraphText}>
-          <em>"Retention dropped 12%—driven by users who signed up during the holiday promo.</em><br />
-          <strong>Top Issue:</strong> 40% didn't complete onboarding.<br />
-          <strong>Recommendation:</strong> Resend onboarding emails to this group."
-        </Text>
-        <Text theme="light" className={styles.spacer}>
-          No coding. No waiting for the data team. No deciphering dashboards. Maybe you really care about this result? Schedule this analysis and get the result in your inbox every week.
-        </Text>
-
-        <Text variant="header" theme="light" className={styles.sectionHeader}>
-          TextQL: The Definitive Architecture for Novel Insights Discovery
-        </Text>
-
-        <Text theme="light" className={styles.paragraphText}>
-          Enterprise data teams know the drill: a stakeholder asks, "Why did Q3 margins drop?" and suddenly you're spelunking through 12 databases, 50 dashboards, and a dozen half-baked SQL scripts. Large language models (LLMs) promised to automate this chaos, but Text-to-SQL alone can't scale. We're releasing a comprehensive report on TextQL's technical architecture, and how we try to solve these problems – you can read it here, or keep going for a short explainer:
-        </Text>
-
-        <Text variant="header" theme="light" className={`${styles.sectionHeader} mt-8`}>Moving Beyond SQL</Text>
-        <Text theme="light" className={styles.paragraphText}>
-          One would think that to automate data-driven decision making, it'd be best to start with automating SQL. That's the most annoying part, isn't it?
-        </Text>
-        <Text theme="light" className={styles.paragraphText}>
-          Imagine all the pain you've experienced rewriting the same query dozens of times, just to get that correlated subquery running...
-        </Text>
-        <Text theme="light" className={styles.paragraphText}>
-          This is where the giants are going, with recent releases such as Snowflake Cortex Agent, Databricks Genie, and Amazon Q Generative SQL. Its legacy is even embedded in our own company name – TextQL.
-        </Text>
-        <Text theme="light" className={styles.spacer}>
-          And yet, our AI agents don't write SQL. What!?
-        </Text>
-
-        <Text variant="header" theme="light" className={`${styles.sectionHeader} ${styles.largerSpacer}`}>The Fundamental Flaws of Text-to-SQL in Enterprise Contexts</Text>
-
-        <Text variant="header" theme="light" className={styles.subsectionHeader}>1. Semantic Ambiguity vs. Deterministic Requirements</Text>
-        <Text theme="light" className={styles.paragraphText}>
-          LLMs like o3 or Gemini excel at syntax generation but fail to resolve contextual semantics critical to enterprises. Consider:
-        </Text>
-        <ul className={styles.listContainer}>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Term Disambiguation:</strong></span> <span className="text-[#4A665C]">"Revenue" might map to sales.gross_revenue (GAAP) in Snowflake, erp.net_revenue (non-GAAP) in BigQuery, or a derived metric involving window functions.</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Join Path Explosion:</strong></span> <span className="text-[#4A665C]">With 10K+ tables, a JOIN between orders and customers could involve 15 valid paths (e.g., order.cust_id vs. customer.legacy_id), each with differing performance and correctness implications.</span></li>
-        </ul>
-        <Text theme="light" className={styles.spacer}>
-          LLMs hallucinate paths or miss hidden constraints (e.g., WHERE tenant_id = {'{current_user}'} for row-level security). Scaling model size or fine-tuning on query logs doesn't solve this—it merely increases the probability of plausible (not correct) SQL.
-        </Text>
-
-        <Text variant="header" theme="light" className={styles.subsectionHeader}>2. Schema Dynamics and Training Data Decay</Text>
-        <Text theme="light" className={styles.paragraphText}>
-          Enterprise schemas evolve constantly:
-        </Text>
-        <SchemaDynamicsVisual />
-        <Text theme="light" className={styles.spacer}>
-          Fine-tuned LLMs or few-shot context systems fed on historical queries become stale instantly and silently. Retraining requires curating thousands of new labeled examples—a Sisyphean task. Even retrieval-augmented generation (RAG) falters, as vector similarity can't guarantee referential integrity or permission-aware SQL.
-        </Text>
-
-        <Text variant="header" theme="light" className={styles.subsectionHeader}>3. Dialect Fragmentation and Execution Safety</Text>
-        <Text theme="light" className={styles.paragraphText}>
-          Enterprises rarely standardize on one SQL dialect. A "simple" DATE_TRUNC call might require:
-        </Text>
-        <ul className={styles.listContainer}>
-          <li className={styles.listItem}><span className="text-[#2A3B35]">Snowflake: DATE_TRUNC('MONTH', timestamp).</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]">BigQuery: DATE_TRUNC(timestamp, MONTH).</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]">Redshift: DATE_TRUNC('month', timestamp).</span></li>
-        </ul>
-        <Text theme="light" className={styles.spacer}>
-          Worse, LLMs generate unsafe queries (e.g., Cartesian joins on terabyte-scale tables) or bypass security and permissioning systems.
-        </Text>
-        <Text theme="light" className={styles.spacer}>
-          And increasing model capability only goes so far. A correct query relies on far more than the IQ of the person or model writing it. It needs deep knowledge of definitions, business processes, physical properties of the data, correct join paths, security and permissioning rules, and more. Almost all of it lives only in the heads of business operators. An effective query AI needs to get it right every time, and even if it miraculously writes flawless, 200-line, 5-subquery SQL – how can a non-technical user even know it's right?
-        </Text>
-
-        <Text variant="header" theme="light" className={`${styles.sectionHeader} mt-16 mb-8`}>TextQL's Architecture: A Graph-Based, Deterministic Alternative</Text>
-        <Text theme="light" className={styles.spacer}>
-          The best parts of language models are their speed, creativity, and deep general knowledge of what they've seen in their training data, not holding together hundreds of precise rules and details internal a business.
-        </Text>
-        <Text theme="light" className={styles.spacer}>
-          So we built TextQL to take care of that, abstracting away semantic and execution constraints so that language models can focus on what they're best at:
-        </Text>
-
-        <Text variant="header" theme="light" className={styles.subsectionHeader}>Layer 1: Ontology Layer – Formalizing Semantics as a Graph</Text>
-        <Text theme="light" className={styles.paragraphText}>
-          TextQL introduces an Ontology Layer that provides semantic abstraction between human concepts and complex data assets. This layer defines a structured Ontology Query Language (OQL), abstracting away dialect differences, security considerations, and data complexity. Technical maintainers benefit from deterministic and verifiable SQL query compilation, dramatically reducing the overhead of manual query debugging and maintenance.
-        </Text>
-
-        <Text theme="light" className={styles.paragraphText}>
-          The Ontology Layer is a labeled property graph that codifies:
-        </Text>
-        <ul className={styles.listContainer}>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Object Types:</strong></span> <span className="text-[#4A665C]">Entities (e.g., Customer, Order) mapped to physical tables/views.</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Attributes:</strong></span> <span className="text-[#4A665C]">Columns with business-aligned names/descriptions (e.g., Order.revenue → "Net Revenue after Returns").</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Links:</strong></span> <span className="text-[#4A665C]">Annotated edges defining valid joins. Each link specifies source/target objects, join keys, and cardinality (one-to-one, one-to-many, many-to-many)</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Metrics:</strong></span> <span className="text-[#4A665C]">Formulaic aggregations on top of objects, including level-of-detail calculations and window functions (e.g., Average Recharge Gap = AVG(lead (recharge_datetime) OVER (PARTITION BY recharge_id ORDER BY recharge_datetime) - recharge_datetime)).</span></li>
-        </ul>
-
-        <div className="my-8 flex justify-center">
-          <div className="relative w-full max-w-2xl">
-            <img
-              src="/images/ontology/Conglomerate Ontology.png"
-              alt="TextQL Ontology Visualization"
-              className="w-full h-full object-contain"
-            />
-          </div>
-        </div>
-
-        <Text variant="header" theme="light" className={styles.subsectionHeader}>Ontology Query Language (OQL)</Text>
-        <Text theme="light" className={styles.paragraphText}>
-          OQL decouples logical intent from physical execution. A query like:
-        </Text>
-        <div className="bg-white border border-[#E5E5E5] rounded-md p-4 mb-6 text-sm font-mono overflow-x-auto">
-          <div><span className="text-purple-600 font-semibold">METRICS</span> <span className="text-[#4A665C]">NetRevenue, CAC</span></div>
-          <div><span className="text-purple-600 font-semibold">DIMENSIONS</span> <span className="text-[#4A665C]">ProductLine (QUARTER)</span></div>
-          <div><span className="text-purple-600 font-semibold">FILTER</span> <span className="text-[#4A665C]">FiscalYear = 2023</span> <span className="text-purple-600 font-semibold">AND</span> <span className="text-[#4A665C]">Region = </span><span className="text-orange-500">"NA"</span></div>
-        </div>
-
-        <Text theme="light" className={styles.paragraphText}>
-          Compiles to dialect-specific SQL via a rule-based engine that:
-        </Text>
-        <ul className={styles.listContainer}>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Resolves Metrics:</strong></span> <span className="text-[#4A665C]">Expands NetRevenue to its formulaic definition, resolving attribute references in the base and joined object.</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Enforces Joins:</strong></span> <span className="text-[#4A665C]">Uses the link graph to select the ideal path between Orders and Products, taking into account link semantics (buyer vs. seller), indices, and path length.</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Injects Permissions:</strong></span> <span className="text-[#4A665C]">Applies row-level security (e.g., inheriting RLS roles or auto-adding filters WHERE tenant_id = {'{user}'}).</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Performs Error-correction:</strong></span> <span className="text-[#4A665C]">If 'NA' isn't found — apply similarity search to give alternate value suggestions to the agent.</span></li>
-        </ul>
-
-        <OQLTransformation />
-
-        <Text variant="header" theme="light" className={styles.subsectionHeader}>Layer 2: Compute Layer – Secure, High-Performance Execution</Text>
-        <Text theme="light" className={styles.paragraphText}>
-          The Compute Layer forms the computational backbone of TextQL, featuring secure Python sandbox environments that execute analytical code safely. This layer employs a "Textables" abstraction, powered by Apache Arrow, enabling high-performance handling of large-scale tabular data from heterogeneous sources. Engineers can leverage this capability for efficient analytics and sophisticated data transformations at scale.
-        </Text>
-
-        <Text variant="header" theme="light" className={styles.subsectionHeader}>Sandbox Environment</Text>
-        <ul className={styles.listContainer}>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Isolation:</strong></span> <span className="text-[#4A665C]">Each analytical task (Python, SQL, etc.) runs in a containerized sandbox with strict CPU/memory limits.</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>LRU Caching:</strong></span> <span className="text-[#4A665C]">Pre-initialized sandboxes reduce cold-start latency from 8s → 1s. Inactive sandboxes are automatically cleared and reallocated for new runs on-demand.</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Data Safety:</strong></span> <span className="text-[#4A665C]">All sandboxes run in network isolated environments, and are provided warehouse credentials corresponding to the end user's mapped database / warehouse roles.</span></li>
-        </ul>
-
-        <Text variant="header" theme="light" className={styles.subsectionHeader}>Textables (Apache Arrow)</Text>
-        <ul className={styles.listContainer}>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Columnar Batches:</strong></span> <span className="text-[#4A665C]">Data is kept in Arrow format across the stack—SQL execution (Go), Python UDFs (Pandas), and visualization (Streamlit).</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>High Performance Cross-System Transfer:</strong></span> <span className="text-[#4A665C]">Go's cgo binds to Arrow C Data Interface, eliminating a layer of serialization overhead. A 10GB DataFrame moves from Go → Python in 300ms (vs. 8s with pickle).</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Universality:</strong></span> <span className="text-[#4A665C]">convert any user context or ontology asset into Textable format - CSVs, storage blobs, DuckDB files, warehouse queries, API results, and more.</span></li>
-        </ul>
-
-        <Text variant="header" theme="light" className={styles.subsectionHeader}>Layer 3: Agent Layer – State Machines for Guaranteed Workflows</Text>
-        <Text theme="light" className={styles.paragraphText}>
-          TextQL's Agent Layer utilizes the Dakota State Framework—a dynamic state-machine architecture that manages complex analytical workflows. It adapts seamlessly to changing contexts, executing a series of well-defined analytical steps such as query planning, data preparation, analysis, and visualization. This structured approach, visualized through an explicit Execution Graph, ensures transparency, reproducibility, and ease of debugging.
-        </Text>
-
-        <Text variant="header" theme="light" className={styles.subsectionHeader}>Dakota State Framework</Text>
-        <Text theme="light" className={styles.paragraphText}>
-          Ana, TextQL's agent, operates as a state machine with 10+ modes (e.g., Query, Cleanup, Visualize). Transitions are governed by rules:
-        </Text>
-        <ul className={styles.listContainer}>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Tool Use Scaling:</strong></span> <span className="text-[#4A665C]">Prompt guidance per mode / tool is only fed in fully when Ana is in the corresponding mode, allowing for scaling to 20+ tools with minimal confusion or hallucination.</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Automatic Recovery:</strong></span> <span className="text-[#4A665C]">Use deterministic rules to control state transitions when unexpected outputs come back. During Analyze, if data quality scores &lt; threshold → transition to Cleanup. During Query, if a requested value is not found, return to Search or ping the user in Help</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Context Stacking:</strong></span> <span className="text-[#4A665C]">As opposed to multi-agent frameworks, states retain compressed knowledge of retrieval and execution context generated by previous states, allowing for re-use of queries, functions, and discovered methodology.</span></li>
-        </ul>
-
-        <Text variant="header" theme="light" className={styles.subsectionHeader}>Execution Graph (DAG)</Text>
-        <Text theme="light" className={styles.paragraphText}>
-          Analytical workflows are represented as a DAG of cells:
-        </Text>
-
-        <ExecutionGraph />
-
-        <Text theme="light" className={styles.paragraphText}>
-          Each cell is:
-        </Text>
-        <ul className={styles.listContainer}>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Reproducible:</strong></span> <span className="text-[#4A665C]">Execution graphs can be replayed, including point-in-time query results and fed LLM context.</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Convertible:</strong></span> <span className="text-[#4A665C]">Ana runs can be trivially converted to Streamlit apps or Jupyter notebooks.</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Inspectable:</strong></span> <span className="text-[#4A665C]">Engineers can profile runtime, resource usage.</span></li>
-        </ul>
-
-        <Text variant="header" theme="light" className={`${styles.sectionHeader} mt-16 mb-8`}>Benchmark Validation: Conglomerate-Benchmark-V1-Lite</Text>
-        <Text theme="light" className={styles.paragraphText}>
-          TextQL-ANA-Enterprise scored 94% accuracy on 18 complex queries across 109 tables, outperforming:
-        </Text>
-        <ul className={styles.listContainer}>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Amazon Q (62%):</strong></span> <span className="text-[#4A665C]">Failed on multi-dialect joins (Snowflake + Redshift).</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Databricks Genie (71%):</strong></span> <span className="text-[#4A665C]">No native metric consistency checks.</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]"><strong>Snowflake Cortex (48%):</strong></span> <span className="text-[#4A665C]">Timeout on 5-table recursive joins.</span></li>
-        </ul>
-        <Text theme="light" className={styles.paragraphText}>
-          Crucially, TextQL succeeded by:
-        </Text>
-        <ul className={styles.listContainer}>
-          <li className={styles.listItem}><span className="text-[#2A3B35]">Leveraging the Ontology to ensure correct formulas, join paths, and value resolution (i.e. resolve "North America" to region_code IN ('US', 'CA')) across 4 disparate schemas.</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]">Ensuring multi-step coherence over complex questions using the Dakota state framework.</span></li>
-        </ul>
-
-        <Text variant="header" theme="light" className={`${styles.sectionHeader} mt-16 mb-8`}>Why This Matters</Text>
-        <Text theme="light" className={styles.paragraphText}>
-          TextQL isn't a thin LLM wrapper—it's a deterministic system that:
-        </Text>
-        <ul className={styles.listContainer}>
-          <li className={styles.listItem}><span className="text-[#2A3B35]">Embeds Domain Knowledge in a graph structure, sidestepping LLM hallucinations.</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]">Guarantees Safe and Performant Execution via sandboxing and Arrow-based vectorization.</span></li>
-          <li className={styles.listItem}><span className="text-[#2A3B35]">Improves long-term planning and enables introspection through state-machine-driven DAGs.</span></li>
-        </ul>
-        <Text theme="light" className={styles.spacer}>
-          For enterprises, this means replacing probabilistic Text-to-SQL with a rules-based, auditable framework. For engineers, it's a blueprint for bridging semantic gaps in NLP-driven analytics.
-        </Text>
+        <article className="prose prose-sm max-w-none text-black">
+          {contentSections.map((section, index) => {
+            if (section.type === 'markdown') {
+              return (
+                <ReactMarkdown
+                  key={index}
+                  remarkPlugins={[remarkGfm]}
+                  rehypePlugins={[rehypeRaw]}
+                  components={customComponents}
+                >
+                  {section.content}
+                </ReactMarkdown>
+              );
+            } else if (section.type === 'visualization') {
+              const VisComponent = section.component;
+              return <VisComponent key={index} />;
+            }
+            return null;
+          })}
+        </article>
       </div>
     </div>
   );
