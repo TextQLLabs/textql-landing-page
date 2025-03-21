@@ -33,8 +33,8 @@ export default function Whitepaper() {
                   Technical Documentation
                 </Badge>
                 
-                <h1 className="text-6xl font-extralight mb-10 text-[#B8D8D0]">
-                  TextQL Whitepaper
+                <h1 className="text-5xl font-extralight mb-10 text-[#B8D8D0]">
+                  The Definitive Architecture for Novel Insights Discovery
                 </h1>
                 
                 <Text color="muted" className="text-xl mb-8 max-w-2xl">
