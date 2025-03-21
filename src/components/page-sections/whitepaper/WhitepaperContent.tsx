@@ -1,5 +1,5 @@
 import { Text } from '../../ui';
-import { OQLTransformation, SchemaDynamicsVisual } from './visualizations';
+import { OQLTransformation, SchemaDynamicsVisual, ExecutionGraph } from './visualizations';
 
 export function WhitepaperContent() {
   return (
@@ -159,12 +159,8 @@ FILTER FiscalYear = 2023 AND Region = "NA"`}
         <Text color="secondary" theme="light" className="mb-4">
           Analytical workflows are represented as a DAG of cells:
         </Text>
-        <pre className="bg-gray-800 p-4 rounded-md mb-6 text-sm font-mono overflow-x-auto text-white">
-          {`PythonCell (Clean Data)
-  → MetricExplorer (Apply CAC Formula)
-  → JoinCell (Merge CRM + ERP via OQL)
-  → StreamlitCell (Render Dashboard)`}
-        </pre>
+        
+        <ExecutionGraph />
 
         <Text color="secondary" theme="light" className="mb-4">
           Each cell is:

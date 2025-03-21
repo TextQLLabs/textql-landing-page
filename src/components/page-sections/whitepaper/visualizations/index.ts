@@ -1,2 +1,3 @@
-export * from './OQLTransformation';
-export * from './SchemaDynamicsVisual'; 
+export { OQLTransformation } from './OQLTransformation';
+export { SchemaDynamicsVisual } from './SchemaDynamicsVisual';
+export { ExecutionGraph } from './ExecutionGraph'; 
