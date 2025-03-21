@@ -6,12 +6,11 @@ export function ExecutionGraph() {
       {/* Chat-like sequence of cells flowing top-down */}
       <div className="space-y-6 max-w-5xl mx-auto">
         {/* User Question */}
-        <div className="flex gap-3">
-          <div className="w-8 h-8 bg-[#B8D8D0] flex items-center justify-center">
+        <div className="flex items-start gap-3">
+          <div className="w-8 h-8 bg-[#B8D8D0] flex items-center justify-center flex-shrink-0">
             <User size={16} className="text-[#2A3B35]" />
           </div>
-          <div className="flex-1">
-            <div className="text-[#2A3B35] font-medium mb-1">User</div>
+          <div className="flex-1 bg-[#B8D8D0]/10 border border-[#B8D8D0]/20 px-4 py-3">
             <div className="text-[#4A665C]">Why did Q3 margins drop compared to previous quarters?</div>
           </div>
         </div>
@@ -22,25 +21,25 @@ export function ExecutionGraph() {
             {/* Metric Explorer Cell */}
             <div className="bg-white border border-[#E5E5E5] h-full">
               <div className="flex items-center bg-[#F7F7F7] px-3 py-2 border-b border-[#E5E5E5]">
-                <Calculator size={16} className="text-[#B8D8D0] mr-2" />
+                <Calculator size={16} className="text-[#2A3B35] mr-2" />
                 <span className="text-[#2A3B35] font-medium">MetricExplorer</span>
               </div>
               <div className="p-3 font-mono text-sm overflow-x-auto bg-white">
                 <div className="flex">
                   <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">1</div>
-                  <div className="text-[#4A665C]"><span className="text-purple-600">METRICS</span> GrossMarginPct, Revenue</div>
+                  <div className="text-[#4A665C]"><span className="text-purple-600 font-semibold">METRICS</span> GrossMarginPct, Revenue</div>
                 </div>
                 <div className="flex">
                   <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">2</div>
-                  <div className="text-[#4A665C]"><span className="text-purple-600">DIMENSIONS</span> Quarter, Department</div>
+                  <div className="text-[#4A665C]"><span className="text-purple-600 font-semibold">DIMENSIONS</span> Quarter, Department</div>
                 </div>
                 <div className="flex">
                   <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">3</div>
-                  <div className="text-[#4A665C]"><span className="text-purple-600">FILTER</span> Quarter IN (<span className="text-orange-600">'Q1-2023'</span>, <span className="text-orange-600">'Q2-2023'</span>, <span className="text-orange-600">'Q3-2023'</span>)</div>
+                  <div className="text-[#4A665C]"><span className="text-purple-600 font-semibold">FILTER</span> Quarter IN (<span className="text-orange-500">'Q1-2023'</span>, <span className="text-orange-500">'Q2-2023'</span>, <span className="text-orange-500">'Q3-2023'</span>)</div>
                 </div>
                 <div className="flex">
                   <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">4</div>
-                  <div className="text-[#4A665C]"><span className="text-purple-600">ORDER BY</span> Quarter <span className="text-blue-600">ASC</span></div>
+                  <div className="text-[#4A665C]"><span className="text-purple-600 font-semibold">ORDER BY</span> Quarter <span className="text-blue-500 font-semibold">ASC</span></div>
                 </div>
               </div>
             </div>
@@ -48,21 +47,21 @@ export function ExecutionGraph() {
             {/* Join Cell */}
             <div className="bg-white border border-[#E5E5E5] h-full">
               <div className="flex items-center bg-[#F7F7F7] px-3 py-2 border-b border-[#E5E5E5]">
-                <GitMerge size={16} className="text-[#B8D8D0] mr-2" />
+                <GitMerge size={16} className="text-[#2A3B35] mr-2" />
                 <span className="text-[#2A3B35] font-medium">JoinCell</span>
               </div>
               <div className="p-3 font-mono text-sm overflow-x-auto bg-white">
                 <div className="flex">
                   <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">1</div>
-                  <div className="text-[#4A665C]"><span className="text-blue-600">WITH</span> supplier_data <span className="text-blue-600">AS</span> (</div>
+                  <div className="text-[#4A665C]"><span className="text-blue-500 font-semibold">WITH</span> supplier_data <span className="text-blue-500 font-semibold">AS</span> (</div>
                 </div>
                 <div className="flex">
                   <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">2</div>
-                  <div className="text-[#4A665C]">  <span className="text-blue-600">SELECT</span> supplier_id, effective_date, price_change_pct</div>
+                  <div className="text-[#4A665C]">  <span className="text-blue-500 font-semibold">SELECT</span> supplier_id, effective_date, price_change_pct</div>
                 </div>
                 <div className="flex">
                   <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">3</div>
-                  <div className="text-[#4A665C]">  <span className="text-blue-600">FROM</span> supplier_price_changes</div>
+                  <div className="text-[#4A665C]">  <span className="text-blue-500 font-semibold">FROM</span> supplier_price_changes</div>
                 </div>
                 <div className="flex">
                   <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">4</div>
@@ -70,7 +69,7 @@ export function ExecutionGraph() {
                 </div>
                 <div className="flex">
                   <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">5</div>
-                  <div className="text-[#4A665C]"><span className="text-blue-600">JOIN</span> margin_data <span className="text-blue-600">USING</span> (supplier_id)</div>
+                  <div className="text-[#4A665C]"><span className="text-blue-500 font-semibold">JOIN</span> margin_data <span className="text-blue-500 font-semibold">USING</span> (supplier_id)</div>
                 </div>
               </div>
             </div>
@@ -81,13 +80,13 @@ export function ExecutionGraph() {
         <div className="ml-6 border-l-2 border-[#E5E5E5] pl-4">
           <div className="bg-white border border-[#E5E5E5]">
             <div className="flex items-center bg-[#F7F7F7] px-3 py-2 border-b border-[#E5E5E5]">
-              <Code2 size={16} className="text-[#B8D8D0] mr-2" />
+              <Code2 size={16} className="text-[#2A3B35] mr-2" />
               <span className="text-[#2A3B35] font-medium">PythonCell</span>
             </div>
             <div className="p-3 font-mono text-sm overflow-x-auto bg-white">
               <div className="flex">
                 <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">1</div>
-                <div className="text-[#4A665C]"><span className="text-blue-600">import</span> pandas <span className="text-blue-600">as</span> pd</div>
+                <div className="text-[#4A665C]"><span className="text-blue-500 font-semibold">import</span> pandas <span className="text-blue-500 font-semibold">as</span> pd</div>
               </div>
               <div className="flex">
                 <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">3</div>
@@ -99,11 +98,11 @@ export function ExecutionGraph() {
               </div>
               <div className="flex">
                 <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">5</div>
-                <div className="text-[#4A665C]">margin_data = sandbox.get_dataframe(<span className="text-orange-600">'margin_metrics'</span>)</div>
+                <div className="text-[#4A665C]">margin_data = sandbox.get_dataframe(<span className="text-orange-500">'margin_metrics'</span>)</div>
               </div>
               <div className="flex">
                 <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">6</div>
-                <div className="text-[#4A665C]">supplier_impact = sandbox.get_dataframe(<span className="text-orange-600">'supplier_data'</span>)</div>
+                <div className="text-[#4A665C]">supplier_impact = sandbox.get_dataframe(<span className="text-orange-500">'supplier_data'</span>)</div>
               </div>
               <div className="flex">
                 <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">7</div>
@@ -115,7 +114,7 @@ export function ExecutionGraph() {
               </div>
               <div className="flex">
                 <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">9</div>
-                <div className="text-[#4A665C]">margin_data[<span className="text-orange-600">'qoq_change'</span>] = margin_data.groupby(<span className="text-orange-600">'Department'</span>)[<span className="text-orange-600">'GrossMarginPct'</span>].diff()</div>
+                <div className="text-[#4A665C]">margin_data[<span className="text-orange-500">'qoq_change'</span>] = margin_data.groupby(<span className="text-orange-500">'Department'</span>)[<span className="text-orange-500">'GrossMarginPct'</span>].diff()</div>
               </div>
               <div className="flex">
                 <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">10</div>
@@ -129,7 +128,7 @@ export function ExecutionGraph() {
         <div className="ml-6 border-l-2 border-[#E5E5E5] pl-4">
           <div className="bg-white border border-[#E5E5E5]">
             <div className="flex items-center bg-[#F7F7F7] px-3 py-2 border-b border-[#E5E5E5]">
-              <BarChart3 size={16} className="text-[#B8D8D0] mr-2" />
+              <BarChart3 size={16} className="text-[#2A3B35] mr-2" />
               <span className="text-[#2A3B35] font-medium">DashboardCell</span>
             </div>
             <div className="p-4">

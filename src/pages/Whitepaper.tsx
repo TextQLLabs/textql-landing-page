@@ -4,6 +4,7 @@ import { WhitepaperContent } from '../components/page-sections/whitepaper/Whitep
 import { Button } from '../components/ui';
 import { WaveGrid } from '../components/animations';
 import { ArrowRight } from 'lucide-react';
+import { Badge } from '../components/ui';
 
 export default function Whitepaper() {
   const handleOpenPDF = () => {
@@ -24,9 +25,18 @@ export default function Whitepaper() {
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-col md:flex-row items-start justify-between gap-12">
               <div className="max-w-3xl">
-                <Text variant="header" className="text-4xl md:text-6xl mb-6 text-white">
-                  TextQL Architecture Whitepaper
-                </Text>
+                <Badge 
+                  variant="outline"
+                  theme="dark" 
+                  className="text-lg px-6 py-2 mb-8"
+                >
+                  Technical Documentation
+                </Badge>
+                
+                <h1 className="text-6xl font-extralight mb-10 text-[#B8D8D0]">
+                  TextQL Whitepaper
+                </h1>
+                
                 <Text color="muted" className="text-xl mb-8 max-w-2xl">
                   Our technical overview of TextQL's three-layer architecture and enterprise applications.
                 </Text>
