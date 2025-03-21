@@ -72,31 +72,11 @@ Today’s AI tools for SQL generation face *three fatal flaws*:
 Example: Asking, “Which product categories grew YoY?” might trigger an incorrect join across disjoint systems, returning garbage. TextQL’s Ontology Layer blocks such errors by design.
 
 
-LLMs like o3 or Gemini **excel at syntax generation** but fail to resolve **contextual semantics** critical to enterprises. Consider:
-
-* **Term Disambiguation:** "Revenue" might map to sales.gross_revenue (GAAP) in Snowflake, erp.net_revenue (non-GAAP) in BigQuery, or a derived metric involving window functions.
-* **Join Path Explosion:** With 10K+ tables, a JOIN between orders and customers could involve 15 valid paths (e.g., order.cust_id vs. customer.legacy_id), each with differing performance and correctness implications.
-
-LLMs hallucinate paths or miss hidden constraints: e.g. WHERE tenant_id = {current_user} for row-level security. Scaling model size or fine-tuning on query logs doesn't solve this—it merely increases the probability of plausible (not correct) SQL.
-
-### Dialect Fragmentation and Execution Safety
-
-Enterprises rarely standardize on one SQL dialect. A "simple" DATE_TRUNC call might require:
-
-* Snowflake: DATE_TRUNC('MONTH', timestamp).
-* BigQuery: DATE_TRUNC(timestamp, MONTH).
-* Redshift: DATE_TRUNC('month', timestamp).
-
-Worse, LLMs generate unsafe queries (e.g., Cartesian joins on terabyte-scale tables) or bypass security and permissioning systems.
-
-And increasing model capability only goes so far. A correct query relies on far more than the IQ of the person or model writing it. It needs deep knowledge of definitions, business processes, physical properties of the data, correct join paths, security and permissioning rules, and more. Almost all of it lives only in the heads of business operators. An effective query AI needs to get it right every time, and even if it miraculously writes flawless, 200-line, 5-subquery SQL – how can a non-technical user even know it's right?
-
-### Schema Dynamics and Training Data Decay - Enterprise schemas evolve constantly:
-
-<!-- SchemaDynamicsVisual -->
+LLMs like o3 or Gemini **excel at syntax generation** but fail to resolve **contextual semantics** critical to enterprises. 
 
 Fine-tuned LLMs or few-shot context systems fed on historical queries become stale instantly and silently. Retraining requires curating thousands of new labeled examples—a Sisyphean task. Even retrieval-augmented generation (RAG) falters, as vector similarity can't guarantee referential integrity or permission-aware SQL.
 
+<!-- SchemaDynamicsVisual -->
 
 ---
 
