@@ -1,5 +1,11 @@
 # The Definitive Architecture for Novel Insights Discovery
 
+In this post you're going to learn: 
+- What TextQL is and how it can help you explore your data better
+- How it performs better than existing, pure-LLM systems
+- Why AI advances alone won't completely solve the problem
+- How exactly TextQL works from the inside
+
 ## What is TextQL?
 
 TextQL is an enterprise data intelligence platform that transforms natural language questions into precise, actionable insights.
