@@ -11,7 +11,9 @@ export function ExecutionGraph() {
             <User size={16} className="text-[#2A3B35]" />
           </div>
           <div className="flex-1 bg-[#B8D8D0]/10 border border-[#B8D8D0]/20 px-4 py-3">
-            <div className="text-[#4A665C]">Why did Q3 margins drop compared to previous quarters?</div>
+            <div className="text-gray-500">
+              Why did Q3 margins drop compared to previous quarters?
+            </div>
           </div>
         </div>
 
@@ -24,22 +26,18 @@ export function ExecutionGraph() {
                 <Calculator size={16} className="text-[#2A3B35] mr-2" />
                 <span className="text-[#2A3B35] font-medium">MetricExplorer</span>
               </div>
-              <div className="p-3 font-mono text-sm overflow-x-auto bg-white">
-                <div className="flex">
-                  <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">1</div>
-                  <div className="text-[#4A665C]"><span className="text-purple-600 font-semibold">METRICS</span> GrossMarginPct, Revenue</div>
+              <div className="p-3">
+                <div className="text-gray-500">
+                  Selecting metrics: Gross Margin % and Revenue.
                 </div>
-                <div className="flex">
-                  <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">2</div>
-                  <div className="text-[#4A665C]"><span className="text-purple-600 font-semibold">DIMENSIONS</span> Quarter, Department</div>
+                <div className="text-gray-500 ml-4 mt-1">
+                  → Group results by Quarter and Department.
                 </div>
-                <div className="flex">
-                  <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">3</div>
-                  <div className="text-[#4A665C]"><span className="text-purple-600 font-semibold">FILTER</span> Quarter IN (<span className="text-orange-500">'Q1-2023'</span>, <span className="text-orange-500">'Q2-2023'</span>, <span className="text-orange-500">'Q3-2023'</span>)</div>
+                <div className="text-gray-500 ml-4 mt-1">
+                  → Filter to include Q1-2023, Q2-2023, and Q3-2023.
                 </div>
-                <div className="flex">
-                  <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">4</div>
-                  <div className="text-[#4A665C]"><span className="text-purple-600 font-semibold">ORDER BY</span> Quarter <span className="text-blue-500 font-semibold">ASC</span></div>
+                <div className="text-gray-500 ml-4 mt-1">
+                  → Order by Quarter in ascending order.
                 </div>
               </div>
             </div>
@@ -50,26 +48,15 @@ export function ExecutionGraph() {
                 <GitMerge size={16} className="text-[#2A3B35] mr-2" />
                 <span className="text-[#2A3B35] font-medium">JoinCell</span>
               </div>
-              <div className="p-3 font-mono text-sm overflow-x-auto bg-white">
-                <div className="flex">
-                  <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">1</div>
-                  <div className="text-[#4A665C]"><span className="text-blue-500 font-semibold">WITH</span> supplier_data <span className="text-blue-500 font-semibold">AS</span> (</div>
+              <div className="p-3">
+                <div className="text-gray-500">
+                  Retrieve supplier price change details (supplier ID, effective date, price change %).
                 </div>
-                <div className="flex">
-                  <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">2</div>
-                  <div className="text-[#4A665C]">  <span className="text-blue-500 font-semibold">SELECT</span> supplier_id, effective_date, price_change_pct</div>
+                <div className="text-gray-500 ml-4 mt-1">
+                  → Use the supplier price changes data source.
                 </div>
-                <div className="flex">
-                  <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">3</div>
-                  <div className="text-[#4A665C]">  <span className="text-blue-500 font-semibold">FROM</span> supplier_price_changes</div>
-                </div>
-                <div className="flex">
-                  <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">4</div>
-                  <div className="text-[#4A665C]">  )</div>
-                </div>
-                <div className="flex">
-                  <div className="text-gray-400 w-7 flex-shrink-0 text-right pr-2">5</div>
-                  <div className="text-[#4A665C]"><span className="text-blue-500 font-semibold">JOIN</span> margin_data <span className="text-blue-500 font-semibold">USING</span> (supplier_id)</div>
+                <div className="text-gray-500 ml-4 mt-1">
+                  → Merge with margin data using supplier ID.
                 </div>
               </div>
             </div>
@@ -159,43 +146,28 @@ export function ExecutionGraph() {
 
                       {/* Electronics Group */}
                       <g transform="translate(90, 0)" className="transition-opacity duration-200">
-                        {/* Q2 Bar */}
                         <rect x="0" y="99" width="25" height="61" fill="#B8D8D0" className="transition-all duration-200 hover:fill-opacity-90" />
                         <text x="12" y="94" fontSize="10" textAnchor="middle" fill="#4A665C">25.3%</text>
-
-                        {/* Q3 Bar */}
                         <rect x="30" y="124" width="25" height="36" fill="#729E8C" className="transition-all duration-200 hover:fill-opacity-90" />
                         <text x="42" y="119" fontSize="10" textAnchor="middle" fill="#4A665C">14.7%</text>
-
-                        {/* Label */}
                         <text x="27" y="180" fontSize="10" textAnchor="middle" fill="#2A3B35" fontWeight="500">Electronics</text>
                       </g>
 
                       {/* Apparel Group */}
                       <g transform="translate(190, 0)" className="transition-opacity duration-200">
-                        {/* Q2 Bar */}
                         <rect x="0" y="83" width="25" height="77" fill="#B8D8D0" className="transition-all duration-200 hover:fill-opacity-90" />
                         <text x="12" y="78" fontSize="10" textAnchor="middle" fill="#4A665C">32.1%</text>
-
-                        {/* Q3 Bar */}
                         <rect x="30" y="88" width="25" height="72" fill="#729E8C" className="transition-all duration-200 hover:fill-opacity-90" />
                         <text x="42" y="83" fontSize="10" textAnchor="middle" fill="#4A665C">29.8%</text>
-
-                        {/* Label */}
                         <text x="27" y="180" fontSize="10" textAnchor="middle" fill="#2A3B35" fontWeight="500">Apparel</text>
                       </g>
 
                       {/* Home Goods Group */}
                       <g transform="translate(290, 0)" className="transition-opacity duration-200">
-                        {/* Q2 Bar */}
                         <rect x="0" y="100" width="25" height="60" fill="#B8D8D0" className="transition-all duration-200 hover:fill-opacity-90" />
                         <text x="12" y="95" fontSize="10" textAnchor="middle" fill="#4A665C">24.8%</text>
-
-                        {/* Q3 Bar */}
                         <rect x="30" y="103" width="25" height="57" fill="#729E8C" className="transition-all duration-200 hover:fill-opacity-90" />
                         <text x="42" y="98" fontSize="10" textAnchor="middle" fill="#4A665C">23.5%</text>
-
-                        {/* Label */}
                         <text x="27" y="180" fontSize="10" textAnchor="middle" fill="#2A3B35" fontWeight="500">Home Goods</text>
                       </g>
                     </svg>
@@ -217,11 +189,8 @@ export function ExecutionGraph() {
                 {/* Time Series Chart */}
                 <div className="p-4">
                   <div className="text-sm font-medium text-[#2A3B35] mb-3">Margin Trends (12 Month)</div>
-
-                  {/* SVG Time Series Chart */}
                   <div className="h-60 mb-4 relative">
                     <svg width="100%" height="100%" viewBox="0 0 400 200" className="overflow-visible">
-                      {/* Grid lines */}
                       <line x1="40" y1="0" x2="40" y2="160" stroke="#E5E5E5" strokeWidth="1" />
                       <line x1="40" y1="0" x2="380" y2="0" stroke="#E5E5E5" strokeWidth="1" />
                       <line x1="40" y1="40" x2="380" y2="40" stroke="#E5E5E5" strokeWidth="1" />
@@ -229,7 +198,6 @@ export function ExecutionGraph() {
                       <line x1="40" y1="120" x2="380" y2="120" stroke="#E5E5E5" strokeWidth="1" />
                       <line x1="40" y1="160" x2="380" y2="160" stroke="#E5E5E5" strokeWidth="1" />
 
-                      {/* Y axis labels */}
                       <text x="30" y="10" fontSize="10" textAnchor="end" fill="#4A665C">35%</text>
                       <text x="30" y="50" fontSize="10" textAnchor="end" fill="#4A665C">25%</text>
                       <text x="30" y="90" fontSize="10" textAnchor="end" fill="#4A665C">15%</text>
@@ -243,7 +211,6 @@ export function ExecutionGraph() {
                           stroke="#B8D8D0"
                           strokeWidth="2"
                         />
-                        {/* Interactive Points */}
                         <circle cx="60" cy="120" r="4" fill="#B8D8D0" className="cursor-pointer hover:r-5 transition-all duration-200">
                           <title>Electronics Q4 '22: 22.5%</title>
                         </circle>
@@ -272,7 +239,6 @@ export function ExecutionGraph() {
                           stroke="#729E8C"
                           strokeWidth="2"
                         />
-                        {/* Interactive Points */}
                         <circle cx="60" cy="80" r="4" fill="#729E8C" className="cursor-pointer hover:r-5 transition-all duration-200">
                           <title>Apparel Q4 '22: 31.2%</title>
                         </circle>
@@ -301,7 +267,6 @@ export function ExecutionGraph() {
                           stroke="#4A665C"
                           strokeWidth="2"
                         />
-                        {/* Interactive Points */}
                         <circle cx="60" cy="100" r="4" fill="#4A665C" className="cursor-pointer hover:r-5 transition-all duration-200">
                           <title>Home Goods Q4 '22: 25.1%</title>
                         </circle>
@@ -322,7 +287,6 @@ export function ExecutionGraph() {
                         </circle>
                       </g>
 
-                      {/* X axis labels */}
                       <text x="60" y="180" fontSize="8" textAnchor="middle" fill="#4A665C">Q4 '22</text>
                       <text x="120" y="180" fontSize="8" textAnchor="middle" fill="#4A665C">Q1 '23</text>
                       <text x="180" y="180" fontSize="8" textAnchor="middle" fill="#4A665C">Q2 '23</text>
@@ -332,7 +296,6 @@ export function ExecutionGraph() {
                     </svg>
                   </div>
 
-                  {/* Legend */}
                   <div className="flex justify-center gap-4 mb-2">
                     <div className="flex items-center">
                       <div className="w-3 h-3 bg-[#B8D8D0] mr-1"></div>
@@ -350,7 +313,6 @@ export function ExecutionGraph() {
                 </div>
               </div>
 
-              {/* Table like in screenshot */}
               <div className="overflow-x-auto border border-[#E5E5E5] mt-2">
                 <table className="min-w-full divide-y divide-[#E5E5E5]">
                   <thead className="bg-[#F7F7F7]">
@@ -395,4 +357,4 @@ export function ExecutionGraph() {
       </div>
     </div>
   );
-} 
+}

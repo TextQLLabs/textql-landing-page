@@ -28,7 +28,7 @@ A clear answer:
 
 *"Retention dropped 12%—driven by users who signed up during the holiday promo.*  
 **Top Issue:** 40% didn't complete onboarding.  
-**Recommendation:** Resend onboarding emails to this group."
+**Recommendation:** Resend onboarding emails to this group.
 
 <!-- ExecutionGraph -->
 
