@@ -147,11 +147,10 @@ export function OQLTransformation() {
       </div>
 
       <div className="mt-6 text-center">
-        <Text color="secondary" theme="light" className="text-sm max-w-lg mx-auto">
-          OQL generates verifiable SQL with guaranteed correctness, unlike probabilistic AI-generated SQL
+        <Text color="secondary" theme="light" className="text-sm mx-auto">
+        The graph structure enables provable correctness. Joins are path-constrained; metrics are formulaically deterministic.
         </Text>
       </div>
     </div>
   );
 } 
-

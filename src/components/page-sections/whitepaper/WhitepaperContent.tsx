@@ -89,6 +89,16 @@ export function WhitepaperContent() {
           <li className="mb-2"><span className="text-[#2A3B35]"><strong>Metrics:</strong></span> <span className="text-[#4A665C]">Formulaic aggregations on top of objects, including level-of-detail calculations and window functions (e.g., Average Recharge Gap = AVG(lead (recharge_datetime) OVER (PARTITION BY recharge_id ORDER BY recharge_datetime) - recharge_datetime)).</span></li>
         </ul>
 
+        <div className="my-8 flex justify-center">
+          <div className="relative w-full max-w-2xl">
+            <img 
+              src="/images/ontology/Conglomerate Ontology.png"
+              alt="TextQL Ontology Visualization"
+              className="w-full h-full object-contain"
+            />
+          </div>
+        </div>
+
         <Text variant="header" theme="light" className="text-2xl mb-4 mt-8">Ontology Query Language (OQL)</Text>
         <Text color="secondary" theme="light" className="mb-4">
           OQL decouples logical intent from physical execution. A query like:
