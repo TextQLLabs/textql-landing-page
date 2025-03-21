@@ -1,5 +1,5 @@
 import { Text } from '../../ui';
-import { OQLTransformation } from './visualizations';
+import { OQLTransformation, SchemaDynamicsVisual } from './visualizations';
 
 export function WhitepaperContent() {
   return (
@@ -45,11 +45,7 @@ export function WhitepaperContent() {
         <Text color="secondary" theme="light" className="mb-4">
           Enterprise schemas evolve constantly:
         </Text>
-        <ul className="list-disc pl-8 mb-6">
-          <li className="mb-2"><span className="text-[#2A3B35]">New tables (q3_2024_financials) appear weekly.</span></li>
-          <li className="mb-2"><span className="text-[#2A3B35]">Columns are deprecated (region → business_unit).</span></li>
-          <li className="mb-2"><span className="text-[#2A3B35]">Cross-database joins emerge (Snowflake + DynamoDB).</span></li>
-        </ul>
+        <SchemaDynamicsVisual />
         <Text color="secondary" theme="light" className="mb-8">
           Fine-tuned LLMs or few-shot context systems fed on historical queries become stale instantly and silently. Retraining requires curating thousands of new labeled examples—a Sisyphean task. Even retrieval-augmented generation (RAG) falters, as vector similarity can't guarantee referential integrity or permission-aware SQL.
         </Text>
@@ -83,8 +79,6 @@ export function WhitepaperContent() {
           TextQL introduces an Ontology Layer that provides semantic abstraction between human concepts and complex data assets. This layer defines a structured Ontology Query Language (OQL), abstracting away dialect differences, security considerations, and data complexity. Technical maintainers benefit from deterministic and verifiable SQL query compilation, dramatically reducing the overhead of manual query debugging and maintenance.
         </Text>
 
-        <OQLTransformation />
-
         <Text color="secondary" theme="light" className="mb-4">
           The Ontology Layer is a labeled property graph that codifies:
         </Text>
@@ -114,10 +108,9 @@ FILTER FiscalYear = 2023 AND Region = "NA"`}
           <li className="mb-2"><span className="text-[#2A3B35]"><strong>Injects Permissions:</strong></span> <span className="text-[#4A665C]">Applies row-level security (e.g., inheriting RLS roles or auto-adding filters WHERE tenant_id = {'{user}'}).</span></li>
           <li className="mb-2"><span className="text-[#2A3B35]"><strong>Performs Error-correction:</strong></span> <span className="text-[#4A665C]">If 'NA' isn't found — apply similarity search to give alternate value suggestions to the agent.</span></li>
         </ul>
-        <Text color="secondary" theme="light" className="mb-8">
-          <span className="text-[#2A3B35]"><strong>Key Innovation:</strong></span> <span className="text-[#4A665C]">The graph structure enables provable correctness. Joins are path-constrained; metrics are formulaically deterministic.</span>
-        </Text>
-
+        
+        <OQLTransformation />
+        
         <Text variant="header" theme="light" className="text-2xl mb-4 mt-8">Layer 2: Compute Layer – Secure, High-Performance Execution</Text>
         <Text color="secondary" theme="light" className="mb-4">
           The Compute Layer forms the computational backbone of TextQL, featuring secure Python sandbox environments that execute analytical code safely. This layer employs a "Textables" abstraction, powered by Apache Arrow, enabling high-performance handling of large-scale tabular data from heterogeneous sources. Engineers can leverage this capability for efficient analytics and sophisticated data transformations at scale.
