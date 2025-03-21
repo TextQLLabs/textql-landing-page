@@ -36,69 +36,69 @@ type ContentSection =
 export function WhitepaperContent() {
   const rawContent = getWhitepaperContent();
   
-  // Split content into sections with visualizations
-  const contentSections = useMemo(() => {
-    // Split points
-    const schemaSplitText = "<!-- SchemaDynamicsVisual -->";
-    const oqlSplitText = "<!-- OQLTransformation -->";
-    const executionSplitText = "<!-- ExecutionGraph -->";
-    
-    // Find positions of each visualization
-    const schemaIndex = rawContent.indexOf(schemaSplitText);
-    const oqlIndex = rawContent.indexOf(oqlSplitText);
-    const executionIndex = rawContent.indexOf(executionSplitText);
-    
-    if (schemaIndex === -1 || oqlIndex === -1 || executionIndex === -1) {
-      console.warn("Could not find one or more visualization markers");
-    }
-    
-    // Split content
-    const sections: ContentSection[] = [];
-    
-    // First section (before first visualization)
-    sections.push({
-      type: 'markdown',
-      content: rawContent.substring(0, schemaIndex)
-    });
-    
-    // Schema visualization
-    sections.push({
-      type: 'visualization',
-      component: SchemaDynamicsVisual
-    });
-    
-    // Between schema and OQL
-    sections.push({
-      type: 'markdown',
-      content: rawContent.substring(schemaIndex + schemaSplitText.length, oqlIndex)
-    });
-    
-    // OQL visualization
-    sections.push({
-      type: 'visualization',
-      component: OQLTransformation
-    });
-    
-    // Between OQL and execution graph
-    sections.push({
-      type: 'markdown',
-      content: rawContent.substring(oqlIndex + oqlSplitText.length, executionIndex)
-    });
-    
-    // Execution graph visualization
-    sections.push({
-      type: 'visualization',
-      component: ExecutionGraph
-    });
-    
-    // Final section
-    sections.push({
-      type: 'markdown',
-      content: rawContent.substring(executionIndex + executionSplitText.length)
-    });
-    
-    return sections;
-  }, [rawContent]);
+// Split content into sections with visualizations
+const contentSections = useMemo(() => {
+  // Split points
+  const schemaSplitText = "<!-- SchemaDynamicsVisual -->";
+  const oqlSplitText = "<!-- OQLTransformation -->";
+  const executionSplitText = "<!-- ExecutionGraph -->";
+  
+  // Find positions of each visualization
+  const schemaIndex = rawContent.indexOf(schemaSplitText);
+  const oqlIndex = rawContent.indexOf(oqlSplitText);
+  const executionIndex = rawContent.indexOf(executionSplitText);
+  
+  if (schemaIndex === -1 || oqlIndex === -1 || executionIndex === -1) {
+    console.warn("Could not find one or more visualization markers");
+  }
+  
+  // Split content
+  const sections: ContentSection[] = [];
+  
+  // First section (before execution graph)
+  sections.push({
+    type: 'markdown',
+    content: rawContent.substring(0, executionIndex)
+  });
+  
+  // Execution graph visualization
+  sections.push({
+    type: 'visualization',
+    component: ExecutionGraph
+  });
+  
+  // Between execution graph and schema
+  sections.push({
+    type: 'markdown',
+    content: rawContent.substring(executionIndex + executionSplitText.length, schemaIndex)
+  });
+  
+  // Schema visualization
+  sections.push({
+    type: 'visualization',
+    component: SchemaDynamicsVisual
+  });
+  
+  // Between schema and OQL
+  sections.push({
+    type: 'markdown',
+    content: rawContent.substring(schemaIndex + schemaSplitText.length, oqlIndex)
+  });
+  
+  // OQL visualization
+  sections.push({
+    type: 'visualization',
+    component: OQLTransformation
+  });
+  
+  // Final section
+  sections.push({
+    type: 'markdown',
+    content: rawContent.substring(oqlIndex + oqlSplitText.length)
+  });
+  
+  return sections;
+}, [rawContent]);
 
   // Custom component to handle HTML blocks
   const customComponents: Components = {
