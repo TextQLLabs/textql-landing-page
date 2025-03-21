@@ -25,6 +25,7 @@ import Demo from './pages/Demo';
 import Integrations from './pages/Integrations';
 import Events from './pages/Events';
 import Benchmark from './pages/Benchmark';
+import Whitepaper from './pages/Whitepaper';
 
 function App() {
   const location = useLocation();
@@ -74,6 +75,7 @@ function App() {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/events" element={<Events />} />
           <Route path="/benchmark" element={<Benchmark />} />
+          <Route path="/whitepaper" element={<Whitepaper />} />
           
           {/* Blog Routes */}
           <Route path="/blog" element={<Blog />} />
