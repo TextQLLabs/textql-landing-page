@@ -38,9 +38,9 @@ No coding. No waiting for the data team. No deciphering dashboards. Maybe you re
 
 ### TextQL Works Like This for Everyone:
 
-1. Ask a question or run on a triggered event (like a revenue drop)
-2. Get an insight (with evidence, not jargon).
-3. Dig deeper (click a chart, ask a follow-up, share with your team, schedule a recurring analysis).
+1. **Ask a question or run on a triggered event** (like a revenue drop)
+2. **Get an insight** (with evidence, not jargon).
+3. **Dig deeper** (click a chart, ask a follow-up, share with your team, schedule a recurring analysis).
 
 ### Why It's Different:
 
