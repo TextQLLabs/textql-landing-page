@@ -4,15 +4,13 @@
 
 TextQL is an enterprise data intelligence platform that transforms natural language questions into precise, actionable insights.
 
-## Imagine This:
-
+**Imagine This:**
 You're a product manager. Your CEO asks, *"Why did customer retention drop last month?"*
 
-## With TextQL:
-
+**With TextQL:**
 You type the question into a chatbox.
 
-## Behind the Scenes:
+### Behind the Scenes:
 
 * TextQL's **Ontology Layer** understands "customer retention" means *active users divided by signups*, pulling data from 5 tables you've never heard of.
 * The **Compute Layer** runs a script to clean messy subscription dates, merges datasets from Salesforce and your app's database, and checks permissions.
@@ -20,7 +18,7 @@ You type the question into a chatbox.
 
 ---
 
-## What You Get in 10 Seconds:
+**What You Get in 10 Seconds:**
 
 A clear answer:
 
@@ -32,21 +30,34 @@ No coding. No waiting for the data team. No deciphering dashboards. Maybe you re
 
 ---
 
-## TextQL Works Like This for Everyone:
+### TextQL Works Like This for Everyone:
 
 1. Ask a question or run on a triggered event (like a revenue drop)
 2. Get an insight (with evidence, not jargon).
 3. Dig deeper (click a chart, ask a follow-up, share with your team, schedule a recurring analysis).
 
-## Why It's Different:
+### Why It's Different:
 
-* No "data prep" hell. It handles messy tables, multiple data sources broken joins, and stale metrics automatically.
-* No blind trust. Every insight is backed by a summary of steps: "Compared Q1 vs. Q2, excluded test accounts, applied regional filters." Permissions and role-based access are automatically applied.
-* No dead ends. If the data's incomplete or your question is unclear, TextQL asks clarifying questions—"Do you mean retention by plan tier or geography?"
+* **No "data prep" hell**. It handles messy tables, multiple data sources broken joins, and stale metrics automatically.
+* **No blind trust**. Every insight is backed by a summary of steps: "Compared Q1 vs. Q2, excluded test accounts, applied regional filters." Permissions and role-based access are automatically applied.
+* **No dead ends**. If the data's incomplete or your question is unclear, TextQL asks clarifying questions—"Do you mean retention by plan tier or geography?"
 
 ---
 
-## Moving Beyond SQL
+## Conglomerate Benchmark: Why TextQL Outperforms Competitors
+
+In our Conglomerate-Benchmark—a test simulating a multi-industry enterprise with 109 interconnected tables—TextQL's Ana agent achieved 93% accuracy on complex queries, outperforming rivals like Amazon Q (35%), Databricks Genie (26%), and Snowflake Cortex (0%).
+
+#### Why competitors falter:
+* **AI Notebooks (Hex, Deepnote):** Struggle with multi-step workflows (e.g., joining tables, applying metrics) without manual coding.
+* **Semantic Layers (Cube, LookML):** Require pre-curated data models, limiting flexibility.
+* **Raw LLM SQL Tools:** Hallucinate joins, mishandle dialects, and fail on schema changes.
+
+TextQL's edge comes from its layered architecture, which ensures provable correctness, consistency, explainability, and security all in one platform.
+
+---
+
+### Moving Beyond SQL
 
 One would think that to automate data-driven decision making, it'd be best to start with automating SQL. That's the most annoying part, isn't it?
 
@@ -165,18 +176,6 @@ Each cell is:
 * **Convertible:** Ana runs can be trivially converted to Streamlit apps or Jupyter notebooks.
 * **Inspectable:** Engineers can profile runtime, resource usage.
 
-## Benchmark Validation: Conglomerate-Benchmark-V1-Lite
-
-TextQL-ANA-Enterprise scored 94% accuracy on 18 complex queries across 109 tables, outperforming:
-
-* **Amazon Q (62%):** Failed on multi-dialect joins (Snowflake + Redshift).
-* **Databricks Genie (71%):** No native metric consistency checks.
-* **Snowflake Cortex (48%):** Timeout on 5-table recursive joins.
-
-Crucially, TextQL succeeded by:
-
-* Leveraging the Ontology to ensure correct formulas, join paths, and value resolution (i.e. resolve "North America" to region_code IN ('US', 'CA')) across 4 disparate schemas.
-* Ensuring multi-step coherence over complex questions using the Dakota state framework.
 
 ## Why This Matters
 
