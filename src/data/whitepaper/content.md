@@ -62,6 +62,7 @@ In our Conglomerate-Benchmark—a test simulating a multi-industry enterprise wi
 TextQL's edge comes from its layered architecture, which ensures provable correctness, consistency, explainability, and security all in one platform.
 
 *Where don’t we do well?*
+
 Every approach has upsides and downsides. Namely, here’s what TextQL needs to do well:
 - Ontology creation – unlike SQL-writing tools, TextQL requires setting up the ontology layer with relevant objects, links, metrics and dimensions, ideally reviewed by humans. While we provide a lot of deterministic and LLM tooling to help generate and update ontologies quickly (Conglomerate-Benchmark ontology generation was done with zero human input) , direct SQL tools provide a faster zero-to-query experience
 - A skew toward operational / analytical queries and a primarily “relational” schema (either normalized or denormalized). OQL currently doesn’t directly support techniques far outside of these patterns, such as graph/reachability queries, spatial analysis, or in-database natural language processing (i.e. ElasticSearch.)
