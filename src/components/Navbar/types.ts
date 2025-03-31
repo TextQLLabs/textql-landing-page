@@ -22,10 +22,6 @@ export const navigation: NavItem[] = [
     href: '/ontology'
   },
   {
-    label: 'Integrations',
-    href: '/integrations'
-  },
-  {
     label: 'Enterprise',
     href: '/enterprise'
   },
