@@ -8,6 +8,7 @@ if (!existsSync(publicDir)) {
   mkdirSync(publicDir, { recursive: true });
 }
 
+// Define routes
 const routes = [
   { url: '/', changefreq: 'weekly', priority: 1.0 },
   { url: '/blog/', changefreq: 'daily', priority: 0.9 },
