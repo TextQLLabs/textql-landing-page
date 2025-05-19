@@ -1,15 +1,13 @@
-import { useNavigate } from 'react-router-dom';
 import { Button } from '../../ui';
 import { WaveBackground } from '../../animations';
 import { ArrowRight } from 'lucide-react';
-import { Text } from '../../ui';
+import { handleSimpleDemoRequest } from '../../../utils/demo-requests/simple';
 
 export function PricingHeader() {
-  const navigate = useNavigate();
-
-  const onDemoRequest = (e: React.MouseEvent) => {
+  const handleDemoRequest = async (e: React.MouseEvent) => {
     e.preventDefault();
-    navigate('/demo');
+    const result = await handleSimpleDemoRequest(window.location.pathname);
+    window.open(result.formUrl, '_blank');
   };
 
   return (
@@ -48,7 +46,7 @@ export function PricingHeader() {
             variant="primary" 
             size="lg"
             className="group"
-            onClick={onDemoRequest}
+            onClick={handleDemoRequest}
           >
             Schedule a Demo
             <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />

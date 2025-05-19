@@ -12,7 +12,7 @@ export default function Enterprise() {
       <SEO 
         title="Enterprise | TextQL"
         description="Enterprise-grade security and deployment options for TextQL. Deploy in your own cloud with complete control and data sovereignty."
-        canonical="https://textql.com/enterprise/"
+        canonical="https://textql.com/enterprise"
         ogImage="https://textql.com/social-preview.png"
       />
       

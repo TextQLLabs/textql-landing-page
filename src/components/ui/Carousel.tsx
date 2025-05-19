@@ -9,7 +9,7 @@ interface CarouselProps {
   className?: string;
   itemClassName?: string;
 }
-// todo: dejitter the animation
+
 export function Carousel({
   items,
   speed = 0.3,

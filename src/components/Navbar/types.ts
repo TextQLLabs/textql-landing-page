@@ -34,6 +34,10 @@ export const navigation: NavItem[] = [
     href: '/workflows'
   },
   {
+    label: 'Meet',
+    href: '/meet'
+  },
+  {
     label: 'Resources',
     children: [
       {
@@ -45,11 +49,6 @@ export const navigation: NavItem[] = [
         label: 'Events',
         description: 'Meet our team and learn about TextQL in person',
         href: '/events'
-      },
-      {
-        label: 'Benchmark',
-        description: 'See how TextQL compares to other solutions',
-        href: '/benchmark'
       },
       {
         label: 'Documentation',

@@ -37,7 +37,7 @@ export default function WorkflowTemplate() {
       <SEO 
         title={`${workflow.title} | TextQL Workflows`}
         description={workflow.description}
-        canonical={`https://textql.com/workflows/${workflow.id}/`}
+        canonical={`https://textql.com/workflows/${workflow.id}`}
         ogImage={workflow.image}
         ogType="article"
       />

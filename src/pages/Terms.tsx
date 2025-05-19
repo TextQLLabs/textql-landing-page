@@ -14,7 +14,7 @@ export default function Terms() {
       <SEO 
         title="Terms & Conditions | TextQL"
         description="Terms and conditions for using TextQL services. Please read these Terms carefully before using the Site."
-        canonical="https://textql.com/terms/"
+        canonical="https://textql.com/terms"
         ogImage="https://textql.com/social-preview.png"
       />
       

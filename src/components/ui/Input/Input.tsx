@@ -1,9 +1,8 @@
 import { forwardRef } from 'react';
 import { type InputProps } from './types';
 import { getBaseStyles } from './styles';
-import { ExternalLinkIcon } from 'lucide-react';
 
-export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps & { link?: string }>(({
+export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(({
   label,
   error,
   hint,
@@ -12,7 +11,6 @@ export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputPro
   as = 'input',
   rows = 3,
   theme = 'dark',
-  link,
   ...props
 }, ref) => {
   const Component = as;
@@ -20,22 +18,13 @@ export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputPro
 
   return (
     <div className={`${fullWidth ? 'w-full' : ''}`}>
-      {label && (link ? (
-        <label className={`block text-xs font-medium tracking-wide ${
-          theme === 'dark' ? 'text-[#B8D8D0]/80' : 'text-[#2A3B35]/80'
-        } mb-2`}>
-        <a href={link} target="_blank" rel="noopener noreferrer" className="underline flex items-top">
-          {label}
-          <ExternalLinkIcon className="w-3 h-3 inline-block ml-1" />
-        </a>
-        </label>
-      ) : (
+      {label && (
         <label className={`block text-xs font-medium tracking-wide ${
           theme === 'dark' ? 'text-[#B8D8D0]/80' : 'text-[#2A3B35]/80'
         } mb-2`}>
           {label}
         </label>
-      ))}
+      )}
       <Component
         ref={ref as any}
         className={`${baseStyles} ${className}`}

@@ -27,7 +27,7 @@ export default function WorkflowLibrary() {
       <SEO 
         title="Workflow Library | TextQL"
         description="Pre-built workflows to help you get started with TextQL. Each workflow is designed to solve specific business problems and can be customized to your needs."
-        canonical="https://textql.com/workflows/"
+        canonical="https://textql.com/workflows"
         ogImage="https://textql.com/social-preview.png"
       />
       
@@ -90,7 +90,8 @@ export default function WorkflowLibrary() {
         variant="wide"
         heading="Ready to transform your business?"
         subheader="Get started with TextQL's AI-powered workflows today"
-        useSimpleButton={true}
+        ctaText="Request Demo"
+        ctaHref="https://forms.default.com/740749"
       />
     </div>
   );

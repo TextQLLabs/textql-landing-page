@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ArrowLeft, Share2 } from 'lucide-react';
 import { Header } from '../../sections/Header';
 import { Button } from '../../ui';
@@ -13,7 +13,6 @@ interface WorkflowHeaderProps {
 export function WorkflowHeader({ workflow }: WorkflowHeaderProps) {
   const [showCopied, setShowCopied] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
 
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -21,9 +20,10 @@ export function WorkflowHeader({ workflow }: WorkflowHeaderProps) {
     setTimeout(() => setShowCopied(false), 2000);
   };
 
-  const onDemoRequest = (e: React.MouseEvent) => {
+  const onDemoRequest = async (e: React.MouseEvent) => {
     e.preventDefault();
-    navigate('/demo');
+    const result = await handleSimpleDemoRequest(location.pathname);
+    window.open(result.formUrl, '_blank');
   };
 
   return (

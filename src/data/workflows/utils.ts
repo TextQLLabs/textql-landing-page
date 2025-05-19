@@ -1,7 +1,7 @@
 import type { Workflow } from './types';
 
 // Import all workflow markdown files
-const workflowModules = import.meta.glob('./*/workflow.md', { eager: true, query: '?raw', import: 'default' }) as Record<string, string>;
+const workflowModules = import.meta.glob('./*/workflow.md', { eager: true, as: 'raw' });
 
 /**
  * Parse implementation steps from markdown content
@@ -83,20 +83,14 @@ function parseFrontmatter(content: string): Workflow | null {
       else if (currentKey === 'components') {
         if (trimmedLine.startsWith('  - name: ')) {
           if (currentComponent.name) {
-            currentComponents.push({ 
-              name: currentComponent.name, 
-              description: currentComponent.description || '' 
-            });
+            currentComponents.push({ ...currentComponent });
             currentComponent = {};
           }
           currentComponent.name = trimmedLine.replace('  - name: ', '').replace(/"/g, '');
         } else if (trimmedLine.startsWith('    description: ')) {
           currentComponent.description = trimmedLine.replace('    description: ', '').replace(/"/g, '');
           if (currentComponent.name && currentComponent.description) {
-            currentComponents.push({ 
-              name: currentComponent.name, 
-              description: currentComponent.description 
-            });
+            currentComponents.push({ ...currentComponent });
             currentComponent = {};
           }
         }
@@ -132,7 +126,7 @@ function parseFrontmatter(content: string): Workflow | null {
  */
 export function loadWorkflows(): Workflow[] {
   const workflows = Object.entries(workflowModules).map(([path, content]) => {
-    const workflow = parseFrontmatter(content as string);
+    const workflow = parseFrontmatter(content);
     if (!workflow) {
       console.warn(`No frontmatter found in workflow file: ${path}`);
       return null;

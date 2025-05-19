@@ -7,7 +7,6 @@ const footerLinks = {
     links: [
       { label: 'Agents', href: '/agents' },
       { label: 'Ontology', href: '/ontology' },
-      { label: 'Integrations', href: '/integrations' },
       { label: 'Enterprise', href: '/enterprise' },
       { label: 'Workflows', href: '/workflows' }
     ]
@@ -43,7 +42,7 @@ const footerLinks = {
     links: [
       { 
         label: 'Get a Demo', 
-        href: '/demo'
+        href: 'https://forms.default.com/529417'
       },
       { label: 'Email', href: 'mailto:ethan@textql.com' },
       { label: 'LinkedIn', href: 'https://linkedin.com/company/textql' },
@@ -124,6 +123,13 @@ export default function Footer() {
                 </span>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Giant TextQL Logo */}
+        <div className="w-full border-t border-white/10">
+          <div className="mx-auto max-w-site px-6 py-24">
+            <TextLogo className="w-full max-w-[800px] mx-auto opacity-[0.03]" />
           </div>
         </div>
       </div>

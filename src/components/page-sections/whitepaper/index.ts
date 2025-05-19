@@ -1,1 +1,0 @@
-export { WhitepaperContent } from './WhitepaperContent'; 

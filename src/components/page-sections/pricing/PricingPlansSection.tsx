@@ -1,6 +1,6 @@
 import { ArrowRight, Cloud, Shield, Palette } from 'lucide-react';
 import { Text, Button } from '../../ui';
-import { useNavigate } from 'react-router-dom';
+import { handleSimpleDemoRequest } from '../../../utils/demo-requests/simple';
 
 const plans = [
   {
@@ -48,11 +48,10 @@ const plans = [
 ];
 
 export function PricingPlansSection() {
-  const navigate = useNavigate();
-
-  const onDemoRequest = (e: React.MouseEvent) => {
+  const handleDemoRequest = async (e: React.MouseEvent) => {
     e.preventDefault();
-    navigate('/demo');
+    const result = await handleSimpleDemoRequest(window.location.pathname);
+    window.open(result.formUrl, '_blank');
   };
 
   return (
@@ -116,7 +115,7 @@ export function PricingPlansSection() {
                   theme="light"
                   fullWidth
                   className="group"
-                  onClick={onDemoRequest}
+                  onClick={handleDemoRequest}
                 >
                   <span>Contact Us</span>
                   <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-0.5" />

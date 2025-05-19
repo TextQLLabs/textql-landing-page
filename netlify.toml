@@ -36,3 +36,7 @@
   for = "/sitemap.xml"
   [headers.values]
     Content-Type = "application/xml"
+
+# Enable prerendering for SEO
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

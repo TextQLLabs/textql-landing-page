@@ -7,7 +7,7 @@ export default function About() {
       <SEO 
         title="About | TextQL"
         description="Learn about TextQL's mission and team. We're building the future of enterprise data analysis with AI."
-        canonical="https://textql.com/about/"
+        canonical="https://textql.com/about"
         ogImage="https://textql.com/social-preview.png"
       />
       

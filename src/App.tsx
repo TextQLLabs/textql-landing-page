@@ -21,11 +21,8 @@ import Blog from './pages/blog';
 import BlogPost from './pages/blog/[id]';
 import WorkflowLibrary from './pages/workflows';
 import WorkflowTemplate from './pages/workflows/[id]';
-import Demo from './pages/Demo';
-import Integrations from './pages/Integrations';
 import Events from './pages/Events';
-import Benchmark from './pages/Benchmark';
-import Whitepaper from './pages/Whitepaper';
+import Meet from './pages/Meet';
 
 function App() {
   const location = useLocation();
@@ -42,8 +39,9 @@ function App() {
         <Route path="/design-system" element={<DesignSystem />} />
         <Route element={<Layout />}>
           {/* Main Routes */}
+          <Route path="/" element={<Navigate to="/meet" replace />} />
           <Route
-            path="/"
+            path="/home"
             element={
               <main className="relative overflow-x-hidden">
                 <SEO 
@@ -70,22 +68,18 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/agents" element={<Agents />} />
           <Route path="/ontology" element={<Ontology />} />
-          <Route path="/integrations" element={<Integrations />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/events" element={<Events />} />
-          <Route path="/benchmark" element={<Benchmark />} />
-          <Route path="/whitepaper" element={<Whitepaper />} />
+          <Route path="/meet" element={<Meet />} />
           
           {/* Blog Routes */}
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogPost />} />
-
-          <Route path="/demo" element={<Demo />} />
         </Route>
       </Routes>
     </>
   );
 }
 
-export default App
+export default App;

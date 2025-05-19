@@ -1,4 +1,4 @@
-import { EventsHero } from '../components/page-sections/events';
+import { EventsHero, EventsList, UpcomingEvents } from '../components/page-sections/events';
 import { SEO } from '../components/SEO';
 
 export default function Events() {
@@ -7,7 +7,7 @@ export default function Events() {
       <SEO 
         title="Events | TextQL"
         description="Join TextQL at upcoming events or watch past presentations. Learn about AI-powered data analysis from our experts."
-        canonical="https://textql.com/events/"
+        canonical="https://textql.com/events"
         ogImage="https://textql.com/social-preview.png"
       />
       

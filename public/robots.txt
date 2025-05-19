@@ -1,10 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /404
-Disallow: /__spa-fallback
-Disallow: /design-system
-Disallow: /docs/*
-Disallow: /documentation/*
-Disallow: /events
 
 Sitemap: https://textql.com/sitemap.xml

@@ -11,7 +11,7 @@ export default function Pricing() {
       <SEO 
         title="Pricing | TextQL"
         description="Transparent pricing with predictable ROI for TextQL's AI platform. Choose the perfect deployment option for your needs."
-        canonical="https://textql.com/pricing/"
+        canonical="https://textql.com/pricing"
         ogImage="https://textql.com/social-preview.png"
       />
       

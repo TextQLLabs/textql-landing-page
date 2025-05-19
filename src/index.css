@@ -2,58 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Critical rendering styles */
-:root {
-  color-scheme: dark;
-  background: #0A1F1C !important;
-  overscroll-behavior: none;
-}
-
-html {
-  background: #0A1F1C !important;
-  min-height: 100vh;
-  overscroll-behavior: none;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  background: #0A1F1C !important;
-  min-height: 100vh;
+html, body {
   overflow-x: hidden;
-  display: block !important;
-  overscroll-behavior: none;
 }
 
-#root {
-  min-height: 100vh;
-  opacity: 1 !important;
-  visibility: visible !important;
-  background: #0A1F1C !important;
-}
-
-/* Page transition animation */
-.page-transition-enter {
-  opacity: 0;
-}
-
-.page-transition-enter-active {
-  opacity: 1;
-  transition: opacity 0.2s ease-in-out;
-}
-
-.page-transition-exit {
-  opacity: 1;
-}
-
-.page-transition-exit-active {
-  opacity: 0;
-  transition: opacity 0.1s ease-in-out;
-}
-
-/* Essential animations */
-.animate-slide-up {
-  animation: slideUpFade 0.5s ease forwards;
+@keyframes progress {
+  from { width: 0; }
+  to { width: 100%; }
 }
 
 @keyframes slideUpFade {
@@ -67,23 +22,48 @@ body {
   }
 }
 
-@keyframes progress {
-  0% { width: 0%; }
-  100% { width: 100%; }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Animation delays */
-.animation-delay-100 { animation-delay: 100ms; }
-.animation-delay-200 { animation-delay: 200ms; }
-.animation-delay-300 { animation-delay: 300ms; }
-.animation-delay-400 { animation-delay: 400ms; }
-
-/* Hide scrollbar but allow scrolling */
-.scrollbar-hide::-webkit-scrollbar {
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.animate-slide-up {
+  animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animation-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animation-delay-400 {
+  animation-delay: 400ms;
 }

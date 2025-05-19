@@ -3,22 +3,10 @@ import Navbar from '../components/Navbar';
 import { Button, Text, Badge, Card } from '../components/ui';
 import { ArrowRight } from 'lucide-react';
 
-// Define types for the components
-type ComponentItem = {
-  name: string;
-  component?: React.ReactNode;
-  preview?: string;
-};
-
-type Section = {
-  title: string;
-  components: ComponentItem[];
-};
-
 export default function DesignSystem() {
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
 
-  const sections: Section[] = [
+  const sections = [
     {
       title: 'UI Components',
       components: [
