@@ -1,4 +1,4 @@
-import type { BlogPost } from '../blog/types';
+import type { BlogPost } from '../../components/page-sections/blog/types';
 
 export const post: BlogPost = {
   id: 'ten-year-thesis',
@@ -9,9 +9,9 @@ export const post: BlogPost = {
   author: {
     name: 'James Smith',
     role: 'CEO',
-    company: 'TextQL'
+    company: 'TextQL',
   },
   date: 'September 28, 2023',
   readTime: '10 min read',
-  category: 'announcements'
+  category: 'announcements',
 };

@@ -14,52 +14,71 @@ export interface NavItem {
 
 export const navigation: NavItem[] = [
   {
-    label: 'Agents',
-    href: '/agents'
+    label: 'Product',
+    children: [
+      {
+        label: 'Agents',
+        href: '/agents'
+      },
+      {
+        label: 'Ontology',
+        href: '/ontology'
+      },
+      {
+        label: 'Enterprise',
+        href: '/enterprise'
+      },
+      {
+        label: 'Workflows',
+        href: '/workflows'
+      }
+    ]
   },
-  {
-    label: 'Ontology',
-    href: '/ontology'
-  },
-  {
-    label: 'Enterprise',
-    href: '/enterprise'
-  },
+    {
+    label: 'Integrations',
+ children: [
+      {
+        label: 'Tableau MCP',
+        href: '/integrations/tableau-mcp'
+      }
+      ]
+    }, 
   {
     label: 'Pricing',
     href: '/pricing'
-  },
-  {
-    label: 'Workflows',
-    href: '/workflows'
-  },
-  {
-    label: 'Meet',
-    href: '/meet'
   },
   {
     label: 'Resources',
     children: [
       {
         label: 'Blog',
-        description: 'Latest updates and technical articles',
         href: '/blog'
       },
       {
-        label: 'Events',
-        description: 'Meet our team and learn about TextQL in person',
-        href: '/events'
+        label: 'Whitepaper',
+        href: '/whitepaper'
       },
       {
         label: 'Documentation',
-        description: 'Learn how to integrate and use TextQL',
         href: 'https://docs.textql.com',
         external: true
       },
       {
-        label: 'About',
-        description: 'Learn about our mission and team',
+        label: 'Careers',
+        href: '/careers'
+      }
+    ]
+  },
+  {
+    label: 'About',
+    children: [
+      {
+        label: 'Mission',
         href: '/about'
+      },
+      {
+        label: 'Team',
+        href: '/team'
       }
     ]
   }

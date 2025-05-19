@@ -30,6 +30,6 @@ The table below highlights key differences between LLMs and embedding models, re
 
 By integrating embedding models at critical decision points, we reduce reliance on expensive LLM calls, control costs, and create more reliable systems. This hybrid approach of embedding-driven reasoning combined with selective use of LLMs ensures faster performance, greater accuracy, and lower failure rates.
 
-![LLMs vs Embedding Models](/images/blog/embedding-models/comparison.png)
+![LLMs vs Embedding Models](/images/blog/embedding-models/embeddings.jpeg)
 
 If you're exploring nontraditional uses of language models, especially in ways that involve embeddings to enhance AI workflows, we'd love to connect. There's a lot of untapped potential in using these tools creatively and with critical thinking, and would love to hear how others are pushing the boundaries in this AI space.

@@ -5,7 +5,6 @@ export * from './Select';
 export * from './Badge';
 export * from './Card';
 export * from './DemoRequestForm';
-export * from './Modal';
 
 // Typography
 export * from './Typography';
@@ -13,3 +12,4 @@ export * from './Typography';
 // Layout Components
 export * from './Form';
 export * from './Carousel';
+export * from '../LogoCarousel';

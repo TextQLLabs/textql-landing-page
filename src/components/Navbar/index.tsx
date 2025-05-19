@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '../ui';
 import { TextLogo } from '../Logo';
 import { NavItem } from './NavItem';
@@ -12,6 +12,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isDevelopment = import.meta.env.DEV;
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,10 +23,9 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const onDemoRequest = async (e: React.MouseEvent) => {
+  const onDemoRequest = (e: React.MouseEvent) => {
     e.preventDefault();
-    const result = await handleSimpleDemoRequest(location.pathname);
-    window.open(result.formUrl, '_blank');
+    navigate('/demo');
   };
 
   return (
@@ -36,9 +36,9 @@ export default function Navbar() {
           : 'bg-black/30 backdrop-blur-sm'
       }`}>
         <div className="flex items-center justify-between px-4 md:px-6">
-          <a href="/" className="text-white hover:text-[#B8D8D0] transition-colors">
+          <Link to="/" className="text-white hover:text-[#B8D8D0] transition-colors">
             <TextLogo className="h-6 md:h-6 w-auto" />
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
@@ -49,11 +49,13 @@ export default function Navbar() {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
+            {/* Design System link - commented out
             {isDevelopment && (
               <Link to="/design-system">
                 <Button variant="ghost" size="sm">Design System</Button>
               </Link>
             )}
+            */}
             <a 
               href="https://app.textql.com" 
               target="_blank" 
@@ -94,29 +96,52 @@ export default function Navbar() {
             {navigation.map((item) => (
               <div key={item.label} className="py-2">
                 {item.href ? (
-                  <a
-                    href={item.href}
-                    target={item.external ? "_blank" : undefined}
-                    rel={item.external ? "noopener noreferrer" : undefined}
-                    className="block text-[#B8D8D0] hover:text-[#729E8C] transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.label}
-                  </a>
+                  item.external ? (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block text-[#B8D8D0] hover:text-[#729E8C] transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={item.href}
+                      className="block text-[#B8D8D0] hover:text-[#729E8C] transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  )
                 ) : (
                   <div className="space-y-2">
                     <div className="text-[#B8D8D0]">{item.label}</div>
                     {item.children && (
                       <div className="pl-4 space-y-2">
                         {item.children.map((child) => (
-                          <a
-                            key={child.href}
-                            href={child.href}
-                            className="block text-[#729E8C] hover:text-[#B8D8D0] transition-colors text-sm"
-                            onClick={() => setIsMenuOpen(false)}
-                          >
-                            {child.label}
-                          </a>
+                          child.external ? (
+                            <a
+                              key={child.href}
+                              href={child.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="block text-[#729E8C] hover:text-[#B8D8D0] transition-colors text-sm"
+                              onClick={() => setIsMenuOpen(false)}
+                            >
+                              {child.label}
+                            </a>
+                          ) : (
+                            <Link
+                              key={child.href}
+                              to={child.href}
+                              className="block text-[#729E8C] hover:text-[#B8D8D0] transition-colors text-sm"
+                              onClick={() => setIsMenuOpen(false)}
+                            >
+                              {child.label}
+                            </Link>
+                          )
                         ))}
                       </div>
                     )}
@@ -127,6 +152,7 @@ export default function Navbar() {
             
             {/* Mobile Actions */}
             <div className="pt-4 border-t border-[#B8D8D0]/10 space-y-3">
+              {/* Design System link - commented out
               {isDevelopment && (
                 <Link 
                   to="/design-system"
@@ -136,6 +162,7 @@ export default function Navbar() {
                   Design System
                 </Link>
               )}
+              */}
               <a 
                 href="https://app.textql.com" 
                 target="_blank" 

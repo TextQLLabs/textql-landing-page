@@ -14,7 +14,7 @@ export default function Agents() {
       <SEO 
         title="AI Agents | TextQL"
         description="Learn about Ana, the most intelligent agent for enterprise data analysis. Discover how we built the Ana agent and its capabilities."
-        canonical="https://textql.com/agents"
+        canonical="https://textql.com/agents/"
         ogImage="https://textql.com/social-preview.png"
       />
       
@@ -41,7 +41,7 @@ export default function Agents() {
         variant="wide"
         heading="Ready to deploy Ana in your organization?"
         subheader="Get started with TextQL's intelligent agent technology today"
-        ctaText="Request Demo"
+        useSimpleButton={true}
       />
     </div>
   );

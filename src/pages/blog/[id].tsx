@@ -33,7 +33,7 @@ export default function BlogPost() {
       <SEO 
         title={`${post.title} | TextQL Blog`}
         description={post.description}
-        canonical={`https://textql.com/blog/${post.id}`}
+        canonical={`https://textql.com/blog/${post.id}/`}
         ogImage={imageSource}
         ogType="article"
       />

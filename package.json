@@ -11,10 +11,12 @@
     "prerender": "vite-plugin-ssr prerender"
   },
   "dependencies": {
+    "@react-spring/web": "^9.7.3",
     "class-variance-authority": "^0.7.0",
     "framer-motion": "^11.0.8",
     "lucide-react": "^0.344.0",
     "mermaid": "^10.9.0",
+    "radix-ui": "^1.1.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-markdown": "^9.0.1",
@@ -23,13 +25,11 @@
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.0",
     "three": "^0.162.0",
-    "zod": "^3.22.4",
-    "@radix-ui/react-dialog": "^1.0.5"
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
     "@mdx-js/rollup": "^3.0.1",
-    "@netlify/plugin-nextjs": "^4.41.3",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@types/three": "^0.162.0",

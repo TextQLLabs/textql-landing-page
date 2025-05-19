@@ -51,7 +51,7 @@ export function AgentFeature1() {
       
       <div className="flex justify-center">
         <a 
-          href="https://docs.textql.com/core/how_it_works/architecture"
+          href="https://docs.textql.com/core/how-it-works/architecture"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex"

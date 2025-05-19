@@ -53,14 +53,14 @@ export function WaitlistForm({ isOpen, onClose, initialEmail }: WaitlistFormProp
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isLoading || showSuccess) return;
-    
+
     setIsLoading(true);
-    
+
     try {
       // Artificial delay
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      const response = await fetch('https://7c7613ab8c59.ngrok.app/api/event/signup', {
+
+      const response = await fetch('https://social.ahaym.workers.dev/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -88,14 +88,14 @@ export function WaitlistForm({ isOpen, onClose, initialEmail }: WaitlistFormProp
     // Only prevent Enter key if it's not in a textarea
     if (e.key === 'Enter' && e.target instanceof HTMLInputElement) {
       e.preventDefault(); // Prevent form submission
-      
+
       // Find the next input field
       const inputs = Array.from(document.querySelectorAll('input:not([type="submit"])'));
       const currentIndex = inputs.indexOf(e.target as HTMLInputElement);
       const nextInput = inputs[currentIndex + 1];
-      
+
       if (nextInput) {
-        nextInput.focus();
+        (nextInput as HTMLInputElement).focus();
       } else {
         // If we're on the last input, submit the form
         handleSubmit(e);
@@ -117,7 +117,6 @@ export function WaitlistForm({ isOpen, onClose, initialEmail }: WaitlistFormProp
             theme="dark"
             disabled={isLoading || showSuccess}
           />
-          
           <Input
             label="Last Name"
             value={formData.lastName}
@@ -128,7 +127,6 @@ export function WaitlistForm({ isOpen, onClose, initialEmail }: WaitlistFormProp
             disabled={isLoading || showSuccess}
           />
         </div>
-        
         <Input
           label="Work Email"
           type="email"
@@ -139,7 +137,6 @@ export function WaitlistForm({ isOpen, onClose, initialEmail }: WaitlistFormProp
           theme="dark"
           disabled={isLoading || showSuccess}
         />
-        
         <Input
           label="Phone Number"
           type="tel"
@@ -150,7 +147,6 @@ export function WaitlistForm({ isOpen, onClose, initialEmail }: WaitlistFormProp
           theme="dark"
           disabled={isLoading || showSuccess}
         />
-        
         <Input
           label="LinkedIn Profile URL"
           type="url"
@@ -162,7 +158,6 @@ export function WaitlistForm({ isOpen, onClose, initialEmail }: WaitlistFormProp
           theme="dark"
           disabled={isLoading || showSuccess}
         />
-
         <div className="flex justify-end gap-4 pt-4">
           <Button 
             variant="ghost" 
@@ -180,7 +175,6 @@ export function WaitlistForm({ isOpen, onClose, initialEmail }: WaitlistFormProp
             Submit
           </Button>
         </div>
-
         {/* Success Notification */}
         <SuccessNotification 
           show={showSuccess} 

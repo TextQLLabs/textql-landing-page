@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface SuggestedAction {
   label: string;
   type: 'meeting' | 'share';
@@ -24,3 +26,10 @@ export interface InsightData {
 }
 
 export type MetricType = 'percentage' | 'currency' | 'count' | 'time' | 'ratio';
+
+// Add the missing Industry interface
+export interface Industry {
+  id: string;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+}

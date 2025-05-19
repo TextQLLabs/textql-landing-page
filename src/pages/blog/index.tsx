@@ -9,9 +9,9 @@ export default function Blog() {
   return (
     <div className="min-h-screen bg-white">
       <SEO 
-        title="TextQL Blog"
+        title="Blog | TextQL"
         description="Insights and updates from our team on AI, data analysis, and the future of enterprise intelligence"
-        canonical="https://textql.com/blog"
+        canonical="https://textql.com/blog/"
         ogImage="https://textql.com/social-preview.png"
       />
       

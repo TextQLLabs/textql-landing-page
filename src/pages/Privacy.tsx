@@ -8,7 +8,7 @@ export default function Privacy() {
       <SEO 
         title="Privacy Policy | TextQL"
         description="Privacy policy for TextQL services. Learn how we collect, use, and protect your data."
-        canonical="https://textql.com/privacy"
+        canonical="https://textql.com/privacy/"
         ogImage="https://textql.com/social-preview.png"
       />
       
