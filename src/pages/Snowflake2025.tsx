@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, MapPin } from 'lucide-react';
 import { Button, Text } from '../components/ui';
 import { WaveBackground } from '../components/animations';
 import { SEO } from '../components/SEO';
 import { DEMO_CONFIG } from '../utils/constants';
+import SnowflakeImageAndDropdownsInfo from '../components/sections/SnowflakeImageAndDropdownsInfo';
 
 declare global {
   interface Window {
@@ -134,30 +135,30 @@ function RegistrationForm() {
       
       {/* Content */}
       <div className="relative z-10 w-full">
-        <div className="mx-auto max-w-7xl px-4 py-24">
+        <div className="mx-auto max-w-7xl px-4 py-24 mt-10">
           <div className="grid grid-cols-1 lg:grid-cols-[1.2fr,1fr] gap-12 items-center">
             {/* Left Content */}
             <div>
-              {/* Snowflake Logo */}
-              <img 
+              <div className="flex items-center gap-4 mb-4">
+                <img 
                 src="https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/6fa00556-c185-4755-80ee-515744313500/public" 
                 alt="Snowflake Logo" 
-                className="h-12 mb-6"
-                style={{ filter: 'brightness(0) invert(1)' }}
+                className="h-8 mb-4"
+style={{ filter: 'brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(654%) hue-rotate(114deg) brightness(93%) contrast(92%)' }}
               />
-              
-              {/* Stronger gradient effect */}
-              <h1 className="text-4xl font-extralight mb-6 bg-gradient-to-r from-[#B8D8D0] pr-5 via-[#B8D8D0] via-[#729E8C] to-[#729E8C] bg-clip-text text-transparent">
-              Book your team a Deep Research Agent Workshop with our leadership team
-
+              </div>
+              <h1 className="text-2xl md:text-5xl lg:text-5xl font-extralight leading-tight text-[#B8D8D0] mb-6">
+                Deep Research Workshop at Snowflake Summit
               </h1>
-              <div className="max-w-xl text-[#B8D8D0]">
-                <div className="flex items-center gap-4">
-                  <div className="w-[2px] h-8 bg-[#B8D8D0]/40" />
-                  <Text className="text-normal">
-                  Our executive team will be curating workshops, where you'll watch Deep Research Agents complete an 8-week management consulting project for your company on a synthetic Snowflake environment via our Snowflake-MCP integration.
-                </Text>
-                </div>
+              <p className="text-lg text-[#729E8C] font-light mb-4 max-w-2xl">
+                OpenAI and Anthropic have released new models that can complete 2 months of management consulting work in 20 minutes. Join us to learn how to deploy these capabilities in your business using our Snowflake-integrated platform.
+              </p>
+              <p className="text-lg text-[#729E8C] font-light mb-6 max-w-2xl">
+                Book a custom deep dive with our leadership team on how deep research agents should be integrated into your AI strategy
+              </p>
+              <div className="flex items-center text-[#729E8C] font-light mb-8">
+                <MapPin className="h-5 w-5 mr-2 text-[#b4ded3]" />
+                <span>Palace Hotel, 2 New Montgomery St, San Francisco, CA 94105</span>
               </div>
               
               {/* Video section */}
@@ -173,13 +174,16 @@ function RegistrationForm() {
                   <source src="/videos/snowflake-meeting.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
+                <p className="text-sm text-[#729E8C] mt-2 italic text-left">
+                  Watch an agent identify opportunities to improve insurance Salesforce performance using our Tableau MCP
+                </p>
               </div>
             </div>
 
             {/* Right Content - Registration Form */}
-            <div className="lg:w-4/5 mx-auto bg-black/20 backdrop-blur-sm rounded-lg p-6 shadow-lg pt-2 mt-10 border border-[#729E8C]/30">
+            <div className="lg:w-4/5 mx-auto bg-black/20 backdrop-blur-sm rounded-lg p-6 shadow-lg pt-2 mt-16 border border-[#729E8C]/30">
               <Text variant="header" className="text-lg mt-2 mb-5 text-[#B8D8D0]">
-                Request a meeting
+                RSVP to a session
               </Text>
               
               {submitMessage && (
@@ -265,7 +269,7 @@ function RegistrationForm() {
                 
                 <div>
                   <label htmlFor="biTools" className="block text-[#B8D8D0] text-xs mb-1.5">
-                  What was the latest project you hired management consultants for? <span className="text-[#729E8C]">Optional</span>
+                  Tell us about your priorities <span className="text-[#729E8C]">(Optional)</span>
                   </label>
                   <textarea
                     id="biTools"
@@ -287,7 +291,7 @@ function RegistrationForm() {
                   <div className="absolute inset-0 bg-gradient-to-r from-[#B8D8D0] via-[#B8D8D0] to-[#729E8C] opacity-20" />
                   <span className="relative flex items-center justify-center">
                     {isSubmitting ? 'Submitting...' : 'Register'}
-                    {!isSubmitting && <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />}
+                    {!isSubmitting && <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1 text-[#b4ded3]" />}
                   </span>
                 </Button>
               </form>
@@ -314,19 +318,23 @@ export default function Snowflake2025() {
       <section className="relative z-10 py-6 -mt-6 bg-black">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-2xl font-light text-center text-[#B8D8D0] mb-4">Trusted By</h2>
-          <div className="flex flex-wrap justify-center items-center gap-8">
+          <div className="flex flex-wrap justify-between items-center gap-x-10 gap-y-8 px-8 md:px-16">
             {[
-              "https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/cbbd6ebc-6b1c-41a9-d110-d58f67ba2b00/public", 
-              "https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/f4df4936-1342-4279-d93e-e3e3c9a06400/public",
-              "https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/e20d2de7-8cf8-4e7e-cb1e-d9fdba6f4400/public",
-              "https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/bad7b0ef-446c-4084-a17f-2b640cbf9200/public",
-              "https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/c4a10e31-df8b-427d-a511-aac64eb71200/public"
+              "https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/e63c02b7-3729-49c0-d8db-0329e6579b00/public", 
+              "https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/73e2845d-8b6a-429d-7c90-6b79b8cf8800/public",
+              "https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/0af61563-d6d9-49ff-b086-cc703757d600/public",
+              "https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/3c5f678e-8426-478c-92bb-211aca6c4100/public",
+              "https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/7ebcf0cd-717b-4b7b-c5d4-6563ec395600/public"
+            //   "https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/c4a10e31-df8b-427d-a511-aac64eb71200/public"
             ].map((src, index) => (
-              <div key={`logo-${index}`} className="w-28 h-16 flex items-center justify-center">
+              <div key={`logo-${index}`} className="flex-1 flex items-center justify-center min-w-[140px]">
                 <img 
                   src={src}
                   alt={`Trusted Partner ${index + 1}`}
-                  className="max-w-full max-h-full object-contain filter brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
+                  className="h-12 w-auto object-contain"
+                  style={{ 
+                    filter: 'brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(654%) hue-rotate(114deg) brightness(93%) contrast(92%)' 
+                  }}
                 />
               </div>
             ))}
@@ -334,26 +342,51 @@ export default function Snowflake2025() {
         </div>
       </section>
       
+      {/* Executive Deep Dive Sessions Section */}
+      <SnowflakeImageAndDropdownsInfo />
+      
       {/* Venue Section */}
       <section className="relative z-10 py-16 bg-black">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl font-light text-left text-[#B8D8D0] mb-4">Venue address</h2>
-          <p className="text-xl text-[#B8D8D0] mb-8">Palace Hotel, a Luxury Collection Hotel, San Francisco<br />
-          2 New Montgomery St, San Francisco, CA 94105
-          </p>
+          <h2 className="text-4xl font-light text-center text-[#B8D8D0] mb-2">Location</h2>
+          <div className="flex items-center justify-center mb-8">
+            <svg className="w-6 h-6 mr-2 text-[#b4ded3]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <p className="text-xl text-[#B8D8D0]">2 New Montgomery St, San Francisco, CA 94105</p>
+          </div>
           
-          <div className="w-full overflow-hidden rounded-lg">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.081741983245!2d-122.40447702411595!3d37.78812407198206!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808580881f0c9dd7%3A0xbe09e1083f7d7fcb!2sPalace%20Hotel%2C%20a%20Luxury%20Collection%20Hotel%2C%20San%20Francisco!5e0!3m2!1sen!2sus!4v1747717508988!5m2!1sen!2sus" 
-              width="100%" 
-              height="450" 
-              style={{ border: 0 }} 
-              allowFullScreen 
-              loading="lazy" 
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Venue Location Map"
-              className="w-full"
-            />
+          <div className="flex flex-col md:flex-row items-start gap-8">
+            <div className="w-full md:w-7/12 overflow-hidden rounded-lg">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.081741983245!2d-122.40447702411595!3d37.78812407198206!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808580881f0c9dd7%3A0xbe09e1083f7d7fcb!2sPalace%20Hotel%2C%20a%20Luxury%20Collection%20Hotel%2C%20San%20Francisco!5e0!3m2!1sen!2sus!4v1747717508988!5m2!1sen!2sus" 
+                width="100%" 
+                height="450" 
+                style={{ border: 0 }} 
+                allowFullScreen 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Venue Location Map"
+                className="w-full"
+              />
+            </div>
+            <div className="w-full md:w-5/12 text-[#B8D8D0] h-full">
+              <div className="border border-[#729E8C]/30 rounded-lg p-6 bg-black/30 h-full flex flex-col">
+                <h3 className="text-2xl font-light mb-4">From Moscone Center</h3>
+                <p className="mb-4">7-minute walk (1500 ft):</p>
+                <ol className="list-decimal pl-6 space-y-2">
+                  <li>Exit to Howard St</li>
+                  <li>Right on 3rd St</li>
+                  <li>Left on Market St</li>
+                  <li>Right on New Montgomery St</li>
+                </ol>
+                <div className="flex-grow"></div>
+                <p className="mt-6">
+                  The Palace Hotel is just steps from Moscone Center and easily accessible from all Summit venues.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
