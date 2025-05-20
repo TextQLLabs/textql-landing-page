@@ -29,7 +29,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="fixed top-[30px] left-0 right-0 z-40 px-4 md:px-6 py-4 md:py-6">
+    <div className="fixed top-[30px] left-0 right-0 z-40 px-4 md:px-6 py-4 md:py-6 mt-2">
       <nav className={`mx-auto max-w-7xl py-2 transition-all duration-300 ring-1 ring-[#B8D8D0]/20 ${
         isScrolled 
           ? 'bg-black/60 backdrop-blur-md shadow-lg' 
