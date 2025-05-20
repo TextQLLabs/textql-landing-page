@@ -177,7 +177,7 @@ function RegistrationForm() {
             </div>
 
             {/* Right Content - Registration Form */}
-            <div className="lg:w-4/5 mx-auto bg-black/20 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-[#729E8C]/30">
+            <div className="lg:w-4/5 mx-auto bg-black/20 backdrop-blur-sm rounded-lg p-6 shadow-lg pt-2 mt-10 border border-[#729E8C]/30">
               <Text variant="header" className="text-lg mb-5 text-[#B8D8D0]">
                 Request a meeting
               </Text>
@@ -265,7 +265,7 @@ function RegistrationForm() {
                 
                 <div>
                   <label htmlFor="biTools" className="block text-[#B8D8D0] text-xs mb-1.5">
-                  What was the latest project you hired management consultants for?<span className="text-[#729E8C]">Optional</span>
+                  What was the latest project you hired management consultants for? <span className="text-[#729E8C]">Optional</span>
                   </label>
                   <textarea
                     id="biTools"
