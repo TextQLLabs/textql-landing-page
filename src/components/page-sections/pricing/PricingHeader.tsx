@@ -23,7 +23,7 @@ export function PricingHeader() {
       <div className="relative z-10 flex items-center min-h-[600px]">
         <div className="mx-auto max-w-4xl px-6 text-center">
           {/* Tech-inspired decorative element */}
-          <div className="mb-8 flex justify-center">
+          <div className="mb-8 pt-10 flex justify-center">
             <div className="inline-flex items-center gap-2 bg-[#B8D8D0]/10 px-4 py-2 rounded-full border border-[#B8D8D0]/20 backdrop-blur-sm">
               <div className="h-2 w-2 bg-[#B8D8D0] rounded-full animate-pulse" />
               <span className="text-[#B8D8D0] text-sm">Agent Compute Units (ACU)</span>

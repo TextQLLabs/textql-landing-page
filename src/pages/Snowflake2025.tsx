@@ -23,7 +23,7 @@ function RegistrationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<{type: 'success' | 'error', text: string} | null>(null);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -148,26 +148,27 @@ function RegistrationForm() {
               
               {/* Stronger gradient effect */}
               <h1 className="text-4xl font-extralight mb-6 bg-gradient-to-r from-[#B8D8D0] pr-5 via-[#B8D8D0] via-[#729E8C] to-[#729E8C] bg-clip-text text-transparent">
-              Watch how Deep Research Agents can complete a Two-Month Management Consulting Project in 15 minutes
+              Book your team a Deep Research Agent Workshop with our leadership team
 
               </h1>
               <div className="max-w-xl text-[#B8D8D0]">
                 <div className="flex items-center gap-4">
                   <div className="w-[2px] h-8 bg-[#B8D8D0]/40" />
                   <Text className="text-normal">
-                  Join a curated demo of Deep Research Agents analyzing data from Tableau & Snowflake MCP servers in your industry
-                  </Text>
+                  Our executive team will be curating workshops, where you'll watch Deep Research Agents complete a 8 week management consulting project for your company on a synthetic snowflake environment via our snowflake-mcp integration.
+                </Text>
                 </div>
               </div>
               
               {/* Video section */}
               <div className="mt-8 mb-6 w-full max-w-xl">
                 <video 
-                  className="w-full rounded-lg shadow-lg" 
-                  controls
+                  className="w-full rounded-lg shadow-lg pointer-events-none" 
                   autoPlay
                   muted
                   loop
+                  disablePictureInPicture
+                  playsInline
                 >
                   <source src="/videos/snowflake-meeting.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
@@ -249,21 +250,6 @@ function RegistrationForm() {
                 </div>
                 
                 <div>
-                  <label htmlFor="biTools" className="block text-[#B8D8D0] text-xs mb-1.5">
-                    What BI tools do you use?<span className="text-[#729E8C]">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="biTools"
-                    name="biTools"
-                    required
-                    value={formData.biTools}
-                    onChange={handleInputChange}
-                    className="w-full bg-black/30 border border-[#729E8C]/30 rounded-md p-2.5 text-[#B8D8D0] text-sm focus:outline-none focus:ring-2 focus:ring-[#B8D8D0]"
-                  />
-                </div>
-                
-                <div>
                   <label htmlFor="phone" className="block text-[#B8D8D0] text-xs mb-1.5">
                     Phone number
                   </label>
@@ -273,6 +259,20 @@ function RegistrationForm() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
+                    className="w-full bg-black/30 border border-[#729E8C]/30 rounded-md p-2.5 text-[#B8D8D0] text-sm focus:outline-none focus:ring-2 focus:ring-[#B8D8D0]"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="biTools" className="block text-[#B8D8D0] text-xs mb-1.5">
+                  What was the latest project you hired management consultants for?<span className="text-[#729E8C]">Optional</span>
+                  </label>
+                  <textarea
+                    id="biTools"
+                    name="biTools"
+                    value={formData.biTools}
+                    onChange={handleInputChange}
+                    rows={4}
                     className="w-full bg-black/30 border border-[#729E8C]/30 rounded-md p-2.5 text-[#B8D8D0] text-sm focus:outline-none focus:ring-2 focus:ring-[#B8D8D0]"
                   />
                 </div>

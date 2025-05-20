@@ -71,7 +71,7 @@ const IntegrationPageTemplate: React.FC<IntegrationPageProps> = ({
       />
       
       {/* Hero Section - Centered */}
-      <section className="pt-24 pb-16">
+      <section className="mt-10 pt-24 pb-16">
         <div className="mx-auto max-w-site px-6 text-center">
           <h1 className="text-5xl md:text-6xl font-extralight text-[#B8D8D0] mb-6">{headline}</h1>
           <p className="text-[#729E8C] font-light text-lg max-w-3xl mx-auto mb-12">{description}</p>
