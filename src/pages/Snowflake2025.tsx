@@ -155,7 +155,7 @@ function RegistrationForm() {
                 <div className="flex items-center gap-4">
                   <div className="w-[2px] h-8 bg-[#B8D8D0]/40" />
                   <Text className="text-normal">
-                  Our executive team will be curating workshops, where you'll watch Deep Research Agents complete a 8 week management consulting project for your company on a synthetic snowflake environment via our snowflake-mcp integration.
+                  Our executive team will be curating workshops, where you'll watch Deep Research Agents complete an 8-week management consulting project for your company on a synthetic Snowflake environment via our Snowflake-MCP integration.
                 </Text>
                 </div>
               </div>
