@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 interface BannerItem {
   text: string;
@@ -21,6 +21,7 @@ export default function BannerCarousel({
 }: BannerCarouselProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const [isReady, setIsReady] = useState(false);
   
   // Calculate animation duration based on speed (lower speed = longer duration)
   // Adjusted formula to make animation faster
@@ -55,8 +56,14 @@ export default function BannerCarousel({
       }
     `;
     
+    // Mark component as ready after a small delay to ensure smooth initialization
+    const timer = setTimeout(() => {
+      setIsReady(true);
+    }, 100);
+    
     // Cleanup on unmount
     return () => {
+      clearTimeout(timer);
       if (styleElement && document.head.contains(styleElement)) {
         document.head.removeChild(styleElement);
       }
@@ -87,7 +94,9 @@ export default function BannerCarousel({
   }, [animationId]);
   
   return (
-    <div className={`fixed top-2 left-0 right-0 z-50 w-full overflow-hidden ${backgroundColor} border-t border-b border-[#B8D8D0]/20`}>
+    <div 
+      className={`fixed top-2 left-0 right-0 z-50 w-full overflow-hidden ${backgroundColor} border-t border-b border-[#B8D8D0]/20 transition-opacity duration-300 ease-in-out ${isReady ? 'opacity-100' : 'opacity-0'}`}
+    >
       <div className="relative w-full">
         <div 
           ref={containerRef}
