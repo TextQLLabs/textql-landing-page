@@ -178,7 +178,7 @@ function RegistrationForm() {
 
             {/* Right Content - Registration Form */}
             <div className="lg:w-4/5 mx-auto bg-black/20 backdrop-blur-sm rounded-lg p-6 shadow-lg pt-2 mt-10 border border-[#729E8C]/30">
-              <Text variant="header" className="text-lg mb-5 text-[#B8D8D0]">
+              <Text variant="header" className="text-lg mt-2 mb-5 text-[#B8D8D0]">
                 Request a meeting
               </Text>
               
