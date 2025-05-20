@@ -10,6 +10,8 @@ export interface NavItem {
     href: string;
     external?: boolean;
   }[];
+  icon?: string;
+  textColor?: string;
 }
 
 export const navigation: NavItem[] = [

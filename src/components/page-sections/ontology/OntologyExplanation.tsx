@@ -99,7 +99,7 @@ export function OntologyExplanation() {
           <div>
             <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden">
               <img 
-                src="/images/ontology/Conglomerate Ontology.png"
+                src="https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/72fc7d25-5a18-497b-2bac-087c51cabf00/public"
                 alt="TextQL Ontology Visualization"
                 className="w-full h-full object-contain shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
               />

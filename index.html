@@ -12,7 +12,12 @@
     <meta name="msapplication-TileColor" content="#0A1F1C">
     <meta name="theme-color" content="#0A1F1C">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Security-Policy" content="frame-src 'self' app.termly.io;">
+    <meta http-equiv="Content-Security-Policy" content="
+      frame-src 'self' https: app.termly.io form.typeform.com *.typeform.com doubleclick.net *.doubleclick.net googletagmanager.com *.googletagmanager.com calendar.google.com google.com *.google.com;
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' *.googletagmanager.com *.typeform.com embed.typeform.com *.doubleclick.net *.google-analytics.com hermes.textql.com *.google.com;
+      connect-src 'self' *.google-analytics.com *.analytics.google.com *.googletagmanager.com *.g.doubleclick.net *.typeform.com hermes.textql.com www.google.com google.com *.google.com calendar.google.com hooks.slack.com;
+      img-src 'self' data: * *.google-analytics.com *.googletagmanager.com *.g.doubleclick.net *.google.com *.googleadservices.com imagedelivery.net *.imagedelivery.net;
+    ">
     
     <!-- Basic metadata -->
     <meta name="description" content="Deploy AI agents to find trends across all of your data that makes you money" />

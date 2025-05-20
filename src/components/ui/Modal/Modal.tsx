@@ -6,9 +6,10 @@ interface ModalProps {
   onClose: () => void;
   children: React.ReactNode;
   title?: string;
+  description?: string;
 }
 
-export function Modal({ isOpen, onClose, children, title }: ModalProps) {
+export function Modal({ isOpen, onClose, children, title, description }: ModalProps) {
   return (
     <Dialog.Root open={isOpen} onOpenChange={onClose}>
       <Dialog.Portal>
@@ -24,6 +25,11 @@ export function Modal({ isOpen, onClose, children, title }: ModalProps) {
               <X className="w-5 h-5" />
             </Dialog.Close>
           </div>
+          {description && (
+            <Dialog.Description className="sr-only">
+              {description}
+            </Dialog.Description>
+          )}
           {children}
         </Dialog.Content>
       </Dialog.Portal>

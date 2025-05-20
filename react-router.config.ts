@@ -17,7 +17,8 @@ export default {
       "/privacy",
       "/blog",
       "/demo",
-      "/whitepaper"
+      "/whitepaper",
+      "/snowflake-2025"
     ];
   },
 } satisfies Config; 

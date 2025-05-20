@@ -12,13 +12,18 @@ interface CarouselProps {
 // todo: dejitter the animation
 export function Carousel({
   items,
-  speed = 0.3,
+  speed = 0.05,
   className = '',
   itemClassName = ''
 }: CarouselProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>();
   const speedRef = useRef(speed);
+
+  // Update speedRef when speed prop changes
+  useEffect(() => {
+    speedRef.current = speed;
+  }, [speed]);
 
   useEffect(() => {
     let lastTime = performance.now();
@@ -29,9 +34,7 @@ export function Carousel({
       const deltaTime = currentTime - lastTime;
       lastTime = currentTime;
 
-      const viewportWidth = window.innerWidth;
-      speedRef.current = viewportWidth * 0.00008;
-
+      // Use the speed from props instead of calculating based on viewport
       const newScrollLeft = scrollRef.current.scrollLeft + speedRef.current * deltaTime;
 
       if (newScrollLeft >= scrollRef.current.scrollWidth / 2) {

@@ -13,3 +13,6 @@ export * from './Typography';
 export * from './Form';
 export * from './Carousel';
 export * from '../LogoCarousel';
+
+// Image Components
+export { default as ImageProxy } from './ImageProxy';

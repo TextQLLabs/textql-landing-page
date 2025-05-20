@@ -26,6 +26,8 @@ import Integrations from './pages/Integrations';
 import IntegrationsRoutes from './pages/integrations/IntegrationsRoutes';
 import Whitepaper from './pages/Whitepaper';
 import Careers from './pages/Careers';
+import Snowflake2025 from './pages/Snowflake2025';
+import SnowflakeScheduler from './pages/snowflake-2025/scheduler';
 
 function App() {
   const location = useLocation();
@@ -76,6 +78,8 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/whitepaper" element={<Whitepaper />} />
+          <Route path="/snowflake-2025" element={<Snowflake2025 />} />
+          <Route path="/snowflake-2025/scheduler" element={<SnowflakeScheduler />} />
           
           {/* Blog Routes */}
           <Route path="/blog" element={<Blog />} />

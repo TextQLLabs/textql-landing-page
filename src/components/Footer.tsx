@@ -68,14 +68,13 @@ export default function Footer() {
         <div className="w-full border-b border-white/10">
           <div className="mx-auto max-w-site px-6 py-12">
             {/* Logo and Description */}
-            <div className="mb-12">
+            {/* <div className="mb-12">
               <a href="/" className="inline-block">
                 <IconLogo className="h-12 w-12 text-[#B8D8D0]" />
               </a>
               <p className="mt-4 text-sm text-white/60 max-w-md">
-                TextQL helps enterprises unlock the full potential of their data with AI-powered insights and automation.
               </p>
-            </div>
+            </div> */}
 
             {/* Links Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(4,1fr)] gap-8">
