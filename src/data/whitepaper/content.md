@@ -117,7 +117,7 @@ The Ontology Layer is a labeled property graph that codifies:
 
 * **Metrics**: Formulaic aggregations on top of objects, including level-of-detail calculations and window functions (e.g., Average Recharge Gap = AVG(lead (recharge_datetime) OVER (PARTITION BY recharge_id ORDER BY recharge_datetime) - recharge_datetime)).
 
-![TextQL Ontology Visualization](/images/ontology/Conglomerate%20Ontology.png)
+<!-- ![TextQL Ontology Visualization](/images/ontology/Conglomerate%20Ontology.png) -->
 
 
 
