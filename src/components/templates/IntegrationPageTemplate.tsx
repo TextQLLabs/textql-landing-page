@@ -1,6 +1,7 @@
 import React from 'react';
 import { SEO } from '../../components/SEO';
 import { CTA } from '../../components/sections';
+import { useNavigate } from 'react-router-dom';
 
 interface IntegrationPageProps {
   /**
@@ -37,12 +38,18 @@ interface IntegrationPageProps {
   additionalContent?: React.ReactNode;
   
   /**
+   * Optional video URL to display in the hero section
+   */
+  videoUrl?: string;
+  
+  /**
    * Optional CTA props to customize the call-to-action
    */
   ctaProps?: {
     heading?: string;
     subheader?: string;
     useSimpleButton?: boolean;
+    buttonText?: string;
   };
 }
 
@@ -56,10 +63,16 @@ const IntegrationPageTemplate: React.FC<IntegrationPageProps> = ({
   faqItems,
   visualContent,
   additionalContent,
+  videoUrl,
   ctaProps
 }) => {
   // Create SEO-friendly slug from name
   const slug = name.toLowerCase().replace(/\s+/g, '-');
+  const navigate = useNavigate();
+  
+  const handleDemoClick = () => {
+    navigate('/demo');
+  };
   
   return (
     <div className="min-h-screen bg-black">
@@ -70,39 +83,57 @@ const IntegrationPageTemplate: React.FC<IntegrationPageProps> = ({
         ogImage="https://textql.com/social-preview.png"
       />
       
-      {/* Hero Section - Centered */}
+      {/* Hero Section - Two Column Layout */}
       <section className="mt-20 pt-24">
-        <div className="mx-auto max-w-site px-6 text-center">
-          <h1 className="text-5xl md:text-6xl font-extralight max-w-3xl mx-auto text-[#B8D8D0] mb-6">{headline}</h1>
-          <p className="text-[#729E8C] font-light text-lg max-w-2xl mx-auto mb-6">{description}</p>
-          <button className="bg-[#0A1F1C] hover:bg-[#0A1F1C]/80 text-[#B8D8D0] font-light py-3 mt-2 px-6 rounded-md transition-colors duration-200">
-            Get a demo
-          </button>
+        <div className="mx-auto max-w-site px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            {/* Left Column - Hero Content */}
+            <div className="text-left">
+              <h1 className="text-5xl md:text-6xl font-extralight text-[#B8D8D0] mb-6">{headline}</h1>
+              <p className="text-[#729E8C] font-light text-lg mb-6">{description}</p>
+              <button 
+                className="bg-[#0A1F1C] hover:bg-[#0A1F1C]/80 text-[#B8D8D0] font-light py-3 mt-2 px-6 rounded-md transition-colors duration-200"
+                onClick={handleDemoClick}
+              >
+                Get a demo
+              </button>
+            </div>
+            
+            {/* Right Column - Video */}
+            <div className="rounded-lg overflow-hidden">
+              {videoUrl ? (
+                <video 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline
+                  className="w-full h-full object-cover rounded-lg"
+                >
+                  <source src={videoUrl} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
+                <div className="bg-[#0A1F1C]/30 rounded-lg p-8 h-64 flex items-center justify-center">
+                  <p className="text-[#729E8C] font-light italic">Video placeholder</p>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </section>
       
-      {/* Visual Section */}
-      <section className="">
-        <div className="mx-auto max-w-site px-6">
-          {visualContent ? (
-            visualContent
-          ) : (
-            <div className="bg-[#0A1F1C]/30 rounded-lg p-8 h-64 flex items-center justify-center">
-              {/* 
-                INTEGRATION VISUAL PLACEHOLDER
-                Replace this comment with the integration-specific visual component
-                This could be an illustration, diagram, screenshot, or other visual representation
-                of how the integration works
-              */}
-              <p className="text-[#729E8C] font-light italic">Integration visual placeholder</p>
-            </div>
-          )}
-        </div>
-      </section>
+      {/* Visual Section - If still needed */}
+      {visualContent && (
+        <section className="mt-16">
+          <div className="mx-auto max-w-site px-6">
+            {visualContent}
+          </div>
+        </section>
+      )}
       
       {/* Additional Content Section - Optional */}
       {additionalContent && (
-        <section className="">
+        <section className="mt-16">
           <div className="mx-auto mx-w-site px-6">
             {additionalContent}
           </div>
@@ -110,7 +141,7 @@ const IntegrationPageTemplate: React.FC<IntegrationPageProps> = ({
       )}
       
       {/* FAQ Section */}
-      <section className="py-16 bg-[#0A1F1C]/30">
+      <section className="py-16 bg-[#0A1F1C]/30 mt-16">
         <div className="mx-auto max-w-site px-6">
           <h2 className="text-3xl font-extralight text-[#B8D8D0] mb-12">FAQ on integrating with {name}</h2>
           
@@ -145,6 +176,7 @@ const IntegrationPageTemplate: React.FC<IntegrationPageProps> = ({
         heading={ctaProps?.heading || `Ready to integrate ${name} with TextQL?`}
         subheader={ctaProps?.subheader || "Get started with our seamless integration today"}
         useSimpleButton={ctaProps?.useSimpleButton || true}
+        buttonText={ctaProps?.buttonText || "Get a demo"}
       />
     </div>
   );

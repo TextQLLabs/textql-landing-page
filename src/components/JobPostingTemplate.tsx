@@ -39,9 +39,9 @@ const JobPostingTemplate: React.FC<JobPostingTemplateProps> = ({
 }) => {
   return (
     <div className="relative">
-      {/* Header with gradient background */}
+      {/* Header with solid black background */}
       <div className="relative overflow-hidden min-h-[200px]">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A1F1C] to-black" />
+        <div className="absolute inset-0 bg-black" />
         
         {/* Content */}
         <div className="relative z-10 pt-24 pb-16 px-6">

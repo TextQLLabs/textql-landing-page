@@ -1,95 +1,98 @@
 import React from 'react';
 import { SEO } from '../../components/SEO';
 import IntegrationPageTemplate from '../../components/templates/IntegrationPageTemplate';
-import IntegrationMindMap from '../../components/integrations/IntegrationMindMap';
-import { tableauMcpMindMapData } from '../../data/integrations/tableauMcpMindMapData';
 
 export default function TableauMcpIntegration() {
   const faqItems = [
     {
-      question: "How frequently can TextQL sync Tableau MCP data?",
+      question: "How do TextQL's AI agents interact with Tableau through MCP?",
       answer: (
         <div>
-          <p className="mb-4">TextQL can sync Tableau MCP data in real-time, near real-time, or on a scheduled basis depending on your needs:</p>
+          <p className="mb-4">TextQL's AI agents leverage the Tableau MCP (Management and Control Plane) to:</p>
           <ul className="list-disc pl-6 space-y-2">
-            <li>Real-time syncing via webhooks for critical updates</li>
-            <li>Scheduled syncing at intervals ranging from every 5 minutes to daily</li>
-            <li>On-demand syncing triggered through our API or user interface</li>
+            <li>Directly query and analyze Tableau datasets and visualizations</li>
+            <li>Monitor dashboard performance and usage patterns in real-time</li>
+            {/* <li>Automatically optimize data models and report structures</li> */}
+            <li>Provide intelligent insights and recommendations based on your Tableau data</li>
           </ul>
         </div>
       )
     },
     {
-      question: "How does TextQL interact with Tableau MCP's API?",
+      question: "What types of AI-powered analysis can TextQL perform on Tableau data?",
       answer: (
         <div>
-          <p className="mb-4">TextQL uses a secure, authenticated connection to Tableau MCP's API. Our integration:</p>
+          <p className="mb-4">Our AI agents can perform sophisticated analysis on your Tableau data, including:</p>
           <ul className="list-disc pl-6 space-y-2">
-            <li>Authenticates using OAuth 2.0 for secure access</li>
-            <li>Implements efficient pagination for large data sets</li>
-            <li>Handles API version changes automatically to ensure continued functionality</li>
-            <li>Minimizes API calls through intelligent caching and change detection</li>
+            <li>Anomaly detection and predictive analytics on your visualizations</li>
+            <li>Natural language querying of Tableau dashboards and reports</li>
+            <li>Automated insight generation and trend identification</li>
+            <li>Cross-dataset correlation analysis and pattern recognition</li>
+            <li>Intelligent data quality monitoring and validation</li>
+          </ul>
+        </div>
+      )
+    },
+    // {
+    //   question: "How does TextQL ensure security when AI agents access Tableau data?",
+    //   answer: (
+    //     <div>
+    //       <p className="mb-4">TextQL implements multiple layers of security:</p>
+    //       <ul className="list-disc pl-6 space-y-2">
+    //         <li>End-to-end encryption for all data transfers between TextQL and Tableau</li>
+    //         <li>Role-based access control for AI agent operations</li>
+    //         <li>Audit logging of all AI interactions with your Tableau environment</li>
+    //         <li>Compliance with data governance policies and regulations</li>
+    //         <li>Secure OAuth 2.0 authentication with MCP</li>
+    //       </ul>
+    //     </div>
+    //   )
+    // },
+    {
+      question: "Can TextQL's AI agents enhance existing Tableau dashboards?",
+      answer: (
+        <div>
+          <p className="mb-4">Yes, our AI agents can automatically enhance your Tableau dashboards by:</p>
+          <ul className="list-disc pl-6 space-y-2">
+            <li>Suggesting optimal visualization types based on data patterns</li>
+            <li>Automatically generating natural language insights and annotations</li>
+            <li>Identifying potential improvements in dashboard performance</li>
+            <li>Creating AI-powered custom calculations and metrics</li>
+            <li>Recommending relevant cross-dashboard connections</li>
           </ul>
         </div>
       )
     },
     {
-      question: "How does TextQL handle rate limits with Tableau MCP?",
-      answer: (
-        <p>TextQL's integration with Tableau MCP includes built-in rate limit handling. Our system automatically respects Tableau's rate limits, implements exponential backoff when limits are approached, and queues requests appropriately to avoid disruption. This ensures your data syncs reliably without exceeding Tableau's API constraints.</p>
-      )
-    },
-    {
-      question: "Can I access custom fields from Tableau MCP?",
-      answer: (
-        <p>Yes, TextQL's integration with Tableau MCP supports access to all custom fields. Our system automatically detects and maps custom fields from your Tableau environment, making them available through our ontology. You can query, filter, and analyze these custom fields just like standard fields, ensuring you have full access to all your data.</p>
-      )
-    },
-    {
-      question: "What other BI integrations can I access with TextQL?",
+      question: "How do TextQL's AI agents handle real-time Tableau data updates?",
       answer: (
         <div>
-          <p className="mb-4">TextQL offers integrations with many popular business intelligence and data visualization tools, including:</p>
-          <ul className="list-disc pl-6 space-y-2 mb-4">
-            <li>Power BI</li>
-            <li>Looker</li>
-            <li>Qlik</li>
-            <li>Domo</li>
-            <li>Sisense</li>
-            <li>ThoughtSpot</li>
+          <p className="mb-4">Our AI agents maintain real-time awareness of your Tableau environment through:</p>
+          <ul className="list-disc pl-6 space-y-2">
+            <li>Continuous monitoring of data changes and updates</li>
+            <li>Instant analysis of new data points and trends</li>
+            <li>Automated alerts for significant changes or anomalies</li>
+            <li>Real-time adjustment of AI models based on new information</li>
           </ul>
-          <p>Each integration offers similar capabilities to our Tableau MCP integration, allowing you to connect and analyze data from multiple BI tools in one place.</p>
         </div>
       )
     },
     {
-      question: "What are some common use cases for TextQL's integration with Tableau MCP?",
+      question: "What unique insights can TextQL's AI provide beyond standard Tableau analytics?",
       answer: (
         <div>
-          <p className="mb-4">Common use cases include:</p>
+          <p className="mb-4">TextQL's AI agents extend Tableau's capabilities by providing:</p>
           <ul className="list-disc pl-6 space-y-2">
-            <li>Centralizing analytics from multiple Tableau deployments</li>
-            <li>Creating a unified data layer across Tableau and other business applications</li>
-            <li>Extending Tableau analytics with AI-powered insights and recommendations</li>
-            <li>Building real-time dashboards that combine Tableau data with other business metrics</li>
-            <li>Automating workflows based on changes or thresholds in Tableau reports</li>
+            <li>Predictive analytics and forecasting based on historical patterns</li>
+            <li>Advanced pattern recognition across multiple data sources</li>
+            <li>Natural language explanations of complex data relationships</li>
+            <li>Automated root cause analysis for business metrics</li>
+            <li>AI-driven recommendations for business actions</li>
           </ul>
         </div>
       )
     },
   ];
-
-  // Custom visual content for the Tableau MCP integration
-  const visualContent = (
-    <div className="flex flex-col">
-      <div className="mb-6">
-      </div>
-      
-      <div className="h-[500px]">
-        <IntegrationMindMap data={tableauMcpMindMapData} />
-      </div>
-    </div>
-  );
 
   return (
     <IntegrationPageTemplate
@@ -97,10 +100,10 @@ export default function TableauMcpIntegration() {
       headline="Seamless AI Research Within Your Tableau Environment"
       description="TextQL's MCP integration bridges the gap between visualization and intelligent analysis, enabling our AI agents to work directly with your Tableau datasets."
       faqItems={faqItems}
-      visualContent={visualContent}
+      videoUrl="/videos/tableau-mcp.mp4"
       ctaProps={{
-        heading: "Ready to integrate Tableau MCP with TextQL?",
-        subheader: "Deploy our intelligent data framework in your organization today",
+        heading: "Ready to learn more?",
+        subheader: "Contact us",
         buttonText: "Get a demo"
       }}
     />
