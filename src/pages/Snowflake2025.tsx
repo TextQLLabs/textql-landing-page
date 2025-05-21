@@ -320,7 +320,7 @@ export default function Snowflake2025() {
           <h2 className="text-2xl font-light text-center text-[#B8D8D0] mb-4">Trusted By</h2>
           <div className="flex flex-wrap justify-between items-center gap-x-10 gap-y-8 px-8 md:px-16">
             {[
-              "https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/e63c02b7-3729-49c0-d8db-0329e6579b00/public", 
+              // "https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/e63c02b7-3729-49c0-d8db-0329e6579b00/public", 
               "https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/73e2845d-8b6a-429d-7c90-6b79b8cf8800/public",
               "https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/0af61563-d6d9-49ff-b086-cc703757d600/public",
               "https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/3c5f678e-8426-478c-92bb-211aca6c4100/public",
