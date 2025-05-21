@@ -42,7 +42,7 @@ interface IntegrationPageProps {
   ctaProps?: {
     heading?: string;
     subheader?: string;
-    buttonText?: string;
+    useSimpleButton?: boolean;
   };
 }
 
@@ -71,18 +71,18 @@ const IntegrationPageTemplate: React.FC<IntegrationPageProps> = ({
       />
       
       {/* Hero Section - Centered */}
-      <section className="mt-20 pt-24 pb-16">
+      <section className="mt-20 pt-24">
         <div className="mx-auto max-w-site px-6 text-center">
-          <h1 className="text-5xl md:text-6xl font-extralight text-[#B8D8D0] mb-6">{headline}</h1>
-          <p className="text-[#729E8C] font-light text-lg max-w-3xl mx-auto mb-12">{description}</p>
-          <button className="bg-[#0A1F1C] hover:bg-[#0A1F1C]/80 text-[#B8D8D0] font-light py-3 px-6 rounded-md transition-colors duration-200">
+          <h1 className="text-5xl md:text-6xl font-extralight max-w-3xl mx-auto text-[#B8D8D0] mb-6">{headline}</h1>
+          <p className="text-[#729E8C] font-light text-lg max-w-2xl mx-auto mb-6">{description}</p>
+          <button className="bg-[#0A1F1C] hover:bg-[#0A1F1C]/80 text-[#B8D8D0] font-light py-3 mt-2 px-6 rounded-md transition-colors duration-200">
             Get a demo
           </button>
         </div>
       </section>
       
       {/* Visual Section */}
-      <section className="py-16">
+      <section className="">
         <div className="mx-auto max-w-site px-6">
           {visualContent ? (
             visualContent
@@ -102,8 +102,8 @@ const IntegrationPageTemplate: React.FC<IntegrationPageProps> = ({
       
       {/* Additional Content Section - Optional */}
       {additionalContent && (
-        <section className="py-16">
-          <div className="mx-auto max-w-site px-6">
+        <section className="">
+          <div className="mx-auto mx-w-site px-6">
             {additionalContent}
           </div>
         </section>
@@ -144,8 +144,7 @@ const IntegrationPageTemplate: React.FC<IntegrationPageProps> = ({
         variant="wide"
         heading={ctaProps?.heading || `Ready to integrate ${name} with TextQL?`}
         subheader={ctaProps?.subheader || "Get started with our seamless integration today"}
-        useSimpleButton={true}
-        buttonText={ctaProps?.buttonText || "Get Started"}
+        useSimpleButton={ctaProps?.useSimpleButton || true}
       />
     </div>
   );

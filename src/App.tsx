@@ -26,6 +26,7 @@ import Integrations from './pages/Integrations';
 import IntegrationsRoutes from './pages/integrations/IntegrationsRoutes';
 import Whitepaper from './pages/Whitepaper';
 import Careers from './pages/Careers';
+import JobPostingPage from './pages/careers/JobPostingPage';
 import Snowflake2025 from './pages/Snowflake2025';
 import SnowflakeScheduler from './pages/snowflake-2025/scheduler';
 import Team from './pages/Team';
@@ -74,6 +75,7 @@ function App() {
           <Route path="/agents" element={<Agents />} />
           <Route path="/ontology" element={<Ontology />} />
           <Route path="/careers" element={<Careers />} />
+          <Route path="/careers/:jobId" element={<JobPostingPage />} />
           <Route path="/integrations" element={<Integrations />} />
           <Route path="/integrations/*" element={<IntegrationsRoutes />} />
           <Route path="/terms" element={<Terms />} />

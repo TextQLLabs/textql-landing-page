@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { ArrowRight, MapPin } from 'lucide-react';
 import { Button, Text } from '../components/ui';
 import { WaveBackground } from '../components/animations';

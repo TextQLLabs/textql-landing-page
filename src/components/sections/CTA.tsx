@@ -12,6 +12,7 @@ interface CTAProps {
   isCompact?: boolean;
   variant?: 'default' | 'wide' | 'compact';
   useSimpleButton?: boolean;
+  buttonText?: string;
 }
 
 export function CTA({ 
@@ -21,7 +22,8 @@ export function CTA({
   showWave = true,
   isCompact = false,
   variant = 'default',
-  useSimpleButton = false
+  useSimpleButton = false,
+  buttonText = 'Request Demo'
 }: CTAProps) {
   const bgColor = theme === 'dark' ? 'bg-black' : 'bg-[#F0F5F3]';
   const minHeight = isCompact ? 'min-h-[400px]' : 'min-h-[600px]';
@@ -71,7 +73,7 @@ export function CTA({
                   onClick={handleDemoRequest}
                   theme={theme}
                 >
-                  Request Demo
+                  {buttonText}
                 </Button>
               ) : (
                 <DemoRequestForm 

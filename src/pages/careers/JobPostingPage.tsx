@@ -16,7 +16,7 @@ export default function JobPostingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black mt-16">
       <SEO 
         title={`${job.title} | TextQL`}
         description={`Join TextQL as ${job.title} and help build the future of data analysis.`}

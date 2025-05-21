@@ -83,10 +83,6 @@ export default function TableauMcpIntegration() {
   const visualContent = (
     <div className="flex flex-col">
       <div className="mb-6">
-        <h3 className="text-2xl font-extralight text-[#B8D8D0] mb-4">Connecting Tableau MCP with TextQL</h3>
-        <p className="text-[#729E8C] font-light mb-4">
-          Visualize how TextQL connects to your Tableau MCP instance and enables AI-powered agents to work with your dashboards and data.
-        </p>
       </div>
       
       <div className="h-[500px]">
@@ -98,8 +94,8 @@ export default function TableauMcpIntegration() {
   return (
     <IntegrationPageTemplate
       name="Tableau MCP"
-      headline="Integrate Tableau MCP with your product—along with any other BI application"
-      description="Connect your product to all the applications your customers use via TextQL's Unified API to close more deals, retain customers, and expand to new markets"
+      headline="Seamless AI Research Within Your Tableau Environment"
+      description="TextQL's MCP integration bridges the gap between visualization and intelligent analysis, enabling our AI agents to work directly with your Tableau datasets."
       faqItems={faqItems}
       visualContent={visualContent}
       ctaProps={{
