@@ -49,6 +49,9 @@ export default function TabsDisplay<T extends string>({
     preloadImages();
   }, []);
 
+  // Safely access the active tab's content
+  const activeTabContent = tabs && activeTab ? tabs[activeTab] : null;
+
   return (
     <section className="bg-black py-24 border-t border-[#B8D8D0]/10">
       <div className="mx-auto max-w-7xl px-6">
@@ -57,16 +60,16 @@ export default function TabsDisplay<T extends string>({
         </h2>
 
         <div className="relative min-h-[600px] rounded-2xl overflow-hidden">
-          <div className={`absolute inset-0 transition-colors duration-500 ${tabs[activeTab].bgColor}`} />
+          <div className={`absolute inset-0 transition-colors duration-500 ${activeTabContent?.bgColor || 'bg-gray-900'}`} />
           
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 p-12">
             {/* Left column - Text content */}
             <div className="flex flex-col justify-center">
               <h3 className="text-4xl font-light text-gray-900 mb-6 transition-opacity duration-300">
-                {tabs[activeTab].title}
+                {activeTabContent?.title || ''}
               </h3>
               <Text className="text-xl font-light leading-relaxed text-gray-700 transition-opacity duration-300">
-                {tabs[activeTab].description}
+                {activeTabContent?.description || ''}
               </Text>
             </div>
 

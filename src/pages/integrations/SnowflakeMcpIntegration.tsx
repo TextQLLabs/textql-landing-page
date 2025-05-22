@@ -9,6 +9,8 @@ import FaqSection from '../../components/integrations/FaqSection';
 import { CTA } from '../../components/sections';
 import { FeatureSection } from '../../components/FeatureSection';
 import { Plug, RefreshCw, Cpu } from 'lucide-react';
+import { JoinsChart } from '../../components/page-sections/agents/joins/JoinsChart';
+import TabsDisplay, { TabContentType } from '../../components/TabsDisplay';
 
 export default function SnowflakeMcpIntegration() {
   const screenshots = [
@@ -116,6 +118,113 @@ export default function SnowflakeMcpIntegration() {
     },
   ];
 
+  type TabOption = 'Connect Your Warehouse' | 'Run Deep Analysis' | 'Report Anywhere';
+
+  const tabContent: Record<TabOption, TabContentType> = {
+    'Connect Your Warehouse': {
+      title: 'Connect Your Warehouse',
+      description: 'Sync your Snowflake data warehouse with TextQL, and map your data relationships in the ontology.',
+      images: [
+        {
+          src: '/images/integrations/snowflake/tripartite/slide-1/databases.png',
+          width: '150%',
+          translateX: 'translate-x-[30%]',
+          translateY: 'translate-y-[-6%]',
+          zIndex: 0,
+          top: '0',
+          right: '0',
+        },
+        {
+          src: '/images/integrations/snowflake/tripartite/slide-1/schema.png',
+          width: '100%',
+          translateX: 'translate-x-[-20%]',
+          translateY: 'translate-y-[15%]',
+          zIndex: 30,
+          top: '50%',
+          left: '50%',
+        },
+        {
+          src: '/images/integrations/snowflake/tripartite/slide-1/sql.png',
+          width: '100%',
+          translateX: 'translate-x-[-15%]',
+          translateY: 'translate-y-[50%]',
+          zIndex: 10,
+          bottom: '0',
+          left: '0',
+        },
+      ],
+      bgColor: 'bg-white'
+    },
+    'Run Deep Analysis': {
+      title: 'Run Deep Analysis',
+      description: 'Take your analysis further with advanced analytics and machine learning capabilities. Transform your data into actionable insights with our powerful analytical tools.',
+      images: [
+        {
+          src: '/images/integrations/tableau/tripartite/slide-2/ML Model.png',
+          width: '130%',
+          translateX: 'translate-x-[-30%]',
+          translateY: 'translate-y-[-35%]',
+          zIndex: 0,
+          top: '50%',
+          left: '50%',
+        },
+        {
+          src: '/images/integrations/tableau/tripartite/slide-2/daily_traffic_metrics.png',
+          width: '50%',
+          translateX: '-translate-x-[40%]',
+          translateY: 'translate-y-[65%]',
+          zIndex: 10,
+          bottom: '0',
+          left: '0',
+        },
+        {
+          src: '/images/integrations/tableau/tripartite/slide-2/days_distribution.png',
+          width: '60%',
+          translateX: 'translate-x-[45%]',
+          translateY: '-translate-y-[30%]',
+          zIndex: 20,
+          top: '0',
+          right: '0',
+        },
+      ],
+      bgColor: 'bg-[#D1F2D9]'
+    },
+    'Report Anywhere': {
+      title: 'Report Anywhere',
+      description: "Share your insights across any platform. Whether it's through email, Slack, or embedded in your applications, your data stories reach the right audience at the right time.",
+      images: [
+        {
+          src: '/images/integrations/tableau/tripartite/slide-3/email.png',
+          width: '70%',
+          translateX: 'translate-x-[-40%]',
+          translateY: 'translate-y-[-30%]',
+          zIndex: 0,
+          top: '50%',
+          left: '50%',
+        },
+        {
+          src: '/images/integrations/tableau/tripartite/slide-3/slack-1.png',
+          width: '50%',
+          translateX: '-translate-x-[10%]',
+          translateY: 'translate-y-[50%]',
+          zIndex: 10,
+          bottom: '0',
+          left: '0',
+        },
+        {
+          src: '/images/integrations/tableau/tripartite/slide-3/slack-2.png',
+          width: '40%',
+          translateX: 'translate-x-[50%]',
+          translateY: '-translate-y-[10%]',
+          zIndex: 20,
+          top: '0',
+          right: '0',
+        },
+      ],
+      bgColor: 'bg-white'
+    }
+  };
+
   return (
     <>
       <SEO 
@@ -128,7 +237,7 @@ export default function SnowflakeMcpIntegration() {
         <HeroSection 
           headline="Powerful AI Research Within Your Snowflake Environment"
           description="TextQL's MCP integration connects intelligent analysis with your Snowflake data warehouse, enabling our AI agents to work directly with all of your datasets."
-          videoUrl="/videos/snowflake-mcp.mp4"
+          videoUrl="/images/integrations/snowflake/snowflake-visual.m4v"
         />
       </section>
       <Testimonial
@@ -141,15 +250,22 @@ export default function SnowflakeMcpIntegration() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 items-center">
             <div className="lg:col-span-2 relative -translate-x-[10%]">
-              <StaggeredScreenshots screenshots={screenshots} />
+              <video 
+                className="w-full rounded-lg"
+                autoPlay 
+                loop 
+                muted 
+                playsInline
+                src="/videos/snowflake-mcp.mp4"
+              />
             </div>
-            <div className="lg:col-span-1 space-y-6">
-              <h2 className="text-5xl font-extralight text-[#B8D8D0] z-20 tracking-tight leading-tight">
-                Read. Logic. Write.
+            <div className="lg:col-span-1 space-y-6 relative z-50 p-6 rounded-lg">
+              <h2 className="text-4xl font-extralight text-[#B8D8D0] tracking-tight leading-tight">
+                Massive scale. Advanced reasoning.
               </h2>
               <div className="space-y-6">
                 <Text className="text-xl text-[#729E8C]/60 font-light leading-relaxed">
-                  TextQL's AI agents can read from all your Snowflake data sources and warehouses.
+                TextQL's agents can perform hundreds of joins, and ingest thousands of tables.
                 </Text>
                 <Text className="text-xl text-[#729E8C]/70 font-light leading-relaxed">
                   After performing complex analysis—executing both SQL and Python code—, agents output natural language insight reports, and can update your Snowflake data pipelines.
@@ -182,7 +298,12 @@ export default function SnowflakeMcpIntegration() {
         ]}
       />
 
-      <CommunicateFindings />
+<TabsDisplay
+      title="Find Deep Value Hidden in Your Snowflake Data"
+      tabs={tabContent}
+      defaultActiveTab="Connect Your Warehouse"
+     />
+
 
       <FaqSection 
         name="Snowflake MCP"

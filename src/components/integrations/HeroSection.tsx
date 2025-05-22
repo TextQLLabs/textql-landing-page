@@ -17,7 +17,7 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
   };
   
   return (
-    <section className="mt-20 pt-24 relative">
+    <section className="mt-20 pt-24 z-0 relative">
       {/* Background funnel flow - positioned behind everything */}
       {/* <div className="absolute inset-0 -z-1 opacity-60 scale-125 translate-y-[15%]">
         <FunnelFlow />

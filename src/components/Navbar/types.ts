@@ -43,10 +43,10 @@ export const navigation: NavItem[] = [
         label: 'Tableau MCP',
         href: '/integrations/tableau-mcp'
       },
-      // {
-      //   label: 'Snowflake MCP',
-      //   href: '/integrations/snowflake-mcp'
-      // }
+      {
+        label: 'Snowflake MCP',
+        href: '/integrations/snowflake-mcp'
+      }
       ]
     }, 
   {
@@ -72,12 +72,7 @@ export const navigation: NavItem[] = [
       {
         label: 'Careers',
         href: '/careers'
-      }
-    ]
-  },
-  {
-    label: 'About',
-    children: [
+      },
       {
         label: 'Mission',
         href: '/about'
@@ -87,5 +82,5 @@ export const navigation: NavItem[] = [
         href: '/team'
       }
     ]
-  }
+  },
 ];
