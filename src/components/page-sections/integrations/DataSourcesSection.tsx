@@ -1,4 +1,5 @@
 import { ExternalLink } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 // Import custom logos directly
 import tableauLogo from '/images/logos/custom/Tableau-Logo.png';
@@ -10,10 +11,11 @@ interface ConnectorCardProps {
   description: string;
   icon: string;
   learnMoreLink?: string;
+  internalLink?: string;
   zoomFactor?: number;
 }
 
-function ConnectorCard({ description, icon, learnMoreLink, zoomFactor = 1 }: ConnectorCardProps) {
+function ConnectorCard({ description, icon, learnMoreLink, internalLink, zoomFactor = 1 }: ConnectorCardProps) {
   return (
     <div className="bg-white border border-[#2A3B35]/20 hover:shadow-lg transition-all h-full flex flex-col">
       {/* Logo Container with Better Proportions */}
@@ -34,19 +36,28 @@ function ConnectorCard({ description, icon, learnMoreLink, zoomFactor = 1 }: Con
           {description}
         </p>
         
+        <div className="mt-auto pt-2 flex gap-4">
+          {internalLink && (
+            <Link 
+              to={internalLink}
+              className="inline-flex items-center text-[#2A3B35] hover:text-blue-600 transition-colors text-sm group"
+            >
+              <span className="mr-2 group-hover:underline">Learn more</span>
+            </Link>
+          )}
+        
         {learnMoreLink && (
-          <div className="mt-auto pt-2">
             <a 
               href={learnMoreLink}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center text-[#2A3B35] hover:text-blue-600 transition-colors text-sm group"
             >
-              <span className="mr-2 group-hover:underline">Learn more</span>
+              <span className="mr-2 group-hover:underline">Documentation</span>
               <ExternalLink size={14} className="group-hover:text-blue-600" />
             </a>
+          )}
           </div>
-        )}
       </div>
     </div>
   );
@@ -57,6 +68,7 @@ const supportedConnectors = [
     description: 'Ask questions directly to your Tableau dashboards and unlock insights from both visualizations and raw data.',
     icon: tableauLogo,
     learnMoreLink: 'https://docs.textql.com/core/datasources/business-intel/tableau-connector',
+    internalLink: '/integrations/tableau-mcp',
     zoomFactor: 1.2
   },
   {
@@ -67,7 +79,8 @@ const supportedConnectors = [
   {
     description: 'Elastic scaling and secure data sharing with Snowflake. From raw data to insights in seconds.',
     icon: snowflakeLogo,
-    learnMoreLink: 'https://docs.textql.com/core/datasources/databases/snowflake'
+    learnMoreLink: 'https://docs.textql.com/core/datasources/databases/snowflake',
+    internalLink: '/integrations/snowflake-mcp'
   },
   {
     description: 'Explore petabyte-scale BigQuery datasets effortlessly. Intelligence at scale. Powered by Ana.',
@@ -88,6 +101,7 @@ export function DataSourcesSection() {
               description={connector.description}
               icon={connector.icon}
               learnMoreLink={connector.learnMoreLink}
+              internalLink={connector.internalLink}
               zoomFactor={connector.zoomFactor}
             />
           ))}

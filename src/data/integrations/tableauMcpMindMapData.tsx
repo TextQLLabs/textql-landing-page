@@ -2,17 +2,17 @@ import { MindMapData } from '../../types/mindMap';
 
 export const tableauMcpMindMapData: MindMapData = {
   nodes: [
-    { id: 'central', label: 'tableau-mcp', type: 'central', x: 500, y: 300 },
+    { id: 'central', label: 'snowflake-mcp', type: 'central', x: 500, y: 300 },
     
     // Agent Nodes (Left Side)
-    { id: 'weekly-update', label: 'Churn Prediction Agent', type: 'secondary', x: 200, y: 150 },
-    { id: 'data-science', label: 'Customer News Update Agent', type: 'secondary', x: 200, y: 300 },
-    { id: 'claude', label: 'Margin Alert Agent', type: 'secondary', x: 200, y: 450 },
+    { id: 'weekly-update', label: 'Transaction Anomaly Agent', type: 'secondary', x: 200, y: 150 },
+    { id: 'data-science', label: 'Customer Behavior Insights Agent', type: 'secondary', x: 200, y: 300 },
+    { id: 'claude', label: 'Stockout Prevention Agent', type: 'secondary', x: 200, y: 450 },
     
-    // Tableau Dashboards (Right Side)
-    { id: 'dashboard1', label: 'Sales Analytics', type: 'primary', x: 800, y: 150 },
-    { id: 'dashboard2', label: 'Customer Insights', type: 'primary', x: 800, y: 300 },
-    { id: 'dashboard3', label: 'Operations KPIs', type: 'primary', x: 800, y: 450 },
+    // Snowflake Schemas (Right Side)
+    { id: 'dashboard1', label: 'ANALYTICS.SALES.TRANSACTIONS', type: 'primary', x: 800, y: 150 },
+    { id: 'dashboard2', label: 'RAW_DATA.WEB_EVENTS', type: 'primary', x: 800, y: 300 },
+    { id: 'dashboard3', label: 'RETAIL.INVENTORY.STOCK_LEVELS', type: 'primary', x: 800, y: 450 },
   ],
   connections: [
     { source: 'central', target: 'weekly-update' },

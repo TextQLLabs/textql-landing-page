@@ -120,7 +120,6 @@ The Ontology Layer is a labeled property graph that codifies:
 <!-- ![TextQL Ontology Visualization](/images/ontology/Conglomerate%20Ontology.png) -->
 
 
-
 ### What Users Experience
 
 * **Ask in Plain English, Get Answers—Not SQL**

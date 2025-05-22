@@ -8,7 +8,7 @@ export function OntologySection() {
       </Text>
       <div className="relative w-full h-[400px] overflow-hidden rounded-lg border border-[#2A3B35]/10">
         <img 
-          src="/images/ontology/diagram.png"
+          src="https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/72fc7d25-5a18-497b-2bac-087c51cabf00/public"
           alt="TextQL Ontology Visualization"
           className="w-full h-full object-contain"
         />

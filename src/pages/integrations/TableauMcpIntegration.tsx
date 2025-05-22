@@ -1,8 +1,31 @@
 import React from 'react';
 import { SEO } from '../../components/SEO';
-import IntegrationPageTemplate from '../../components/templates/IntegrationPageTemplate';
+import StaggeredScreenshots from '../../components/StaggeredScreenshots';
+import { Text } from '../../components/ui';
+import { Testimonial } from '../../components/Testimonial';
+import CommunicateFindings from '../../components/CommunicateFindings';
+import HeroSection from '../../components/integrations/HeroSection';
+import FaqSection from '../../components/integrations/FaqSection';
+import { CTA } from '../../components/sections';
+import { FeatureSection } from '../../components/FeatureSection';
+import { Plug, RefreshCw, Cpu } from 'lucide-react';
 
 export default function TableauMcpIntegration() {
+  const screenshots = [
+    {
+      src: "/images/integrations/tableau/1-large.png",
+      alt: "Tableau Dashboard Analytics"
+    },
+    {
+      src: "/images/integrations/tableau/2-small.png",
+      alt: "Data Visualization Interface"
+    },
+    {
+      src: "/images/integrations/tableau/3-small.png",
+      alt: "Business Intelligence Overview"
+    }
+  ];
+
   const faqItems = [
     {
       question: "How do TextQL's AI agents interact with Tableau through MCP?",
@@ -95,17 +118,91 @@ export default function TableauMcpIntegration() {
   ];
 
   return (
-    <IntegrationPageTemplate
-      name="Tableau MCP"
-      headline="Seamless AI Research Within Your Tableau Environment"
-      description="TextQL's MCP integration bridges the gap between visualization and intelligent analysis, enabling our AI agents to work directly with your Tableau datasets."
-      faqItems={faqItems}
-      videoUrl="/videos/tableau-mcp.mp4"
-      ctaProps={{
-        heading: "Ready to learn more?",
-        subheader: "Contact us",
-        buttonText: "Get a demo"
-      }}
-    />
+        <>
+        <SEO 
+          title="Tableau MCP Integration | TextQL"
+          description="Integrate Tableau MCP with TextQL. TextQL's MCP integration bridges the gap between visualization and intelligent analysis, enabling our AI agents to work directly with your Tableau datasets."
+          canonical="https://textql.com/integrations/tableau-mcp/"
+          ogImage="https://textql.com/social-preview.png"
+        />
+        <section> <HeroSection 
+          headline="Seamless AI Research Within Your Tableau Environment"
+          description="TextQL's MCP integration bridges the gap between visualization and intelligent analysis, enabling our AI agents to work directly with your Tableau datasets."
+          videoUrl="/videos/tableau-mcp-copy.mp4"
+        />
+      </section>
+      <Testimonial
+          quote="This is the best Tableau AI on the market—by a massive margin."
+          author="F100 CIO"
+        />
+
+        
+    
+      <section className="bg-transparent">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 items-center">
+            <div className="lg:col-span-2 relative -translate-x-[10%]">
+              <StaggeredScreenshots screenshots={screenshots} />
+            </div>
+            <div className="lg:col-span-1 space-y-6">
+              <h2 className="text-5xl font-extralight text-[#B8D8D0] tracking-tight leading-tight">
+                Read. Logic. Write.
+              </h2>
+              <div className="space-y-6">
+                <Text className="text-xl text-[#729E8C]/60 font-light leading-relaxed">
+                  TextQL's AI agents can read from all your Tableau data sources and dashboards.
+                </Text>
+                <Text className="text-xl text-[#729E8C]/70 font-light leading-relaxed">
+                After performing complex analysis—executing both SQL and Python code—, agents output natural language insight reports, and can update Tableau dashboards.
+                </Text>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>   
+      
+
+      <FeatureSection
+        title="The World's First Tableau MCP Server"
+        subtitle="It's never been easier for AI to understand your Tableaus."
+        features={[
+          {
+            icon: Plug,
+            title: "Effortless connection",
+            description: "Connect Ana to your Tableau environment in minutes—no code required. ."
+          },
+          {
+            icon: RefreshCw,
+            title: "Always up-to-date",
+            description: "The underlying data sources and visualizations are always up-to-date, so Ana can always provide the most accurate and relevant insights."
+          },
+          {
+            icon: Cpu,
+            title: "AI-Native",
+            description: "Ana can interface directly with the Tableau servers using the Model Context Protocol, ensuring a seamless experience."
+          }
+        ]}
+      />
+
+      <CommunicateFindings />
+
+     
+
+<FaqSection 
+          name="Tableau MCP"
+          faqItems={faqItems}
+        />
+        
+        <CTA 
+          theme="dark"
+          showWave={false}
+          variant="wide"
+          heading="Ready to learn more?"
+          subheader="Contact us"
+          useSimpleButton={true}
+          buttonText="Get a demo"
+        />
+    </>
+    
   );
 }

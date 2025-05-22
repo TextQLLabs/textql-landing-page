@@ -12,7 +12,7 @@ const getNodeIcon = (id: string) => {
     return <img src="https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/eb7781db-f2ba-4dfa-0593-56bbceeee500/public" alt="MCP Server" className="w-6 h-6 brightness-[10] contrast-[0.1] opacity-100" />;
   }
   if (id.includes('dashboard')) {
-    return <img src="https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/d9d651f9-1300-4b40-d2a7-4e1e681c9f00/public" alt="Tableau" className="w-5 h-5" />;
+    return <img src="https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/dc29777c-76a1-4424-8322-b84a4fa24200/public" alt="Tableau" className="w-5 h-5" />;
   }
   return <img src="https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/82cd07cf-998c-4f79-2308-d42a533f3400/public" alt="TextQL" className="w-5 h-5" />;
 };

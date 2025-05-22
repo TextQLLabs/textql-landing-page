@@ -42,7 +42,11 @@ export const navigation: NavItem[] = [
       {
         label: 'Tableau MCP',
         href: '/integrations/tableau-mcp'
-      }
+      },
+      // {
+      //   label: 'Snowflake MCP',
+      //   href: '/integrations/snowflake-mcp'
+      // }
       ]
     }, 
   {

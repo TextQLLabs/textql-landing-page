@@ -51,6 +51,20 @@ interface IntegrationPageProps {
     useSimpleButton?: boolean;
     buttonText?: string;
   };
+
+  /**
+   * Optional mind map data to display a visual relationship diagram
+   */
+  mindMapData?: {
+    nodes: Array<{
+      id: string;
+      label: string;
+    }>;
+    links: Array<{
+      source: string;
+      target: string;
+    }>;
+  };
 }
 
 /**
@@ -64,7 +78,8 @@ const IntegrationPageTemplate: React.FC<IntegrationPageProps> = ({
   visualContent,
   additionalContent,
   videoUrl,
-  ctaProps
+  ctaProps,
+  mindMapData
 }) => {
   // Create SEO-friendly slug from name
   const slug = name.toLowerCase().replace(/\s+/g, '-');
@@ -100,20 +115,20 @@ const IntegrationPageTemplate: React.FC<IntegrationPageProps> = ({
             </div>
             
             {/* Right Column - Video */}
-            <div className="rounded-lg overflow-hidden">
+            <div className="rounded-lg overflow-hidden h-[400px] w-full">
               {videoUrl ? (
                 <video 
                   autoPlay 
                   loop 
                   muted 
                   playsInline
-                  className="w-full h-full object-cover rounded-lg"
+                  className="w-full h-full object-contain rounded-lg bg-[#0A1F1C]/30"
                 >
                   <source src={videoUrl} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               ) : (
-                <div className="bg-[#0A1F1C]/30 rounded-lg p-8 h-64 flex items-center justify-center">
+                <div className="bg-[#0A1F1C]/30 rounded-lg p-8 h-full flex items-center justify-center">
                   <p className="text-[#729E8C] font-light italic">Video placeholder</p>
                 </div>
               )}
@@ -167,6 +182,41 @@ const IntegrationPageTemplate: React.FC<IntegrationPageProps> = ({
           </div>
         </div>
       </section>
+      
+      {/* Mind Map Section */}
+      {mindMapData && (
+        <section className="py-16 mt-8">
+          <div className="mx-auto max-w-site px-6">
+            <h2 className="text-3xl font-extralight text-[#B8D8D0] mb-12">{name} Integration Mind Map</h2>
+            
+            <div className="bg-[#0A1F1C]/30 p-8 rounded-lg">
+              <div className="mind-map-container h-[600px] relative">
+                {/* This is a placeholder for an actual mind map visualization */}
+                {/* In a real implementation, you would use a visualization library like D3.js */}
+                <div className="text-center text-[#729E8C] font-light p-4">
+                  <p className="mb-4">Mind Map Visualization</p>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {mindMapData.nodes
+                      .filter(node => node.id !== "root" && !node.id.includes("-"))
+                      .map((node) => (
+                        <div key={node.id} className="border border-[#0A1F1C] p-4 rounded-lg">
+                          <h3 className="text-xl text-[#B8D8D0] mb-4">{node.label}</h3>
+                          <ul className="list-disc pl-6 space-y-2 text-left">
+                            {mindMapData.nodes
+                              .filter(childNode => childNode.id.startsWith(`${node.id}-`))
+                              .map(childNode => (
+                                <li key={childNode.id}>{childNode.label}</li>
+                              ))}
+                          </ul>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
       
       {/* CTA Section */}
       <CTA 
