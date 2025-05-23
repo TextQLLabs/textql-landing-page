@@ -1,7 +1,5 @@
 # Beyond Guesswork: How Different AI Models Handle Fermi Estimation
 
-TextQL recently rolled out **Deep Research**, a new capability of our agent Ana that supports estimation and forecasting workflows. As part of that launch, we ran a comprehensive experiment to improve how Ana tackles *Fermi-style* questions: quantitative estimation problems that require reasoning from limited information.
-
 
 ## What Are Fermi Problems?
 
