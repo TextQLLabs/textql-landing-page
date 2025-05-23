@@ -15,10 +15,12 @@ import { post as embeddingModels } from './embedding-models';
 import { post as whyOntology } from './why-ontology';
 import { post as sqlProcess } from './sql-process';
 import { post as anaSmall } from './ana-small';
+import { post as fermiEstimation } from './fermi-estimation';
 
 // Export all blog posts
 // most recent at top
 export const blogPosts: BlogPost[] = [
+  fermiEstimation,
   twitterBenchmark,
   anaSmall,
   sqlProcess,
@@ -39,6 +41,8 @@ export const blogPosts: BlogPost[] = [
 export function getPostContent(id: string): string {
   try {
     switch (id) {
+      case 'fermi-estimation':
+        return getFermiEstimationContent();
       case 'vision-benchmark':
         return getTwitterBenchmarkContent();
       case 'ana-small':
@@ -74,6 +78,14 @@ export function getPostContent(id: string): string {
     console.error('Failed to load content for post ' + id + ':', error);
     return '';
   }
+}
+
+export function getFermiEstimationContent(): string {
+  return import.meta.glob('./fermi-estimation/content.md', {
+    query: '?raw',
+    import: 'default',
+    eager: true,
+  })['./fermi-estimation/content.md'] as string;
 }
 
 export function getTwitterBenchmarkContent(): string {
