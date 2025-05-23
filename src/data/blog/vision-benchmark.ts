@@ -14,5 +14,5 @@ export const post: BlogPost = {
   },
   date: 'May 13, 2025',
   readTime: '3 min read',
-  category: 'technical',
+  category: 'research',
 };
