@@ -55,7 +55,7 @@ export function DataMovementSection() {
               {journeySteps.map((step, index) => (
                 <div key={step.title} className="flex flex-col items-center">
                   <div
-                    className={`w-16 h-16 rounded-full flex items-center justify-center cursor-pointer z-10 transition-all duration-300
+                    className={`w-16 h-16 flex items-center justify-center cursor-pointer z-10 transition-all duration-300
                       ${index === activeStep ? 'bg-[#2A3B35]' : 'bg-[#F0F5F3]'}`}
                     onMouseEnter={() => setActiveStep(index)}
                   >
@@ -85,7 +85,7 @@ export function DataMovementSection() {
               transition={{ duration: 0.3 }}
               className="max-w-4xl mx-auto"
             >
-              <div className="aspect-[16/9] rounded-lg overflow-hidden border border-[#2A3B35]/20 shadow-lg mb-6">
+              <div className="aspect-[16/9] overflow-hidden border border-[#2A3B35]/20 shadow-lg mb-6">
                 <img
                   src={journeySteps[activeStep].image}
                   alt={journeySteps[activeStep].title}

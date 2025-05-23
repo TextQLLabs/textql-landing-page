@@ -21,9 +21,9 @@ function FeatureCard({ icon: Icon, title, description }: Feature) {
         <Icon size={24} />
       </div>
       <h3 className="text-xl font-extralight text-[#B8D8D0]">{title}</h3>
-      <Text color="muted" className="font-light leading-relaxed">
+      <p className="text-[#729E8C] font-light leading-relaxed">
         {description}
-      </Text>
+      </p>
     </div>
   );
 }
@@ -36,9 +36,9 @@ export function FeatureSection({ title, subtitle, features, className = '' }: Fe
           <h2 className="text-5xl font-extralight text-[#B8D8D0] tracking-tight leading-tight mb-6">
             {title}
           </h2>
-          <Text color="muted" className="text-xl font-light leading-relaxed max-w-3xl mx-auto">
+          <p className="text-xl text-[#729E8C] font-light leading-relaxed max-w-3xl mx-auto">
             {subtitle}
-          </Text>
+          </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

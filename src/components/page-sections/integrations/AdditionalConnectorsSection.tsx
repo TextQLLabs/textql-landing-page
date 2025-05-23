@@ -71,7 +71,7 @@ function ConnectorLogo({ name, logo, url }: ConnectorLogoProps) {
       href={url} 
       target="_blank" 
       rel="noopener noreferrer" 
-      className="block bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-all border border-[#2A3B35]/10 h-24 flex items-center justify-center group cursor-pointer"
+      className="block bg-white p-4 shadow-sm hover:shadow-md transition-all border border-[#2A3B35]/10 h-24 flex items-center justify-center group cursor-pointer"
       aria-label={`Visit ${name} website`}
     >
       <img 

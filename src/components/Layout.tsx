@@ -20,7 +20,9 @@ export default function Layout() {
     <>
       <BannerCarousel items={bannerItems} />
       <Navbar />
-      <Outlet />
+      <div className="mt-12">
+        <Outlet />
+      </div>
       <Footer />
     </>
   );

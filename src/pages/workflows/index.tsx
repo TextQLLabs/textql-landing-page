@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Industry, industries } from '../../data/industries';
 import { WorkflowLibraryHeader, WorkflowGrid } from '../../components/page-sections/workflow-library';
 import { CTA } from '../../components/sections';
@@ -7,7 +8,31 @@ import { workflows } from '../../data/workflows';
 import { SEO } from '../../components/SEO';
 
 export default function WorkflowLibrary() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [selectedIndustry, setSelectedIndustry] = useState<string | null>(null);
+
+  // Initialize selectedIndustry from URL parameter
+  useEffect(() => {
+    const industry = searchParams.get('industry');
+    if (industry) {
+      setSelectedIndustry(industry);
+    }
+  }, [searchParams]);
+
+  // Update URL when selectedIndustry changes
+  const handleIndustryChange = (industryId: string | null) => {
+    const newSelectedIndustry = selectedIndustry === industryId ? null : industryId;
+    setSelectedIndustry(newSelectedIndustry);
+    
+    // Update URL
+    if (newSelectedIndustry) {
+      searchParams.set('industry', newSelectedIndustry);
+    } else {
+      searchParams.delete('industry');
+    }
+    setSearchParams(searchParams);
+  };
 
   // Calculate matches for each industry
   const industryMatches = useMemo(() => {
@@ -41,7 +66,7 @@ export default function WorkflowLibrary() {
           <div className="max-w-7xl mx-auto px-6 py-6">
             <div className="flex flex-wrap justify-center gap-2">
               <button
-                onClick={() => setSelectedIndustry(null)}
+                onClick={() => handleIndustryChange(null)}
                 className={`
                   px-4 py-2 rounded-full whitespace-nowrap transition-all
                   ${!selectedIndustry
@@ -55,9 +80,7 @@ export default function WorkflowLibrary() {
               {activeIndustries.map((industry) => (
                 <button
                   key={industry.id}
-                  onClick={() => setSelectedIndustry(
-                    selectedIndustry === industry.id ? null : industry.id
-                  )}
+                  onClick={() => handleIndustryChange(industry.id)}
                   className={`
                     px-4 py-2 rounded-full whitespace-nowrap transition-all flex items-center gap-2
                     ${selectedIndustry === industry.id

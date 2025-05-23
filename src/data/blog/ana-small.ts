@@ -2,7 +2,7 @@ import type { BlogPost } from '../../components/page-sections/blog/types';
 
 export const post: BlogPost = {
   id: 'ana-small',
-  title: 'Open Sourcing State of the Art Text-to-SQL',
+  title: 'Open-Sourcing State of the Art Text-to-SQL',
   description: 'Introducing Ana Small',
   image: '/images/blog/building-data-agent/header.png',
   useLocalImage: true,

@@ -74,7 +74,7 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
       </div>
 
       {/* Main Content - Centered with flex */}
-      <div className="relative z-10 flex-grow mx-auto max-w-7xl px-6 pt-32 pb-20 flex flex-col justify-center">
+      <div className="relative z-10 flex-grow mx-auto max-w-7xl px-6 pb-20 flex flex-col justify-center">
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-[1fr,600px]">
           {/* Left Content */}
           <div>

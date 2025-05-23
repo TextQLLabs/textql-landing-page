@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowRight, MapPin } from 'lucide-react';
 import { Button, Text } from '../components/ui';
 import { WaveBackground } from '../components/animations';
@@ -23,6 +23,81 @@ function RegistrationForm() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<{type: 'success' | 'error', text: string} | null>(null);
+
+  // Track page visits
+  useEffect(() => {
+    const trackPageVisit = async () => {
+      try {
+        const visitData = {
+          timestamp: new Date().toISOString(),
+          page: 'Snowflake 2025 Landing Page',
+          url: window.location.href,
+          userAgent: navigator.userAgent,
+          referrer: document.referrer || 'Direct visit',
+          sessionId: Math.random().toString(36).substring(7)
+        };
+
+        const messageText = `🏂 NEW PAGE VISIT: Snowflake 2025 Landing Page`;
+        
+        const payload = {
+          "text": messageText,
+          "blocks": [
+            {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": messageText
+              }
+            },
+            {
+              "type": "section",
+              "fields": [
+                {
+                  "type": "mrkdwn",
+                  "text": `*Page:* ${visitData.page}`
+                },
+                {
+                  "type": "mrkdwn",
+                  "text": `*URL:* ${visitData.url}`
+                },
+                {
+                  "type": "mrkdwn",
+                  "text": `*Timestamp:* ${new Date(visitData.timestamp).toLocaleString()}`
+                },
+                {
+                  "type": "mrkdwn",
+                  "text": `*Referrer:* ${visitData.referrer}`
+                },
+                {
+                  "type": "mrkdwn",
+                  "text": `*Session ID:* ${visitData.sessionId}`
+                }
+              ]
+            }
+          ],
+          "page-visit": true,
+          "page-name": "snowflake-2025",
+          "timestamp": visitData.timestamp,
+          "url": visitData.url,
+          "referrer": visitData.referrer,
+          "user-agent": visitData.userAgent
+        };
+
+        await fetch(DEMO_CONFIG.WEBHOOK_URLS.SLACK.PAGE_VISITS, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+      } catch (error) {
+        console.error('Error tracking page visit:', error);
+      }
+    };
+
+    trackPageVisit();
+  }, []); // Empty dependency array means this runs once when component mounts
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -147,15 +222,14 @@ function RegistrationForm() {
 style={{ filter: 'brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(654%) hue-rotate(114deg) brightness(93%) contrast(92%)' }}
               />
               </div>
-              <h1 className="text-2xl md:text-5xl lg:text-5xl font-extralight leading-tight text-[#B8D8D0] mb-6">
-                Deep Research Workshop at Snowflake Summit
+              <h1 className="text-xl md:text-5xl lg:text-5xl font-extralight leading-tight text-[#B8D8D0] mb-6">
+              Deep Research Agents that Actually Connect to Your Snowflake Data
               </h1>
-              <p className="text-lg text-[#729E8C] font-light mb-4 max-w-2xl">
-                OpenAI and Anthropic have released new models that can complete 2 months of management consulting work in 20 minutes. Join us to learn how to deploy these capabilities in your business using our Snowflake-integrated platform.
+              <p className="text-m text-[#729E8C] font-light mb-4 max-w-2xl">
+              You've got millions of rows in Snowflake and you've tried AI research tools. But you're still waiting weeks for insights that should take hours. The problem isn't AI capability—it's that most tools can't actually work with YOUR data architecture.
               </p>
-              <p className="text-lg text-[#729E8C] font-light mb-6 max-w-2xl">
-                Book a custom deep dive with our leadership team on how deep research agents should be integrated into your AI strategy
-              </p>
+              <p className="text-m text-[#729E8C] font-light mb-6 max-w-2xl">
+              This isn't another AI demo. We'll analyze <i>your</i> Snowflake instance live and tell you within 10 minutes if our approach won't work for your setup. Most vendors won't do that.              </p>
               <div className="flex items-center text-[#729E8C] font-light mb-8">
                 <MapPin className="h-5 w-5 mr-2 text-[#b4ded3]" />
                 <span>Palace Hotel, 2 New Montgomery St, San Francisco, CA 94105</span>

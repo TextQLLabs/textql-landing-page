@@ -95,7 +95,7 @@ export default function BannerCarousel({
   
   return (
     <div 
-      className={`fixed top-2 left-0 right-0 z-50 w-full overflow-hidden ${backgroundColor} border-t border-b border-[#B8D8D0]/20 transition-opacity duration-300 ease-in-out ${isReady ? 'opacity-100' : 'opacity-0'}`}
+      className={`fixed top-3 left-0 right-0 z-50 w-full overflow-hidden ${backgroundColor} border-t border-b border-[#B8D8D0]/20 transition-opacity duration-300 ease-in-out ${isReady ? 'opacity-100' : 'opacity-0'}`}
     >
       <div className="relative w-full">
         <div 

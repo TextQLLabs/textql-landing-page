@@ -23,6 +23,7 @@ import WorkflowLibrary from './pages/workflows';
 import WorkflowTemplate from './pages/workflows/[id]';
 import Demo from './pages/Demo';
 import Integrations from './pages/Integrations';
+import AllIntegrations from './pages/AllIntegrations';
 import IntegrationsRoutes from './pages/integrations/IntegrationsRoutes';
 import Whitepaper from './pages/Whitepaper';
 import Careers from './pages/Careers';
@@ -77,6 +78,7 @@ function App() {
           <Route path="/careers" element={<Careers />} />
           <Route path="/careers/:jobId" element={<JobPostingPage />} />
           <Route path="/integrations" element={<Integrations />} />
+          <Route path="/all-integrations" element={<AllIntegrations />} />
           <Route path="/integrations/*" element={<IntegrationsRoutes />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />

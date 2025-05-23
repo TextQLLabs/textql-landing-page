@@ -258,16 +258,16 @@ export default function TableauMcpIntegration() {
                 Designed For Enterprise Scales.
               </h2>
               <div className="space-y-6">
-                <Text className="text-xl text-[#729E8C]/60 font-light leading-relaxed">
+                <p className="text-xl text-[#729E8C] font-light leading-relaxed">
                   TextQL's AI agents can read from all your Tableau data sources and dashboards.
-                </Text>
-                <Text className="text-xl text-[#729E8C]/70 font-light leading-relaxed">
-                After performing complex analysis—executing both SQL and Python code—, agents output natural language insight reports, and can update Tableau dashboards.
-                </Text>
+                </p>
+                <p className="text-xl text-[#729E8C] font-light leading-relaxed">
+                After performing complex analysis—executing both SQL and Python code—agents output natural language insight reports, and can update Tableau dashboards.
+                </p>
+              </div>
               </div>
             </div>
           </div>
-        </div>
       </section>   
       
 

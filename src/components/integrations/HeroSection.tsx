@@ -17,7 +17,7 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
   };
   
   return (
-    <section className="mt-20 pt-24 z-0 relative">
+    <section className="pt-24 z-0 relative">
       {/* Background funnel flow - positioned behind everything */}
       {/* <div className="absolute inset-0 -z-1 opacity-60 scale-125 translate-y-[15%]">
         <FunnelFlow />
@@ -31,7 +31,7 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
           {/* Left Column - Hero Content */}
           <div className="text-left">
             <h1 className="text-5xl md:text-6xl font-extralight text-[#B8D8D0] mb-6">{headline}</h1>
-            <p className="text-[#729E8C]/70 font-light text-lg mb-6">{description}</p>
+            <p className="text-[#729E8C] font-light text-lg mb-6">{description}</p>
             {/* <button 
               className="bg-[#0A1F1C] hover:bg-[#0A1F1C]/80 text-[#B8D8D0] font-light py-3 mt-2 px-6 rounded-md transition-colors duration-200"
               onClick={handleDemoClick}

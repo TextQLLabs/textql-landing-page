@@ -29,7 +29,7 @@ export function EnterpriseHero() {
 
           {/* Right Content - Cloud Providers */}
           <div className="space-y-8">
-            <Text variant="header" className="text-4xl font-extralight text-[#B8D8D0] mb-8">
+            <Text variant="header" className="mt-20 text-4xl font-extralight text-[#B8D8D0] mb-8">
               Deployed Into Your Cloud
             </Text>
             

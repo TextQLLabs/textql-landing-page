@@ -268,7 +268,7 @@ export default function SnowflakeMcpIntegration() {
                 TextQL's agents can perform hundreds of joins, and ingest thousands of tables.
                 </Text>
                 <Text className="text-xl text-[#729E8C]/70 font-light leading-relaxed">
-                  After performing complex analysis—executing both SQL and Python code—, agents output natural language insight reports, and can update your Snowflake data pipelines.
+                  After performing complex analysis—executing both SQL and Python code—agents output natural language insight reports, and can update your Snowflake data pipelines.
                 </Text>
               </div>
             </div>

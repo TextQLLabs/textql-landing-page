@@ -20,7 +20,7 @@ export function PricingHeader() {
       </div>
       
       {/* Content */}
-      <div className="relative z-10 flex items-center min-h-[600px]">
+      <div className="relative z-10 flex items-center min-h-[600px] mt-12">
         <div className="mx-auto max-w-4xl px-6 text-center">
           {/* Tech-inspired decorative element */}
           <div className="mb-8 pt-10 flex justify-center">

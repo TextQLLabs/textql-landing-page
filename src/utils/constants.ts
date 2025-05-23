@@ -7,7 +7,8 @@ export const DEMO_CONFIG = {
     SLACK: {
       SIMPLE: 'https://hooks.slack.com/triggers/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',
       EMAIL: 'https://hooks.slack.com/triggers/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',
-      SNOWFLAKE2025: 'https://hooks.slack.com/triggers/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'
+      SNOWFLAKE2025: 'https://hooks.slack.com/triggers/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',
+      PAGE_VISITS: 'https://hooks.slack.com/triggers/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'
     }
   },
   

@@ -10,6 +10,7 @@ import { handleSimpleDemoRequest } from '../../utils/demo-requests/simple';
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const isDevelopment = import.meta.env.DEV;
   const location = useLocation();
   const navigate = useNavigate();
@@ -20,8 +21,22 @@ export default function Navbar() {
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    // Add entrance animation on mount
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timer);
+    };
   }, []);
+
+  // Close dropdown when route changes
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
 
   const onDemoRequest = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -29,14 +44,14 @@ export default function Navbar() {
   };
 
   return (
-    <div className="fixed top-[30px] left-0 right-0 z-40 px-4 md:px-6 py-4 md:py-6 mt-2">
-      <nav className={`mx-auto max-w-7xl py-2 transition-all duration-300 ring-1 ring-[#B8D8D0]/20 ${
+    <div className={`fixed top-[30px] left-0 right-0 z-40 px-4 md:px-6 py-4 md:py-6 mt-2 transition-opacity duration-500 ease-in-out ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+      <nav className={`mx-auto max-w-7xl py-2 transition-all duration-500 ease-in-out ring-1 ring-[#B8D8D0]/20 ${
         isScrolled 
           ? 'bg-black/60 backdrop-blur-md shadow-lg' 
           : 'bg-black/30 backdrop-blur-sm'
       }`}>
         <div className="flex items-center justify-between px-4 md:px-6">
-          <Link to="/" className="text-white hover:text-[#B8D8D0] transition-colors">
+          <Link to="/" className="text-white hover:text-[#B8D8D0] transition-colors duration-300">
             <TextLogo className="h-6 md:h-6 w-auto" />
           </Link>
 
@@ -75,7 +90,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-[#B8D8D0] hover:text-[#729E8C] transition-colors"
+            className="md:hidden p-2 text-[#B8D8D0] hover:text-[#729E8C] transition-colors duration-300"
           >
             {isMenuOpen ? (
               <X className="w-6 h-6" />
@@ -88,7 +103,7 @@ export default function Navbar() {
         {/* Mobile Menu */}
         <div 
           className={`
-            md:hidden overflow-hidden transition-all duration-300 ease-in-out
+            md:hidden overflow-hidden transition-all duration-500 ease-in-out
             ${isMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}
           `}
         >
@@ -101,7 +116,7 @@ export default function Navbar() {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block text-[#B8D8D0] hover:text-[#729E8C] transition-colors"
+                      className="block text-[#B8D8D0] hover:text-[#729E8C] transition-colors duration-300"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.label}
@@ -109,7 +124,7 @@ export default function Navbar() {
                   ) : (
                     <Link
                       to={item.href}
-                      className="block text-[#B8D8D0] hover:text-[#729E8C] transition-colors"
+                      className="block text-[#B8D8D0] hover:text-[#729E8C] transition-colors duration-300"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.label}
@@ -127,7 +142,7 @@ export default function Navbar() {
                               href={child.href}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="block text-[#729E8C] hover:text-[#B8D8D0] transition-colors text-sm"
+                              className="block text-[#729E8C] hover:text-[#B8D8D0] transition-colors duration-300 text-sm"
                               onClick={() => setIsMenuOpen(false)}
                             >
                               {child.label}
@@ -136,7 +151,7 @@ export default function Navbar() {
                             <Link
                               key={child.href}
                               to={child.href}
-                              className="block text-[#729E8C] hover:text-[#B8D8D0] transition-colors text-sm"
+                              className="block text-[#729E8C] hover:text-[#B8D8D0] transition-colors duration-300 text-sm"
                               onClick={() => setIsMenuOpen(false)}
                             >
                               {child.label}
@@ -167,7 +182,7 @@ export default function Navbar() {
                 href="https://app.textql.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="block text-[#B8D8D0] hover:text-[#729E8C] transition-colors"
+                className="block text-[#B8D8D0] hover:text-[#729E8C] transition-colors duration-300"
               >
                 Sign In
               </a>
@@ -176,7 +191,7 @@ export default function Navbar() {
                   onDemoRequest(e);
                   setIsMenuOpen(false);
                 }}
-                className="block text-[#B8D8D0] hover:text-[#729E8C] transition-colors font-medium"
+                className="block text-[#B8D8D0] hover:text-[#729E8C] transition-colors duration-300 font-medium"
               >
                 Request a Demo →
               </button>
