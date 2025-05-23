@@ -83,14 +83,14 @@ function RegistrationForm() {
           "user-agent": visitData.userAgent
         };
 
-        await fetch(DEMO_CONFIG.WEBHOOK_URLS.SLACK.PAGE_VISITS, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(payload)
-        });
+        // await fetch(DEMO_CONFIG.WEBHOOK_URLS.SLACK.PAGE_VISITS, {
+        //   method: 'POST',
+        //   mode: 'no-cors',
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
+        //   body: JSON.stringify(payload)
+        // });
       } catch (error) {
         console.error('Error tracking page visit:', error);
       }

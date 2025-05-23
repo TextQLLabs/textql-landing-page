@@ -5,7 +5,7 @@ import { ChevronRight, Search } from 'lucide-react';
 type IntegrationType = {
   name: string;
   description: string;
-  category: 'Data Warehouse' | 'BI Tool' | 'Communication';
+  category: 'Data Warehouse' | 'Business Intelligence' | 'Semantic Layer' | 'Data Catalog' | 'Metadata' | 'Framework';
   logoSrc: string;
   href?: string;
   isComingSoon: boolean;
@@ -34,14 +34,6 @@ export function AllIntegrationsSection() {
       isComingSoon: false
     },
     {
-      name: 'Tableau',
-      description: 'Connect TextQL with your Tableau dashboards for AI-powered analysis and insights.',
-      category: 'BI Tool',
-      logoSrc: '/images/integrations/all/tableau.png',
-      href: '/integrations/tableau-mcp',
-      isComingSoon: false
-    },
-    {
       name: 'Redshift',
       description: 'Connect TextQL to Amazon Redshift for intelligent analysis of your cloud data warehouse.',
       category: 'Data Warehouse',
@@ -56,63 +48,308 @@ export function AllIntegrationsSection() {
       isComingSoon: false
     },
     {
-      name: 'Azure',
-      description: 'Connect TextQL with Azure data services for comprehensive AI-driven analytics.',
-      category: 'Data Warehouse',
-      logoSrc: '/images/integrations/all/azure.png',
-      isComingSoon: false
-    },
-    {
-      name: 'Aurora',
-      description: 'Connect TextQL with Amazon RDS for intelligent database analysis.',
-      category: 'Data Warehouse',
-      logoSrc: '/images/integrations/all/AWS RDS.svg',
-      isComingSoon: false
-    },
-    {
       name: 'Databricks',
       description: 'Leverage TextQL AI capabilities with your Databricks data platform.',
       category: 'Data Warehouse',
       logoSrc: '/images/integrations/all/databricks.png',
       isComingSoon: false
     },
+    {
+      name: 'MotherDuck',
+      description: 'Connect TextQL with MotherDuck for serverless analytics on DuckDB.',
+      category: 'Data Warehouse',
+      logoSrc: '/images/integrations/all/motherduck.png',
+      isComingSoon: false
+    },
+    {
+      name: 'SAP 2/4 Hana',
+      description: 'Integrate TextQL with SAP HANA for real-time analytics on enterprise data.',
+      category: 'Data Warehouse',
+      logoSrc: '/images/integrations/all/sap.png',
+      isComingSoon: false
+    },
+    {
+      name: 'Salesforce',
+      description: 'Analyze your Salesforce data with TextQL AI-powered insights.',
+      category: 'Data Warehouse',
+      logoSrc: '/images/integrations/all/salesforce.png',
+      isComingSoon: false
+    },
+    {
+      name: 'Azure Synapse',
+      description: 'Connect TextQL with Azure Synapse Analytics for comprehensive data analysis.',
+      category: 'Data Warehouse',
+      logoSrc: '/images/integrations/all/azure-synapse.png',
+      isComingSoon: false
+    },
+    {
+      name: 'IBM DB2',
+      description: 'Integrate TextQL with IBM DB2 for enterprise-grade data analytics.',
+      category: 'Data Warehouse',
+      logoSrc: '/images/integrations/all/ibm-db2.png',
+      isComingSoon: false
+    },
+    {
+      name: 'Firebolt',
+      description: 'Connect TextQL with Firebolt for ultra-fast analytics on big data.',
+      category: 'Data Warehouse',
+      logoSrc: '/images/integrations/all/firebolt.svg',
+      isComingSoon: false
+    },
+    {
+      name: 'Oracle',
+      description: 'Integrate TextQL with Oracle Database for powerful enterprise analytics.',
+      category: 'Data Warehouse',
+      logoSrc: '/images/integrations/all/oracle png.png',
+      isComingSoon: false
+    },
     
-    // BI Tool
+    // Business Intelligence
+    {
+      name: 'Tableau',
+      description: 'Connect TextQL with your Tableau dashboards for AI-powered analysis and insights.',
+      category: 'Business Intelligence',
+      logoSrc: '/images/integrations/all/tableau.png',
+      href: '/integrations/tableau-mcp',
+      isComingSoon: false
+    },
+    {
+      name: 'Looker',
+      description: 'Enhance your Looker analytics with TextQL AI capabilities.',
+      category: 'Business Intelligence',
+      logoSrc: '/images/integrations/all/looker.png',
+      isComingSoon: false
+    },
+    {
+      name: 'Mode',
+      description: 'Integrate TextQL with Mode Analytics for collaborative data analysis.',
+      category: 'Business Intelligence',
+      logoSrc: '/images/integrations/all/mode.png',
+      isComingSoon: false
+    },
+    {
+      name: 'Hex',
+      description: 'Connect TextQL with Hex for modern analytics and data science workflows.',
+      category: 'Business Intelligence',
+      logoSrc: '/images/integrations/all/hex.png',
+      isComingSoon: false
+    },
     {
       name: 'Superset',
       description: 'Integrate with Apache Superset to add AI analytics to your data visualization platform.',
-      category: 'BI Tool',
+      category: 'Business Intelligence',
       logoSrc: '/images/integrations/all/superset.png',
       isComingSoon: false
     },
     {
+      name: 'Sisense',
+      description: 'Enhance Sisense dashboards with TextQL AI-driven insights.',
+      category: 'Business Intelligence',
+      logoSrc: '/images/integrations/all/sisense.png',
+      isComingSoon: false
+    },
+    {
+      name: 'SAP Business One',
+      description: 'Connect TextQL with SAP Business One for comprehensive business analytics.',
+      category: 'Business Intelligence',
+      logoSrc: '/images/integrations/all/sap-business-one.png',
+      isComingSoon: false
+    },
+    {
+      name: 'Quicksight',
+      description: 'Integrate TextQL with Amazon QuickSight for cloud-native business intelligence.',
+      category: 'Business Intelligence',
+      logoSrc: '/images/integrations/all/Quicksight.png',
+      isComingSoon: false
+    },
+    {
+      name: 'Power BI',
+      description: 'Connect TextQL with Microsoft Power BI for enhanced business analytics.',
+      category: 'Business Intelligence',
+      logoSrc: '/images/integrations/all/PowerBI.png',
+      isComingSoon: false
+    },
+    {
+      name: 'IBM Cognos',
+      description: 'Integrate TextQL with IBM Cognos Analytics for enterprise reporting.',
+      category: 'Business Intelligence',
+      logoSrc: '/images/integrations/all/IBM Cognos.png',
+      isComingSoon: false
+    },
+    {
+      name: 'Sigma',
+      description: 'Connect TextQL with Sigma Computing for cloud-native analytics.',
+      category: 'Business Intelligence',
+      logoSrc: '/images/integrations/all/Sigma.png',
+      isComingSoon: false
+    },
+     {
       name: 'Metabase',
       description: 'Connect TextQL to Metabase for intelligent insights from your business data.',
-      category: 'BI Tool',
+      category: 'Business Intelligence',
       logoSrc: '/images/integrations/all/metabase.png',
       isComingSoon: false
     },
+    {
+      name: 'dbt MetricFlow',
+      description: 'Connect TextQL with dbt MetricFlow for consistent metric definitions.',
+      category: 'Semantic Layer',
+      logoSrc: '/images/integrations/all/dbt.png',
+      isComingSoon: false
+    },
     
-    // Communication
+    // Semantic Layers
     {
-      name: 'Email',
-      description: 'Receive AI-generated insights and reports directly to your inbox.',
-      category: 'Communication',
-      logoSrc: '/images/integrations/all/email.png',
+      name: 'Cube',
+      description: 'Integrate TextQL with Cube for semantic layer analytics and metrics.',
+      category: 'Semantic Layer',
+      logoSrc: '/images/integrations/all/Cube.png',
       isComingSoon: false
     },
     {
-      name: 'Slack',
-      description: 'Get TextQL insights delivered to your Slack channels for team collaboration.',
-      category: 'Communication',
-      logoSrc: '/images/integrations/all/slack.webp',
+      name: 'LookML',
+      description: 'Integrate TextQL with LookML for Looker semantic modeling.',
+      category: 'Semantic Layer',
+      logoSrc: '/images/integrations/all/lookML.png',
       isComingSoon: false
     },
     {
-      name: 'Teams',
-      description: 'Integrate TextQL with Microsoft Teams for seamless team communication of insights.',
-      category: 'Communication',
-      logoSrc: '/images/integrations/all/teams.png',
+      name: 'Lightdash',
+      description: 'Connect TextQL with Lightdash for open-source BI and semantic modeling.',
+      category: 'Semantic Layer',
+      logoSrc: '/images/integrations/all/Lightdash.png',
+      isComingSoon: false
+    },
+    
+    // Data Catalog
+    {
+      name: 'Airflow',
+      description: 'Connect TextQL with Apache Airflow for workflow orchestration and data lineage.',
+      category: 'Data Catalog',
+      logoSrc: '/images/integrations/all/airflow.png',
+      isComingSoon: false
+    },
+    {
+      name: 'DataHub',
+      description: 'Integrate TextQL with DataHub for modern data catalog and discovery.',
+      category: 'Data Catalog',
+      logoSrc: '/images/integrations/all/DataHub.png',
+      isComingSoon: false
+    },
+    {
+      name: 'Alation',
+      description: 'Connect TextQL with Alation for enterprise data catalog and governance.',
+      category: 'Data Catalog',
+      logoSrc: '/images/integrations/all/alation.png',
+      isComingSoon: false
+    },
+    {
+      name: 'Collibra',
+      description: 'Integrate TextQL with Collibra for data governance and catalog management.',
+      category: 'Data Catalog',
+      logoSrc: '/images/integrations/all/collibra.png',
+      isComingSoon: false
+    },
+    {
+      name: 'Atlan',
+      description: 'Connect TextQL with Atlan for active metadata and data discovery.',
+      category: 'Data Catalog',
+      logoSrc: '/images/integrations/all/atlan.png',
+      isComingSoon: false
+    },
+    {
+      name: 'dbt',
+      description: 'Integrate TextQL with dbt for data transformation and catalog management.',
+      category: 'Data Catalog',
+      logoSrc: '/images/integrations/all/dbt.png',
+      isComingSoon: false
+    },
+    {
+      name: 'Select Star',
+      description: 'Integrate TextQL with Select Star for automated data discovery.',
+      category: 'Data Catalog',
+      logoSrc: '/images/integrations/all/Select Star.png',
+      isComingSoon: false
+    },
+    {
+      name: 'Secoda',
+      description: 'Connect TextQL with Secoda for data discovery and documentation.',
+      category: 'Data Catalog',
+      logoSrc: '/images/integrations/all/Secoda.png',
+      isComingSoon: false
+    },
+    {
+      name: 'Informatica',
+      description: 'Integrate TextQL with Informatica for enterprise data management.',
+      category: 'Data Catalog',
+      logoSrc: '/images/integrations/all/Informatica.png',
+      isComingSoon: false
+    },
+    
+    // Metadata
+    {
+      name: 'Google Sheets',
+      description: 'Analyze your Google Sheets data with TextQL AI capabilities.',
+      category: 'Metadata',
+      logoSrc: '/images/integrations/all/google sheets.png',
+      isComingSoon: false
+    },
+    {
+      name: 'Google Drive',
+      description: 'Access and analyze documents from Google Drive with TextQL.',
+      category: 'Metadata',
+      logoSrc: '/images/integrations/all/google drive.png',
+      isComingSoon: false
+    },
+    {
+      name: 'Google Docs',
+      description: 'Extract insights from Google Docs content using TextQL AI.',
+      category: 'Metadata',
+      logoSrc: '/images/integrations/all/google-docs.png',
+      isComingSoon: false
+    },
+    {
+      name: 'Microsoft Office',
+      description: 'Integrate TextQL with Microsoft Office for document and spreadsheet analysis.',
+      category: 'Metadata',
+      logoSrc: '/images/integrations/all/microsoft-office.png',
+      isComingSoon: false
+    },
+    {
+      name: 'Notion',
+      description: 'Connect TextQL with Notion for knowledge base and document analysis.',
+      category: 'Metadata',
+      logoSrc: '/images/integrations/all/notion.png',
+      isComingSoon: false
+    },
+    {
+      name: 'Confluence',
+      description: 'Integrate TextQL with Confluence for team documentation analysis.',
+      category: 'Metadata',
+      logoSrc: '/images/integrations/all/confluence.png',
+      isComingSoon: false
+    },
+    
+    // Framework
+    {
+      name: 'dbt',
+      description: 'Leverage TextQL with dbt for data transformation and analytics engineering.',
+      category: 'Framework',
+      logoSrc: '/images/integrations/all/dbt.png',
+      isComingSoon: false
+    },
+    {
+      name: 'Airflow',
+      description: 'Integrate TextQL with Apache Airflow for data pipeline orchestration.',
+      category: 'Framework',
+      logoSrc: '/images/integrations/all/airflow.png',
+      isComingSoon: false
+    },
+    {
+      name: 'SQLMesh',
+      description: 'Connect TextQL with SQLMesh for DataOps and data transformation.',
+      category: 'Framework',
+      logoSrc: '/images/integrations/all/sql-mesh.png',
       isComingSoon: false
     }
   ];
@@ -122,7 +359,7 @@ export function AllIntegrationsSection() {
       id: 'All Integrations',
       name: 'All Integrations',
       title: 'All integrations',
-      subtitle: 'Connect TextQL with your favorite tools and platforms'
+      subtitle: 'Plug in TextQL anywhere data lives in your stack'
     },
     {
       id: 'Data Warehouse',
@@ -131,23 +368,39 @@ export function AllIntegrationsSection() {
       subtitle: 'Connect your data storage and warehousing solutions'
     },
     {
-      id: 'BI Tool',
-      name: 'BI Tool',
+      id: 'Business Intelligence',
+      name: 'Business Intelligence',
       title: 'Business Intelligence',
       subtitle: 'Enhance your analytics and visualization platforms'
     },
     {
-      id: 'Communication',
-      name: 'Communication',
-      title: 'Communication',
-      subtitle: 'Get insights delivered to your communication channels'
+      id: 'Semantic Layer',
+      name: 'Semantic Layer',
+      title: 'Semantic Layers',
+      subtitle: 'Integrate with semantic modeling and metrics platforms'
+    },
+    {
+      id: 'Data Catalog',
+      name: 'Data Catalog',
+      title: 'Data Catalog',
+      subtitle: 'Connect with data discovery and governance tools'
+    },
+    {
+      id: 'Metadata',
+      name: 'Metadata',
+      title: 'Metadata',
+      subtitle: 'Analyze documents and knowledge management systems'
+    },
+    {
+      id: 'Framework',
+      name: 'Framework',
+      title: 'Orchestration & Framework',
+      subtitle: 'Integrate with data orchestration and framework tools'
     }
   ];
 
   const quickLinks = [
-    { name: 'Create free account', href: '/signup' },
     { name: 'Get a demo', href: '/demo' },
-    { name: 'Intro to TextQL', href: '/intro' }
   ];
   
   const currentCategory = categories.find(cat => cat.id === selectedCategory) || categories[0];
@@ -172,7 +425,7 @@ export function AllIntegrationsSection() {
             <div className="bg-white p-6 shadow-sm">
               {/* Category Navigation */}
               <div className="mb-8">
-                <h3 className="text-sm ml-2font-medium text-[#0A1F1C]/60 mb-4 uppercase tracking-wide">Unified APIs</h3>
+                <h3 className="text-sm ml-2font-medium text-[#0A1F1C]/60 mb-4 uppercase tracking-wide">Categories</h3>
                 <nav className="space-y-1">
                   {categories.map((category) => (
                     <button
@@ -198,7 +451,7 @@ export function AllIntegrationsSection() {
               {/* Quick Links */}
               <div>
                 <h3 className="text-sm font-medium text-[#0A1F1C]/60 mb-4 uppercase tracking-wide">Quick links</h3>
-                <div className="space-y-3">
+                <div className="space-y-3 ml-2">
                   {quickLinks.map((link, index) => (
                     <a
                       key={index}

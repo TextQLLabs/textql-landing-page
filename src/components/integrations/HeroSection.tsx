@@ -26,7 +26,7 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
         <WaveBackground />
       </div>
       
-      <div className="mx-auto max-w-site px-6 relative z-10">
+      <div className="mx-auto max-w-site relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Left Column - Hero Content */}
           <div className="text-left">
@@ -41,20 +41,20 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
           </div>
           
           {/* Right Column - Video */}
-          <div className="rounded-lg overflow-hidden h-[400px] w-full">
+          <div className="rounded-[20px] overflow-hidden h-[400px] w-full">
             {videoUrl ? (
               <video 
                 autoPlay 
                 loop 
                 muted 
                 playsInline
-                className="w-full h-full object-contain rounded-lg bg-black/30"
+                className="w-full h-full object-contain rounded-[20px] bg-black/30"
               >
                 <source src={videoUrl} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             ) : (
-              <div className="bg-[#0A1F1C]/30 rounded-lg p-8 h-full flex items-center justify-center">
+              <div className="bg-[#0A1F1C]/30 rounded-[20px] p-8 h-full flex items-center justify-center">
                 <p className="text-[#729E8C] font-light italic">Video placeholder</p>
               </div>
             )}

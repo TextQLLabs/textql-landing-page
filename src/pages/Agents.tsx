@@ -19,7 +19,7 @@ export default function Agents() {
       />
       
       <AgentHeader />
-      <section className="py-24 bg-white">
+      <section className="py-12 bg-white">
         <div className="mx-auto max-w-site px-6">
           <AgentFeature1 />
         </div>
