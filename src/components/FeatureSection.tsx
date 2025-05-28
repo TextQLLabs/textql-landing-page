@@ -31,7 +31,7 @@ function FeatureCard({ icon: Icon, title, description }: Feature) {
 export function FeatureSection({ title, subtitle, features, className = '' }: FeatureSectionProps) {
   return (
     <section className={`bg-black py-24 border-t border-[#B8D8D0]/10 ${className}`}>
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
         <div className="text-center mb-16">
           <h2 className="text-5xl font-extralight text-[#B8D8D0] tracking-tight leading-tight mb-6">
             {title}

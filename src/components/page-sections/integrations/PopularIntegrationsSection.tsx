@@ -32,7 +32,7 @@ export function PopularIntegrationsSection() {
   return (
     <section className="mb-4">
       <div className="container mx-auto px-4 relative z-10">
-        <h2 className="text-4xl font-extralight text-white mb-12">Popular integrations</h2>
+        <h2 className="text-4xl font-extralight mb-12 text-[#B8D8D0]">Popular integrations</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {popularIntegrations.map((integration, index) => (

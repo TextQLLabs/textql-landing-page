@@ -3,13 +3,11 @@ import { SEO } from '../../components/SEO';
 import StaggeredScreenshots from '../../components/StaggeredScreenshots';
 import { Text } from '../../components/ui';
 import { Testimonial } from '../../components/Testimonial';
-import CommunicateFindings from '../../components/CommunicateFindings';
-import HeroSection from '../../components/integrations/HeroSection';
+import HeroSection from '../../components/integrations/IntegrationHeroSection';
 import FaqSection from '../../components/integrations/FaqSection';
 import { CTA } from '../../components/sections';
 import { FeatureSection } from '../../components/FeatureSection';
 import { Plug, RefreshCw, Cpu } from 'lucide-react';
-import { JoinsChart } from '../../components/page-sections/agents/joins/JoinsChart';
 import TabsDisplay, { TabContentType } from '../../components/TabsDisplay';
 
 export default function SnowflakeMcpIntegration() {
@@ -43,14 +41,16 @@ export default function SnowflakeMcpIntegration() {
       )
     },
     {
-      question: "What types of AI-powered analysis can TextQL perform on Snowflake data?",
+      question: "What types of AI-powered analysis and research can TextQL perform on Snowflake data?",
       answer: (
         <div>
           <p className="mb-4">Our AI agents can perform sophisticated analysis on your Snowflake data, including:</p>
           <ul className="list-disc pl-6 space-y-2">
-            <li>Anomaly detection and predictive analytics across large datasets</li>
             <li>Natural language querying of Snowflake databases and data warehouses</li>
+            <li>Visualization of patterns, trends, and insights</li>
             <li>Automated insight generation and trend identification</li>
+            <li>Anomaly and fraud detection and predictive analytics</li>
+            <li>Advanced machine learning model training and evaluation across large datasets</li>
             <li>Cross-database correlation analysis and pattern recognition</li>
             <li>Intelligent data quality monitoring and validation</li>
           </ul>
@@ -92,30 +92,15 @@ export default function SnowflakeMcpIntegration() {
         <div>
           <p className="mb-4">TextQL's AI agents extend Snowflake's capabilities by providing:</p>
           <ul className="list-disc pl-6 space-y-2">
+            <li>Deep analysis joining hundreds of tables instead of tens</li>
             <li>Predictive analytics and forecasting based on historical patterns</li>
-            <li>Advanced pattern recognition across multiple data sources</li>
             <li>Natural language explanations of complex data relationships</li>
             <li>Automated root cause analysis for business metrics</li>
             <li>AI-driven recommendations for business actions</li>
           </ul>
         </div>
       )
-    },
-    {
-      question: "How does TextQL's Snowflake integration help with data governance?",
-      answer: (
-        <div>
-          <p className="mb-4">Our Snowflake integration enhances data governance through:</p>
-          <ul className="list-disc pl-6 space-y-2">
-            <li>Automated data lineage tracking and documentation</li>
-            <li>AI-powered data quality assessment and monitoring</li>
-            <li>Intelligent access pattern analysis for security optimization</li>
-            <li>Compliance recommendation based on regulatory requirements</li>
-            <li>Continuous monitoring of data access and usage patterns</li>
-          </ul>
-        </div>
-      )
-    },
+    }
   ];
 
   type TabOption = 'Connect Your Warehouse' | 'Run Deep Analysis' | 'Report Anywhere';
@@ -237,48 +222,13 @@ export default function SnowflakeMcpIntegration() {
         <HeroSection 
           headline="Powerful AI Research Within Your Snowflake Environment"
           description="TextQL's MCP integration connects intelligent analysis with your Snowflake data warehouse, enabling our AI agents to work directly with all of your datasets."
-          videoUrl="/images/integrations/snowflake/snowflake-visual.m4v"
+          videoUrl="/images/integrations/snowflake/snowflake.m4v"
         />
       </section>
-      <Testimonial
-        quote="TextQL's Snowflake integration has transformed how we analyze our data warehouse."
-        author="Enterprise Data Leader"
-        title="Data Analytics Director"
-      />
-
-      <section className="bg-transparent">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 items-center">
-            <div className="lg:col-span-2 relative -translate-x-[10%]">
-              <video 
-                className="w-full rounded-lg"
-                autoPlay 
-                loop 
-                muted 
-                playsInline
-                src="/videos/snowflake-mcp.mp4"
-              />
-            </div>
-            <div className="lg:col-span-1 space-y-6 relative z-50 p-6 rounded-lg">
-              <h2 className="text-4xl font-extralight text-[#B8D8D0] tracking-tight leading-tight">
-                Massive scale. Advanced reasoning.
-              </h2>
-              <div className="space-y-6">
-                <Text className="text-xl text-[#729E8C]/60 font-light leading-relaxed">
-                TextQL's agents can perform hundreds of joins, and ingest thousands of tables.
-                </Text>
-                <Text className="text-xl text-[#729E8C]/70 font-light leading-relaxed">
-                  After performing complex analysis—executing both SQL and Python code—agents output natural language insight reports, and can update your Snowflake data pipelines.
-                </Text>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>   
       
       <FeatureSection
-        title="The World's First Snowflake MCP Server"
-        subtitle="It's never been easier for AI to understand your Snowflake data."
+        title="Massive scale. Advanced reasoning."
+        subtitle="It'll feel like you just hired a whole new data team."
         features={[
           {
             icon: Plug,
@@ -298,6 +248,42 @@ export default function SnowflakeMcpIntegration() {
         ]}
       />
 
+<Testimonial
+        quote="TextQL's Snowflake integration has transformed how we analyze our data warehouse."
+        author="Enterprise Data Leader"
+        title="Data Analytics Director"
+      />
+
+<section className="bg-transparent py-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="relative z-19">
+              <video 
+                className="w-full rounded-lg"
+                autoPlay 
+                loop 
+                muted 
+                playsInline
+                src="/images/integrations/snowflake/snowflake-mcp.m4v"
+              />
+            </div>
+            <div className="relative z-10 space-y-6">
+              <h2 className="text-4xl font-extralight text-[#B8D8D0] tracking-tight leading-tight">
+                The world's first Snowflake MCP server.
+              </h2>
+              <div className="space-y-6">
+                <p className="text-xl text-[#729E8C] font-light leading-relaxed">
+                TextQL's agents can perform hundreds of joins, and ingest thousands of tables.
+                </p>
+                <p className="text-xl text-[#729E8C] font-light leading-relaxed">
+                  After performing complex analysis—executing both SQL and Python code—agents output natural language insight reports, and can update your Snowflake data pipelines.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>   
+
 <TabsDisplay
       title="Find Deep Value Hidden in Your Snowflake Data"
       tabs={tabContent}
@@ -312,7 +298,7 @@ export default function SnowflakeMcpIntegration() {
         
       <CTA 
         theme="dark"
-        showWave={false}
+        showWave={true}
         variant="wide"
         heading="Ready to learn more?"
         subheader="Contact us"

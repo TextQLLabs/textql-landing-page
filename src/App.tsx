@@ -24,13 +24,15 @@ import WorkflowTemplate from './pages/workflows/[id]';
 import Demo from './pages/Demo';
 import Integrations from './pages/Integrations';
 import AllIntegrations from './pages/AllIntegrations';
-import IntegrationsRoutes from './pages/integrations/IntegrationsRoutes';
+import TableauMcpIntegration from './pages/integrations/TableauMcpIntegration';
+import DatabricksMcpIntegration from './pages/integrations/Databricks';
 import Whitepaper from './pages/Whitepaper';
 import Careers from './pages/Careers';
 import JobPostingPage from './pages/careers/JobPostingPage';
 import Snowflake2025 from './pages/Snowflake2025';
 import SnowflakeScheduler from './pages/snowflake-2025/scheduler';
 import Team from './pages/Team';
+import SnowflakeMcpIntegration from './pages/integrations/SnowflakeMcpIntegration';
 
 function App() {
   const location = useLocation();
@@ -78,8 +80,10 @@ function App() {
           <Route path="/careers" element={<Careers />} />
           <Route path="/careers/:jobId" element={<JobPostingPage />} />
           <Route path="/integrations" element={<Integrations />} />
-          <Route path="/all-integrations" element={<AllIntegrations />} />
-          <Route path="/integrations/*" element={<IntegrationsRoutes />} />
+          <Route path="/integrations/all" element={<AllIntegrations />} />
+          <Route path="/integrations/tableau-mcp" element={<TableauMcpIntegration />} />
+          <Route path="/integrations/databricks-mcp" element={<DatabricksMcpIntegration />} />
+          <Route path="/integrations/snowflake-mcp" element={<SnowflakeMcpIntegration />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/whitepaper" element={<Whitepaper />} />

@@ -3,7 +3,7 @@ import { SEO } from '../../components/SEO';
 import StaggeredScreenshots from '../../components/StaggeredScreenshots';
 import { Text } from '../../components/ui';
 import { Testimonial } from '../../components/Testimonial';
-import HeroSection from '../../components/integrations/HeroSection';
+import HeroSection from '../../components/integrations/IntegrationHeroSection';
 import FaqSection from '../../components/integrations/FaqSection';
 import { CTA } from '../../components/sections';
 import { FeatureSection } from '../../components/FeatureSection';
@@ -237,7 +237,7 @@ export default function TableauMcpIntegration() {
         <section> <HeroSection 
           headline="Seamless AI Research Within Your Tableau Environment"
           description="TextQL's MCP integration bridges the gap between visualization and intelligent analysis, enabling our AI agents to work directly with your Tableau datasets."
-          videoUrl="/videos/tableau-mcp-copy.mp4"
+          videoUrl="/videos/tableau-mcp.m4v"
         />
       </section>
       <Testimonial
@@ -248,14 +248,14 @@ export default function TableauMcpIntegration() {
         
     
       <section className="bg-transparent">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-6 relative z-20">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 items-center">
             <div className="lg:col-span-2 relative -translate-x-[10%]">
               <StaggeredScreenshots screenshots={screenshots} />
             </div>
             <div className="lg:col-span-1 space-y-6">
-              <h2 className="text-5xl font-extralight relative z-50 text-[#B8D8D0] tracking-tight leading-tight">
-                Designed For Enterprise Scales.
+              <h2 className="text-5xl font-extralight text-[#B8D8D0] tracking-tight leading-tight">
+                Designed for Enterprise Scales.
               </h2>
               <div className="space-y-6">
                 <p className="text-xl text-[#729E8C] font-light leading-relaxed">
@@ -272,8 +272,8 @@ export default function TableauMcpIntegration() {
       
 
       <FeatureSection
-        title="The World's First Tableau MCP Server"
-        subtitle="It's never been easier for AI to understand your Tableaus."
+        title="Advanced reasoning. Deep insights."
+        subtitle="It'll feel like you just hired a whole new data team."
         features={[
           {
             icon: Plug,

@@ -31,7 +31,7 @@ export default function FaqSection({ name, faqItems }: FaqSectionProps) {
                 </span>
               </summary>
               <div className="p-6 pt-0 text-[#729E8C] font-light border-t border-[#0A1F1C]">
-                {item.answer}
+                <p className="text-md text-[#729E8C] font-light leading-relaxed mt-2">{item.answer}</p>
               </div>
             </details>
           ))}

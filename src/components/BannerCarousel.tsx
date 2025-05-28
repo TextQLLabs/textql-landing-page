@@ -28,6 +28,11 @@ export default function BannerCarousel({
   const animationDuration = Math.round(60 / (speed * 10));
   const animationId = `banner-scroll-${Math.floor(Math.random() * 1000000)}`;
   
+  // Helper function to check if icon is an image path
+  const isImageIcon = (icon: string) => {
+    return icon.startsWith('/') || icon.includes('.png') || icon.includes('.jpg') || icon.includes('.jpeg') || icon.includes('.svg');
+  };
+  
   // Inject animation CSS on mount
   useEffect(() => {
     // Create unique ID for style to avoid conflicts
@@ -116,12 +121,35 @@ export default function BannerCarousel({
                     target="_blank" 
                     rel="noopener noreferrer"
                   >
-                    {item.icon && <span className="mr-2">{item.icon}</span>}
+                    {item.icon && (
+                      isImageIcon(item.icon) ? (
+                        <img 
+                          src={item.icon} 
+                          alt="" 
+                          className="w-4 h-4 mr-2 object-contain mr-3"
+                          style={{ 
+                            filter: 'brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(654%) hue-rotate(114deg) brightness(93%) contrast(92%)' 
+                          }}
+                        />
+                      ) : (
+                        <span className="mr-2">{item.icon}</span>
+                      )
+                    )}
                     {item.text}
                   </a>
                 ) : (
                   <span className={`${textColor} text-sm font-medium flex items-center`}>
-                    {item.icon && <span className="mr-2">{item.icon}</span>}
+                    {item.icon && (
+                      isImageIcon(item.icon) ? (
+                        <img 
+                          src={item.icon} 
+                          alt="" 
+                          className="w-4 h-4 mr-2 object-contain"
+                        />
+                      ) : (
+                        <span className="mr-2">{item.icon}</span>
+                      )
+                    )}
                     {item.text}
                   </span>
                 )}

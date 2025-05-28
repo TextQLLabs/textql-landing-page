@@ -1,5 +1,6 @@
 import type { LucideIcon } from 'lucide-react';
 import { industries } from '../../data/industries';
+import { m } from 'framer-motion';
 
 export interface NavSubItem {
   label: string;
@@ -151,21 +152,26 @@ export const navigation: NavItem[] = [
             {
               label: 'All Integrations',
               description: '',
-              href: '/all-integrations',
+              href: '/integrations/all',
               icon: 'Grid'
             },
-            
             {
-              label: 'Tableau MCP',
+              label: 'Databricks MCP',
               description: '',
-              href: '/integrations/tableau-mcp',
-              icon: '/images/navbar/tableau.png'
+              href: '/integrations/databricks-mcp',
+              icon: '/images/navbar/databricks.png'
             },
             {
               label: 'Snowflake MCP',
               description: '',
               href: '/integrations/snowflake-mcp',
               icon: '/images/navbar/snowflake.png'
+            },
+            {
+              label: 'Tableau MCP',
+              description: '',
+              href: '/integrations/tableau-mcp',
+              icon: '/images/navbar/tableau.png'
             }
           ]
         }
