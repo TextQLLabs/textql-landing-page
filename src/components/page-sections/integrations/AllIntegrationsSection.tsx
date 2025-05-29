@@ -389,13 +389,13 @@ export function AllIntegrationsSection() {
       href: 'https://www.getdbt.com/',
       isComingSoon: false
     },
-    // {
-    //   name: 'Airflow',
-    //   description: 'Integrate TextQL with Apache Airflow for data pipeline orchestration.',
-    //   category: 'Framework',
-    //   logoSrc: '/images/integrations/all/airflow.png',
-    //   isComingSoon: false
-    // },
+    {
+      name: 'Airflow',
+      description: 'Integrate TextQL with Apache Airflow for data pipeline orchestration.',
+      category: 'Framework',
+      logoSrc: '/images/integrations/all/airflow.png',
+      isComingSoon: false
+    },
     {
       name: 'SQLMesh',
       description: 'Connect TextQL with SQLMesh for DataOps and data transformation.',
@@ -501,7 +501,7 @@ export function AllIntegrationsSection() {
               </div>
 
               {/* Quick Links */}
-              <div>
+              {/* <div>
                 <h3 className="text-sm font-medium text-[#0A1F1C]/60 mb-4 uppercase tracking-wide">Quick links</h3>
                 <div className="space-y-3 ml-2">
                   {quickLinks.map((link, index) => (
@@ -515,7 +515,7 @@ export function AllIntegrationsSection() {
                     </a>
                   ))}
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
 
