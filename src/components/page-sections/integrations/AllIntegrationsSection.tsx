@@ -65,7 +65,7 @@ export function AllIntegrationsSection() {
       name: 'SAP 2/4 Hana',
       description: 'Integrate TextQL with SAP HANA for real-time analytics on enterprise data.',
       category: 'Data Warehouse',
-      logoSrc: '/images/integrations/all/sap.png',
+      logoSrc: '/images/integrations/all/saphana.png',
       isComingSoon: false
     },
     {
@@ -454,7 +454,7 @@ export function AllIntegrationsSection() {
                 <div className="space-y-3 ml-2">
                   {quickLinks.map((link, index) => (
                     <a
-                      key={index}
+                      key={index} 
                       href={link.href}
                       className="flex items-center gap-2 text-sm text-[#0A1F1C]/70 hover:text-[#0A1F1C] transition-colors group"
                     >

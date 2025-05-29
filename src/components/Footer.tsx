@@ -7,7 +7,7 @@ const footerLinks = {
     links: [
       { label: 'Agents', href: '/agents' },
       { label: 'Ontology', href: '/ontology' },
-      { label: 'Integrations', href: '/integrations' },
+      { label: 'Integrations', href: '/integrations/all' },
       { label: 'Enterprise', href: '/enterprise' },
       { label: 'Workflows', href: '/workflows' }
     ]

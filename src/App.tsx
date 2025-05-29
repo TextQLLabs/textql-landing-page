@@ -79,7 +79,6 @@ function App() {
           <Route path="/ontology" element={<Ontology />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/careers/:jobId" element={<JobPostingPage />} />
-          <Route path="/integrations" element={<Integrations />} />
           <Route path="/integrations/all" element={<AllIntegrations />} />
           <Route path="/integrations/tableau-mcp" element={<TableauMcpIntegration />} />
           <Route path="/integrations/databricks-mcp" element={<DatabricksMcpIntegration />} />
