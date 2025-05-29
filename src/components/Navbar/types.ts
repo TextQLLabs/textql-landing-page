@@ -158,19 +158,19 @@ export const navigation: NavItem[] = [
             {
               label: 'Databricks MCP',
               description: '',
-              href: '/integrations/databricks-mcp',
+              href: '/integrations/databricks',
               icon: '/images/navbar/databricks.png'
             },
             {
               label: 'Snowflake MCP',
               description: '',
-              href: '/integrations/snowflake-mcp',
+              href: '/integrations/snowflake',
               icon: '/images/navbar/snowflake.png'
             },
             {
               label: 'Tableau MCP',
               description: '',
-              href: '/integrations/tableau-mcp',
+              href: '/integrations/tableau',
               icon: '/images/navbar/tableau.png'
             }
           ]

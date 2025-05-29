@@ -144,7 +144,7 @@ function RegistrationForm() {
               },
               {
                 "type": "mrkdwn",
-                "text": `*BI Tools:* ${formData.biTools}`
+                "text": `*Business Intelligence:* ${formData.biTools}`
               },
               {
                 "type": "mrkdwn",

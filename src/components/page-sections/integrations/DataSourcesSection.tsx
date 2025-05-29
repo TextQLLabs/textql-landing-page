@@ -68,7 +68,7 @@ const supportedConnectors = [
     description: 'Ask questions directly to your Tableau dashboards and unlock insights from both visualizations and raw data.',
     icon: tableauLogo,
     learnMoreLink: 'https://docs.textql.com/core/datasources/business-intel/tableau-connector',
-    internalLink: '/integrations/tableau-mcp',
+    internalLink: '/integrations/tableau',
     zoomFactor: 1.2
   },
   {
@@ -80,7 +80,7 @@ const supportedConnectors = [
     description: 'Elastic scaling and secure data sharing with Snowflake. From raw data to insights in seconds.',
     icon: snowflakeLogo,
     learnMoreLink: 'https://docs.textql.com/core/datasources/databases/snowflake',
-    internalLink: '/integrations/snowflake-mcp'
+    internalLink: '/integrations/snowflake'
   },
   {
     description: 'Explore petabyte-scale BigQuery datasets effortlessly. Intelligence at scale. Powered by Ana.',

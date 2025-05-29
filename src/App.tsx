@@ -80,9 +80,9 @@ function App() {
           <Route path="/careers" element={<Careers />} />
           <Route path="/careers/:jobId" element={<JobPostingPage />} />
           <Route path="/integrations/all" element={<AllIntegrations />} />
-          <Route path="/integrations/tableau-mcp" element={<TableauMcpIntegration />} />
-          <Route path="/integrations/databricks-mcp" element={<DatabricksMcpIntegration />} />
-          <Route path="/integrations/snowflake-mcp" element={<SnowflakeMcpIntegration />} />
+          <Route path="/integrations/tableau" element={<TableauMcpIntegration />} />
+          <Route path="/integrations/databricks" element={<DatabricksMcpIntegration />} />
+          <Route path="/integrations/snowflake" element={<SnowflakeMcpIntegration />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/whitepaper" element={<Whitepaper />} />

@@ -12,8 +12,8 @@ export function AllIntegrationsHeader() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 mt-12 pt-32 pb-16 px-4">
-        <div className="max-w-5xl mx-auto text-center">
+      <div className="relative z-10 mt-12 pt-32 pb-16 px-6">
+        <div className="max-w-7xl mx-auto text-center">
           <div className="mb-6">
             <h1 className="text-6xl font-extralight mb-6 text-[#B8D8D0]">
               Explore All Integrations
