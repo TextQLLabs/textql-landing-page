@@ -74,7 +74,7 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
       </div>
 
       {/* Main Content - Centered with flex */}
-      <div className="relative z-10 flex-grow mx-auto max-w-7xl px-6 pb-20 flex flex-col justify-center">
+      <div className="relative z-10 flex-grow mx-auto max-w-7xl px-6 md:pb-20 flex flex-col justify-center">
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-[1fr,600px]">
           {/* Left Content */}
           <div>
@@ -113,7 +113,7 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
 
       {/* Logo Carousel - Relative on mobile, Absolute on desktop */}
       {showLogoCarousel && (
-        <div className="relative lg:absolute lg:bottom-0 lg:left-0 lg:right-0 bg-black/80 backdrop-blur-sm py-8">
+        <div className="relative lg:absolute lg:bottom-0 lg:left-0 lg:right-0 bg-black/80 backdrop-blur-sm py-20">
           <div className="mx-auto max-w-7xl px-6">
             <p className="text-sm font-medium text-[#B8D8D0]/80 mb-4">
               Ana finds insights in your existing data stack

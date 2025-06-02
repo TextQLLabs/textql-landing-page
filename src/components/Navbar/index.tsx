@@ -4,13 +4,14 @@ import { Button } from '../ui';
 import { TextLogo } from '../Logo';
 import { NavItem } from './NavItem';
 import { navigation } from './types';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 import { handleSimpleDemoRequest } from '../../utils/demo-requests/simple';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [expandedSections, setExpandedSections] = useState<string[]>([]);
   const isDevelopment = import.meta.env.DEV;
   const location = useLocation();
   const navigate = useNavigate();
@@ -36,11 +37,20 @@ export default function Navbar() {
   // Close dropdown when route changes
   useEffect(() => {
     setIsMenuOpen(false);
+    setExpandedSections([]);
   }, [location.pathname]);
 
   const onDemoRequest = (e: React.MouseEvent) => {
     e.preventDefault();
     navigate('/demo');
+  };
+
+  const toggleSection = (label: string) => {
+    setExpandedSections(prev => 
+      prev.includes(label) 
+        ? prev.filter(item => item !== label)
+        : [...prev, label]
+    );
   };
 
   return (
@@ -107,16 +117,18 @@ export default function Navbar() {
             ${isMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}
           `}
         >
-          <div className="px-4 py-3 space-y-3">
+          <div className="px-4 py-3 space-y-1">
             {navigation.map((item) => (
-              <div key={item.label} className="py-2">
+              <div key={item.label}>
+                {/* Main navigation item */}
                 {item.href ? (
+                  // Simple link items (like Pricing)
                   item.external ? (
                     <a
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block text-[#B8D8D0] hover:text-[#729E8C] transition-colors duration-300"
+                      className="block py-3 text-[#B8D8D0] hover:text-[#729E8C] transition-colors duration-300"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.label}
@@ -124,39 +136,56 @@ export default function Navbar() {
                   ) : (
                     <Link
                       to={item.href}
-                      className="block text-[#B8D8D0] hover:text-[#729E8C] transition-colors duration-300"
+                      className="block py-3 text-[#B8D8D0] hover:text-[#729E8C] transition-colors duration-300"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.label}
                     </Link>
                   )
                 ) : (
-                  <div className="space-y-2">
-                    <div className="text-[#B8D8D0]">{item.label}</div>
-                    {item.children && (
-                      <div className="pl-4 space-y-2">
-                        {item.children.map((child) => (
-                          child.external ? (
-                            <a
-                              key={child.href}
-                              href={child.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="block text-[#729E8C] hover:text-[#B8D8D0] transition-colors duration-300 text-sm"
-                              onClick={() => setIsMenuOpen(false)}
-                            >
-                              {child.label}
-                            </a>
-                          ) : (
-                            <Link
-                              key={child.href}
-                              to={child.href}
-                              className="block text-[#729E8C] hover:text-[#B8D8D0] transition-colors duration-300 text-sm"
-                              onClick={() => setIsMenuOpen(false)}
-                            >
-                              {child.label}
-                            </Link>
-                          )
+                  // Items with megaMenu
+                  <div>
+                    <button
+                      onClick={() => toggleSection(item.label)}
+                      className="flex items-center justify-between w-full py-3 text-[#B8D8D0] hover:text-[#729E8C] transition-colors duration-300"
+                    >
+                      <span>{item.label}</span>
+                      {expandedSections.includes(item.label) ? (
+                        <ChevronDown className="w-4 h-4" />
+                      ) : (
+                        <ChevronRight className="w-4 h-4" />
+                      )}
+                    </button>
+                    
+                    {/* Expanded sub-items */}
+                    {expandedSections.includes(item.label) && item.megaMenu && (
+                      <div className="pl-4 pb-2 space-y-1">
+                        {item.megaMenu.sections?.map((section, sectionIndex) => (
+                          <div key={sectionIndex}>
+                            {section.items.map((subItem) => (
+                              subItem.external ? (
+                                <a
+                                  key={subItem.href}
+                                  href={subItem.href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="block py-2 text-sm text-[#B8D8D0]/80 hover:text-[#B8D8D0] transition-colors duration-300"
+                                  onClick={() => setIsMenuOpen(false)}
+                                >
+                                  {subItem.label}
+                                </a>
+                              ) : (
+                                <Link
+                                  key={subItem.href}
+                                  to={subItem.href}
+                                  className="block py-2 text-sm text-[#B8D8D0]/80 hover:text-[#B8D8D0] transition-colors duration-300"
+                                  onClick={() => setIsMenuOpen(false)}
+                                >
+                                  {subItem.label}
+                                </Link>
+                              )
+                            ))}
+                          </div>
                         ))}
                       </div>
                     )}
