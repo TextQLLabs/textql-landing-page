@@ -70,7 +70,7 @@ interface HomeHeroProps {
 export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
   return (
     <section className="relative flex flex-col min-h-screen bg-black">
-      <div className="absolute inset-0 z-0 -mt-32">
+      <div className="absolute inset-0 z-0 -mt-32 opacity-0 animate-fade-in animation-delay-400">
         <WaveBackground />
       </div>
 
