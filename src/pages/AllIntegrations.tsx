@@ -20,12 +20,7 @@ export default function AllIntegrations() {
       <AllIntegrationsSection />
       <CTA 
         theme="dark"
-        showWave={false}
-        variant="wide"
-        heading="Ready to supercharge your data workflow?"
-        subheader="Get started with TextQL integrations"
-        useSimpleButton={true}
-        buttonText="Get a demo"
+        heading="Ready to supercharge your data analysis?"
       />
     </>
   );

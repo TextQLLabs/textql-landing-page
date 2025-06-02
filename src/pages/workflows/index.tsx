@@ -60,7 +60,7 @@ export default function WorkflowLibrary() {
       <WorkflowLibraryHeader />
 
       {/* Main Content - Light Mode */}
-      <div className="bg-white">
+      <div className="bg-[#F5F9F8]">
         {/* Industry Pills */}
         <div className="border-b border-[#2A3B35]/10">
           <div className="max-w-7xl mx-auto px-6 py-6">
@@ -108,12 +108,12 @@ export default function WorkflowLibrary() {
 
       {/* CTA Section */}
       <CTA
-        theme="light"
+        theme="dark"
         showWave={true}
         variant="wide"
         heading="Ready to transform your business?"
-        subheader="Get started with TextQL's AI-powered workflows today"
-        useSimpleButton={true}
+        // subheader="Get started with TextQL's AI-powered workflows today."
+        useSimpleButton={false}
       />
     </div>
   );

@@ -70,6 +70,7 @@ export function DemoRequestForm({
     }
   };
 
+  // unused
   const variants = {
     default: 'max-w-md w-full space-y-4',
     compact: 'max-w-sm w-full space-y-3',
@@ -94,13 +95,13 @@ export function DemoRequestForm({
             theme={theme}
             className="bg-opacity-10 backdrop-blur-lg"
           />
-          <div className="absolute right-2 top-1/2 -translate-y-1/2">
+          <div className="absolute right-3 top-1/2 -translate-y-1/2">
             <Button 
               type="submit"
               variant="primary"
-              size="sm"
+              size="md"
               loading={isSubmitting}
-              icon={ArrowRight}
+              // icon={ArrowRight}
               iconPosition="right"
               disabled={isSubmitting}
               theme={theme}

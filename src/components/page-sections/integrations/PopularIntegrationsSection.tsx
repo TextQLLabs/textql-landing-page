@@ -4,19 +4,19 @@ import { IntegrationCard } from '../../integrations/IntegrationCard';
 export function PopularIntegrationsSection() {
   const popularIntegrations = [
     {
-        name: 'Databricks',
+      name: 'Snowflake MCP',
+      description: 'Seamlessly integrate TextQL with your Snowflake data warehouse for enhanced analytics.',
+      category: 'Database',
+      logoSrc: '/images/integrations/all/snowflake.png',
+      href: '/integrations/snowflake',
+      isComingSoon: false
+    },
+    {
+        name: 'Databricks MCP',
         description: 'Leverage TextQL AI capabilities with your Databricks data platform.',
         category: 'Database',
         logoSrc: '/images/integrations/all/databricks.png',
         href: '/integrations/databricks',
-        isComingSoon: false
-      },
-    {
-        name: 'Snowflake',
-        description: 'Seamlessly integrate TextQL with your Snowflake data warehouse for enhanced analytics.',
-        category: 'Database',
-        logoSrc: '/images/integrations/all/snowflake.png',
-        href: '/integrations/snowflake',
         isComingSoon: false
       },
     {

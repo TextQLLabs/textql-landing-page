@@ -4,7 +4,7 @@ import { Brain, Network, Cpu } from 'lucide-react';
 
 export function JoinsSection() {
   return (
-    <section className="bg-white py-24">
+    <section className="bg-[#F5F9F8] py-24">
       <div className="mx-auto max-w-site px-6">
         {/* Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr,1.2fr] gap-16 items-start">

@@ -1,6 +1,7 @@
 import { Badge, DemoRequestForm, Carousel} from "../../ui";
 import { WaveBackground } from "../../animations";
 import { InsightsFeed } from "../../InsightsFeed/InsightsFeed";
+import { DemoRequestButton } from "../../ui/Button/DemoRequestButton";
 
 
 const logos = [
@@ -69,12 +70,12 @@ interface HomeHeroProps {
 export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
   return (
     <section className="relative flex flex-col min-h-screen bg-black">
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 -mt-32">
         <WaveBackground />
       </div>
 
-      {/* Main Content - Centered with flex */}
-      <div className="relative z-10 flex-grow mx-auto max-w-7xl px-6 md:pb-20 flex flex-col justify-center">
+      {/* Main Content - Top aligned on mobile, centered on desktop */}
+      <div className="relative z-10 flex-1 mx-auto max-w-7xl px-6 md:pb-20 flex flex-col justify-start md:justify-center pt-20 md:pt-0">
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-[1fr,600px]">
           {/* Left Content */}
           <div>
@@ -87,7 +88,7 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
             </Badge>
 
             <div className="mb-8">
-              <h1 className="text-5xl md:text-8xl font-light bg-gradient-to-r from-[#B8D8D0] via-[#B8D8D0] to-[#729E8C] inline-block text-transparent bg-clip-text tracking-tight mb-6 opacity-0 animate-slide-up animation-delay-100">
+              <h1 className="text-5xl md:text-8xl font-light bg-gradient-to-r from-[#B8D8D0] via-[#B8D8D0] to-[#729E8C] inline-block text-transparent bg-clip-text tracking-tight mb-4 md:mb-6 opacity-0 animate-slide-up animation-delay-100">
                 Ana
               </h1>
               <h2 className="text-4xl md:text-7xl font-light leading-[1.1] text-white opacity-0 animate-slide-up animation-delay-200">
@@ -97,23 +98,29 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
               </h2>
             </div>
             <p className="mb-12 text-xl md:text-3xl font-light text-[#B8D8D0] opacity-0 animate-slide-up animation-delay-300">
-              Deploy agents across all of your databases & systems of record.
+              Deploy agents across all of your databases & systems of record
             </p>
-            <div className="opacity-0 animate-slide-up animation-delay-400">
+            <div className="hidden md:block opacity-0 animate-slide-up animation-delay-400">
               <DemoRequestForm />
+            </div>
+            <div className="md:hidden flex justify-center">
+              <DemoRequestButton
+                theme="dark"
+                buttonText="Request Demo"
+              />
             </div>
           </div>
 
           {/* Right Content - Insights Feed */}
-          <div className="hidden lg:block h-[600px]">
+          <div className="h-[600px] hidden md:block">
             <InsightsFeed />
           </div>
         </div>
       </div>
 
-      {/* Logo Carousel - Relative on mobile, Absolute on desktop */}
+      {/* Logo Carousel - MOBILE - Fixed at bottom */}
       {showLogoCarousel && (
-        <div className="relative lg:absolute lg:bottom-0 lg:left-0 lg:right-0 bg-black/80 backdrop-blur-sm py-20">
+        <div className="md:hidden bg-black/80 backdrop-blur-sm py-6">
           <div className="mx-auto max-w-7xl px-6">
             <p className="text-sm font-medium text-[#B8D8D0]/80 mb-4">
               Ana finds insights in your existing data stack
@@ -121,7 +128,19 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
             <Carousel items={logos} />
           </div>
         </div>
-      )} 
+      )}
+
+      {/* Logo Carousel - DESKTOP */}
+      {showLogoCarousel && (
+        <div className="hidden md:block lg:absolute lg:bottom-0 lg:left-0 lg:right-0 bg-black/80 backdrop-blur-sm md:py-20">
+          <div className="mx-auto max-w-7xl px-6">
+            <p className="text-sm font-medium text-[#B8D8D0]/80 mb-4">
+              Ana finds insights in your existing data stack
+            </p>
+            <Carousel items={logos} />
+          </div>
+        </div>
+      )}
     </section>
   );
 }

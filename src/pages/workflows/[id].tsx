@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { WorkflowHeader, WorkflowBody } from '../../components/page-sections/workflow-template';
-import { WorkflowCTA } from '../../components/page-sections/workflow-template/WorkflowCTA';
 import { workflows } from '../../data/workflows';
 import { Text } from '../../components/ui';
 import { SEO } from '../../components/SEO';
+import { CTA } from '../../components/sections';
 
 // Import all insight files
 const insightModules = import.meta.glob('../../data/workflows/*/insight.ts', { eager: true });
@@ -48,7 +48,11 @@ export default function WorkflowTemplate() {
       <WorkflowBody workflow={workflow} insight={insight} />
 
       {/* CTA Section */}
-      <WorkflowCTA workflow={workflow} />
+      <CTA 
+        theme="dark"
+        heading={`Get a demo of ${workflow.title}`}
+        useSimpleButton={false}
+      />
     </div>
   );
 }

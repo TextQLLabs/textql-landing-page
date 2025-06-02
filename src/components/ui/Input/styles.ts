@@ -22,9 +22,9 @@ export const getBaseStyles = (error?: string, theme: 'dark' | 'light' = 'dark') 
     w-full
     ${colors[theme].bg}
     border ${colors[theme].border}
-    ${colors[theme].text} text-base font-light
+    ${colors[theme].text} text-md font-light
     ${colors[theme].placeholder}
-    px-4 py-2.5
+    px-5 py-5
     focus:outline-none focus:ring-2 ${colors[theme].focus}
     backdrop-blur-md
     transition-colors

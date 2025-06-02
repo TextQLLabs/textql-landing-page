@@ -22,7 +22,6 @@ import BlogPost from './pages/blog/[id]';
 import WorkflowLibrary from './pages/workflows';
 import WorkflowTemplate from './pages/workflows/[id]';
 import Demo from './pages/Demo';
-import Integrations from './pages/Integrations';
 import AllIntegrations from './pages/AllIntegrations';
 import TableauMcpIntegration from './pages/integrations/TableauMcpIntegration';
 import DatabricksMcpIntegration from './pages/integrations/Databricks';
