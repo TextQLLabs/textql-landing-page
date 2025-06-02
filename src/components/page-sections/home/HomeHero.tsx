@@ -105,7 +105,7 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
           </div>
 
           {/* Right Content - Insights Feed */}
-          <div className="h-[600px]">
+          <div className="hidden lg:block h-[600px]">
             <InsightsFeed />
           </div>
         </div>

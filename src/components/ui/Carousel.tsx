@@ -56,7 +56,7 @@ export function Carousel({
   }, []);
 
   return (
-    <div className={`w-full overflow-hidden bg-[#0A1F1C]/40 backdrop-blur-md ${className}`}>
+    <div className={`w-full overflow-hidden bg-black/40 backdrop-blur-md ${className}`}>
       <div className="relative">
         <div
           ref={scrollRef}
@@ -73,8 +73,8 @@ export function Carousel({
           ))}
         </div>
         
-        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#0A1F1C] to-transparent" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#0A1F1C] to-transparent" />
+        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-black to-transparent" />
+        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-black to-transparent" />
       </div>
     </div>
   );
