@@ -3,11 +3,11 @@ import * as THREE from 'three';
 import { isWebGLAvailable } from '../../utils/webgl';
 
 class Particle {
-  pos: THREE.Vector3;
-  speed: number;
-  offset: number;
-  initialY: number;
-  initialZ: number;
+  pos!: THREE.Vector3;
+  speed!: number;
+  offset!: number;
+  initialY!: number;
+  initialZ!: number;
 
   constructor() {
     this.reset();

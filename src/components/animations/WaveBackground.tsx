@@ -15,6 +15,11 @@ export function WaveBackground() {
         geometry: THREE.PlaneGeometry,
         clock: THREE.Clock;
 
+    // Track initial dimensions to avoid unnecessary resizes
+    let lastWidth = window.innerWidth;
+    let lastHeight = window.innerHeight;
+    let resizeTimeout: number;
+
     const init = () => {
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0x000000);
@@ -67,9 +72,30 @@ export function WaveBackground() {
 
     const onWindowResize = () => {
       if (!camera || !renderer) return;
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      
+      // Clear any pending resize timeout
+      if (resizeTimeout) {
+        clearTimeout(resizeTimeout);
+      }
+      
+      // Debounce resize events and only resize for significant changes
+      resizeTimeout = setTimeout(() => {
+        const newWidth = window.innerWidth;
+        const newHeight = window.innerHeight;
+        
+        // Only resize if width changed significantly or height changed by more than typical mobile address bar (>100px)
+        const widthChange = Math.abs(newWidth - lastWidth);
+        const heightChange = Math.abs(newHeight - lastHeight);
+        
+        if (widthChange > 50 || heightChange > 100) {
+          camera.aspect = newWidth / newHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(newWidth, newHeight);
+          
+          lastWidth = newWidth;
+          lastHeight = newHeight;
+        }
+      }, 150); // 150ms debounce
     };
 
     const animate = () => {
@@ -99,10 +125,15 @@ export function WaveBackground() {
     window.addEventListener('resize', onWindowResize);
 
     return () => {
+      if (resizeTimeout) {
+        clearTimeout(resizeTimeout);
+      }
       window.removeEventListener('resize', onWindowResize);
       renderer?.dispose();
       geometry?.dispose();
-      containerRef.current?.removeChild(renderer.domElement);
+      if (containerRef.current && renderer?.domElement) {
+        containerRef.current.removeChild(renderer.domElement);
+      }
     };
   }, []);
 
