@@ -93,7 +93,7 @@ export function DemoRequestForm({
             error={error}
             disabled={isSubmitting}
             theme={theme}
-            className="bg-opacity-10 backdrop-blur-lg"
+            className="bg-opacity-10 backdrop-blur-lg pr-60"
           />
           <div className="absolute right-3 top-1/2 -translate-y-1/2">
             <Button 

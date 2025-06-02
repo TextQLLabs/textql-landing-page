@@ -64,11 +64,11 @@ export function CTA({
             </div>
 
             {/* Form or Button Section */}
-            <div className="flex justify-center">
+            <div className="flex justify-center items-center w-full">
               <div className="hidden md:block">
-                <DemoRequestForm theme={theme} />
+                <DemoRequestForm/>
               </div>
-              <div className="md:hidden">
+              <div className="md:hidden flex justify-center">
                 <DemoRequestButton theme={theme} buttonText={buttonText} />
               </div>
             </div>
