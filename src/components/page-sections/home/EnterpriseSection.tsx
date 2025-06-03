@@ -32,7 +32,7 @@ const cloudLogos = [
 
 export function EnterpriseSection() {
   return (
-    <section className="bg-[#F5F9F8]">
+    <section className="bg-[#F5F9F8] pb-16 md:pb-32">
       <div className="mx-auto max-w-site px-6">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr,1.5fr] gap-8 md:gap-12 lg:gap-16 items-center">
           {/* Left Content */}
