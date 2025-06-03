@@ -1,4 +1,4 @@
-import { Badge, DemoRequestForm, Carousel} from "../../ui";
+import { Badge, DemoRequestForm, Carousel, MobileCarousel} from "../../ui";
 import { WaveBackground } from "../../animations";
 import { InsightsFeed } from "../../InsightsFeed/InsightsFeed";
 import { DemoRequestButton } from "../../ui/Button/DemoRequestButton";
@@ -99,26 +99,26 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
 
 
       {/* Mobile Content */}
-      <div className="md:hidden flex flex-col items-center justify-center text-center px-4">
+      <div className="md:hidden flex flex-col items-center justify-center mx-auto max-w-7xl px-4">
         <Badge
           variant="default"
-          className="inline-flex items-center bg-[#B8D8D0]/10 px-3 py-1 mb-8 mt-8 backdrop-blur-sm border border-[#B8D8D0]/20 animate-slide-up animation-delay-100"
+          className="inline-flex bg-[#B8D8D0]/10 px-3 py-1 mb-8 mt-8 backdrop-blur-sm border border-[#B8D8D0]/20 animate-slide-up animation-delay-100"
         >
-          <div className="text-center h-2 w-2 bg-[#B8D8D0] animate-pulse mr-2" />
+          <div className=" h-2 w-2 bg-[#B8D8D0] animate-pulse mr-2" />
           <span className="animate-fade-in animation-delay-200">Ana is now generally available</span>
         </Badge>
 
-        <div className="mb-8 w-full">
+        <div className="mb-8 w-full text-center">
           <h1 className="text-5xl md:text-8xl font-light bg-gradient-to-r from-[#B8D8D0] via-[#B8D8D0] to-[#729E8C] inline-block text-transparent bg-clip-text tracking-tight mb-4 md:mb-6 animate-slide-up animation-delay-200">
             Ana
           </h1>
-          <h2 className="ml-3 text-4xl md:text-7xl font-light leading-[1.1] text-white animate-slide-up animation-delay-300">
+          <h2 className="text-4xl md:text-7xl font-light leading-[1.1] text-white animate-slide-up animation-delay-300">
             finds insights
             <br />
             you cannot
           </h2>
         </div>
-        <p className="mb-12 text-xl md:text-3xl font-light text-[#B8D8D0] animate-slide-up animation-delay-400 w-full">
+        <p className="mb-12 text-xl md:text-3xl font-light text-[#B8D8D0] animate-slide-up animation-delay-400 w-full text-center">
           Deploy agents across all of your databases & systems of record
         </p>
         <div className="md:hidden flex justify-center w-full animate-slide-up animation-delay-500">
@@ -128,7 +128,6 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
           />
         </div>
       </div>
-
       {/* Logo Carousel - MOBILE - Fixed at bottom */}
       {showLogoCarousel && (
         <div className="md:hidden bg-none backdrop-blur-sm mt-40 pb-4">
@@ -137,7 +136,7 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
               Ana finds insights in your existing data stack
             </p>
             <div className="">
-              <Carousel items={logos} />
+              <MobileCarousel items={logos} speed={5} />
             </div>
           </div>
         </div>
@@ -158,3 +157,4 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
     </section>
   );
 }
+

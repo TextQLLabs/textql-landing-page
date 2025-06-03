@@ -12,6 +12,7 @@ export * from './Typography';
 // Layout Components
 export * from './Form';
 export * from './Carousel';
+export * from './MobileCarousel';
 export * from '../LogoCarousel';
 
 // Image Components
