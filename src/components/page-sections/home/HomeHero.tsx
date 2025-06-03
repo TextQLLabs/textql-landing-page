@@ -120,7 +120,7 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
 
       {/* Logo Carousel - MOBILE - Fixed at bottom */}
       {showLogoCarousel && (
-        <div className="md:hidden bg-black/80 backdrop-blur-sm">
+        <div className="hidden md:hidden bg-black/80 backdrop-blur-sm pb-4">
           <div className="mx-auto max-w-7xl px-6 ">
             <p className="text-sm font-medium text-[#B8D8D0]/80 mb-4 text-center">
               Ana finds insights in your existing data stack
