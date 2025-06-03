@@ -450,10 +450,6 @@ export function AllIntegrationsSection() {
       subtitle: 'Integrate with data orchestration and framework tools'
     }
   ];
-
-  const quickLinks = [
-    { name: 'Get a demo', href: '/demo' },
-  ];
   
   const currentCategory = categories.find(cat => cat.id === selectedCategory) || categories[0];
   

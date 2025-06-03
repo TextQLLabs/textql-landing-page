@@ -48,7 +48,7 @@ export function Carousel() {
   }, []);
 
   return (
-    <div className="w-full bg-white py-12">
+    <div className="w-full bg-F5F9F8 py-12">
       <div className="max-w-site mx-auto px-6">
         <div className="relative">
           {/* Gradient Overlays */}

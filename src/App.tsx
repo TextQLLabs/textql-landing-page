@@ -29,7 +29,6 @@ import Whitepaper from './pages/Whitepaper';
 import Careers from './pages/Careers';
 import JobPostingPage from './pages/careers/JobPostingPage';
 import Snowflake2025 from './pages/Databricks2025';
-import SnowflakeScheduler from './pages/snowflake-2025/scheduler';
 import Team from './pages/Team';
 import SnowflakeMcpIntegration from './pages/integrations/SnowflakeMcpIntegration';
 import Databricks2025 from './pages/Databricks2025';
