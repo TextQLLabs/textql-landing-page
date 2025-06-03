@@ -101,7 +101,7 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
       {/* Mobile Content */}
       <div className="md:hidden flex flex-col min-h-screen">
         {/* Main mobile content */}
-        <div className="flex flex-col items-center justify-center flex-1 mx-auto max-w-7xl px-4 pb-64">
+        <div className="flex flex-col items-center justify-center flex-1 mx-auto max-w-7xl px-4 pb-48">
           <Badge
             variant="default"
             className="inline-flex bg-[#B8D8D0]/10 px-3 py-1 mb-8 mt-8 backdrop-blur-sm border border-[#B8D8D0]/20 animate-slide-up animation-delay-100"
