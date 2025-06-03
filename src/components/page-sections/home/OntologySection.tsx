@@ -9,15 +9,15 @@ export function OntologySection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 min-h-[600px]">
           {/* Left Content */}
           <div className="flex flex-col justify-center py-16 lg:py-0">
-            <h2 className="text-4xl lg:text-6xl font-extralight text-[#B8D8D0] mb-6 tracking-tight">
+            <h2 className="z-10 text-center md:text-left text-4xl lg:text-6xl font-extralight text-[#B8D8D0] mb-6 tracking-tight">
               Powered by The Ontology
             </h2>
 
-            <p className="text-xl lg:text-2xl text-[#729E8C] max-w-xl mb-8">
+            <p className="z-10 text-center md:text-left text-xl lg:text-2xl text-[#729E8C] max-w-xl mb-8">
               Learn about the framework that lets TextQL join 100x more data together than other products
             </p>
 
-            <div>
+            <div className="flex justify-center z-20 md:justify-start">
               <a href="/ontology">
                 <Button 
                   variant="primary" 
@@ -31,13 +31,12 @@ export function OntologySection() {
             </div>
           </div>
 
-          {/* Right Animation Container */}
-          <div className="relative h-[400px] lg:h-full">
-            {/* Mobile version */}
-            <div className="lg:hidden absolute inset-0 opacity-20">
+           <div className="lg:hidden absolute inset-0 opacity-20">
               <OntologyPolyhedron config={{ interactive: false }} />
             </div>
-            
+
+          {/* Right Animation Container */}
+          <div className="hidden md:block relative h-[400px] lg:h-full">            
             {/* Desktop version */}
             <div className="hidden lg:block absolute inset-0">
               <OntologyPolyhedron config={{ interactive: true }} />

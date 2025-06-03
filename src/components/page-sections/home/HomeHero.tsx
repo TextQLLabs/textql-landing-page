@@ -70,12 +70,12 @@ interface HomeHeroProps {
 export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
   return (
     <section className="relative flex flex-col min-h-screen bg-black">
-      <div className="absolute inset-0 z-0 -mt-32 opacity-0 animate-fade-in animation-delay-400">
+      <div className="absolute inset-0 z-0 opacity-0 mt-6 animate-fade-in animation-delay-400">
         <WaveBackground />
       </div>
 
       {/* Main Content - Top aligned on mobile, centered on desktop */}
-      <div className="relative z-10 flex-1 mx-auto max-w-7xl px-6 md:pb-20 flex flex-col justify-start md:justify-center pt-20 md:pt-0">
+      <div className="relative z-10 flex-1 mx-auto max-w-7xl px-6 md:pb-20 flex flex-col justify-start md:justify-center pt-12 md:pt-0">
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-[1fr,600px]">
           {/* Left Content */}
           <div>
@@ -120,9 +120,9 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
 
       {/* Logo Carousel - MOBILE - Fixed at bottom */}
       {showLogoCarousel && (
-        <div className="md:hidden bg-black/80 backdrop-blur-sm py-6">
-          <div className="mx-auto max-w-7xl px-6">
-            <p className="text-sm font-medium text-[#B8D8D0]/80 mb-4">
+        <div className="md:hidden bg-black/80 backdrop-blur-sm">
+          <div className="mx-auto max-w-7xl px-6 ">
+            <p className="text-sm font-medium text-[#B8D8D0]/80 mb-4 text-center">
               Ana finds insights in your existing data stack
             </p>
             <Carousel items={logos} />

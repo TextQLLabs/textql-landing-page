@@ -28,10 +28,11 @@ import DatabricksMcpIntegration from './pages/integrations/Databricks';
 import Whitepaper from './pages/Whitepaper';
 import Careers from './pages/Careers';
 import JobPostingPage from './pages/careers/JobPostingPage';
-import Snowflake2025 from './pages/Snowflake2025';
+import Snowflake2025 from './pages/Databricks2025';
 import SnowflakeScheduler from './pages/snowflake-2025/scheduler';
 import Team from './pages/Team';
 import SnowflakeMcpIntegration from './pages/integrations/SnowflakeMcpIntegration';
+import Databricks2025 from './pages/Databricks2025';
 
 function App() {
   const location = useLocation();
@@ -87,7 +88,7 @@ function App() {
           <Route path="/whitepaper" element={<Whitepaper />} />
           <Route path="/team" element={<Team />} />
           <Route path="/snowflake-2025" element={<Snowflake2025 />} />
-          <Route path="/snowflake-2025/scheduler" element={<SnowflakeScheduler />} />
+          <Route path="/databricks-2025" element={<Databricks2025 />} />
           
           {/* Blog Routes */}
           <Route path="/blog" element={<Blog />} />
