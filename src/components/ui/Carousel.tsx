@@ -67,7 +67,7 @@ export function Carousel({
               key={index}
               src={item.src}
               alt={item.alt}
-              className={`h-5 w-auto object-contain opacity-60 grayscale hover:opacity-100 transition-opacity ${itemClassName}`}
+              className={`h-8 w-auto max-w-24 object-contain opacity-60 grayscale hover:opacity-100 transition-opacity ${itemClassName}`}
               style={{ filter: 'brightness(0) invert(1)' }}
             />
           ))}
