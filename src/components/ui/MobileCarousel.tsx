@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface MobileCarouselProps {
   items: Array<{
@@ -16,62 +16,93 @@ export function MobileCarousel({
   className = '',
   itemClassName = ''
 }: MobileCarouselProps) {
-  const [animationKey, setAnimationKey] = useState(0);
+  const scrollerRef = useRef<HTMLDivElement>(null);
 
-  // Reset animation when items change
   useEffect(() => {
-    setAnimationKey(prev => prev + 1);
-  }, [items]);
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
 
-  // Inject CSS animation styles
-  useEffect(() => {
-    const styleId = 'mobile-carousel-animation';
-    let styleElement = document.getElementById(styleId) as HTMLStyleElement;
+    // Create unique animation name to avoid conflicts
+    const animationName = `scroll-${Math.random().toString(36).substr(2, 9)}`;
     
-    if (!styleElement) {
-      styleElement = document.createElement('style');
-      styleElement.id = styleId;
-      document.head.appendChild(styleElement);
-    }
+    // Calculate the width of one set of logos
+    const firstChild = scroller.firstElementChild as HTMLElement;
+    if (!firstChild) return;
     
-    styleElement.innerHTML = `
-      @keyframes mobile-scroll {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
+    // Use ResizeObserver to get accurate width
+    const resizeObserver = new ResizeObserver(() => {
+      const scrollWidth = firstChild.scrollWidth;
+      
+      // Inject keyframes with calculated width
+      const styleId = `mobile-carousel-${animationName}`;
+      let styleElement = document.getElementById(styleId) as HTMLStyleElement;
+      
+      if (!styleElement) {
+        styleElement = document.createElement('style');
+        styleElement.id = styleId;
+        document.head.appendChild(styleElement);
       }
       
-      .mobile-carousel-scroll {
-        animation: mobile-scroll ${speed}s linear infinite;
-        will-change: transform;
-      }
-    `;
+      styleElement.innerHTML = `
+        @keyframes ${animationName} {
+          0% { transform: translateX(0px); }
+          100% { transform: translateX(-${scrollWidth}px); }
+        }
+        
+        .${animationName} {
+          animation: ${animationName} ${speed}s linear infinite;
+        }
+      `;
+      
+      // Apply animation class
+      scroller.className = `flex items-center ${animationName}`;
+    });
+
+    resizeObserver.observe(firstChild);
 
     return () => {
-      // Cleanup on unmount if needed
+      resizeObserver.disconnect();
+      const styleElement = document.getElementById(`mobile-carousel-${animationName}`);
+      if (styleElement) {
+        document.head.removeChild(styleElement);
+      }
     };
-  }, [speed]);
+  }, [speed, items]);
 
   return (
     <div className={`w-full overflow-hidden bg-black/40 backdrop-blur-md ${className}`}>
       <div className="relative">
-        <div 
-          key={animationKey}
-          className="flex gap-8 items-center mobile-carousel-scroll"
-        >
-          {/* Only duplicate once for mobile to reduce DOM load */}
-          {[...items, ...items].map((item, index) => (
-            <img
-              key={index}
-              src={item.src}
-              alt={item.alt}
-              className={`h-6 w-auto max-w-20 object-contain opacity-60 grayscale flex-shrink-0 ${itemClassName}`}
-              style={{ filter: 'brightness(0) invert(1)' }}
-              loading="lazy"
-            />
-          ))}
+        <div ref={scrollerRef} className="flex items-center">
+          {/* First set of logos */}
+          <div className="flex gap-8 items-center flex-shrink-0">
+            {items.map((item, index) => (
+              <img
+                key={`first-${index}`}
+                src={item.src}
+                alt={item.alt}
+                className={`h-6 w-auto max-w-20 object-contain opacity-60 grayscale flex-shrink-0 ${itemClassName}`}
+                style={{ filter: 'brightness(0) invert(1)' }}
+                loading="lazy"
+              />
+            ))}
+          </div>
+          
+          {/* Second set of logos for seamless loop */}
+          <div className="flex gap-8 items-center flex-shrink-0 ml-8">
+            {items.map((item, index) => (
+              <img
+                key={`second-${index}`}
+                src={item.src}
+                alt={item.alt}
+                className={`h-6 w-auto max-w-20 object-contain opacity-60 grayscale flex-shrink-0 ${itemClassName}`}
+                style={{ filter: 'brightness(0) invert(1)' }}
+                loading="lazy"
+              />
+            ))}
+          </div>
         </div>
         
-        {/* Simplified gradients for mobile */}
+        {/* Gradients */}
         <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-black to-transparent pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-black to-transparent pointer-events-none" />
       </div>
