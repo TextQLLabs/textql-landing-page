@@ -99,48 +99,52 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
 
 
       {/* Mobile Content */}
-      <div className="md:hidden flex flex-col items-center justify-center mx-auto max-w-7xl px-4">
-        <Badge
-          variant="default"
-          className="inline-flex bg-[#B8D8D0]/10 px-3 py-1 mb-8 mt-8 backdrop-blur-sm border border-[#B8D8D0]/20 animate-slide-up animation-delay-100"
-        >
-          <div className=" h-2 w-2 bg-[#B8D8D0] animate-pulse mr-2" />
-          <span className="animate-fade-in animation-delay-200">Ana is now generally available</span>
-        </Badge>
+      <div className="md:hidden flex flex-col min-h-screen">
+        {/* Main mobile content */}
+        <div className="flex flex-col items-center justify-center flex-1 mx-auto max-w-7xl px-4 pb-32">
+          <Badge
+            variant="default"
+            className="inline-flex bg-[#B8D8D0]/10 px-3 py-1 mb-8 mt-8 backdrop-blur-sm border border-[#B8D8D0]/20 animate-slide-up animation-delay-100"
+          >
+            <div className=" h-2 w-2 bg-[#B8D8D0] animate-pulse mr-2" />
+            <span className="animate-fade-in animation-delay-200">Ana is now generally available</span>
+          </Badge>
 
-        <div className="mb-8 w-full text-center">
-          <h1 className="text-5xl md:text-8xl font-light bg-gradient-to-r from-[#B8D8D0] via-[#B8D8D0] to-[#729E8C] inline-block text-transparent bg-clip-text tracking-tight mb-4 md:mb-6 animate-slide-up animation-delay-200">
-            Ana
-          </h1>
-          <h2 className="text-4xl md:text-7xl font-light leading-[1.1] text-white animate-slide-up animation-delay-300 text-center">
-            finds insights
-            <br />
-            you cannot
-          </h2>
-        </div>
-        <p className="mb-12 text-xl md:text-3xl font-light text-[#B8D8D0] animate-slide-up animation-delay-400 w-full text-center">
-          Deploy agents across all of your databases & systems of record
-        </p>
-        <div className="md:hidden flex justify-center w-full animate-slide-up animation-delay-500">
-          <DemoRequestButton
-            theme="dark"
-            buttonText="Get a demo"
-          />
-        </div>
-      </div>
-      {/* Logo Carousel - MOBILE - Fixed at bottom */}
-      {showLogoCarousel && (
-        <div className="md:hidden bg-none backdrop-blur-sm mt-40 pb-4">
-          <div className="mx-auto max-w-7xl px-6 ">
-            <p className="text-sm font-medium text-[#B8D8D0]/80 mt-4 mb-4 text-center">
-              Ana finds insights in your existing data stack
-            </p>
-            <div className="">
-              <MobileCarousel items={logos} speed={30} />
-            </div>
+          <div className="mb-8 w-full text-center">
+            <h1 className="text-5xl md:text-8xl font-light bg-gradient-to-r from-[#B8D8D0] via-[#B8D8D0] to-[#729E8C] inline-block text-transparent bg-clip-text tracking-tight mb-4 md:mb-6 animate-slide-up animation-delay-200">
+              Ana
+            </h1>
+            <h2 className="text-4xl md:text-7xl font-light leading-[1.1] text-white animate-slide-up animation-delay-300 text-center">
+              finds insights
+              <br />
+              you cannot
+            </h2>
+          </div>
+          <p className="mb-12 text-xl md:text-3xl font-light text-[#B8D8D0] animate-slide-up animation-delay-400 w-full text-center">
+            Deploy agents across all of your databases & systems of record
+          </p>
+          <div className="flex justify-center w-full animate-slide-up animation-delay-500">
+            <DemoRequestButton
+              theme="dark"
+              buttonText="Get a demo"
+            />
           </div>
         </div>
-      )}
+
+        {/* Mobile Logo Carousel - Fixed at bottom */}
+        {showLogoCarousel && (
+          <div className="bg-none backdrop-blur-sm pb-4">
+            <div className="mx-auto max-w-7xl px-6">
+              <p className="text-sm font-medium text-[#B8D8D0]/80 mb-4 text-center">
+                Ana finds insights in your existing data stack
+              </p>
+              <div className="">
+                <MobileCarousel items={logos} speed={30} />
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
 
       {/* Logo Carousel - DESKTOP */}
       {showLogoCarousel && (
@@ -155,6 +159,7 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
         </div>
       )}
     </section>
+    
   );
 }
 
