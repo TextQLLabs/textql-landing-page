@@ -8,7 +8,7 @@ export function WorkflowCarousel() {
     <section className="bg-[#F5F9F8] py-12 md:py-24">
       <div className="max-w-site mx-auto px-6">
         {/* Header */}
-        <div className="hidden md:flex items-center justify-between mb-12">
+        <div className="hidden md:flex items-center justify-center mb-12">
           <div className="max-w-2xl">
             <Heading level={2} theme="light" className="mb-4">
               Discover How Ana Transforms Industries
