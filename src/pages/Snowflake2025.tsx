@@ -230,13 +230,13 @@ style={{ filter: 'brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(65
               </p>
               <p className="text-m text-[#729E8C] font-light mb-6 max-w-2xl">
               This isn't another AI demo. We'll analyze <i>your</i> Snowflake instance live and tell you within 10 minutes if our approach won't work for your setup. Most vendors won't do that.              </p>
-              <div className="flex items-center text-[#729E8C] font-light mb-8">
+              <div className="flex items-center text-[#729E8C] font-light mb-4">
                 <MapPin className="h-5 w-5 mr-2 text-[#b4ded3]" />
                 <span>Palace Hotel, 2 New Montgomery St, San Francisco, CA 94105</span>
               </div>
               
               {/* Video section */}
-              <div className="mt-8 mb-6 w-full max-w-xl">
+              <div className="mt-2mb-6 w-full max-w-xl">
                 <video 
                   className="w-full rounded-lg shadow-lg pointer-events-none" 
                   autoPlay
@@ -248,7 +248,7 @@ style={{ filter: 'brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(65
                   <source src="/videos/snowflake-meeting.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
-                <p className="text-sm text-[#729E8C] mt-2 italic text-left">
+                <p className="text-xs text-[#729E8C] mt-2 italic text-left">
                   Watch an agent identify opportunities to improve insurance Salesforce performance using our Tableau MCP
                 </p>
               </div>
