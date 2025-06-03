@@ -210,12 +210,12 @@ function RegistrationForm() {
       </div>
       
       {/* Content */}
-      <div className="relative z-10 w-full">
+      <div className="relative z-10 w-full mt-10">
         <div className="mx-auto max-w-7xl px-4">
           <div className="grid grid-cols-1 lg:grid-cols-[1.2fr,1fr] md:gap-12 items-center">
             {/* Left Content */}
             <div>
-              <div className="flex items-center pt-4 mt-4">
+              <div className="flex items-center pt-4 mt-4 ">
                 <img 
                 src="https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/1ef677cf-ebd7-4117-53e1-e31c9aaea000/public" 
                 alt="Databrick Summit Logo" 
