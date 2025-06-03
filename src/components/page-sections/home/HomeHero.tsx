@@ -108,17 +108,17 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
           <span className="animate-fade-in animation-delay-200">Ana is now generally available</span>
         </Badge>
 
-        <div className="mb-8 w-full">
+        <div className="mb-8 w-full text-center">
           <h1 className="text-5xl md:text-8xl font-light bg-gradient-to-r from-[#B8D8D0] via-[#B8D8D0] to-[#729E8C] inline-block text-transparent bg-clip-text tracking-tight mb-4 md:mb-6 animate-slide-up animation-delay-200">
             Ana
           </h1>
-          <h2 className="ml-3 text-4xl md:text-7xl font-light leading-[1.1] text-white animate-slide-up animation-delay-300">
+          <h2 className="text-4xl md:text-7xl font-light leading-[1.1] text-white animate-slide-up animation-delay-300 text-center">
             finds insights
             <br />
             you cannot
           </h2>
         </div>
-        <p className="mb-12 text-xl md:text-3xl font-light text-[#B8D8D0] animate-slide-up animation-delay-400 w-full">
+        <p className="mb-12 text-xl md:text-3xl font-light text-[#B8D8D0] animate-slide-up animation-delay-400 w-full text-center">
           Deploy agents across all of your databases & systems of record
         </p>
         <div className="md:hidden flex justify-center w-full animate-slide-up animation-delay-500">
@@ -136,7 +136,7 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
               Ana finds insights in your existing data stack
             </p>
             <div className="">
-              <MobileCarousel items={logos} speed={25} />
+              <MobileCarousel items={logos} speed={30} />
             </div>
           </div>
         </div>

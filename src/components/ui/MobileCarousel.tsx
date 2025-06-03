@@ -17,89 +17,66 @@ export function MobileCarousel({
   itemClassName = ''
 }: MobileCarouselProps) {
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const animationIdRef = useRef(`mobile-scroll-${Math.floor(Math.random() * 1000000)}`);
+  const animationId = animationIdRef.current;
 
   useEffect(() => {
-    const scroller = scrollerRef.current;
-    if (!scroller) return;
-
-    // Create unique animation name to avoid conflicts
-    const animationName = `scroll-${Math.random().toString(36).substr(2, 9)}`;
+    // Create unique ID for style to avoid conflicts
+    const styleId = `mobile-carousel-style-${animationId}`;
+    let styleElement = document.getElementById(styleId) as HTMLStyleElement;
     
-    // Calculate the width of one set of logos
-    const firstChild = scroller.firstElementChild as HTMLElement;
-    if (!firstChild) return;
+    if (!styleElement) {
+      styleElement = document.createElement('style');
+      styleElement.id = styleId;
+      document.head.appendChild(styleElement);
+    }
     
-    // Use ResizeObserver to get accurate width
-    const resizeObserver = new ResizeObserver(() => {
-      const scrollWidth = firstChild.scrollWidth;
-      
-      // Inject keyframes with calculated width
-      const styleId = `mobile-carousel-${animationName}`;
-      let styleElement = document.getElementById(styleId) as HTMLStyleElement;
-      
-      if (!styleElement) {
-        styleElement = document.createElement('style');
-        styleElement.id = styleId;
-        document.head.appendChild(styleElement);
+    // Define the animation CSS - same approach as BannerCarousel
+    styleElement.innerHTML = `
+      @keyframes ${animationId} {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
       }
       
-      styleElement.innerHTML = `
-        @keyframes ${animationName} {
-          0% { transform: translateX(0px); }
-          100% { transform: translateX(-${scrollWidth}px); }
-        }
-        
-        .${animationName} {
-          animation: ${animationName} ${speed}s linear infinite;
-        }
-      `;
-      
-      // Apply animation class
-      scroller.className = `flex items-center ${animationName}`;
-    });
-
-    resizeObserver.observe(firstChild);
+      .${animationId} {
+        display: flex;
+        width: fit-content;
+        animation: ${animationId} ${speed}s linear infinite;
+        will-change: transform;
+        animation-play-state: running !important;
+      }
+    `;
+    
+    // Apply animation class
+    if (scrollerRef.current) {
+      scrollerRef.current.className = `flex gap-8 items-center ${animationId}`;
+    }
 
     return () => {
-      resizeObserver.disconnect();
-      const styleElement = document.getElementById(`mobile-carousel-${animationName}`);
-      if (styleElement) {
+      if (styleElement && document.head.contains(styleElement)) {
         document.head.removeChild(styleElement);
       }
     };
-  }, [speed, items]);
+  }, [speed, animationId]);
 
   return (
     <div className={`w-full overflow-hidden bg-black/40 backdrop-blur-md ${className}`}>
       <div className="relative">
-        <div ref={scrollerRef} className="flex items-center">
-          {/* First set of logos */}
-          <div className="flex gap-8 items-center flex-shrink-0">
-            {items.map((item, index) => (
-              <img
-                key={`first-${index}`}
-                src={item.src}
-                alt={item.alt}
-                className={`h-6 w-auto max-w-20 object-contain opacity-60 grayscale flex-shrink-0 ${itemClassName}`}
-                style={{ filter: 'brightness(0) invert(1)' }}
-                loading="lazy"
-              />
-            ))}
-          </div>
-          
-          {/* Second set of logos for seamless loop */}
-          <div className="flex gap-8 items-center flex-shrink-0 ml-8">
-            {items.map((item, index) => (
-              <img
-                key={`second-${index}`}
-                src={item.src}
-                alt={item.alt}
-                className={`h-6 w-auto max-w-20 object-contain opacity-60 grayscale flex-shrink-0 ${itemClassName}`}
-                style={{ filter: 'brightness(0) invert(1)' }}
-                loading="lazy"
-              />
-            ))}
-          </div>
+        <div 
+          ref={scrollerRef}
+          className={`flex gap-8 items-center ${animationId}`}
+        >
+          {/* Triple duplication for smooth looping - same as BannerCarousel */}
+          {[...items, ...items, ...items].map((item, index) => (
+            <img
+              key={index}
+              src={item.src}
+              alt={item.alt}
+              className={`h-6 w-auto max-w-20 object-contain opacity-60 grayscale flex-shrink-0 ${itemClassName}`}
+              style={{ filter: 'brightness(0) invert(1)' }}
+              loading="lazy"
+            />
+          ))}
         </div>
         
         {/* Gradients */}
