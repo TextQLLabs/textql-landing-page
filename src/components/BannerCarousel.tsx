@@ -132,7 +132,7 @@ export default function BannerCarousel({
       <div className="relative w-full">
         <div 
           ref={containerRef}
-          className="overflow-x-hidden hide-scrollbar py-1.5 px-6"
+          className="overflow-x-hidden scrollbar-hide py-1.5 px-6"
         >
           <div 
             ref={scrollerRef}

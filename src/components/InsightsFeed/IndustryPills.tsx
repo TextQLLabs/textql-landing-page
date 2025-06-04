@@ -139,7 +139,7 @@ export const IndustryPills: React.FC<IndustryPillsProps> = ({
       <div className="md:hidden">{renderMobileDropdown()}</div>
 
       {/* Desktop View - Horizontal Scroll */}
-      <div className="hidden md:block w-full max-w-screen-xl mx-auto">
+      <div className="hidden md:block w-full">
         <div className="flex flex-wrap justify-center gap-1.5">
           {INDUSTRIES.map((industry) => (
             <IndustryButton

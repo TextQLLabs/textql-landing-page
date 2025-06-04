@@ -66,14 +66,14 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-8">
             {navigation.map((item) => (
               <NavItem key={item.label} item={item} />
             ))}
           </div>
 
           {/* Desktop Actions */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-4">
             {/* Design System link - commented out
             {isDevelopment && (
               <Link to="/design-system">
@@ -100,7 +100,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-[#B8D8D0] hover:text-[#729E8C] transition-colors duration-300"
+            className="lg:hidden p-2 text-[#B8D8D0] hover:text-[#729E8C] transition-colors duration-300"
           >
             {isMenuOpen ? (
               <X className="w-6 h-6" />
@@ -113,7 +113,7 @@ export default function Navbar() {
         {/* Mobile Menu */}
         <div 
           className={`
-            md:hidden overflow-hidden transition-all duration-500 ease-in-out
+            lg:hidden overflow-hidden transition-all duration-500 ease-in-out
             ${isMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}
           `}
         >

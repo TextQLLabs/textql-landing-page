@@ -42,70 +42,67 @@ const logos = [
   { src: '/images/logos/oracle.png', alt: 'Oracle' }
 ];
 
-
-interface HomeHeroProps {
-  showLogoCarousel?: boolean;
-}
-
-export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
+export function HomeHero() {
   return (
     <section className="relative flex flex-col bg-black">
-      <div className="absolute inset-0 z-0 animate-fade-in animation-delay-400">
-        <WaveBackground />
+    <div className="absolute inset-0 z-0 animate-fade-in animation-delay-400">
+      <WaveBackground />
+    </div>
+  
+    <div className="hidden md:flex flex-col relative z-10 flex-1 px-4 lg:px-6 md:mx-6 lg:mx-auto lg:max-w-7xl md:pb-20 min-h-screen pt-10 justify-center">
+      <div className="grid grid-cols-1 xl:gap-16 xl:grid-cols-[1fr,600px]">
+        {/* Left Content */}
+        <div className="flex flex-col justify-center md:min-h-screen xl:min-h-0 pb-20 max-w-none">
+          {/* Badge */}
+          <div>
+            <Badge
+              variant="default"
+              className="inline-flex items-center bg-[#B8D8D0]/10 px-3 py-1 mb-8 backdrop-blur-sm border border-[#B8D8D0]/20">
+              <div className="text-center h-2 w-2 bg-[#B8D8D0] animate-pulse mr-2" />
+              <span>Ana is now generally available</span>
+            </Badge>
+          </div>
+          {/* Hero Text */}
+          <div className="mb-8">
+            <h1 className="text-5xl md:text-6xl lg:text-8xl font-light bg-gradient-to-r from-[#B8D8D0] via-[#B8D8D0] to-[#729E8C] inline-block text-transparent bg-clip-text tracking-tight mb-4 md:mb-6 animate-slide-up animation-delay-100">
+              Ana
+            </h1>
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-light leading-[1.1] text-white animate-slide-up animation-delay-200">
+              finds insights
+              <br />
+              you cannot
+            </h2>
+          </div>
+          {/* Hero Subtext */}
+          <p className="mb-12 text-xl md:text-2xl lg:text-3xl font-light text-[#B8D8D0] animate-slide-up animation-delay-300">
+            Deploy agents across all of your databases & systems of record
+          </p>
+          <div className="hidden md:block animate-slide-up animation-delay-400 mb-16">
+            <DemoRequestForm />
+          </div>
+          <div className="md:hidden flex justify-center">
+            <DemoRequestButton
+              theme="dark"
+              buttonText="Get a demo"
+            />
+          </div>
+        </div>
+  
+        {/* Right Content - Insights Feed */}
+        {/* <div className="h-[600px] hidden md:flex pb-12 3xl:pb-0 lg:min-h-0 max-w-xl"> */}
+        <div className="h-[600px] hidden md:flex pb-12 3xl:pb-0 lg:min-h-0">
+          <InsightsFeed />
+        </div>
       </div>
-
-      <div className="hidden md:flex relative z-10 flex-1 mx-auto max-w-7xl px-6 md:pb-20 flex-col justify-start md:justify-center min-h-screen">
-        <div className="grid grid-cols-1 items-center gap-16 xl:grid-cols-[1fr,600px]">
-          {/* Left Content */}
-          <div className="flex flex-col justify-center md:min-h-screen lg:min-h-0">
-            {/* Badge */}
-            <div>
-              <Badge
-                variant="default"
-                className="inline-flex items-center bg-[#B8D8D0]/10 px-3 py-1 mb-8 backdrop-blur-sm border border-[#B8D8D0]/20">
-                <div className="text-center h-2 w-2 bg-[#B8D8D0] animate-pulse mr-2" />
-                <span>Ana is now generally available</span>
-              </Badge>
-            </div>
-            {/* Hero Text */}
-            <div className="mb-8">
-              <h1 className="text-5xl md:text-8xl font-light bg-gradient-to-r from-[#B8D8D0] via-[#B8D8D0] to-[#729E8C] inline-block text-transparent bg-clip-text tracking-tight mb-4 md:mb-6 animate-slide-up animation-delay-100">
-                Ana
-              </h1>
-              <h2 className="text-4xl md:text-7xl font-light leading-[1.1] text-white animate-slide-up animation-delay-200">
-                finds insights
-                <br />
-                you cannot
-              </h2>
-            </div>
-            {/* Hero Subtext */}
-            <p className="mb-12 text-xl md:text-3xl font-light text-[#B8D8D0] animate-slide-up animation-delay-300">
-              Deploy agents across all of your databases & systems of record
-            </p>
-            <div className="hidden md:block animate-slide-up animation-delay-400 mb-16">
-              <DemoRequestForm />
-            </div>
-            <div className="md:hidden flex justify-center">
-              <DemoRequestButton
-                theme="dark"
-                buttonText="Get a demo"
-              />
-            </div>
-          </div>
-
-          {/* Right Content - Insights Feed */}
-          <div className="h-[600px] hidden md:flex mb-20 3xl:mb-0 pb-12 3xl:pb-0">
-              <InsightsFeed />
-            </div>
-          </div>
-         {/* Logo Carousel - DESKTOP */}
-        <div className="hidden md:flex pb-10 bg-transparent">
-          <div className="mx-auto max-w-7xl px-6">
-            <p className="text-sm font-medium text-[#B8D8D0]/80 mb-4">
-              Ana finds insights in your existing data stack
-            </p>
-            <div className="mt-8"></div>
-            <Carousel items={logos} />
+      
+      {/* Logo Carousel - DESKTOP */}
+      <div className="hidden md:flex pb-20 bg-transparent mt-16 lg:mt-0">
+        <div className="mx-auto max-w-7xl px-6">
+          <p className="text-sm font-medium text-[#B8D8D0]/80 mb-4">
+            Ana finds insights in your existing data stack
+          </p>
+          <div className=""></div>
+          <Carousel items={logos} />
           </div>
         </div>
       </div>

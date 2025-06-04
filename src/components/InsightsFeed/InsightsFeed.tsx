@@ -70,7 +70,7 @@ export const InsightsFeed: React.FC = () => {
       onIndustrySelect={handleIndustryChange}
       onSearchComplete={handleSearchComplete}
     >
-      <div className="h-full overflow-y-auto hide-scrollbar pr-2">
+      <div className="h-full overflow-y-auto scrollbar-hide pr-2 pl-2">
         <div className="space-y-2">
           {insights.map((insight, index) => (
             <motion.div

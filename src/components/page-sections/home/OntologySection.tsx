@@ -4,20 +4,20 @@ import { Button } from '../../ui';
 
 export function OntologySection() {
   return (
-    <section className="relative min-h-[600px] bg-black overflow-hidden">
+    <section className="relative min-h-[600px] bg-black">
       <div className="mx-auto max-w-site px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 min-h-[600px]">
           {/* Left Content */}
           <div className="flex flex-col justify-center py-16 lg:py-0">
-            <h2 className="z-10 text-center md:text-left text-4xl lg:text-6xl font-extralight text-[#B8D8D0] mb-6 tracking-tight">
+            <h2 className="z-10 text-center lg:text-left text-4xl lg:text-6xl font-extralight text-[#B8D8D0] mb-6 tracking-tight">
               Powered by The Ontology
             </h2>
 
-            <p className="z-10 text-center md:text-left text-xl lg:text-2xl text-[#729E8C] max-w-xl mb-8">
+            <p className="z-10 text-center lg:text-left text-xl lg:text-2xl text-[#729E8C] mx-auto  mb-8">
               Learn about the framework that lets TextQL join 100x more data together than other products
             </p>
 
-            <div className="flex justify-center z-20 md:justify-start">
+            <div className="flex justify-center z-20 lg:justify-start">
               <a href="/ontology">
                 <Button 
                   variant="primary" 
@@ -31,16 +31,14 @@ export function OntologySection() {
             </div>
           </div>
 
-           <div className="lg:hidden absolute inset-0 opacity-20">
+           <div className="lg:hidden absolute inset-0 opacity-40">
               <OntologyPolyhedron config={{ interactive: false }} />
             </div>
 
           {/* Right Animation Container */}
-          <div className="hidden md:block relative h-[400px] lg:h-full">            
+          <div className="hidden lg:flex justify-end relative overflow-visible pr-16 -mr-16">            
             {/* Desktop version */}
-            <div className="hidden lg:block absolute inset-0">
-              <OntologyPolyhedron config={{ interactive: false }} />
-            </div>
+              <OntologyPolyhedron config={{ interactive: false }} /> 
           </div>
         </div>
       </div>

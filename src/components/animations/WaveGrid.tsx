@@ -43,7 +43,7 @@ export function WaveGrid() {
         color: 0xB8D8D0,
         size: 0.05,
         transparent: true,
-        opacity: 0.4,
+        opacity: 0.6,
         fog: true
       });
 
@@ -97,7 +97,7 @@ export function WaveGrid() {
   return (
     <div 
       ref={containerRef} 
-      className="absolute inset-0 opacity-30"
+      className="absolute inset-0 opacity-50"
       style={{ background: 'linear-gradient(to bottom, transparent, #000)' }}
     />
   );

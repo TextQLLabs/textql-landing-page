@@ -2,14 +2,14 @@ import { OntologyPolyhedron } from '../../animations/ontology';
 
 export function OntologyHero() {
   return (
-    <section className="relative min-h-screen bg-black overflow-hidden">
+    <section className="relative min-h-screen bg-black overflow-hidden -mt-16">
       {/* Background Animation - Full viewport */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 opacity-70">
         <OntologyPolyhedron />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen pt-32 px-6">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6">
         <h1 className="text-8xl font-extralight text-[#B8D8D0] mb-6 tracking-tight text-center">
           The Ontology
         </h1>

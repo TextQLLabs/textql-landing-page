@@ -43,7 +43,7 @@ export function useOntologyScene(
 
     // Main group setup - Adjusted scale
     const mainGroup = new THREE.Group();
-    mainGroup.scale.multiplyScalar(1.8); // Reduced scale further
+    mainGroup.scale.multiplyScalar(1.4); // Reduced from 1.8 to 1.4 to prevent overflow
     mainGroup.position.y = 0; // Centered vertically
     scene.add(mainGroup);
 

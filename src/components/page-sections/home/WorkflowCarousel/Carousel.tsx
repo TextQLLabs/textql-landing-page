@@ -58,7 +58,7 @@ export function Carousel() {
           {/* Carousel Content */}
           <div 
             ref={scrollRef}
-            className="flex gap-6 overflow-x-hidden hide-scrollbar"
+            className="flex gap-6 overflow-x-hidden scrollbar-hide"
           >
             {FEATURED_WORKFLOWS.map((workflow, index) => (
               <div 

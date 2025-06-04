@@ -60,7 +60,7 @@ export function Carousel({
       <div className="relative">
         <div
           ref={scrollRef}
-          className="flex gap-12 overflow-x-hidden hide-scrollbar items-center"
+          className="flex gap-12 overflow-x-hidden scrollbar-hide items-center"
         >
           {[...items, ...items].map((item, index) => (
             <img
