@@ -114,7 +114,7 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
       {/* Mobile Content */}
       <div className="md:hidden flex flex-col min-h-screen">
         {/* Main mobile content */}
-        <div className="flex flex-col items-center justify-center flex-1 mx-auto max-w-7xl px-4 pb-48">
+        <div className="flex flex-col items-center justify-center flex-1 mx-auto max-w-7xl px-4">
           <Badge
             variant="default"
             className="inline-flex bg-[#B8D8D0]/10 px-3 py-1 mb-8 mt-8 backdrop-blur-sm border border-[#B8D8D0]/20 animate-slide-up animation-delay-100"
@@ -136,27 +136,25 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
           <p className="mb-12 text-xl md:text-3xl font-light text-[#B8D8D0] animate-slide-up animation-delay-400 w-full text-center">
             Deploy agents across all of your databases & systems of record
           </p>
-          <div className="flex justify-center w-full animate-slide-up animation-delay-500">
+          <div className="flex justify-center w-full animate-slide-up animation-delay-500 mb-16">
             <DemoRequestButton
               theme="dark"
               buttonText="Get a demo"
             />
           </div>
         </div>
-
-        {/* Mobile Logo Carousel - Fixed at bottom */}
-        {showLogoCarousel && (
-          <div className="bg-none backdrop-blur-sm pb-4">
-            <div className="mx-auto max-w-7xl px-6">
-              <p className="text-sm font-medium text-[#B8D8D0]/80 mb-4 text-center">
-                Ana finds insights in your existing data stack
-              </p>
-              <div className="">
-                <MobileCarousel items={logos} speed={30} />
-              </div>
+        
+        {/* Mobile Logo Carousel - Separate from main content */}
+        <div className="bg-transparent backdrop-blur-sm pb-8">
+          <div className="mx-auto max-w-7xl px-4">
+            <p className="text-sm font-medium text-[#B8D8D0]/80 mb-4 text-center">
+              Ana finds insights in your existing data stack
+            </p>
+            <div className="overflow-hidden">
+              <MobileCarousel items={logos} speed={30} />
             </div>
           </div>
-        )}
+        </div>
       </div>
     </section>
     

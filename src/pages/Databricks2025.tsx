@@ -209,11 +209,11 @@ function RegistrationForm() {
       </div>
       
       {/* Content */}
-      <div className="relative z-10 w-full min-h-screen flex items-center">
+      <div className="relative z-10 w-full min-h-screen flex items-center pr-4 pl-4">
         <div className="mx-auto max-w-7xl pr-4 pl-4">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr,1fr] lg:gap-36 items-center pb-36">
             {/* Left Content */}
-            <div className="flex flex-col justify-center min-h-screen lg:min-h-0 pb-28 lg:pb-0">
+            <div className="flex flex-col justify-center min-h-screen lg:min-h-0 pb-40 md:pb-28 lg:pb-0">
               <div className="flex items-left">
                 <img 
                 src="https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/1ef677cf-ebd7-4117-53e1-e31c9aaea000/public" 
@@ -222,7 +222,7 @@ function RegistrationForm() {
 style={{ filter: 'brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(654%) hue-rotate(114deg) brightness(93%) contrast(92%)' }}
               />
               </div>
-              <h1 className="text-2-5xl lg:text-4xl font-extralight leading-tight text-[#B8D8D0] mb-6">
+              <h1 className="text-md lg:text-4xl font-extralight leading-tight text-[#B8D8D0] mb-6">
               Deep Research Agents that Actually Connect to Your Databricks Data
               </h1>
               <p className="text-xs lg:text-m text-[#729E8C] font-light mb-4 max-w-2xl">
@@ -231,7 +231,7 @@ style={{ filter: 'brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(65
               <p className="text-xs lg:text-m text-[#729E8C] font-light mb-6 max-w-2xl">
               This isn't another AI demo. We'll analyze your Databricks instance live and tell you within 10 minutes if our approach won't work for your setup. Most vendors won't do that.              </p>
               <div className="flex items-center text-sm text-[#729E8C] font-light">
-                <MapPin className="h-3 w-3 mr-2 text-[#b4ded3]" />
+                <MapPin className="h-6 md:h-4 w-6 md:w-4 mr-4 md:mr-2 text-[#b4ded3]" />
                 <span>Palace Hotel, 2 New Montgomery St, San Francisco, CA 94105</span>
               </div>
               
@@ -391,7 +391,7 @@ export default function Databricks2025() {
       <RegistrationForm />
       
       {/* Trusted By Section */}
-      <section className="relative z-10 py-6 bg-black lg:pb-20 md:pb-20">
+      <section className="relative z-10 py-6 bg-black md:pb-20">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-2xl font-light text-center text-[#B8D8D0] mb-4">Trusted By</h2>
           <div className="flex flex-wrap justify-between items-center gap-x-10 gap-y-8 px-8 md:px-16">
