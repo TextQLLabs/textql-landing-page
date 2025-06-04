@@ -11,9 +11,9 @@ const bannerItems = [
     icon: '/images/navbar/databricks.png'
   },
   { 
-    text: "In SF June 2-4 for Snowflake Summit? Meet the founders of TextQL ↗",
-    link: "/snowflake-2025",
-    icon: '/images/navbar/snowflake.png'
+    text: "In SF June 9-12 for Databricks Summit? Meet the founders of TextQL ↗",
+    link: "/databricks-2025",
+    icon: '/images/navbar/databricks.png'
   }
 ];
 
