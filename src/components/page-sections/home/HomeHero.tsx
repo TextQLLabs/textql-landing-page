@@ -54,8 +54,8 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
         <WaveBackground />
       </div>
 
-      <div className="hidden md:flex relative z-10 flex-1 mx-auto max-w-7xl px-6 md:pb-20 flex-col justify-start md:justify-center pt-12 md:pt-0">
-        <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-[1fr,600px]">
+      <div className="hidden md:flex relative z-10 flex-1 mt-24 3xl:mt-0 mx-auto max-w-7xl px-6 md:pb-20 flex-col justify-start md:justify-center pt-12 md:pt-0">
+        <div className="grid grid-cols-1 items-center gap-16 2xl:grid-cols-[1fr,600px]">
           {/* Left Content */}
           <div>
             <Badge
@@ -79,7 +79,7 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
             <p className="mb-12 text-xl md:text-3xl font-light text-[#B8D8D0] animate-slide-up animation-delay-300">
               Deploy agents across all of your databases & systems of record
             </p>
-            <div className="hidden md:block animate-slide-up animation-delay-400">
+            <div className="hidden md:block animate-slide-up animation-delay-400 mb-16">
               <DemoRequestForm />
             </div>
             <div className="md:hidden flex justify-center">
@@ -91,7 +91,7 @@ export function HomeHero({ showLogoCarousel = true }: HomeHeroProps) {
           </div>
 
           {/* Right Content - Insights Feed */}
-          <div className="h-[600px] hidden md:block">
+          <div className="h-[600px] hidden md:block mb-20 3xl:mb-0 pb-12 3xl:pb-0">
             <InsightsFeed />
           </div>
         </div>

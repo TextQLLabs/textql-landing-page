@@ -203,19 +203,19 @@ function RegistrationForm() {
   };
 
   return (
-    <section className="relative min-h-screen overflow-hidden flex items-center">
+    <section className="relative min-h-screen overflow-hidden flex items-start justify-center">
       {/* Animated Background */}
       <div className="hidden md:block absolute inset-0 z-0">
         <WaveBackground />
       </div>
       
       {/* Content */}
-      <div className="relative z-10 w-full mt-10">
+      <div className="relative z-10 w-full pt-12 lg:pt-20">
         <div className="mx-auto max-w-7xl px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr,1fr] md:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr,1fr] md:gap-12 items-start">
             {/* Left Content */}
             <div>
-              <div className="flex items-center pt-4 mt-4 ">
+              <div className="flex items-center md:mt-0 md:pt-0">
                 <img 
                 src="https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/1ef677cf-ebd7-4117-53e1-e31c9aaea000/public" 
                 alt="Databrick Summit Logo" 
@@ -223,16 +223,16 @@ function RegistrationForm() {
 style={{ filter: 'brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(654%) hue-rotate(114deg) brightness(93%) contrast(92%)' }}
               />
               </div>
-              <h1 className="text-3xl md:text-5xl lg:text-5xl font-extralight leading-tight text-[#B8D8D0] mb-6">
+              <h1 className="text-2-5xl lg:text-4xl font-extralight leading-tight text-[#B8D8D0] mb-6">
               Deep Research Agents that Actually Connect to Your Databricks Data
               </h1>
-              <p className="text-s md:text-m text-[#729E8C] font-light mb-4 max-w-2xl">
+              <p className="text-xs lg:text-m text-[#729E8C] font-light mb-4 max-w-2xl">
               You've got millions of rows in Databricks and you've tried AI research tools. But you're still waiting weeks for insights that should take hours. The problem isn't AI capability—it's that most tools can't actually work with <i>your</i> data architecture.
               </p>
-              <p className="text-m text-[#729E8C] font-light mb-6 max-w-2xl">
+              <p className="text-xs lg:text-m text-[#729E8C] font-light mb-6 max-w-2xl">
               This isn't another AI demo. We'll analyze your Databricks instance live and tell you within 10 minutes if our approach won't work for your setup. Most vendors won't do that.              </p>
-              <div className="flex items-center text-[#729E8C] font-light">
-                <MapPin className="h-5 w-5 mr-2 text-[#b4ded3]" />
+              <div className="flex items-center text-sm text-[#729E8C] font-light">
+                <MapPin className="h-3 w-3 mr-2 text-[#b4ded3]" />
                 <span>Palace Hotel, 2 New Montgomery St, San Francisco, CA 94105</span>
               </div>
               
@@ -256,7 +256,7 @@ style={{ filter: 'brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(65
             </div>
 
             {/* Right Content - Registration Form */}
-            <div className="lg:w-4/5 mx-auto bg-black/20 backdrop-blur-sm rounded-lg p-6 shadow-lg pt-2 mt-8 md:mt-16 mb-16 md:mb-0 border border-[#729E8C]/30">
+            <div className="lg:w-4/5 mx-auto bg-black/20 backdrop-blur-sm rounded-lg p-6 shadow-lg pt-2 mb-8 lg:mb-0 border border-[#729E8C]/30">
               <Text variant="header" className="text-lg mt-2 mb-5 text-[#B8D8D0]">
                 RSVP to a session
               </Text>

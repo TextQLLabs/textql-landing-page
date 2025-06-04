@@ -7,9 +7,7 @@ const footerLinks = {
     links: [
       { label: 'Agents', href: '/agents' },
       { label: 'Ontology', href: '/ontology' },
-      { label: 'Integrations', href: '/integrations/all' },
       { label: 'Enterprise', href: '/enterprise' },
-      { label: 'Workflows', href: '/workflows' }
     ]
   },
   workflows: {
@@ -24,16 +22,29 @@ const footerLinks = {
       { label: 'Content Performance Optimization', href: '/workflows/content-performance' },
       { label: 'Risk Assessment & Pricing', href: '/workflows/risk-assessment' },
       { label: 'Production Efficiency', href: '/workflows/production-efficiency' },
-      { label: 'Digital Health Transformation', href: '/workflows/digital-health' }
+      { label: 'Digital Health Transformation', href: '/workflows/digital-health' },
+      { label: 'All Workflows', href: '/workflows/all' },
     ]
   },
+  // integrations: {
+  //   title: 'Popular Integrations',
+  //   links: [
+  //     { label: 'Databricks MCP', href: '/integrations/databricks' },
+  //     { label: 'Snowflake MCP', href: '/integrations/snowflake' },
+  //     { label: 'Tableau MCP', href: '/integrations/tableau' },
+  //     { label: 'All Integrations', href: '/integrations' }
+  //   ]
+  // },
   company: {
-    title: 'Company',
+    title: 'Resources',
     links: [
       { label: 'About', href: '/about' },
       { label: 'Blog', href: '/blog' },
+      { label: 'Whitepaper', href: '/whitepaper' },
+      { label: 'Documentation', href: 'https://docs.textql.com', external: true },
+      { label: 'Careers', href: '/careers' },
+      { label: 'Team', href: '/team' },
       { label: 'Pricing', href: '/pricing' },
-      { label: 'Docs', href: 'https://docs.textql.com', external: true },
       { label: 'Terms & conditions', href: '/terms' },
       { label: 'Privacy policy', href: '/privacy' }
     ]
@@ -77,10 +88,10 @@ export default function Footer() {
             </div> */}
 
             {/* Links Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(4,1fr)] gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(4,1fr)] gap-6">
               {Object.entries(footerLinks).map(([key, section]) => (
                 <div key={key}>
-                  <h3 className="text-sm font-medium text-white/60 mb-4">
+                  <h3 className="text-sm font-medium text-white mb-4">
                     {section.title}
                   </h3>
                   <ul className="space-y-3">
@@ -91,14 +102,14 @@ export default function Footer() {
                             href={link.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-sm text-white hover:text-white/80 transition-colors"
+                            className="text-sm text-white/60 hover:text-white/80 transition-colors"
                           >
                             {link.label}
                           </a>
                         ) : (
                           <Link
                             to={link.href}
-                            className="text-sm text-white hover:text-white/80 transition-colors"
+                            className="text-sm text-white/60 hover:text-white/80 transition-colors"
                           >
                             {link.label}
                           </Link>

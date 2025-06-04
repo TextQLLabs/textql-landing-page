@@ -152,7 +152,7 @@ export const navigation: NavItem[] = [
             {
               label: 'All Integrations',
               description: '',
-              href: '/integrations/all',
+              href: '/integrations',
               icon: 'Grid'
             },
             {

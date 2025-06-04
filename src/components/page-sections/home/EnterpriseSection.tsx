@@ -25,8 +25,8 @@ const features = [
 ];
 
 const cloudLogos = [
-  { src: "/images/logos/aws-white.png", alt: "AWS" },
   { src: "/images/logos/azure-white.png", alt: "Azure" },
+  { src: "/images/logos/aws-white.png", alt: "AWS" },
   { src: "/images/logos/gcp-white.png", alt: "Google Cloud" }
 ];
 
@@ -53,7 +53,7 @@ export function EnterpriseSection() {
                     alt={logo.alt}
                     className="w-full h-full object-contain brightness-0 opacity-20"
                   />
-                  <div className="absolute inset-0 mix-blend-overlay bg-[#2A3B35]" />
+                  <div className="absolute inset-0 mix-blend-overlay bg-transparent" />
                 </div>
               ))}
             </div>

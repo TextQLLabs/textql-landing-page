@@ -39,7 +39,7 @@ export function OntologySection() {
           <div className="hidden md:block relative h-[400px] lg:h-full">            
             {/* Desktop version */}
             <div className="hidden lg:block absolute inset-0">
-              <OntologyPolyhedron config={{ interactive: true }} />
+              <OntologyPolyhedron config={{ interactive: false }} />
             </div>
           </div>
         </div>

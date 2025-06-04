@@ -22,7 +22,7 @@ export default function Layout() {
     <>
       <BannerCarousel items={bannerItems} />
       <Navbar />
-      <div className="mt-32 md:mt-12">
+      <div className="mt-28 sm:mt-26 md:mt-24">
         <Outlet />
       </div>
       <Footer />
