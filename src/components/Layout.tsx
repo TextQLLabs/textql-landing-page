@@ -19,13 +19,22 @@ const bannerItems = [
 
 export default function Layout() {
   return (
-    <>
-      <BannerCarousel items={bannerItems} />
-      <Navbar />
-      <div className="mt-28 sm:mt-26 md:mt-24 lg:mt-12">
-        <Outlet />
+    <div className="min-h-screen grid grid-rows-[auto,1fr,auto]">
+      {/* Header area - fixed height */}
+      <div className="relative z-50">
+        <BannerCarousel items={bannerItems} />
+        <div className="mt-8">
+          <Navbar/>
+        </div>
       </div>
+      
+      {/* Content area - uses remaining space */}
+      <main className="relative overflow-x-hidden">
+        <Outlet />
+      </main>
+      
+      {/* Footer area - auto height */}
       <Footer />
-    </>
+    </div>
   );
 }

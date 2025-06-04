@@ -4,7 +4,6 @@ import { Button, Text } from '../components/ui';
 import { WaveBackground } from '../components/animations';
 import { SEO } from '../components/SEO';
 import { DEMO_CONFIG } from '../utils/constants';
-import SnowflakeImageAndDropdownsInfo from '../components/sections/SnowflakeImageAndDropdownsInfo';
 import DatabricksImageAndDropdownsInfo from '../components/sections/DatabricksImageAndDropdownsInfo';
 
 declare global {
@@ -203,19 +202,19 @@ function RegistrationForm() {
   };
 
   return (
-    <section className="relative min-h-screen overflow-hidden flex items-start justify-center">
+    <section className="relative overflow-hidden min-h-screen">
       {/* Animated Background */}
       <div className="hidden md:block absolute inset-0 z-0">
         <WaveBackground />
       </div>
       
       {/* Content */}
-      <div className="relative z-10 w-full pt-12 lg:pt-20">
-        <div className="mx-auto max-w-7xl px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr,1fr] md:gap-12 items-start">
+      <div className="relative z-10 w-full min-h-screen flex items-center">
+        <div className="mx-auto max-w-7xl px-4 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr,1fr] lg:gap-12 items-center pb-36">
             {/* Left Content */}
-            <div>
-              <div className="flex items-center md:mt-0 md:pt-0">
+            <div className="flex flex-col justify-center min-h-screen lg:min-h-0">
+              <div className="flex items-center md:pt-0">
                 <img 
                 src="https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/1ef677cf-ebd7-4117-53e1-e31c9aaea000/public" 
                 alt="Databrick Summit Logo" 
@@ -256,120 +255,122 @@ style={{ filter: 'brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(65
             </div>
 
             {/* Right Content - Registration Form */}
-            <div className="lg:w-4/5 mx-auto bg-black/20 backdrop-blur-sm rounded-lg p-6 shadow-lg pt-2 mb-8 lg:mb-0 border border-[#729E8C]/30">
-              <Text variant="header" className="text-lg mt-2 mb-5 text-[#B8D8D0]">
-                RSVP to a session
-              </Text>
-              
-              {submitMessage && (
-                <div className={`p-3 mb-5 rounded-md ${submitMessage.type === 'success' ? 'bg-[#729E8C]/20 text-[#B8D8D0]' : 'bg-red-500/20 text-red-200'}`}>
-                  {submitMessage.text}
-                </div>
-              )}
-              
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label htmlFor="firstName" className="block text-[#B8D8D0] text-xs mb-1.5">
-                    First name<span className="text-[#729E8C]">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    required
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    className="w-full bg-black/30 border border-[#729E8C]/30 rounded-md p-2.5 text-[#B8D8D0] text-sm focus:outline-none focus:ring-2 focus:ring-[#B8D8D0]"
-                  />
-                </div>
+            <div className="flex items-center justify-center">
+              <div className="lg:w-4/5 mx-auto bg-black/20 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-[#729E8C]/30 w-full max-w-md lg:max-w-none">
+                <Text variant="header" className="text-lg mt-2 mb-5 text-[#B8D8D0]">
+                  RSVP to a session
+                </Text>
                 
-                <div>
-                  <label htmlFor="lastName" className="block text-[#B8D8D0] text-xs mb-1.5">
-                    Last name<span className="text-[#729E8C]">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    required
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    className="w-full bg-black/30 border border-[#729E8C]/30 rounded-md p-2.5 text-[#B8D8D0] text-sm focus:outline-none focus:ring-2 focus:ring-[#B8D8D0]"
-                  />
-                </div>
+                {submitMessage && (
+                  <div className={`p-3 mb-5 rounded-md ${submitMessage.type === 'success' ? 'bg-[#729E8C]/20 text-[#B8D8D0]' : 'bg-red-500/20 text-red-200'}`}>
+                    {submitMessage.text}
+                  </div>
+                )}
                 
-                <div>
-                  <label htmlFor="email" className="block text-[#B8D8D0] text-xs mb-1.5">
-                    Business Email<span className="text-[#729E8C]">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="w-full bg-black/30 border border-[#729E8C]/30 rounded-md p-2.5 text-[#B8D8D0] text-sm focus:outline-none focus:ring-2 focus:ring-[#B8D8D0]"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="company" className="block text-[#B8D8D0] text-xs mb-1.5">
-                    Company name<span className="text-[#729E8C]">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="company"
-                    name="company"
-                    required
-                    value={formData.company}
-                    onChange={handleInputChange}
-                    className="w-full bg-black/30 border border-[#729E8C]/30 rounded-md p-2.5 text-[#B8D8D0] text-sm focus:outline-none focus:ring-2 focus:ring-[#B8D8D0]"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="phone" className="block text-[#B8D8D0] text-xs mb-1.5">
-                    Phone number
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="w-full bg-black/30 border border-[#729E8C]/30 rounded-md p-2.5 text-[#B8D8D0] text-sm focus:outline-none focus:ring-2 focus:ring-[#B8D8D0]"
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="biTools" className="block text-[#B8D8D0] text-xs mb-1.5">
-                  Tell us about your priorities <span className="text-[#729E8C]">(Optional)</span>
-                  </label>
-                  <textarea
-                    id="biTools"
-                    name="biTools"
-                    value={formData.biTools}
-                    onChange={handleInputChange}
-                    rows={4}
-                    className="w-full bg-black/30 border border-[#729E8C]/30 rounded-md p-2.5 text-[#B8D8D0] text-sm focus:outline-none focus:ring-2 focus:ring-[#B8D8D0]"
-                  />
-                </div>
-                            
-                <Button 
-                  type="submit"
-                  variant="primary" 
-                  size="md"
-                  disabled={isSubmitting}
-                  className="group w-full relative overflow-hidden mt-3"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#B8D8D0] via-[#B8D8D0] to-[#729E8C] opacity-20" />
-                  <span className="relative flex items-center justify-center">
-                    {isSubmitting ? 'Submitting...' : 'Register'}
-                    {!isSubmitting && <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1 text-[#b4ded3]" />}
-                  </span>
-                </Button>
-              </form>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label htmlFor="firstName" className="block text-[#B8D8D0] text-xs mb-1.5">
+                      First name<span className="text-[#729E8C]">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      required
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      className="w-full bg-black/30 border border-[#729E8C]/30 rounded-md p-2.5 text-[#B8D8D0] text-sm focus:outline-none focus:ring-2 focus:ring-[#B8D8D0]"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="lastName" className="block text-[#B8D8D0] text-xs mb-1.5">
+                      Last name<span className="text-[#729E8C]">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      required
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      className="w-full bg-black/30 border border-[#729E8C]/30 rounded-md p-2.5 text-[#B8D8D0] text-sm focus:outline-none focus:ring-2 focus:ring-[#B8D8D0]"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="email" className="block text-[#B8D8D0] text-xs mb-1.5">
+                      Business Email<span className="text-[#729E8C]">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="w-full bg-black/30 border border-[#729E8C]/30 rounded-md p-2.5 text-[#B8D8D0] text-sm focus:outline-none focus:ring-2 focus:ring-[#B8D8D0]"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="company" className="block text-[#B8D8D0] text-xs mb-1.5">
+                      Company name<span className="text-[#729E8C]">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      required
+                      value={formData.company}
+                      onChange={handleInputChange}
+                      className="w-full bg-black/30 border border-[#729E8C]/30 rounded-md p-2.5 text-[#B8D8D0] text-sm focus:outline-none focus:ring-2 focus:ring-[#B8D8D0]"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="phone" className="block text-[#B8D8D0] text-xs mb-1.5">
+                      Phone number
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="w-full bg-black/30 border border-[#729E8C]/30 rounded-md p-2.5 text-[#B8D8D0] text-sm focus:outline-none focus:ring-2 focus:ring-[#B8D8D0]"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="biTools" className="block text-[#B8D8D0] text-xs mb-1.5">
+                    Tell us about your priorities <span className="text-[#729E8C]">(Optional)</span>
+                    </label>
+                    <textarea
+                      id="biTools"
+                      name="biTools"
+                      value={formData.biTools}
+                      onChange={handleInputChange}
+                      rows={4}
+                      className="w-full bg-black/30 border border-[#729E8C]/30 rounded-md p-2.5 text-[#B8D8D0] text-sm focus:outline-none focus:ring-2 focus:ring-[#B8D8D0]"
+                    />
+                  </div>
+                              
+                  <Button 
+                    type="submit"
+                    variant="primary" 
+                    size="md"
+                    disabled={isSubmitting}
+                    className="group w-full relative overflow-hidden mt-3"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#B8D8D0] via-[#B8D8D0] to-[#729E8C] opacity-20" />
+                    <span className="relative flex items-center justify-center">
+                      {isSubmitting ? 'Submitting...' : 'Register'}
+                      {!isSubmitting && <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1 text-[#b4ded3]" />}
+                    </span>
+                  </Button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -390,7 +391,7 @@ export default function Databricks2025() {
       <RegistrationForm />
       
       {/* Trusted By Section */}
-      <section className="relative z-10 py-6 -mt-6 bg-black">
+      <section className="relative z-10 py-6 bg-black lg:pb-20 md:pb-20">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-2xl font-light text-center text-[#B8D8D0] mb-4">Trusted By</h2>
           <div className="flex flex-wrap justify-between items-center gap-x-10 gap-y-8 px-8 md:px-16">

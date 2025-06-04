@@ -7,6 +7,7 @@
   color-scheme: dark;
   background: #000000 !important;
   overscroll-behavior: none;
+  --header-height: auto; /* Dynamically calculated by grid */
 }
 
 html {
@@ -111,4 +112,26 @@ body {
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Safe viewport height that excludes header space */
+.min-h-safe-screen {
+  min-height: calc(100vh - var(--header-offset, 0px));
+}
+
+.h-safe-screen {
+  height: calc(100vh - var(--header-offset, 0px));
+}
+
+/* Flex utilities for content areas */
+.content-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.content-fill {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }

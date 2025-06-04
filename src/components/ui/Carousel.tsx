@@ -56,7 +56,7 @@ export function Carousel({
   }, []);
 
   return (
-    <div className={`w-full overflow-hidden bg-black/40 backdrop-blur-md ${className}`}>
+    <div className={`w-full overflow-hidden bg-transparent ${className}`}>
       <div className="relative">
         <div
           ref={scrollRef}
