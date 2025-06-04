@@ -19,13 +19,13 @@ const bannerItems = [
 
 export default function Layout() {
   return (
-    <div className="min-h-screen grid grid-rows-[auto,1fr,auto]">
-      {/* Header area - fixed height */}
+    <div className="min-h-screen grid grid-rows-[auto,auto,auto]">
+      {/* Header area - both components use fixed positioning */}
       <div className="relative z-50">
         <BannerCarousel items={bannerItems} />
-        <div className="mt-8">
-          <Navbar/>
-        </div>
+        <Navbar/>
+        {/* Spacer to account for fixed header height */}
+        <div className="h-[120px]"></div>
       </div>
       
       {/* Content area - uses remaining space */}

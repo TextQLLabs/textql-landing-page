@@ -210,11 +210,11 @@ function RegistrationForm() {
       
       {/* Content */}
       <div className="relative z-10 w-full min-h-screen flex items-center">
-        <div className="mx-auto max-w-7xl px-4 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr,1fr] lg:gap-12 items-center pb-36">
+        <div className="mx-auto max-w-7xl pr-4 pl-4">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr,1fr] lg:gap-36 items-center pb-36">
             {/* Left Content */}
-            <div className="flex flex-col justify-center min-h-screen lg:min-h-0">
-              <div className="flex items-center md:pt-0">
+            <div className="flex flex-col justify-center min-h-screen lg:min-h-0 pb-28 lg:pb-0">
+              <div className="flex items-left">
                 <img 
                 src="https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/1ef677cf-ebd7-4117-53e1-e31c9aaea000/public" 
                 alt="Databrick Summit Logo" 
@@ -255,8 +255,8 @@ style={{ filter: 'brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(65
             </div>
 
             {/* Right Content - Registration Form */}
-            <div className="flex items-center justify-center">
-              <div className="lg:w-4/5 mx-auto bg-black/20 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-[#729E8C]/30 w-full max-w-md lg:max-w-none">
+            <div className="flex items-center">
+              <div className="mx-auto bg-black/20 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-[#729E8C]/30 w-full max-w-md lg:max-w-none">
                 <Text variant="header" className="text-lg mt-2 mb-5 text-[#B8D8D0]">
                   RSVP to a session
                 </Text>
