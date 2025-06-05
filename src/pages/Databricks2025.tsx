@@ -202,43 +202,43 @@ function RegistrationForm() {
   };
 
   return (
-    <section className="relative overflow-hidden min-h-screen">
+    <section className="relative overflow-hidden">
       {/* Animated Background */}
       <div className="hidden md:block absolute inset-0 z-0">
         <WaveBackground />
       </div>
       
       {/* Content */}
-      <div className="relative z-10 w-full min-h-screen flex items-center pr-4 pl-4">
-        <div className="mx-auto max-w-7xl pr-4 pl-4">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr,1fr] lg:gap-36 items-center pb-36">
+      <div className="relative z-10 flex">
+        <div className="mx-auto max-w-7xl px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr,1fr] lg:gap-20">
             {/* Left Content */}
-            <div className="flex flex-col justify-center min-h-screen lg:min-h-0 pb-40 md:pb-28 lg:pb-0">
+            <div className="flex flex-col min-h-screen">
               <div className="flex items-left">
                 <img 
                 src="https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/1ef677cf-ebd7-4117-53e1-e31c9aaea000/public" 
                 alt="Databrick Summit Logo" 
-                className="h-28"
+                className="h-16"
 style={{ filter: 'brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(654%) hue-rotate(114deg) brightness(93%) contrast(92%)' }}
               />
               </div>
-              <h1 className="text-xl lg:text-2xl font-extralight leading-tight text-[#B8D8D0] mb-6">
+              <h1 className="text-xl lg:text-2xl font-extralight leading-tight text-[#B8D8D0] mb-4">
               Deep Research Agents that Actually Connect to Your Databricks Data
               </h1>
-              <p className="text-base lg:text-m text-[#729E8C] font-light mb-4 max-w-2xl">
+              <p className="text-xs lg:text-m text-[#729E8C] font-light mb-3 max-w-2xl">
               You've got millions of rows in Databricks and you've tried AI research tools. But you're still waiting weeks for insights that should take hours. The problem isn't AI capability—it's that most tools can't actually work with <i>your</i> data architecture.
               </p>
-              <p className="text-base lg:text-m text-[#729E8C] font-light mb-6 max-w-2xl">
+              <p className="text-xs lg:text-m text-[#729E8C] font-light mb-4 max-w-2xl">
               This isn't another AI demo. We'll analyze your Databricks instance live and tell you within 10 minutes if our approach won't work for your setup. Most vendors won't do that.              </p>
-              <div className="flex items-center text-sm text-[#729E8C] font-light">
-                <MapPin className="h-6 md:h-4 w-6 md:w-4 mr-4 md:mr-2 text-[#b4ded3]" />
+              <div className="flex items-center text-sm text-[#729E8C] font-light mb-4">
+                <MapPin className="h-5 w-5 mr-2 text-[#b4ded3]" />
                 <span>Palace Hotel, 2 New Montgomery St, San Francisco, CA 94105</span>
               </div>
               
               {/* Video section */}
-              <div className="mt-2 mb-6 w-full max-w-xl">
+              <div className="mb-2 flex flex-col items-center md:items-start">
                 <video 
-                  className="w-full rounded-lg shadow-lg pointer-events-none" 
+                  className="max-w-md max-h-md pointer-events-none" 
                   autoPlay
                   muted
                   loop
@@ -255,9 +255,9 @@ style={{ filter: 'brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(65
             </div>
 
             {/* Right Content - Registration Form */}
-            <div className="flex items-center">
-              <div className="mx-auto bg-black/20 backdrop-blur-sm rounded-lg p-6 shadow-lg border border-[#729E8C]/30 w-full max-w-md lg:max-w-none">
-                <Text variant="header" className="text-lg mt-2 mb-5 text-[#B8D8D0]">
+            <div className="flex items-start mt-12">
+              <div className="mx-auto bg-black/20 backdrop-blur-sm rounded-lg p-4 shadow-lg border border-[#729E8C]/30 w-full max-w-md lg:max-w-none">
+                <Text variant="header" className="text-sm mt-1 mb-4 text-[#B8D8D0]">
                   RSVP to a session
                 </Text>
                 
@@ -270,7 +270,7 @@ style={{ filter: 'brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(65
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <label htmlFor="firstName" className="block text-[#B8D8D0] text-xs mb-1.5">
-                      First name<span className="text-[#729E8C]">*</span>
+                      Full name<span className="text-[#729E8C]">*</span>
                     </label>
                     <input
                       type="text"
@@ -283,20 +283,7 @@ style={{ filter: 'brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(65
                     />
                   </div>
                   
-                  <div>
-                    <label htmlFor="lastName" className="block text-[#B8D8D0] text-xs mb-1.5">
-                      Last name<span className="text-[#729E8C]">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="lastName"
-                      name="lastName"
-                      required
-                      value={formData.lastName}
-                      onChange={handleInputChange}
-                      className="w-full bg-black/30 border border-[#729E8C]/30 rounded-md p-2.5 text-[#B8D8D0] text-sm focus:outline-none focus:ring-2 focus:ring-[#B8D8D0]"
-                    />
-                  </div>
+
                   
                   <div>
                     <label htmlFor="email" className="block text-[#B8D8D0] text-xs mb-1.5">
@@ -351,7 +338,7 @@ style={{ filter: 'brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(65
                       name="biTools"
                       value={formData.biTools}
                       onChange={handleInputChange}
-                      rows={4}
+                      rows={1}
                       className="w-full bg-black/30 border border-[#729E8C]/30 rounded-md p-2.5 text-[#B8D8D0] text-sm focus:outline-none focus:ring-2 focus:ring-[#B8D8D0]"
                     />
                   </div>
