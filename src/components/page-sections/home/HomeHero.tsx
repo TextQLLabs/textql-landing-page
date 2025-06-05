@@ -49,10 +49,10 @@ export function HomeHero() {
       <WaveBackground />
     </div>
   
-    <div className="hidden md:flex flex-col relative z-10 flex-1 px-4 lg:px-6 md:mx-6 lg:mx-auto lg:pb-20 lg:max-w-7xl min-h-screen pt-10 justify-center">
-      <div className="grid grid-cols-1 xl:gap-16 xl:grid-cols-[1fr,600px]">
+    <div className="hidden md:flex flex-col relative z-10 flex-1 px-6 lg:px-6 xl:mx-auto lg:pb-20 lg:max-w-7xl min-h-screen pt-10 justify-center">
+      <div className="grid grid-cols-1 xl:gap-12 xl:grid-cols-[1fr,600px]">
         {/* Left Content */}
-        <div className="flex flex-col justify-center md:min-h-screen xl:min-h-0 pb-20 max-w-none">
+        <div className="flex flex-col justify-center md:min-h-screen xl:min-h-0 pb-20 max-w-none px-6">
           {/* Badge */}
           <div>
             <Badge
@@ -89,14 +89,15 @@ export function HomeHero() {
         </div>
   
         {/* Right Content - Insights Feed */}
-        {/* <div className="h-[600px] hidden md:flex pb-12 3xl:pb-0 lg:min-h-0 max-w-xl"> */}
-        <div className="h-[600px] hidden md:flex pb-12 3xl:pb-0 lg:min-h-0">
-          <InsightsFeed />
+        <div className="h-[600px] hidden md:flex pb-12 3xl:pb-0 lg:min-h-0 px-6 xl:px-6 justify-center xl:justify-start">
+          <div className="w-full max-w-[600px]">
+            <InsightsFeed />
+          </div>
         </div>
       </div>
       
       {/* Logo Carousel - DESKTOP */}
-      <div className="hidden md:flex pb-20 bg-transparent mt-16 lg:mt-0">
+      <div className="hidden md:flex pb-12 lg:pb-20 bg-transparent mt-16 lg:mt-0">
         <div className="mx-auto max-w-7xl px-6">
           <p className="text-sm font-medium text-[#B8D8D0]/80 mb-4">
             Ana finds insights in your existing data stack
