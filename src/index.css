@@ -114,6 +114,10 @@ body {
   scrollbar-width: none;
 }
 
+:root {
+  --header-offset: 120px;
+}
+
 /* Safe viewport height that excludes header space */
 .min-h-safe-screen {
   min-height: calc(100vh - var(--header-offset, 0px));
