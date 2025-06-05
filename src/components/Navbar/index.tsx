@@ -117,7 +117,7 @@ export default function Navbar() {
             ${isMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}
           `}
         >
-          <div className="px-4 py-3 space-y-1">
+          <div className={`px-4 py-3 space-y-1 ${isMenuOpen ? 'overflow-y-auto scrollbar-hide' : ''} max-h-[460px]`}>
             {navigation.map((item) => (
               <div key={item.label}>
                 {/* Main navigation item */}
