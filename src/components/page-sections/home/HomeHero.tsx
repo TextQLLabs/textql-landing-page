@@ -97,7 +97,7 @@ export function HomeHero() {
       </div>
       
       {/* Logo Carousel - DESKTOP */}
-      <div className="hidden md:flex pb-12 lg:pb-20 bg-transparent mt-16 lg:mt-0">
+      <div className="hidden md:flex pb-12 lg:pb-0 xl:pb-20 bg-transparent mt-16 lg:mt-0">
         <div className="mx-auto max-w-7xl px-6">
           <p className="text-sm font-medium text-[#B8D8D0]/80 mb-4">
             Ana finds insights in your existing data stack
