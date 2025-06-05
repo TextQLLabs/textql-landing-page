@@ -211,9 +211,9 @@ function RegistrationForm() {
       {/* Content */}
       <div className="relative z-10 flex">
         <div className="mx-auto max-w-7xl px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr,1fr] lg:gap-20 min-h-safe-screen justify-center items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr,1fr] lg:gap-36 min-h-safe-screen justify-center items-center">
             {/* Left Content */}
-            <div className="flex flex-col mt-10 md:mt-0 justify-center">
+            <div className="flex flex-col mt-10 md:mt-0 justify-center min-h-safe-screen">
               <div className="flex items">
                 <img 
                 src="https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/1ef677cf-ebd7-4117-53e1-e31c9aaea000/public" 
@@ -378,7 +378,7 @@ export default function Databricks2025() {
       <RegistrationForm />
       
       {/* Trusted By Section */}
-      <section className="relative z-10 py-6 bg-black md:pb-20">
+      <section className="relative z-10 py-24 bg-black md:pb-20">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-2xl font-light text-center text-[#B8D8D0] mb-4">Trusted By</h2>
           <div className="flex flex-wrap justify-between items-center gap-x-10 gap-y-8 px-8 md:px-16">

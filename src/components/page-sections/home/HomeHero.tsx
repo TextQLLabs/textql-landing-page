@@ -49,7 +49,7 @@ export function HomeHero() {
       <WaveBackground />
     </div>
   
-    <div className="hidden md:flex flex-col relative z-10 flex-1 px-6 lg:px-6 xl:mx-auto lg:pb-20 lg:max-w-7xl min-h-screen pt-10 justify-center">
+    <div className="hidden md:flex flex-col relative z-10 flex-1 px-6 lg:px-6 xl:mx-auto lg:pb-20 lg:max-w-7xl min-h-safe-screen pt-10 justify-center">
       <div className="grid grid-cols-1 xl:gap-12 xl:grid-cols-[1fr,600px]">
         {/* Left Content */}
         <div className="flex flex-col justify-center md:min-h-screen xl:min-h-0 pb-20 max-w-none px-6">

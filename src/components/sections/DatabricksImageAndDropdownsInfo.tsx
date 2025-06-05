@@ -15,7 +15,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ title, content, isOpen, o
         className="w-full py-4 flex justify-between items-center text-left"
         onClick={onClick}
       >
-        <span className="text-lg font-light text-[#B8D8D0]">{title}</span>
+        <span className="text-base lg:text-lg font-light text-[#B8D8D0]">{title}</span>
         <ChevronDown
           className={`w-5 h-5 text-[#B8D8D0] transition-transform duration-300 ${
             isOpen ? 'transform rotate-180' : ''
@@ -27,7 +27,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ title, content, isOpen, o
           isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="pb-4 text-[#729E8C] font-light">
+        <div className="pb-4 text-xs lg:text-lg text-[#729E8C] font-light">
           {content}
         </div>
       </div>
@@ -104,7 +104,7 @@ const DatabricksImageAndDropdownsInfo = () => {
   return (
     <section className="relative z-10 py-16 bg-black ">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-4xl font-light text-center text-[#B8D8D0] mb-12">
+        <h2 className="text-2xl lg:text-4xl font-light text-center text-[#B8D8D0] mb-6 lg:mb-12">
           Executive Deep Dive Sessions
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
