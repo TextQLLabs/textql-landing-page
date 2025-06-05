@@ -8,9 +8,10 @@ export function WorkflowLibraryHeader() {
       <div className="absolute inset-0 bg-black" />
 
       {/* FunnelFlow Animation */}
-      <div className="absolute inset-0 z-0 opacity-60 scale-125 translate-y-[-20%]">
+      <div className="absolute inset-0 z-0 opacity-60 scale-125 translate-y-[-10%] md:translate-y-[-5%] lg:translate-y-[-10%] xl:translate-y-[-20%]">
         <FunnelFlow />
       </div>
+
 
       {/* Content */}
       <div className="relative z-10 pt-32 pb-16 px-4 mt-12">
