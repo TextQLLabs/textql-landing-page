@@ -211,10 +211,10 @@ function RegistrationForm() {
       {/* Content */}
       <div className="relative z-10 flex">
         <div className="mx-auto max-w-7xl px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr,1fr] lg:gap-20">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr,1fr] lg:gap-20 min-h-screen">
             {/* Left Content */}
-            <div className="flex flex-col min-h-screen">
-              <div className="flex items-left">
+            <div className="flex flex-col">
+              <div className="flex items-start">
                 <img 
                 src="https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/1ef677cf-ebd7-4117-53e1-e31c9aaea000/public" 
                 alt="Databrick Summit Logo" 
@@ -236,7 +236,7 @@ style={{ filter: 'brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(65
               </div>
               
               {/* Video section */}
-              <div className="mb-2 flex flex-col items-center md:items-start">
+              <div className="hidden md:block mb-4 w-full max-x-site">
                 <video 
                   className="max-w-md max-h-md pointer-events-none" 
                   autoPlay
