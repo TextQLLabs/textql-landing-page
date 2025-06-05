@@ -11,8 +11,8 @@ interface TestimonialProps {
 
 export function Testimonial({ quote, author, title, ctaText = "Read the case study", ctaHref = "#" }: TestimonialProps) {
   return (
-    <section className="bg-transparent py-24 relative overflow-hidden">
-      <div className="mx-auto max-w-4xl px-6 relative">
+    <section className="bg-transparent py-12 lg:py-24 relative overflow-hidden">
+      <div className="mx-auto max-w-4xl px-12 md:px-12 relative">
         <div className="bg-black border border-[#729E8C]/20 rounded-xl p-12 relative opacity-0 animate-slide-up animation-delay-800">
           <div className="text-[#729E8C] text-[150px] font-bold leading-none absolute -top-10 -left-6">
             "

@@ -29,7 +29,7 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
         <WaveBackground />
       </div>
       
-      <div className="flex flex-col justify-center mx-auto max-w-site relative z-10 min-h-screen px-6">
+      <div className="flex flex-col justify-center mx-auto max-w-site relative z-10 min-h-screen px-6 pb-40 md:pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8 items-center px-6 max-w-xl lg:max-w-site mx-auto lg:min-h-0 pb-20">
           {/* Left Column - Hero Content */}
           <div className="text-left">
