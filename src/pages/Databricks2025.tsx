@@ -222,7 +222,7 @@ function RegistrationForm() {
 style={{ filter: 'brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(654%) hue-rotate(114deg) brightness(93%) contrast(92%)' }}
               />
               </div>
-              <h1 className="text-xl lg:text-4xl font-extralight leading-tight text-[#B8D8D0] mb-6">
+              <h1 className="text-xl lg:text-2xl font-extralight leading-tight text-[#B8D8D0] mb-6">
               Deep Research Agents that Actually Connect to Your Databricks Data
               </h1>
               <p className="text-base lg:text-m text-[#729E8C] font-light mb-4 max-w-2xl">
