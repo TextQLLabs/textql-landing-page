@@ -86,10 +86,10 @@ export function PricingPlansSection() {
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-extralight text-[#2A3B35] mb-4">
+          <h2 className="text-2xl lg:text-4xl font-extralight text-[#2A3B35] mb-4">
             Pricing Options
           </h2>
-          <Text theme="light" color="muted" className="text-xl max-w-2xl mx-auto">
+          <Text theme="light" color="muted" className="text-base lg:text-xl max-w-2xl mx-auto">
             Choose the perfect plan for your organization's needs, all powered by our transparent ACU pricing model
           </Text>
         </div>
@@ -117,7 +117,7 @@ export function PricingPlansSection() {
                 {/* Icon & Name */}
                 <div className="flex items-start justify-between mb-4">
                   <div>
-                    <h3 className="text-2xl text-[#2A3B35]">
+                    <h3 className="text-xl lg:text-2xl text-[#2A3B35]">
                       {plan.name}
                     </h3>
                   </div>
@@ -125,12 +125,12 @@ export function PricingPlansSection() {
                 </div>
 
                 {/* Tagline */}
-                <Text theme="light" className="text-lg font-medium mb-4">
+                <Text theme="light" className="text-base lg:text-lg font-medium mb-4">
                   {plan.tagline}
                 </Text>
 
                 {/* Description */}
-                <Text theme="light" color="muted" className="mb-6">
+                <Text theme="light" color="muted" className="text-xs lg:text-base mb-6">
                   {plan.description}
                 </Text>
 
@@ -160,7 +160,7 @@ export function PricingPlansSection() {
                       ) : (
                         <X className="w-5 h-5 text-red-500 flex-shrink-0" />
                       )}
-                      <Text theme="light" className="flex-1">
+                      <Text theme="light" className="flex-1 text-xs lg:text-base">
                         {feature.text}
                       </Text>
                     </li>
@@ -170,7 +170,7 @@ export function PricingPlansSection() {
                 {/* View Features Link */}
                 <a 
                   href={plan.viewFeaturesLink} 
-                  className="text-[#2A3B35]/80 hover:text-[#2A3B35] text-sm mb-6 inline-block transition-colors"
+                  className="text-[#2A3B35]/80 hover:text-[#2A3B35] text-xs lg:text-sm mb-6 inline-block transition-colors"
                 >
                   View All Features →
                 </a>
@@ -184,7 +184,7 @@ export function PricingPlansSection() {
                   onClick={onDemoRequest}
                 >
                   <span>{plan.buttonText}</span>
-                  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-0.5" />
+                  <ArrowRight className="w-3 lg:w-4 h-3 lg:h-4 ml-2 text-xs lg:text-sm transition-transform group-hover:translate-x-0.5" />
                 </Button>
               </div>
             );
