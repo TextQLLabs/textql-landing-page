@@ -222,13 +222,13 @@ function RegistrationForm() {
 style={{ filter: 'brightness(0) saturate(100%) invert(91%) sepia(8%) saturate(654%) hue-rotate(114deg) brightness(93%) contrast(92%)' }}
               />
               </div>
-              <h1 className="text-md lg:text-4xl font-extralight leading-tight text-[#B8D8D0] mb-6">
+              <h1 className="text-xl lg:text-4xl font-extralight leading-tight text-[#B8D8D0] mb-6">
               Deep Research Agents that Actually Connect to Your Databricks Data
               </h1>
-              <p className="text-xs lg:text-m text-[#729E8C] font-light mb-4 max-w-2xl">
+              <p className="text-base lg:text-m text-[#729E8C] font-light mb-4 max-w-2xl">
               You've got millions of rows in Databricks and you've tried AI research tools. But you're still waiting weeks for insights that should take hours. The problem isn't AI capability—it's that most tools can't actually work with <i>your</i> data architecture.
               </p>
-              <p className="text-xs lg:text-m text-[#729E8C] font-light mb-6 max-w-2xl">
+              <p className="text-base lg:text-m text-[#729E8C] font-light mb-6 max-w-2xl">
               This isn't another AI demo. We'll analyze your Databricks instance live and tell you within 10 minutes if our approach won't work for your setup. Most vendors won't do that.              </p>
               <div className="flex items-center text-sm text-[#729E8C] font-light">
                 <MapPin className="h-6 md:h-4 w-6 md:w-4 mr-4 md:mr-2 text-[#b4ded3]" />
