@@ -4,7 +4,7 @@ import { missionEssay } from './content/mission';
 export function AboutMission() {
   return (
     <section className="bg-black py-24">
-      <div className="mx-auto max-w-site px-6">
+      <div className="mx-auto max-w-site px-6 pb-20 md:pb-0">
         {/* Mission Header */}
         <div className="text-center mb-32">
           <h1 className="text-8xl lg:text-[12rem] font-extralight text-[#B8D8D0] mb-12 leading-none tracking-tight w-full">

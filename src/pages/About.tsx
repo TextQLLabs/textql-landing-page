@@ -18,9 +18,9 @@ export default function About() {
       <AboutMission />
       </div>
       {/* Mission Essay */}
-      <div className="max-w-2xl lg:max-w-site px-6 lg:px-12 flex flex-col justify-center mx-auto space-y-12 pb-12">
+      <div className="max-w-2xl lg:max-w-site px-12 lg:px-12 flex flex-col justify-center mx-auto space-y-12 pb-12">
           {missionEssay.map((paragraph, index) => (
-            <p key={index} className="text-xl justify-center font-light text-[#B8D8D0] leading-relaxed">
+            <p key={index} className="text-base lg:text-xl justify-center font-light text-[#B8D8D0] leading-relaxed">
               {paragraph}
             </p>
           ))}
