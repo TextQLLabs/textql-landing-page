@@ -12,7 +12,7 @@ export default function Careers() {
   const scrollToRoles = () => {
     if (rolesRef.current) {
       const elementTop = rolesRef.current.offsetTop;
-      const offset = 0; // Adjust this value to control how much space you want above the section
+      const offset = -40; // Adjust this value to control how much space you want above the section
       const targetPosition = elementTop - offset;
       
       window.scrollTo({
