@@ -89,14 +89,14 @@ export default function Careers() {
           <h2 className="text-4xl font-extralight text-[#B8D8D0] mb-8">Open Roles</h2>
           {categories.map((category, index) => (
             <div key={index} className="mb-16">
-              <h3 className="text-xl font-extralight text-[#B8D8D0] mb-8">{category.category}</h3>
+              <h3 className="text-2xl font-extralight text-[#B8D8D0] mb-4">{category.category}</h3>
               
               <div className="border-t border-[#0A1F1C]">
                 {category.jobs.map((job, jobIndex) => (
                   <div key={jobIndex} className="py-6 border-b border-[#0A1F1C] flex justify-between items-center">
                     <div>
-                      <h4 className="text-xl font-light text-[#B8D8D0]">{job.title}</h4>
-                      <p className="text-[#729E8C] font-light mt-2">{job.location}</p>
+                      <h4 className="text-md lg:text-xl font-light text-[#B8D8D0]">{job.title}</h4>
+                      <p className="text-xs lg:text-base text-[#729E8C] font-light mt-2">{job.location}</p>
                     </div>
                     <Link 
                       to={job.url} 
