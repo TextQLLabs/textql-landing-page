@@ -30,7 +30,7 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
       </div>
       
       <div className="flex flex-col justify-center mx-auto max-w-site relative z-10 min-h-screen px-6 pb-40 md:pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8 items-center px-6 max-w-xl lg:max-w-site mx-auto lg:min-h-0 pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8 items-center px-6 max-w-xl lg:max-w-site mx-auto lg:min-h-0 pb-10 lg:pb-20">
           {/* Left Column - Hero Content */}
           <div className="text-left">
             <h1 className="text-3xl lg:text-5xl text-center lg:text-left lg:pt-0 font-extralight text-[#B8D8D0] mb-6 opacity-0 animate-slide-up animation-delay-100 mx-auto lg:mx-0">{headline}</h1>
