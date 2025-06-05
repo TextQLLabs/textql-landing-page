@@ -14,7 +14,7 @@ export default function FaqSection({ name, faqItems }: FaqSectionProps) {
   return (
     <section className="py-16 bg-black">
       <div className="mx-auto max-w-site px-6">
-        <h2 className="text-3xl font-extralight text-[#B8D8D0] mb-12">FAQ on integrating with {name}</h2>
+        <h2 className="text-2xl lg:text-3xl text-center lg:text-left font-extralight text-[#B8D8D0] mb-12">FAQ on integrating with {name}</h2>
         
         <div className="space-y-4">
           {faqItems.map((item, index) => (
@@ -22,7 +22,7 @@ export default function FaqSection({ name, faqItems }: FaqSectionProps) {
               key={index} 
               className="border border-[#0A1F1C] rounded-lg overflow-hidden group"
             >
-              <summary className="flex justify-between items-center p-6 cursor-pointer text-xl font-light text-[#B8D8D0]">
+              <summary className="flex justify-between items-center p-6 cursor-pointer text-base lg:text-xl font-light text-[#B8D8D0]">
                 {item.question}
                 <span className="transform group-open:rotate-180 transition-transform duration-200">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -31,7 +31,7 @@ export default function FaqSection({ name, faqItems }: FaqSectionProps) {
                 </span>
               </summary>
               <div className="p-6 pt-0 text-[#729E8C] font-light border-t border-[#0A1F1C]">
-                <p className="text-md text-[#729E8C] font-light leading-relaxed mt-2">{item.answer}</p>
+                <p className="text-xs lg:text-md text-[#729E8C] font-light leading-relaxed mt-2">{item.answer}</p>
               </div>
             </details>
           ))}

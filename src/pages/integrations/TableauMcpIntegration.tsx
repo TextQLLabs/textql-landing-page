@@ -240,10 +240,10 @@ export default function TableauMcpIntegration() {
           videoUrl="/videos/tableau-mcp.m4v"
         />
       </section>
-      <Testimonial
+      {/* <Testimonial
           quote="This is the best Tableau AI on the market—by a massive margin."
           author="F100 CIO"
-        />
+        /> */}
 
         
     

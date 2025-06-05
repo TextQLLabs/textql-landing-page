@@ -8,11 +8,11 @@ export function JoinsContent() {
         <Text 
           variant="header" 
           theme="light"
-          className="text-4xl md:text-5xl font-extralight mb-6"
+          className="text-3xl lg:text-5xl font-extralight mb-6"
         >
           Unmatched Text to SQL at Scale
         </Text>
-        <Text theme="light" color="secondary" className="text-xl leading-relaxed">
+        <Text theme="light" color="secondary" className="text-base lg:text-xl leading-relaxed">
           Your enterprise doesn't have dozens of tables, it has hundreds of thousands. TextQL is the only platform that can connect those at scale.
         </Text>
       </div>

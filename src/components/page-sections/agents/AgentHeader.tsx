@@ -18,7 +18,7 @@ export function AgentHeader() {
             <span className="text-[#B8D8D0]">Ana Agent</span>
           </Badge>
 
-          <h1 className="text-7xl font-extralight text-[#B8D8D0] mb-6">
+          <h1 className="text-5xl lg:text-7xl font-extralight text-[#B8D8D0] mb-6">
             The Most Intelligent Agent—Ever
           </h1>
           <p className="text-xl font-light text-[#729E8C]">

@@ -1,20 +1,13 @@
-import React from 'react';
-
 export function ValuesBlock() {
   return (
-    <section className="py-16">
-      <div className="mx-auto max-w-site px-6">
+    <section className="py-8">
+      <div className="mx-auto max-w-site px-12">
         <h2 className="text-xl font-extralight text-[#B8D8D0] mb-4 uppercase tracking-wider">Real Values</h2>
         
         <div className="text-[#729E8C] font-light mb-10">
-          <p className="mb-4">Some meta about value-setting: We believe values don't mean anything if they don't have clear tradeoffs. If you try to have your cake and eat it too - you're just laying out a platitude.</p>
-          <p className="mb-4">In other words, "<span className="text-[#B8D8D0] font-normal">move fast and break things</span>" is a good value, because it acknowledges that when in doubt, you should err on the side of speed.</p>
-          <p className="mb-4">On the other side: "<span className="text-[#B8D8D0] font-normal">we work hard but maintain good WLB</span>" is a terrible value, it doesn't acknowledge that an emphasis on WLB comes at the cost of brutal and hard work.</p>
-          <div className="flex items-center mt-6">
-            <a href="/handbook" className="text-[#B8D8D0] hover:text-[#729E8C] font-light transition-colors duration-200">
-              Check out our employee handbook <span className="ml-1">→</span>
-            </a>
-          </div>
+          <p className="mb-4">We believe values don't mean anything if they don't have clear tradeoffs. If you try to have your cake and eat it too—you're just laying out a platitude.</p>
+          <p className="mb-4">In other words, <span className="text-[#B8D8D0] font-normal italic">move fast and break things</span> is a good value, because it acknowledges that when in doubt, you should err on the side of speed.</p>
+          <p className="mb-4">On the other hand, <span className="text-[#B8D8D0] font-normal italic">we work hard but maintain good work-life balance</span> is a terrible value because it doesn't acknowledge that an emphasis on work-life balance comes at the cost of brutal and hard work.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
@@ -79,6 +72,33 @@ export function ValuesBlock() {
             </p>
           </div>
         </div>
+        <div className="flex flex-col space-y-4 mt-6">
+            <a
+              href="https://www.notion.so/textql/work-with-textql-26363a9652824b1a8ed6ba63fbd6b1ac?pvs=4"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block text-[#B8D8D0] hover:text-[#729E8C] font-light transition-colors duration-200"
+            >
+              Check out our employee handbook →
+            </a>
+            <a 
+              href="https://mandate.beehiiv.com/p/the-next-trillion-dollar-company" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="block text-[#B8D8D0] hover:text-[#729E8C] font-light transition-colors duration-200"
+            >
+              Read how we want to build a trillion-dollar company →
+            </a>
+            <a 
+              href="https://mandate.beehiiv.com/p/how-do-you-give-a-players-exposure" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="block text-[#B8D8D0] hover:text-[#729E8C] font-light transition-colors duration-200"
+            >
+              Read how we want to give our team exposure →
+            </a>
+          </div>
+
       </div>
     </section>
   );

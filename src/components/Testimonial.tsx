@@ -25,14 +25,14 @@ export function Testimonial({ quote, author, title, ctaText = "Read the case stu
               <h2 className="text-2xl font-extralight text-[#B8D8D0] tracking-tight uppercase">
                 {/* TESTIMONIALS */}
               </h2>
-              <Text color="primary" className="text-2xl md:text-3xl font-light leading-relaxed italics opacity-0 animate-slide-up animation-delay-800">
+              <Text color="primary" className="text-2xl md:text-3xl italic font-light leading-relaxed italics opacity-0 animate-slide-up animation-delay-800">
                 {quote}
               </Text>
             </div>
             
             <div className="space-y-2 opacity-0 animate-slide-up animation-delay-800">
               <Text color="primary" className="font-medium italic">
-                — {author}
+                {author !== "" && <>— {author}</>}
               </Text>
               <Text color="muted" className="font-light">
                 {title}

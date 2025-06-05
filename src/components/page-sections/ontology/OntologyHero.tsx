@@ -10,11 +10,11 @@ export function OntologyHero() {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6">
-        <h1 className="text-8xl font-extralight text-[#B8D8D0] mb-6 tracking-tight text-center">
+        <h1 className="text-5xl lg:text-8xl font-extralight text-[#B8D8D0] mb-6 tracking-tight text-center">
           The Ontology
         </h1>
 
-        <p className="text-2xl text-[#729E8C] max-w-2xl mx-auto text-center">
+        <p className="text-xl lg:text-2xl text-[#729E8C] max-w-2xl mx-auto text-center">
           AI's Interface for Enterprise Data
         </p>
       </div>

@@ -88,7 +88,7 @@ export default function Team() {
       {/* Hero Section */}
       <div className="relative overflow-hidden min-h-[300px]">
         {/* Background with gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A1F1C] to-black" />
+        <div className="absolute inset-0 bg-black" />
         
         {/* Content */}
         <div className="relative z-10 pt-32 pb-16 px-4">

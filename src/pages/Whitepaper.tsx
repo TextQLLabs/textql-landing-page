@@ -21,7 +21,7 @@ export default function Whitepaper() {
       
       <div className="min-h-screen">
         {/* Hero Section */}
-        <div className="bg-black pt-32 pb-24">
+        <div className="bg-black pt-20 pb-24">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-col md:flex-row items-start justify-between gap-12">
               <div className="max-w-3xl">

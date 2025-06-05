@@ -20,8 +20,7 @@ export default function Ontology() {
         showWave={true}
         variant="wide"
         heading="Ready to unlock insights with TextQL's Ontology?"
-        subheader="Deploy our intelligent data framework in your organization today"
-        useSimpleButton={true}
+        // subheader="Deploy our intelligent data framework in your organization today"
       />
     </div>
   );

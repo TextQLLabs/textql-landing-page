@@ -15,14 +15,14 @@ export function BlogHeader({ featuredPost }: BlogHeaderProps) {
     : featuredPost?.image;
 
   return (
-    <div className="relative min-h-[600px] pt-32 bg-black">
+    <div className="relative min-h-[600px] pt-20 bg-black">
       {/* Background */}
       <div className="absolute inset-0">
         <WaveBackground />
       </div>
       
-      <div className="relative z-10 mx-auto max-w-7xl px-6 py-16">
-        <div className="grid lg:grid-cols-[1fr,1.5fr] gap-16 items-center">
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
+        <div className="grid lg:grid-cols-[1fr,1.5fr] gap-16 items-center justify-center">
           {/* Left Content */}
           <div>
             <Heading level={1} className="text-6xl mb-6">

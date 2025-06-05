@@ -3,7 +3,7 @@ import { Text } from '../../ui';
 
 export function OntologyExplanation() {
   return (
-    <section className="bg-white py-24">
+    <section className="bg-white pt-16 lg:pt-24 lg:pb-12">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
@@ -13,7 +13,7 @@ export function OntologyExplanation() {
           <Text variant="header" theme="light" className="text-4xl mb-6">
             A Composable System of Record
           </Text>
-          <Text theme="light" color="muted" className="text-xl">
+          <Text theme="light" color="muted" className="text-base lg:text-xl">
             TextQL's Ontology is a composable system of record for the data in your databases. 
             Unifying tables from databases, warehouses, business intelligence, and more.
           </Text>
@@ -96,7 +96,7 @@ export function OntologyExplanation() {
           </div>
 
           {/* Right Column - Ontology Diagram */}
-          <div>
+          <div className="hidden lg:block">
             <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden">
               <img 
                 src="https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/72fc7d25-5a18-497b-2bac-087c51cabf00/public"

@@ -30,8 +30,8 @@ const values: Value[] = [
 
 export function AboutValues() {
   return (
-    <section className="bg-[#0A1F1C] py-24">
-      <div className="mx-auto max-w-site px-6">
+    <section className="bg-[#0A1F1C] py-12 flex flex-col justify-center">
+      <div className="mx-auto max-w-site px-12">
         <div className="grid md:grid-cols-[1fr,1.5fr] gap-24">
           {/* Left Side - Header and Links */}
           <div className="space-y-8">

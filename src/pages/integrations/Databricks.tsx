@@ -225,11 +225,7 @@ export default function DatabricksMcpIntegration() {
           videoUrl="/images/integrations/databricks/databricks-visual.m4v"
         />
       </section>
-      <Testimonial
-        quote="TextQL's Databricks integration has revolutionized how we analyze our lakehouse data and ML models."
-        author="Enterprise ML Leader"
-        title="Machine Learning Director"
-      />
+
 
 <FeatureSection
         title="Advanced reasoning. Deep insights."
@@ -272,14 +268,14 @@ export default function DatabricksMcpIntegration() {
                 </div>
               </div>
               <div className="lg:col-span-1 space-y-6 relative z-50 p-6 rounded-lg">
-                <h2 className="text-4xl font-extralight text-[#B8D8D0] tracking-tight leading-tight">
+                <h2 className="text-3xl lg:text-4xl text-center lg:text-left font-extralight text-[#B8D8D0] tracking-tight leading-tight">
                   AI fluent in your Lakehouse.
                 </h2>
                 <div className="space-y-6">
-                  <p className="text-xl text-[#729E8C] font-light leading-relaxed">
+                  <p className="text-base lg:text-xl text-[#729E8C] text-center lg:text-left font-light leading-relaxed">
                   TextQL's agents can perform hundreds of joins across Delta tables, and ingest thousands of datasets from your lakehouse.
                   </p>
-                  <p className="text-xl text-[#729E8C] font-light leading-relaxed">
+                  <p className="text-base lg:text-xl text-[#729E8C] text-center lg:text-left font-light leading-relaxed">
                     After performing complex analysis—executing both Spark SQL and Python code—agents output natural language insight reports, and can update your Databricks pipelines and ML workflows.
                   </p>
                 </div>

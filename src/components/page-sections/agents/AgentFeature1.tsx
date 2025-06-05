@@ -49,7 +49,7 @@ export function AgentFeature1() {
         columns={3}
       />
       
-      <div className="flex justify-center">
+      <div className="flex justify-center mb-16">
         <a 
           href="https://docs.textql.com/core/how-it-works/architecture"
           target="_blank"
@@ -62,7 +62,7 @@ export function AgentFeature1() {
             className="group"
           >
             Read more about how we built Ana
-            <ArrowUpRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <ArrowUpRight className="w-4h-4 ml-2 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Button>
         </a>
       </div>

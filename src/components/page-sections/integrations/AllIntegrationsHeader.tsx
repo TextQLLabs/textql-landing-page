@@ -4,10 +4,10 @@ export function AllIntegrationsHeader() {
   return (
     <div className="relative overflow-hidden min-h-[500px]">
       {/* Background with gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0A1F1C] to-black" />
+      {/* <div className="absolute inset-0 bg-gradient-to-b from-[#0A1F1C] to-black" /> */}
 
       {/* FunnelFlow Animation */}
-      <div className="absolute inset-0 z-0 opacity-60 scale-125 translate-y-[-20%]">
+      <div className="absolute inset-0 z-0 opacity-60 scale-125 translate-y-[-10%] md:translate-y-[-5%] lg:translate-y-[-10%] xl:translate-y-[-20%]">
         <FunnelFlow />
       </div>
 
@@ -15,10 +15,10 @@ export function AllIntegrationsHeader() {
       <div className="relative z-10 mt-12 pt-32 pb-16 px-6">
         <div className="max-w-7xl mx-auto text-center">
           <div className="mb-6">
-            <h1 className="text-6xl font-extralight mb-6 text-[#B8D8D0]">
+            <h1 className="text-5xl lg:text-6xl font-extralight mb-6 text-[#B8D8D0]">
               Explore All Integrations
             </h1>
-            <p className="text-2xl text-[#729E8C] font-light max-w-3xl mx-auto">
+            <p className="text-base lg:text-2xl text-[#729E8C] font-light max-w-3xl mx-auto">
               TextQL is designed for plug-and-play across your data stack—from data warehouses, BI tools, to communication platforms.
             </p>
           </div>

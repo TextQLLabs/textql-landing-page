@@ -12,7 +12,7 @@ export function JoinsContent() {
         >
           Ontology-Powered Joins at Scale
         </Text>
-        <Text theme="light" color="secondary" className="text-xl leading-relaxed">
+        <Text theme="light" color="secondary" className="text-base lg:text-xl leading-relaxed">
           TextQL's Ontology is the foundation that enables our unmatched join capabilities, 
           connecting hundreds of tables through semantic understanding.
         </Text>

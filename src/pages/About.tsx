@@ -1,9 +1,11 @@
+import { ValuesBlock } from '../components/careers/ValuesBlock';
 import { AboutHero, AboutMission, AboutValues } from '../components/page-sections/about';
+import { missionEssay } from '../components/page-sections/about/content/mission';
 import { SEO } from '../components/SEO';
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-black">
+    <div className="bg-black">
       <SEO 
         title="About | TextQL"
         description="Learn about TextQL's mission and team. We're building the future of enterprise data analysis with AI."
@@ -11,9 +13,19 @@ export default function About() {
         ogImage="https://textql.com/social-preview.png"
       />
       
+      <div className="min-h-screen flex flex-col justify-center"> 
       <AboutHero />
       <AboutMission />
-      <AboutValues />
+      </div>
+      {/* Mission Essay */}
+      <div className="lg:max-w-site md:max-w-2xl flex flex-col justify-center mx-auto space-y-12 pb-12">
+          {missionEssay.map((paragraph, index) => (
+            <p key={index} className="text-xl justify-center font-light text-[#B8D8D0] leading-relaxed">
+              {paragraph}
+            </p>
+          ))}
+        </div>
+      <ValuesBlock />
     </div>
   );
 }

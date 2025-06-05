@@ -62,19 +62,19 @@ export function FeatureGrid({
           <Badge 
             variant={badge.variant || 'outline'} 
             theme={theme} 
-            className="text-lg px-6 py-2"
+            className="text-md lg:text-lg px-6 py-2"
           >
             {badge.text}
           </Badge>
         )}
 
         <div className="space-y-4">
-          <h2 className={`text-7xl font-extralight ${textColor}`}>
+          <h2 className={`text-4xl lg:text-7xl font-extralight ${textColor}`}>
             {title}
           </h2>
           
           {subtitle && (
-            <h3 className={`text-3xl font-light ${textColor}`}>
+            <h3 className={`text-xl lg:text-3xl font-light ${textColor}`}>
               {subtitle}
             </h3>
           )}
@@ -83,7 +83,7 @@ export function FeatureGrid({
             <Text 
               color="muted" 
               theme={theme} 
-              className="text-2xl font-light max-w-3xl mx-auto"
+              className="text-base lg:text-2xl font-light max-w-3xl mx-auto"
             >
               {description}
             </Text>
@@ -105,7 +105,7 @@ export function FeatureGrid({
           >
             <div className="space-y-6">
               {feature.icon && (
-                <feature.icon className={`w-8 h-8 ${textColor}`} />
+                <feature.icon className={`w-8 h-8 ${textColor} mx-auto lg:mx-0`} />
               )}
               {feature.image && (
                 <div className={`${imageSizes[imageSize]} flex items-center`}>
@@ -113,7 +113,7 @@ export function FeatureGrid({
                     src={feature.image.src}
                     alt={feature.image.alt}
                     className={`
-                      h-full w-auto object-contain
+                      h-full w-auto object-contain mx-auto lg:mx-0
                       ${feature.image.invert && theme === 'light' ? 'invert' : ''}
                     `}
                   />
@@ -121,13 +121,14 @@ export function FeatureGrid({
               )}
               <Text 
                 theme={theme} 
-                className="text-xl font-medium"
+                className="text-center lg:text-left text-lg lg:text-xl font-medium"
               >
                 {feature.title}
               </Text>
               <Text 
                 color="muted" 
                 theme={theme}
+                className="text-center lg:text-left text-base lg:text-lg font-light"
               >
                 {feature.description}
               </Text>

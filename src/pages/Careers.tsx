@@ -4,12 +4,22 @@ import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { jobs } from '../data/JobData';
 import { MissionBlock, ValuesBlock } from '../components/careers';
+import { WaveBackground } from '../components/animations/WaveBackground';
 
 export default function Careers() {
   const rolesRef = useRef<HTMLDivElement>(null);
 
   const scrollToRoles = () => {
-    rolesRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (rolesRef.current) {
+      const elementTop = rolesRef.current.offsetTop;
+      const offset = 0; // Adjust this value to control how much space you want above the section
+      const targetPosition = elementTop - offset;
+      
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+    }
   };
 
   // Group jobs by department
@@ -37,19 +47,20 @@ export default function Careers() {
       />
       
       {/* Hero Section */}
-      <div className="relative overflow-hidden min-h-[500px]">
+      <div className="relative overflow-hidden min-h-[500px] pb-40 min-h-screen flex flex-col justify-center">
         {/* Background with gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A1F1C] to-black" />
-        
+        <div className="absolute inset-0 z-0 animate-fade-in animation-delay-400">
+      <WaveBackground />
+    </div>        
         {/* Content */}
-        <div className="relative z-10 pt-32 pb-4 px-4">
+        <div className="relative z-10 pb-4 px-12">
           <div className="max-w-5xl mx-auto text-center">
             <div className="mb-6">
               <h1 className="text-6xl mt-20 font-extralight mb-6 text-[#B8D8D0]">
                 Help us build the future of AI
               </h1>
               <p className="text-2xl text-[#729E8C] font-light max-w-3xl mx-auto mb-8">
-                Join our team and help reshape how the world's best enterprises interface with their data
+              We're on a mission is to drive the cost of a data-driven decision to zero.
               </p>
               <button 
                 onClick={scrollToRoles}
@@ -66,13 +77,15 @@ export default function Careers() {
       </div>
 
       {/* Mission Block */}
-      <MissionBlock />
+      {/* <MissionBlock /> */}
 
       {/* Values Block */}
-      <ValuesBlock />
+      <div className="px-6">
+        <ValuesBlock />
+      </div>
 
       <section ref={rolesRef} className="py-16 bg-black/30">
-        <div className="mx-auto max-w-site px-6">
+        <div className="mx-auto max-w-site px-12">
           <h2 className="text-4xl font-extralight text-[#B8D8D0] mb-8">Open Roles</h2>
           {categories.map((category, index) => (
             <div key={index} className="mb-16">

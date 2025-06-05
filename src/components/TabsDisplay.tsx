@@ -55,7 +55,7 @@ export default function TabsDisplay<T extends string>({
   return (
     <section className="bg-black py-24 border-t border-[#B8D8D0]/10">
       <div className="mx-auto max-w-7xl px-6">
-        <h2 className="text-5xl font-extralight text-[#B8D8D0] tracking-tight leading-tight text-center mb-16">
+        <h2 className="text-3xl lg:text-5xl font-extralight text-[#B8D8D0] tracking-tight leading-tight text-center mb-8 lg:mb-16">
           {title}
         </h2>
 
@@ -65,10 +65,10 @@ export default function TabsDisplay<T extends string>({
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 p-12">
             {/* Left column - Text content */}
             <div className="flex flex-col justify-center">
-              <h3 className="text-4xl font-light text-gray-900 mb-6 transition-opacity duration-300">
+              <h3 className="text-2xl lg:text-4xl font-light text-gray-900 mb-3 lg:mb-6 transition-opacity duration-300">
                 {activeTabContent?.title || ''}
               </h3>
-              <Text className="text-xl font-light leading-relaxed text-gray-700 transition-opacity duration-300">
+              <Text className="text-base lg:text-xl font-light leading-relaxed mb-2 text-gray-700 transition-opacity duration-300">
                 {activeTabContent?.description || ''}
               </Text>
             </div>
@@ -115,7 +115,7 @@ export default function TabsDisplay<T extends string>({
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-6 py-3 rounded-full text-sm font-medium transition-colors duration-200 ${
+              className={`px-6 py-3 rounded-full text-xs lg:text-sm font-medium transition-colors duration-200 ${
                 activeTab === tab
                   ? 'bg-white text-black'
                   : 'bg-[#0A1F1C]/40 text-[#B8D8D0] hover:bg-[#0A1F1C]/60'

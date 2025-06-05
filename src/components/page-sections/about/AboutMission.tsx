@@ -7,7 +7,7 @@ export function AboutMission() {
       <div className="mx-auto max-w-site px-6">
         {/* Mission Header */}
         <div className="text-center mb-32">
-          <h1 className="text-[12rem] font-extralight text-[#B8D8D0] mb-12 leading-none tracking-tight w-full">
+          <h1 className="text-8xl lg:text-[12rem] font-extralight text-[#B8D8D0] mb-12 leading-none tracking-tight w-full">
             The Mission
           </h1>
           <a 
@@ -18,15 +18,6 @@ export function AboutMission() {
           >
             Our Intelligence Hub →
           </a>
-        </div>
-
-        {/* Mission Essay */}
-        <div className="max-w-4xl mx-auto space-y-12">
-          {missionEssay.map((paragraph, index) => (
-            <p key={index} className="text-2xl font-light text-[#B8D8D0] leading-relaxed">
-              {paragraph}
-            </p>
-          ))}
         </div>
       </div>
     </section>

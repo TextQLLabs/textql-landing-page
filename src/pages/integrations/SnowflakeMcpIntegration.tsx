@@ -250,8 +250,8 @@ export default function SnowflakeMcpIntegration() {
 
 <Testimonial
         quote="TextQL's Snowflake integration has transformed how we analyze our data warehouse."
-        author="Enterprise Data Leader"
-        title="Data Analytics Director"
+        author=""
+        title=""
       />
 
 <section className="bg-transparent py-20">

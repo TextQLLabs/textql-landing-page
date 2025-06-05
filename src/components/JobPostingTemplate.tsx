@@ -38,7 +38,7 @@ const JobPostingTemplate: React.FC<JobPostingTemplateProps> = ({
   referLink
 }) => {
   return (
-    <div className="relative">
+    <div className="relative px-12">
       {/* Header with solid black background */}
       <div className="relative overflow-hidden min-h-[200px]">
         <div className="absolute inset-0 bg-black" />

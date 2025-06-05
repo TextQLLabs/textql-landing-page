@@ -20,14 +20,14 @@ export default function Enterprise() {
 
       {/* Security Features - Light Mode */}
       <section className="bg-white">
-        <div className="mx-auto max-w-site px-6 py-24">
+        <div className="mx-auto max-w-site px-6 py-16 md:py-24">
           <EnterpriseFeatureGrid1 theme="light" />
         </div>
       </section>
 
       {/* Compliance - Light Mode */}
       <section className="bg-[#F0F5F3]">
-        <div className="mx-auto max-w-site px-6 py-24">
+        <div className="mx-auto max-w-site px-6 py-16 md:py-24">
           <EnterpriseFeatureGrid2 theme="light" />
         </div>
       </section>
