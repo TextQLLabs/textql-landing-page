@@ -17,7 +17,7 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
   };
   
   return (
-    <section className="pt-24 z-0 relative">
+    <section className="z-0 relative">
       {/* Background funnel flow - positioned behind everything */}
       {/* <div className="absolute inset-0 -z-1 opacity-60 scale-125 translate-y-[15%]">
         <FunnelFlow />
@@ -26,7 +26,7 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
         <WaveBackground />
       </div>
       
-      <div className="mx-auto max-w-site relative z-10">
+      <div className="mx-auto max-w-site relative z-10 pb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Left Column - Hero Content */}
           <div className="text-left">
