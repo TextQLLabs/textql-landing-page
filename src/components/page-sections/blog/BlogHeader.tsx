@@ -21,8 +21,8 @@ export function BlogHeader({ featuredPost }: BlogHeaderProps) {
         <WaveBackground />
       </div>
       
-      <div className="relative z-10 mx-auto max-w-7xl px-12 min-h-screen flex flex-col justify-center">
-        <div className="grid lg:grid-cols-[1fr,1.5fr] gap-16 items-center justify-center">
+      <div className="relative z-10 mx-auto max-w-7xl px-12 flex flex-col justify-center">
+        <div className="grid lg:grid-cols-[1fr,1.5fr] gap-16 items-center justify-center py-12 md:py-24 md:pb-0">
           {/* Left Content */}
           <div>
             <h1 className="text-4xl lg:text-6xl text-[#B8D8D0] font-extralight mb-6">

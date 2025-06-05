@@ -19,7 +19,7 @@ export default function Blog() {
       <BlogHeader featuredPost={featuredPost} />
 
       {/* Blog Posts Grid */}
-      <div className="max-w-7xl mx-auto px-6 py-24">
+      <div className="max-w-7xl mx-auto px-6 py-12 md:py-24">
         <BlogGrid posts={blogPosts} />
       </div>
     </div>
