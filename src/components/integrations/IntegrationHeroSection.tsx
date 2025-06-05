@@ -4,6 +4,7 @@ import { FunnelFlow } from '../animations/FunnelFlow';
 import { WaveBackground } from '../animations';
 import { Testimonial } from '../Testimonial';
 import { DemoRequestForm } from '../ui/DemoRequestForm';
+import { DemoRequestButton } from '../ui/Button/DemoRequestButton';
 
 interface HeroSectionProps {
   headline: string;
@@ -28,12 +29,12 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
         <WaveBackground />
       </div>
       
-      <div className="flex flex-col justify-center mx-auto max-w-site relative z-10 min-h-screen">
-        <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8 items-center px-6 max-w-xl lg:max-w-site mx-auto min-h-screen lg:min-h-0 pb-20">
+      <div className="flex flex-col justify-center mx-auto max-w-site relative z-10 min-h-screen px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8 items-center px-6 max-w-xl lg:max-w-site mx-auto lg:min-h-0 pb-20">
           {/* Left Column - Hero Content */}
           <div className="text-left">
-            <h1 className="text-3xl lg:text-5xl text-center lg:text-left pt-20 lg:pt-0 font-extralight text-[#B8D8D0] mb-6 opacity-0 animate-slide-up animation-delay-100 mx-auto lg:mx-0">{headline}</h1>
-            <p className="text-[#729E8C] font-light text-center lg:text-left text-base lg:text-lg mb-6 opacity-0 animate-slide-up animation-delay-200">{description}</p>
+            <h1 className="text-3xl lg:text-5xl text-center lg:text-left lg:pt-0 font-extralight text-[#B8D8D0] mb-6 opacity-0 animate-slide-up animation-delay-100 mx-auto lg:mx-0">{headline}</h1>
+            <p className="text-[#729E8C] font-light text-center lg:text-left text-sm md:text-base lg:text-lg mb-6 opacity-0 animate-slide-up animation-delay-200">{description}</p>
             {/* <button 
               className="bg-[#0A1F1C] hover:bg-[#0A1F1C]/80 text-[#B8D8D0] font-light py-3 mt-2 px-6 rounded-md transition-colors duration-200"
               onClick={handleDemoClick}
@@ -43,7 +44,7 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
           </div>
           
           {/* Right Column - Video */}
-          <div className="bg-transparent opacity-0 animate-slide-up animation-delay-300 mb-60 lg:mb-0">
+          <div className="bg-transparent opacity-0 animate-slide-up animation-delay-300 lg:mb-0">
             {videoUrl ? (
               <video 
                 autoPlay 
@@ -62,9 +63,16 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
             )}
           </div>
         </div>
-        <div className="flex justify-center">
+        
+        {/* Demo Request Form - Now outside the grid as a separate block */}
+        {/* Show form on desktop/tablet, button on mobile */}
+        <div className="flex justify-center hidden md:flex">
           <DemoRequestForm />
         </div>
+        <div className="flex justify-center md:hidden">
+          <DemoRequestButton theme="dark" buttonText="Get a demo" />
+        </div>
+
         <div className="hidden">
           <Testimonial
           quote="TextQL's Databricks integration has revolutionized how we analyze our lakehouse data and ML models."

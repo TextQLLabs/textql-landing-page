@@ -16,10 +16,10 @@ export function WorkflowLibraryHeader() {
       <div className="relative z-10 pt-32 pb-16 px-4 mt-12">
         <div className="max-w-5xl mx-auto text-center">
           <div className="mb-6">
-            <h1 className="text-6xl font-extralight -6 text-[#B8D8D0]">
+            <h1 className="text-4xl lg:text-6xl font-extralight pb-6 text-[#B8D8D0]">
               Workflow Library
             </h1>
-            <p className="text-2xl text-[#729E8C] font-light max-w-3xl mx-auto">
+            <p className="text-base lg:text-2xl text-[#729E8C] font-light max-w-3xl mx-auto">
               Pre-built workflows to help you get started with TextQL. Each workflow is designed to solve specific business problems and can be customized to your needs.
             </p>
           </div>

@@ -28,7 +28,7 @@ export const jobs: JobData[] = [
   {
     id: 'member-of-technical-staff-data-engineering',
     url: '/careers/member-of-technical-staff-data-engineering',
-    title: 'Member of Technical Staff - Data Engineering',
+    title: 'Member of Technical Staff (Data Engineering)',
     department: 'Engineering',
     type: 'Full-time',
     location: 'NYC, FIDI',
@@ -57,7 +57,7 @@ export const jobs: JobData[] = [
   {
     id: 'member-of-technical-staff-customer-facing',
     url: '/careers/member-of-technical-staff-customer-facing',
-    title: 'Member of Technical Staff - Customer Facing',
+    title: 'Member of Technical Staff (Customer-Facing)',
     department: 'Engineering',
     type: 'Full-time',
     location: 'NYC, FIDI',
@@ -87,7 +87,7 @@ export const jobs: JobData[] = [
   {
     id: 'member-of-technical-staff-generalist',
     url: '/careers/member-of-technical-staff-generalist',
-    title: 'Member of Technical Staff - Generalist',
+    title: 'Member of Technical Staff (Generalist)',
     department: 'Engineering',
     type: 'Full-time',
     location: 'NYC, FIDI',

@@ -13,7 +13,7 @@ interface FaqSectionProps {
 export default function FaqSection({ name, faqItems }: FaqSectionProps) {
   return (
     <section className="py-16 bg-black">
-      <div className="mx-auto max-w-site px-6">
+      <div className="mx-auto max-w-site px-6 md:px-12">
         <h2 className="text-2xl lg:text-3xl text-center lg:text-left font-extralight text-[#B8D8D0] mb-12">FAQ on integrating with {name}</h2>
         
         <div className="space-y-4">

@@ -23,7 +23,7 @@ export function JoinsContent() {
             <div className="p-2 rounded-lg bg-[#F0F5F3]">
               <Brain className="w-6 h-6 text-[#2A3B35]" />
             </div>
-            <Text variant="header" theme="light" className="text-xl">
+            <Text variant="header" theme="light" className="text-lg">
               Intelligent Agent Architecture
             </Text>
           </div>

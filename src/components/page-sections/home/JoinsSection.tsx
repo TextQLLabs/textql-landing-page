@@ -29,7 +29,7 @@ export function JoinsSection() {
                   <div className="md:p-2 rounded-lg bg-[#F0F5F3]">
                     <Brain className="w-6 h-6 text-[#2A3B35]" />
                   </div>
-                  <Text variant="header" theme="light" className="text-xl text-center md:text-left">
+                  <Text variant="header" theme="light" className="text-lg text-center md:text-left">
                     Intelligent Agent Architecture
                   </Text>
                 </div>

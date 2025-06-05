@@ -14,9 +14,10 @@ export default function AllIntegrations() {
         canonical="https://textql.com/all-integrations"
         ogImage="https://textql.com/social-preview.png"
       />
-
+      <div className="min-h-screen flex flex-col justify-center">
       <AllIntegrationsHeader />
       <PopularIntegrationsSection />
+      </div>
       <AllIntegrationsSection />
       <CTA 
         theme="dark"

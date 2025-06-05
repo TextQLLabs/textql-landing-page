@@ -466,7 +466,7 @@ export function AllIntegrationsSection() {
 
   return (
     <section className="py-20 bg-[#F5F9F8]">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6 sm:px-12">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Left Sidebar */}
           <div className="lg:w-80 flex-shrink-0">
@@ -544,7 +544,7 @@ export function AllIntegrationsSection() {
             </div>
             
             {/* Integrations Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
               {filteredIntegrations.map((integration, index) => (
                 <div key={index} className="transform scale-90">
                   <IntegrationCard

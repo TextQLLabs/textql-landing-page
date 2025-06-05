@@ -53,13 +53,13 @@ export default function TabsDisplay<T extends string>({
   const activeTabContent = tabs && activeTab ? tabs[activeTab] : null;
 
   return (
-    <section className="bg-black py-24 border-t border-[#B8D8D0]/10">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="bg-black lg:py-24">
+      <div className="mx-auto max-w-7xl px-6 md:px-12">
         <h2 className="text-3xl lg:text-5xl font-extralight text-[#B8D8D0] tracking-tight leading-tight text-center mb-8 lg:mb-16">
           {title}
         </h2>
 
-        <div className="relative min-h-[600px] rounded-2xl overflow-hidden">
+        <div className="relative min-h-[500px] rounded-2xl overflow-hidden">
           <div className={`absolute inset-0 transition-colors duration-500 ${activeTabContent?.bgColor || 'bg-gray-900'}`} />
           
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 p-12">
@@ -68,7 +68,7 @@ export default function TabsDisplay<T extends string>({
               <h3 className="text-2xl lg:text-4xl font-light text-gray-900 mb-3 lg:mb-6 transition-opacity duration-300">
                 {activeTabContent?.title || ''}
               </h3>
-              <Text className="text-base lg:text-xl font-light leading-relaxed mb-2 text-gray-700 transition-opacity duration-300">
+              <Text className="text-xs md:text-base lg:text-xl font-light leading-relaxed mb-2 text-gray-700 transition-opacity duration-300">
                 {activeTabContent?.description || ''}
               </Text>
             </div>
@@ -110,12 +110,12 @@ export default function TabsDisplay<T extends string>({
           </div>
         </div>
 
-        <div className="flex justify-center mt-8 gap-4">
+        <div className="flex justify-center mt-8 px-12 gap-4">
           {tabOptions.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-6 py-3 rounded-full text-xs lg:text-sm font-medium transition-colors duration-200 ${
+              className={`px-2 md:px-6 py-3 rounded-full text-xs lg:text-sm font-medium transition-colors duration-200 ${
                 activeTab === tab
                   ? 'bg-white text-black'
                   : 'bg-[#0A1F1C]/40 text-[#B8D8D0] hover:bg-[#0A1F1C]/60'

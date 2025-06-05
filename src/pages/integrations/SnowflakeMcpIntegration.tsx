@@ -255,7 +255,7 @@ export default function SnowflakeMcpIntegration() {
       />
 
 <section className="bg-transparent py-20">
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-6 md:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="relative z-19">
               <video 
@@ -268,14 +268,14 @@ export default function SnowflakeMcpIntegration() {
               />
             </div>
             <div className="relative z-10 space-y-6">
-              <h2 className="text-4xl font-extralight text-[#B8D8D0] tracking-tight leading-tight">
+              <h2 className="text-2xl lg:text-4xl font-extralight text-[#B8D8D0] tracking-tight leading-tight">
                 The world's first Snowflake MCP server.
               </h2>
               <div className="space-y-6">
-                <p className="text-xl text-[#729E8C] font-light leading-relaxed">
+                <p className="text-base lg:text-xl text-[#729E8C] font-light leading-relaxed">
                 TextQL's agents can perform hundreds of joins, and ingest thousands of tables.
                 </p>
-                <p className="text-xl text-[#729E8C] font-light leading-relaxed">
+                <p className="text-base lg:text-xl text-[#729E8C] font-light leading-relaxed">
                   After performing complex analysis—executing both SQL and Python code—agents output natural language insight reports, and can update your Snowflake data pipelines.
                 </p>
               </div>

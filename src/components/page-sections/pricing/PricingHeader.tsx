@@ -26,12 +26,12 @@ export function PricingHeader() {
           <div className="mb-8 pt-10 flex justify-center">
             <div className="inline-flex items-center gap-2 bg-[#B8D8D0]/10 px-4 py-2 rounded-full border border-[#B8D8D0]/20 backdrop-blur-sm">
               <div className="h-2 w-2 bg-[#B8D8D0] rounded-full animate-pulse" />
-              <span className="text-[#B8D8D0] text-sm">Agent Compute Units (ACU)</span>
+              <span className="text-[#B8D8D0] text-xs lg:text-sm">Agent Compute Units (ACU)</span>
             </div>
           </div>
 
           {/* Main Heading */}
-          <h1 className="text-6xl md:text-7xl font-extralight text-[#B8D8D0] mb-6">
+          <h1 className="text-4xl lg:text-6xl font-extralight text-[#B8D8D0] mb-6">
             Empower Your Business with{' '}
             <span className="bg-gradient-to-r from-[#B8D8D0] via-[#B8D8D0] to-[#729E8C] inline-block text-transparent bg-clip-text">
               Outcome-Driven AI
@@ -39,7 +39,7 @@ export function PricingHeader() {
           </h1>
 
           {/* Subheadline */}
-          <h2 className="text-xl md:text-2xl font-light text-[#729E8C] mb-12 max-w-3xl mx-auto">
+          <h2 className="text-base lg:text-2xl font-light text-[#729E8C] mb-12 max-w-3xl mx-auto">
             Transparent Pricing, Predictable ROI – Every task measured in Agent Compute Units
           </h2>
 

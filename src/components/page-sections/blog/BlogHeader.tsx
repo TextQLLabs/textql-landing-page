@@ -15,20 +15,20 @@ export function BlogHeader({ featuredPost }: BlogHeaderProps) {
     : featuredPost?.image;
 
   return (
-    <div className="relative min-h-[600px] pt-20 bg-black">
+    <div className="relative bg-black">
       {/* Background */}
       <div className="absolute inset-0">
         <WaveBackground />
       </div>
       
-      <div className="relative z-10 mx-auto max-w-7xl px-6">
+      <div className="relative z-10 mx-auto max-w-7xl px-12 min-h-screen flex flex-col justify-center">
         <div className="grid lg:grid-cols-[1fr,1.5fr] gap-16 items-center justify-center">
           {/* Left Content */}
           <div>
-            <Heading level={1} className="text-6xl mb-6">
+            <h1 className="text-4xl lg:text-6xl text-[#B8D8D0] font-extralight mb-6">
               TextQL Blog
-            </Heading>
-            <Text color="muted" className="text-xl max-w-xl">
+            </h1>
+            <Text color="muted" className="text-md lg:text-xl max-w-xl">
               Insights and updates from our team on AI, data analysis, and the future of enterprise intelligence
             </Text>
           </div>
@@ -58,19 +58,19 @@ export function BlogHeader({ featuredPost }: BlogHeaderProps) {
               </div>
 
               {/* Content */}
-              <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end">
+              <div className="absolute inset-0 z-20 flex flex-col justify-center items-left px-12">
                 <Badge 
                   variant="outline" 
-                  className="mb-4 w-fit bg-[#B8D8D0]/10 backdrop-blur-sm"
+                  className="hidden sm:block mb-4 w-fit bg-[#B8D8D0]/10 backdrop-blur-sm"
                 >
                   Featured Post
                 </Badge>
 
-                <Heading level={2} className="text-3xl font-light text-white mb-4 group-hover:text-[#B8D8D0] transition-colors">
+                <Heading level={2} className="text-base md:text-xl lg:text-3xl font-light text-white mb-4 group-hover:text-[#B8D8D0] transition-colors">
                   {featuredPost.title}
                 </Heading>
 
-                <p className="text-[#B8D8D0]/80 mb-6 line-clamp-2 group-hover:text-white/90 transition-colors">
+                <p className="hidden md:block text-[#B8D8D0]/80 mb-6 line-clamp-2 group-hover:text-white/90 transition-colors">
                   {featuredPost.description}
                 </p>
 

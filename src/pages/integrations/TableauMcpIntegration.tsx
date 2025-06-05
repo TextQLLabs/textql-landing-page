@@ -250,18 +250,18 @@ export default function TableauMcpIntegration() {
       <section className="bg-transparent">
         <div className="mx-auto max-w-7xl px-6 relative z-20">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 items-center">
-            <div className="lg:col-span-2 relative -translate-x-[10%]">
+            <div className="lg:col-span-2 relative -translate-x-[10%] md:-translate-x-[5%] xl:-translate-x-[10%] pl-16">
               <StaggeredScreenshots screenshots={screenshots} />
             </div>
             <div className="lg:col-span-1 space-y-6">
-              <h2 className="text-5xl font-extralight text-[#B8D8D0] tracking-tight leading-tight">
+              <h2 className="text-2xl md:text-4xl xl:text-5xl font-extralight text-[#B8D8D0] tracking-tight leading-tight">
                 Designed for Enterprise Scales.
               </h2>
               <div className="space-y-6">
-                <p className="text-xl text-[#729E8C] font-light leading-relaxed">
+                <p className="text-base lg:text-xl text-[#729E8C] font-light leading-relaxed">
                   TextQL's AI agents can read from all your Tableau data sources and dashboards.
                 </p>
-                <p className="text-xl text-[#729E8C] font-light leading-relaxed">
+                <p className="text-base lg:text-xl text-[#729E8C] font-light leading-relaxed">
                 After performing complex analysis—executing both SQL and Python code—agents output natural language insight reports, and can update Tableau dashboards.
                 </p>
               </div>
