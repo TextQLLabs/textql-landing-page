@@ -13,14 +13,14 @@ export function PricingHeader() {
   };
 
   return (
-    <div className="relative min-h-[600px] overflow-hidden bg-black">
+    <div className="relative overflow-hidden bg-black">
       {/* Animated Background */}
       <div className="absolute inset-0 z-0">
         <WaveBackground />
       </div>
       
       {/* Content */}
-      <div className="relative z-10 flex items-center min-h-[600px] mt-12">
+      <div className="relative z-10 flex items-center pb-20 mt-12">
         <div className="mx-auto max-w-4xl px-6 text-center">
           {/* Tech-inspired decorative element */}
           <div className="mb-8 pt-10 flex justify-center">
