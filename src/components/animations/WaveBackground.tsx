@@ -38,6 +38,13 @@ export function WaveBackground() {
         alpha: true
       });
       renderer.setSize(window.innerWidth, window.innerHeight);
+      
+      // Prevent canvas from creating extra space
+      renderer.domElement.style.display = 'block';
+      renderer.domElement.style.verticalAlign = 'top';
+      renderer.domElement.style.width = '100%';
+      renderer.domElement.style.height = '100%';
+      
       containerRef.current?.appendChild(renderer.domElement);
       
       clock = new THREE.Clock();
@@ -137,5 +144,12 @@ export function WaveBackground() {
     };
   }, []);
 
-  return <div ref={containerRef} className="absolute top-0 left-0 w-full h-full -z-10" />;
+  return <div ref={containerRef} style={{ 
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    overflow: 'hidden'
+  }} />;
 }
