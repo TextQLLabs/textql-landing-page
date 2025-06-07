@@ -10,7 +10,7 @@ const plans = [
     description: 'Perfect for teams getting started with TextQL\'s AI-powered data analysis capabilities.',
     price: '$2.00',
     unit: 'per 100 ACUs',
-    location: 'AWS, US East (Northern Virginia)',
+    // location: 'AWS, US East (Northern Virginia)',
     features: [
       { text: 'Everything connected', included: true },
       { text: 'Basic dashboards', included: true },
@@ -27,7 +27,7 @@ const plans = [
     description: 'Designed for organizations that need advanced security features and user management capabilities.',
     price: '$3.00',
     unit: 'per 100 ACUs',
-    location: 'AWS, US East (Northern Virginia)',
+    // location: 'AWS, US East (Northern Virginia)',
     features: [
       { text: 'Everything in Standard', included: true },
       { text: 'RBAC controls', included: true },
@@ -44,7 +44,7 @@ const plans = [
     description: 'Enhanced security features and controls for organizations with strict compliance requirements.',
     price: '$4.00',
     unit: 'per 100 ACUs',
-    location: 'AWS, US East (Northern Virginia)',
+    // location: 'AWS, US East (Northern Virginia)',
     features: [
       { text: 'Everything in Enterprise', included: true },
       { text: 'Enhanced security', included: true },
