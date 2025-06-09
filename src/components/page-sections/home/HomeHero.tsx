@@ -57,7 +57,7 @@ export function HomeHero() {
           <div>
             <Badge
               variant="default"
-              className="inline-flex items-center bg-[#B8D8D0]/10 px-3 py-1 mb-8 backdrop-blur-sm border border-[#B8D8D0]/20">
+              className="inline-flex items-center bg-[#B8D8D0]/10 px-3 py-1 mb-8 backdrop-blur-sm border border-[#B8D8D0]/20 animate-slide-up animation-delay-100">
               <div className="text-center h-2 w-2 bg-[#B8D8D0] animate-pulse mr-2" />
               <span>Ana is now generally available</span>
             </Badge>
