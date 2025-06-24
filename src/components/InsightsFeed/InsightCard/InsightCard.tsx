@@ -54,8 +54,8 @@ export const InsightCard: React.FC<InsightCardProps> = ({
   const borderColor = theme === 'dark' ? 'border-[#B8D8D0]/10' : 'border-[#2A3B35]/10';
   const textColor = theme === 'dark' ? 'text-[#729E8C]' : 'text-[#4A665C]';
   
-  const padding = size === 'large' ? 'p-4 md:p-6' : 'p-3 md:p-4';
-  const textSize = size === 'large' ? 'text-sm md:text-base' : 'text-xs md:text-sm';
+  const padding = size === 'large' ? 'p-3 md:p-4' : 'p-2 md:p-3';
+  const textSize = size === 'large' ? 'text-xs md:text-sm' : 'text-xs';
 
   return (
     <motion.div 

@@ -1,5 +1,5 @@
 export interface DemoRequestFormProps {
-  variant?: 'default' | 'compact' | 'wide';
+  variant?: 'default' | 'compact' | 'small' | 'wide';
   theme?: 'dark' | 'light';
   onSubmit?: (email: string) => void;
   className?: string;

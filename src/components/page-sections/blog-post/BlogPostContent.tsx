@@ -17,8 +17,8 @@ export function BlogPostContent({ content, post }: BlogPostContentProps) {
 
   return (
     <div className="relative">
-      {/* Cover Image Section - Positioned to overlap with header */}
-      <div className="relative -mt-32 mb-12">
+      {/* Cover Image Section - Positioned to span across the dividing line */}
+      <div className="relative -mt-40 mb-24 z-10">
         <div className="mx-auto max-w-4xl px-6">
           <div className="aspect-[2/1] relative rounded-lg overflow-hidden shadow-xl">
             <img
@@ -31,7 +31,7 @@ export function BlogPostContent({ content, post }: BlogPostContentProps) {
       </div>
 
       {/* Content Section */}
-      <div className="relative bg-white">
+      <div className="relative bg-white -mt-32">
         <div className="max-w-2xl mx-auto px-6 py-12">
           <article className="prose prose-sm max-w-none">
             <ReactMarkdown 

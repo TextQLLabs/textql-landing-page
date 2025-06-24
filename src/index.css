@@ -115,7 +115,7 @@ body {
 }
 
 :root {
-  --header-offset: 120px;
+  --header-offset: 60px;
 }
 
 /* Safe viewport height that excludes header space */

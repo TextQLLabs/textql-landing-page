@@ -13,8 +13,8 @@ export function BlogPostHeader({ post }: BlogPostHeaderProps) {
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-transparent" />
       
-      <div className="relative z-20 pt-24 pb-48">
-        <div className="mx-auto max-w-3xl px-6 pt-10">
+      <div className="relative z-20 pt-12 pb-48">
+        <div className="mx-auto max-w-3xl px-6">
           {/* Back Link */}
           <Link 
             to="/blog" 

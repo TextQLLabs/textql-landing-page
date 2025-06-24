@@ -8,7 +8,7 @@ interface BlogGridProps {
   posts: BlogPost[];
 }
 
-const TAGS = ['announcements', 'technical'] as const;
+const TAGS = ['announcements', 'technical', 'research'] as const;
 type Tag = typeof TAGS[number];
 
 export function BlogGrid({ posts }: BlogGridProps) {
@@ -29,35 +29,67 @@ export function BlogGrid({ posts }: BlogGridProps) {
       {/* Search and Filters */}
       <div className="space-y-6">
         {/* Search Bar */}
-        <div className="relative">
+        <div className="relative max-w-md">
           <Input
             type="text"
-            placeholder="Search posts..."
+            placeholder="Search posts by title or content..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10"
+            className="pl-10 pr-4 py-3 text-base rounded-xl border-2 transition-all focus:border-[#B8D8D0] focus:ring-2 focus:ring-[#B8D8D0]/20"
             theme="light"
           />
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#2A3B35]/40" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#2A3B35]/50" />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#2A3B35]/50 hover:text-[#2A3B35] transition-colors"
+            >
+              ✕
+            </button>
+          )}
         </div>
 
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2">
-          {TAGS.map((tag) => (
-            <button
-              key={tag}
-              onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
-              className={`
-                px-4 py-2 rounded-full transition-all
-                ${selectedTag === tag
-                  ? 'bg-[#2A3B35] text-white'
-                  : 'bg-white text-[#2A3B35] hover:bg-[#2A3B35]/5'
-                }
-              `}
-            >
-              {tag}
-            </button>
-          ))}
+        {/* Results Counter and Tags */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          {/* Results Counter */}
+          <div className="text-sm text-[#4A665C]">
+            {searchQuery || selectedTag ? (
+              <span>
+                Showing {filteredPosts.length} of {posts.length} posts
+                {selectedTag && <span> in <strong>{selectedTag}</strong></span>}
+                {searchQuery && <span> matching "<strong>{searchQuery}</strong>"</span>}
+              </span>
+            ) : (
+              <span>{posts.length} posts total</span>
+            )}
+          </div>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2">
+            {TAGS.map((tag) => (
+              <button
+                key={tag}
+                onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
+                className={`
+                  px-4 py-2 rounded-full text-sm font-medium transition-all border-2 capitalize
+                  ${selectedTag === tag
+                    ? 'bg-[#2A3B35] text-white border-[#2A3B35] shadow-md'
+                    : 'bg-white text-[#2A3B35] border-[#2A3B35]/20 hover:border-[#2A3B35]/40 hover:bg-[#2A3B35]/5 hover:shadow-sm'
+                  }
+                `}
+              >
+                {tag}
+              </button>
+            ))}
+            {selectedTag && (
+              <button
+                onClick={() => setSelectedTag(null)}
+                className="px-3 py-2 rounded-full text-sm text-[#2A3B35]/60 hover:text-[#2A3B35] transition-colors"
+              >
+                Clear filter
+              </button>
+            )}
+          </div>
         </div>
       </div>
 

@@ -74,6 +74,7 @@ export function DemoRequestForm({
   const variants = {
     default: 'max-w-md w-full space-y-4',
     compact: 'max-w-sm w-full space-y-3',
+    small: 'max-w-xs w-full space-y-2',
     wide: 'max-w-xl w-full space-y-4'
   };
 
@@ -93,13 +94,13 @@ export function DemoRequestForm({
             error={error}
             disabled={isSubmitting}
             theme={theme}
-            className="bg-opacity-10 backdrop-blur-lg pr-60"
+            className={`bg-opacity-10 backdrop-blur-lg ${variant === 'small' || variant === 'compact' ? 'pr-36' : 'pr-60'}`}
           />
           <div className="absolute right-3 top-1/2 -translate-y-1/2">
             <Button 
               type="submit"
               variant="primary"
-              size="md"
+              size={variant === 'small' || variant === 'compact' ? 'sm' : 'md'}
               loading={isSubmitting}
               // icon={ArrowRight}
               iconPosition="right"

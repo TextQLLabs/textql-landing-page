@@ -24,7 +24,7 @@ export function Carousel() {
 
       // Adjust speed based on viewport width
       const viewportWidth = window.innerWidth;
-      speedRef.current = viewportWidth * 0.00008;
+      speedRef.current = viewportWidth * 0.00004;
 
       const newScrollLeft = scrollRef.current.scrollLeft + speedRef.current * deltaTime;
 

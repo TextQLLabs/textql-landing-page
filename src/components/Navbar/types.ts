@@ -102,29 +102,24 @@ export const navigation: NavItem[] = [
               description: '',
               href: '/workflows?industry=healthcare',
               icon: 'Heart'
-            }
-          ]
-        },
-        {
-          title: '',
-          items: [
+            },
             {
               label: 'Insurance',
               description: '',
               href: '/workflows?industry=insurance',
               icon: 'Shield'
-            },
-            {
-              label: 'Manufacturing',
-              description: '',
-              href: '/workflows?industry=manufacturing',
-              icon: 'Factory'
             }
           ]
         },
         {
           title: '',
           items: [
+            {
+              label: 'Manufacturing',
+              description: '',
+              href: '/workflows?industry=manufacturing',
+              icon: 'Factory'
+            },
             {
               label: 'Media',
               description: '',

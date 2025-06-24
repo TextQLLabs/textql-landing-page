@@ -49,64 +49,67 @@ export function HomeHero() {
       <WaveBackground />
     </div>
   
-    <div className="hidden md:flex flex-col relative z-10 flex-1 px-6 lg:px-6 xl:mx-auto lg:pb-20 lg:max-w-7xl min-h-safe-screen pt-10 justify-center">
-      <div className="grid grid-cols-1 xl:gap-12 xl:grid-cols-[1fr,600px]">
-        {/* Left Content */}
-        <div className="flex flex-col justify-center md:min-h-screen xl:min-h-0 pb-20 max-w-none px-6">
+    {/* Desktop Hero Content - Aligned with navbar */}
+    <div className="hidden md:flex relative z-10 flex-1 min-h-safe-screen items-center pb-32">
+      <div className="mx-auto max-w-7xl w-full">
+        <div className="px-4 md:px-6">
+          <div className="grid grid-cols-1 xl:gap-8 xl:grid-cols-[1fr,600px] w-full">
+            {/* Left Content */}
+            <div className="flex flex-col justify-center">
           {/* Badge */}
           <div>
             <Badge
               variant="default"
-              className="inline-flex items-center bg-[#B8D8D0]/10 px-3 py-1 mb-8 backdrop-blur-sm border border-[#B8D8D0]/20 animate-slide-up animation-delay-100">
-              <div className="text-center h-2 w-2 bg-[#B8D8D0] animate-pulse mr-2" />
+              className="inline-flex items-center bg-[#B8D8D0]/10 px-2 py-1 mb-6 backdrop-blur-sm border border-[#B8D8D0]/20 animate-slide-up animation-delay-100 text-sm">
+              <div className="text-center h-1.5 w-1.5 bg-[#B8D8D0] animate-pulse mr-2" />
               <span>Ana is now generally available</span>
             </Badge>
           </div>
           {/* Hero Text */}
-          <div className="mb-8">
-            <h1 className="text-5xl md:text-6xl lg:text-8xl font-light bg-gradient-to-r from-[#B8D8D0] via-[#B8D8D0] to-[#729E8C] inline-block text-transparent bg-clip-text tracking-tight mb-4 md:mb-6 animate-slide-up animation-delay-100">
-              Ana
+          <div className="mb-4 lg:mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light animate-slide-up animation-delay-100">
+              <span className="tracking-tight mb-1 block pb-2" style={{
+                background: 'linear-gradient(to right, #B8D8D0, #B8D8D0, #729E8C)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}>
+                Agentic Analytics
+              </span>
+              <span className="text-white block">
+                for Every Decision
+              </span>
             </h1>
-            <h2 className="text-4xl md:text-5xl lg:text-7xl font-light leading-[1.1] text-white animate-slide-up animation-delay-200">
-              finds insights
-              <br />
-              you cannot
-            </h2>
           </div>
           {/* Hero Subtext */}
-          <p className="mb-12 text-xl md:text-2xl lg:text-3xl font-light text-[#B8D8D0] animate-slide-up animation-delay-300">
-            Deploy agents across all of your databases & systems of record
+          <p className="mb-6 lg:mb-8 text-base md:text-lg lg:text-xl xl:text-2xl font-light text-[#B8D8D0] animate-slide-up animation-delay-300">
+            Deploy Agents designed for enterprise complexity and security
           </p>
-          <div className="hidden md:block animate-slide-up animation-delay-400 mb-16">
-            <DemoRequestForm />
-          </div>
-          <div className="md:hidden flex justify-center">
-            <DemoRequestButton
-              theme="dark"
-              buttonText="Get a demo"
-            />
-          </div>
-        </div>
-  
-        {/* Right Content - Insights Feed */}
-        <div className="h-[600px] hidden md:flex pb-12 3xl:pb-0 lg:min-h-0 px-6 xl:px-6 justify-center xl:justify-start">
-          <div className="w-full max-w-[600px]">
-            <InsightsFeed />
-          </div>
-        </div>
-      </div>
+              <div className="hidden md:block animate-slide-up animation-delay-400">
+                <DemoRequestForm variant="compact" />
+              </div>
+            </div>
       
-      {/* Logo Carousel - DESKTOP */}
-      <div className="hidden md:flex pb-12 lg:pb-0 xl:pb-20 bg-transparent mt-16 lg:mt-0">
-        <div className="mx-auto max-w-7xl px-6">
-          <p className="text-sm font-medium text-[#B8D8D0]/80 mb-4">
-            Ana finds insights in your existing data stack
-          </p>
-          <div className=""></div>
-          <Carousel items={logos} />
+            {/* Right Content - Insights Feed */}
+            <div className="h-[400px] md:h-[45vh] lg:h-[50vh] xl:h-[55vh] min-h-[350px] hidden md:flex lg:min-h-0 justify-center xl:justify-start mt-12">
+              <div className="w-full max-w-[600px]">
+                <InsightsFeed />
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </div>
+      
+    {/* Logo Carousel - DESKTOP - Fixed to bottom */}
+    <div className="hidden md:block absolute bottom-0 left-0 right-0 z-10 pb-8">
+      <div className="mx-auto max-w-7xl px-6">
+        <p className="text-sm font-medium text-[#B8D8D0]/80 mb-4">
+          Ana finds insights in your existing data stack
+        </p>
+        <Carousel items={logos} />
+      </div>
+    </div>
 
 
       {/* Mobile Content */}

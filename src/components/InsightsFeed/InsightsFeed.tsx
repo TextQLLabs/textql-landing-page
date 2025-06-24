@@ -30,6 +30,9 @@ export const InsightsFeed: React.FC = () => {
   const [showInsights, setShowInsights] = useState(false);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [isSearchCentered, setIsSearchCentered] = useState(true);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [hasOverflow, setHasOverflow] = useState(false);
+  const scrollContainerRef = React.useRef<HTMLDivElement>(null);
 
   // Start preloading InsightCard after mount
   React.useEffect(preloadInsightCard, []);
@@ -46,6 +49,29 @@ export const InsightsFeed: React.FC = () => {
     setIsInitialLoad(false);
     setIsSearchCentered(false);
   }, []);
+
+  // Check if content overflows container
+  const checkOverflow = useCallback(() => {
+    if (scrollContainerRef.current) {
+      const hasScrollableContent = scrollContainerRef.current.scrollHeight > scrollContainerRef.current.clientHeight;
+      setHasOverflow(hasScrollableContent);
+    }
+  }, []);
+
+  // Handle scroll detection
+  const handleScroll = useCallback(() => {
+    setIsScrolling(true);
+    const timeoutId = setTimeout(() => setIsScrolling(false), 0);
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+  // Check overflow when insights change
+  React.useEffect(() => {
+    if (showInsights) {
+      // Delay to ensure DOM has updated
+      setTimeout(checkOverflow, 100);
+    }
+  }, [showInsights, insights, checkOverflow]);
 
   // Optimization: Reduce motion complexity for performance
   const cardVariants = {
@@ -70,32 +96,44 @@ export const InsightsFeed: React.FC = () => {
       onIndustrySelect={handleIndustryChange}
       onSearchComplete={handleSearchComplete}
     >
-      <div className="h-full overflow-y-auto scrollbar-hide pr-2 pl-2">
-        <div className="space-y-2">
-          {insights.map((insight, index) => (
-            <motion.div
-              key={insight.id}
-              custom={index}
-              initial="hidden"
-              animate="visible"
-              variants={cardVariants}
-              // Optimize motion performance by reducing GPU overhead
-              style={{ willChange: 'transform, opacity' }}
-              // Only animate if needed to reduce CPU/GPU usage
-              layoutId={`insight-${insight.id}`}
-            >
-              <Suspense fallback={
-                <div className="w-full min-h-[100px] bg-black/20 rounded-sm" />
-              }>
-                <InsightCard 
-                  insight={insight}
-                  isExpanded={insight.id === expandedId}
-                  onExpandToggle={(expanded) => handleExpandToggle(insight.id, expanded)}
-                />
-              </Suspense>
-            </motion.div>
-          ))}
+      <div className="h-full relative">
+        <div 
+          ref={scrollContainerRef}
+          className="h-full overflow-y-auto scrollbar-hide pr-1 pl-1" 
+          onScroll={handleScroll}
+        >
+          <div className="space-y-1">
+            {insights.map((insight, index) => (
+              <motion.div
+                key={insight.id}
+                custom={index}
+                initial="hidden"
+                animate="visible"
+                variants={cardVariants}
+                // Optimize motion performance by reducing GPU overhead
+                style={{ willChange: 'transform, opacity' }}
+                // Only animate if needed to reduce CPU/GPU usage
+                layoutId={`insight-${insight.id}`}
+              >
+                <Suspense fallback={
+                  <div className="w-full min-h-[100px] bg-black/20 rounded-sm" />
+                }>
+                  <InsightCard 
+                    insight={insight}
+                    isExpanded={insight.id === expandedId}
+                    onExpandToggle={(expanded) => handleExpandToggle(insight.id, expanded)}
+                  />
+                </Suspense>
+              </motion.div>
+            ))}
+          </div>
         </div>
+        {/* Fade out gradient at bottom - positioned relative to viewport, not scroll content */}
+        {!expandedId && !isScrolling && hasOverflow && (
+          <div className="absolute bottom-0 left-0 right-0 h-16 md:h-20 pointer-events-none">
+            <div className="w-full h-full bg-gradient-to-t from-black via-black/70 via-black/40 to-transparent" />
+          </div>
+        )}
       </div>
     </InsightsLayout>
   );
