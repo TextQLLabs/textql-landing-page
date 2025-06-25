@@ -25,18 +25,23 @@ interface InsightsLayoutProps {
   onSearchComplete: () => void;
   children: React.ReactNode;
   theme?: 'light' | 'dark';
+  enabledIndustries?: Set<string>;
+  showDebugBorders?: boolean;
+  className?: string;
 }
 
 // The motion components with simpler animations for better performance
 const IndustryPillsMotion = memo(({ 
   isSearchCentered, 
-  children 
+  children,
+  showDebugBorders 
 }: { 
   isSearchCentered: boolean; 
   children: React.ReactNode;
+  showDebugBorders?: boolean;
 }) => (
   <motion.div 
-    className="flex-none"
+    className={`flex-none ${showDebugBorders ? 'border-2 border-yellow-500' : ''}`}
     initial={{ opacity: 0 }}
     animate={{ 
       opacity: isSearchCentered ? 0 : 1,
@@ -57,13 +62,15 @@ IndustryPillsMotion.displayName = 'IndustryPillsMotion';
 
 const SearchBarMotion = memo(({ 
   isSearchCentered, 
-  children 
+  children,
+  showDebugBorders 
 }: { 
   isSearchCentered: boolean; 
   children: React.ReactNode;
+  showDebugBorders?: boolean;
 }) => (
   <motion.div
-    className="flex-none"
+    className={`flex-none w-full md:w-auto ${showDebugBorders ? 'border-2 border-purple-500' : ''}`}
     animate={{ 
       y: 0,
       marginTop: isSearchCentered ? 0 : '0.75rem',
@@ -84,13 +91,15 @@ SearchBarMotion.displayName = 'SearchBarMotion';
 
 const ContentMotion = memo(({ 
   showInsights, 
-  children 
+  children,
+  showDebugBorders 
 }: { 
   showInsights: boolean; 
   children: React.ReactNode;
+  showDebugBorders?: boolean;
 }) => (
   <motion.div 
-    className="flex-1 min-h-0"
+    className={`min-h-0 overflow-y-auto scrollbar-hide relative ${showDebugBorders ? 'border-2 border-green-500' : ''}`}
     initial={{ opacity: 0 }}
     animate={{ 
       opacity: showInsights ? 1 : 0,
@@ -118,13 +127,27 @@ export const InsightsLayout: React.FC<InsightsLayoutProps> = ({
   onIndustrySelect,
   onSearchComplete,
   children,
-  theme = 'dark'
+  theme = 'dark',
+  enabledIndustries,
+  showDebugBorders = false,
+  className = ''
 }) => {
   return (
-    <div className={`min-h-0 max-h-[calc(100vh-220px)] min-w-[600px] w-[600px] flex flex-col relative ${showInsights ? 'overflow-x-hidden overflow-y-hidden' : 'overflow-visible'}`} style={{ contain: 'layout' }}>
+    <div 
+      className={`w-full flex flex-col justify-center relative ${showDebugBorders ? 'border-2 border-purple-500' : ''} ${showInsights ? 'overflow-x-hidden overflow-y-hidden' : 'overflow-visible'} ${className}`} 
+      style={{ 
+        contain: 'layout',
+        /* InsightsFeed height constraint for desktop only */
+        ...(!className?.includes('lg:hidden') && {
+          maxHeight: 'calc(100vh - 280px)',
+          height: 'calc(100vh - 280px)',
+          minHeight: '400px'
+        })
+      }}
+    >
       {/* Industry Pills */}
       {!isSearchCentered && (
-        <IndustryPillsMotion isSearchCentered={false}>
+        <IndustryPillsMotion isSearchCentered={false} showDebugBorders={showDebugBorders}>
           <IndustryPills
             selectedIndustry={selectedIndustry}
             onSelect={onIndustrySelect}
@@ -134,7 +157,7 @@ export const InsightsLayout: React.FC<InsightsLayoutProps> = ({
       )}
 
       {/* Search Bar */}
-      <SearchBarMotion isSearchCentered={false}>
+      <SearchBarMotion isSearchCentered={false} showDebugBorders={showDebugBorders}>
         <Suspense fallback={<SearchBarFallback />}>
           <AnimatedSearchBar
             industryLabel={selectedIndustry.label}
@@ -147,7 +170,7 @@ export const InsightsLayout: React.FC<InsightsLayoutProps> = ({
       </SearchBarMotion>
 
         {/* Insights Feed */}
-        <ContentMotion showInsights={showInsights}>
+        <ContentMotion showInsights={showInsights} showDebugBorders={showDebugBorders}>
           {children}
         </ContentMotion>
         

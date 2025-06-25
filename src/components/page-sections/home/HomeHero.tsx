@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Badge, DemoRequestForm, Carousel, MobileCarousel} from "../../ui";
 import { WaveBackground } from "../../animations";
 import { InsightsFeed } from "../../InsightsFeed/InsightsFeed";
 import { DemoRequestButton } from "../../ui/Button/DemoRequestButton";
-import { Sun, Moon } from 'lucide-react';
+import { Sun, Moon, Eye, EyeOff } from 'lucide-react';
 
 
 // const logos = [
@@ -111,13 +111,43 @@ const logoData = [
 
 export function HomeHero() {
   const [isLightMode, setIsLightMode] = useState(true);
+  const [navbarHeight, setNavbarHeight] = useState(60); // fallback to 60px
+  const [showDebugBorders, setShowDebugBorders] = useState(false);
 
   const toggleTheme = () => {
     setIsLightMode(!isLightMode);
   };
 
+  const toggleDebugBorders = () => {
+    const newState = !showDebugBorders;
+    setShowDebugBorders(newState);
+    // Save to localStorage and dispatch event
+    localStorage.setItem('showDebugBorders', newState.toString());
+    window.dispatchEvent(new Event('debugToggle'));
+  };
+
+  // Dynamically measure navbar height
+  useEffect(() => {
+    const measureNavbarHeight = () => {
+      const navbar = document.querySelector('nav');
+      if (navbar) {
+        setNavbarHeight(navbar.offsetHeight);
+      }
+    };
+
+    // Measure on mount
+    measureNavbarHeight();
+    
+    // Measure on window resize (navbar height might change)
+    window.addEventListener('resize', measureNavbarHeight);
+    
+    return () => {
+      window.removeEventListener('resize', measureNavbarHeight);
+    };
+  }, []);
+
   // Add/remove body class for hero-scoped styling
-  React.useEffect(() => {
+  useEffect(() => {
     if (isLightMode) {
       document.body.classList.add('hero-light-mode');
     } else {
@@ -147,35 +177,58 @@ export function HomeHero() {
   }));
   
   return (
-    <section className={`relative flex flex-col ${bgColor}`}>
-    <div className="absolute inset-0 z-0 animate-fade-in animation-delay-400">
+    <section className={`relative flex flex-col min-h-screen ${bgColor} ${showDebugBorders ? 'border-4 border-yellow-500' : ''}`}>
+    <div className={`absolute inset-0 z-0 animate-fade-in animation-delay-400 ${showDebugBorders ? 'border-4 border-purple-500' : ''}`}>
       <WaveBackground theme={isLightMode ? 'light' : 'dark'} />
     </div>
     
-    {/* Theme Toggle Button - Only visible in development */}
+    {/* Development Tools - Only visible in development */}
     {import.meta.env.DEV && (
-      <button
-        onClick={toggleTheme}
-        className={`fixed top-20 right-6 z-50 p-3 rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-110 ${
-          isLightMode 
-            ? 'bg-[#2A3B35]/10 hover:bg-[#2A3B35]/20 text-[#2A3B35]'
-            : 'bg-[#B8D8D0]/10 hover:bg-[#B8D8D0]/20 text-[#B8D8D0]'
-        }`}
-        aria-label="Toggle theme"
-      >
-        {isLightMode ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
-      </button>
+      <div className="fixed top-20 right-6 z-50 flex flex-col gap-2">
+        {/* Theme Toggle Button */}
+        <button
+          onClick={toggleTheme}
+          className={`p-3 rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-110 ${
+            isLightMode 
+              ? 'bg-[#2A3B35]/10 hover:bg-[#2A3B35]/20 text-[#2A3B35]'
+              : 'bg-[#B8D8D0]/10 hover:bg-[#B8D8D0]/20 text-[#B8D8D0]'
+          }`}
+          aria-label="Toggle theme"
+        >
+          {isLightMode ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+        </button>
+        
+        {/* Debug Borders Toggle Button */}
+        <button
+          onClick={toggleDebugBorders}
+          className={`p-3 rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-110 ${
+            showDebugBorders
+              ? 'bg-green-500/20 hover:bg-green-500/30 text-green-600'
+              : isLightMode 
+                ? 'bg-[#2A3B35]/10 hover:bg-[#2A3B35]/20 text-[#2A3B35]'
+                : 'bg-[#B8D8D0]/10 hover:bg-[#B8D8D0]/20 text-[#B8D8D0]'
+          }`}
+          aria-label="Toggle debug borders"
+        >
+          {showDebugBorders ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}
+        </button>
+      </div>
     )}
   
-    {/* Desktop Hero Content - Aligned with navbar */}
-    <div className="hidden md:flex relative z-10 flex-1 min-h-safe-screen items-center pb-32">
-      <div className="mx-auto max-w-7xl w-full">
-        <div className="px-4 md:px-6">
-          <div className="grid grid-cols-1 xl:gap-8 xl:grid-cols-[1fr,600px] w-full">
+    {/* Desktop Hero Content - Positioned below navbar */}
+    <div className="hidden lg:flex w-full relative z-10" style={{ 
+      marginTop: `${navbarHeight}px`  /* Push entire content below navbar (dynamic) */
+    }}>
+      <div className={`mx-auto max-w-7xl w-full px-4 md:px-6 ${showDebugBorders ? 'border-2 border-green-500' : ''}`} style={{ 
+        height: `calc(100vh - ${navbarHeight}px - 96px)`,  /* Viewport minus navbar (dynamic) and logo carousel (96px) */
+        display: 'flex',
+        alignItems: 'center'
+      }}>
+          <div className={`grid grid-cols-1 lg:gap-8 xl:gap-16 lg:grid-cols-[1fr,clamp(400px,50vw,600px)] w-full items-center ${showDebugBorders ? 'border-2 border-yellow-500' : ''}`}>
             {/* Left Content */}
             <div className="flex flex-col justify-center">
           {/* Badge */}
-          <div>
+          <div className="text-center lg:text-left">
             <Badge
               variant="default"
               className={`inline-flex items-center ${badgeBg} px-2 py-1 mb-6 backdrop-blur-sm border ${badgeBorder} animate-slide-up animation-delay-100 text-sm`}>
@@ -184,8 +237,8 @@ export function HomeHero() {
             </Badge>
           </div>
           {/* Hero Text */}
-          <div className="mb-4 lg:mb-6">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light animate-slide-up animation-delay-100">
+          <div className="mb-4 lg:mb-6 text-center lg:text-left">
+            <h1 className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-light animate-slide-up animation-delay-100">
               <span className={`tracking-tight mb-1 block pb-2 ${textPrimary}`}>
                 Agentic Analytics
               </span>
@@ -195,32 +248,29 @@ export function HomeHero() {
             </h1>
           </div>
           {/* Hero Subtext */}
-          <p className={`mb-6 lg:mb-8 text-base md:text-lg lg:text-xl xl:text-2xl font-light ${textSecondary} animate-slide-up animation-delay-300`}>
+          <p className={`mb-6 lg:mb-8 text-base md:text-lg lg:text-xl xl:text-2xl font-light ${textSecondary} animate-slide-up animation-delay-300 text-center lg:text-left`}>
             Deploy Agents designed for enterprise complexity and security
           </p>
-              <div className="hidden md:block animate-slide-up animation-delay-400">
+              <div className="hidden lg:flex justify-center lg:justify-start animate-slide-up animation-delay-400">
                 <DemoRequestForm variant="compact" theme={isLightMode ? 'light' : 'dark'} />
               </div>
             </div>
       
             {/* Right Content - Insights Feed */}
-            <div className="h-[450px] md:h-[55vh] lg:h-[60vh] xl:h-[65vh] min-h-[400px] hidden md:flex lg:min-h-0 justify-center xl:justify-start items-center mt-12">
-              <div className="w-full max-w-[600px]">
-                <InsightsFeed theme={isLightMode ? 'light' : 'dark'} minimal={true} />
-              </div>
+            <div className="hidden lg:flex lg:min-h-0 justify-center lg:justify-start items-center h-full">
+              <InsightsFeed theme={isLightMode ? 'light' : 'dark'} minimal={true} />
             </div>
           </div>
-        </div>
       </div>
     </div>
-      
-    {/* Logo Carousel - DESKTOP - Fixed to bottom */}
-    <div className="hidden md:block absolute bottom-0 left-0 right-0 z-10 pb-8">
-      <div className="mx-auto max-w-7xl px-6">
-        <p className={`text-sm font-medium ${isLightMode ? 'text-[#2A3B35]' : 'text-[#B8D8D0]/80'} mb-4`}>
+    
+    {/* Logo Carousel - DESKTOP - Positioned at viewport bottom */}
+    <div className={`hidden lg:block absolute left-0 right-0 bottom-0 z-10 h-20 flex items-end ${showDebugBorders ? 'border-2 border-blue-500' : ''}`}>
+      <div className={`mx-auto max-w-7xl px-6 w-full pb-4 ${showDebugBorders ? 'border-2 border-purple-500' : ''}`}>
+        <p className={`text-sm font-medium ${isLightMode ? 'text-[#2A3B35]' : 'text-[#B8D8D0]/80'} mb-2`}>
           Ana finds insights in your existing data stack
         </p>
-        <div className="logo-carousel">
+        <div className={`logo-carousel ${showDebugBorders ? 'border-2 border-orange-500' : ''}`}>
           <Carousel items={logos} gradientColor={isLightMode ? '[#F7F7F7]' : 'black'} />
         </div>
       </div>
@@ -228,44 +278,48 @@ export function HomeHero() {
 
 
       {/* Mobile Content */}
-      <div className="md:hidden flex flex-col min-h-screen">
+      <div className={`lg:hidden flex flex-col min-h-screen relative z-10 ${showDebugBorders ? 'border-2 border-red-500' : ''}`} style={{ 
+        paddingTop: `${navbarHeight}px`  /* Account for navbar height (dynamic) */
+      }}>
         {/* Main mobile content */}
-        <div className="flex flex-col items-center justify-center flex-1 mx-auto max-w-7xl px-4 pb-24">
-          <Badge
-            variant="default"
-            className={`inline-flex ${badgeBg} px-3 py-1 mb-8 mt-8 backdrop-blur-sm border ${badgeBorder} animate-slide-up animation-delay-100`}
-          >
-            <div className={` h-2 w-2 ${badgeDot} animate-pulse mr-2`} />
-            <span className={`animate-fade-in animation-delay-200 ${textPrimary}`}>Ana is now generally available</span>
-          </Badge>
+        <div className={`flex flex-col items-center justify-center flex-1 mx-auto max-w-7xl px-2 pb-24 ${showDebugBorders ? 'border-2 border-green-500' : ''}`}>
+          <div className={`w-full text-center ${showDebugBorders ? 'border-2 border-cyan-500' : ''}`}>
+            <Badge
+              variant="default"
+              className={`inline-flex ${badgeBg} px-3 py-1 mb-8 mt-8 backdrop-blur-sm border ${badgeBorder} animate-slide-up animation-delay-100`}
+            >
+              <div className={` h-2 w-2 ${badgeDot} animate-pulse mr-2`} />
+              <span className={`animate-fade-in animation-delay-200 ${textPrimary}`}>Ana is now generally available</span>
+            </Badge>
 
-          <div className="mb-8 w-full text-center">
-            <h1 className={`text-5xl md:text-8xl font-light inline-block text-transparent bg-clip-text tracking-tight mb-4 md:mb-6 animate-slide-up animation-delay-200 ${
-              isLightMode 
-                ? 'bg-gradient-to-r from-[#1a2622] via-[#2A3B35] to-[#3d5249]'
-                : 'bg-gradient-to-r from-[#9bc4ba] via-[#B8D8D0] to-[#729E8C]'
-            }`}>
-              Ana
-            </h1>
-            <h2 className={`text-4xl md:text-7xl font-light leading-[1.1] ${textPrimary} animate-slide-up animation-delay-300 text-center`}>
-              finds insights
-              <br />
-              you cannot
-            </h2>
+            <div className="mb-8 w-full text-center">
+              <h1 className={`text-4xl sm:text-5xl font-light leading-[1.1] ${textPrimary} animate-slide-up animation-delay-300 text-center`}>
+                Agentic Analytics
+                <br />
+                for Every Decision
+              </h1>
+            </div>
+            <p className={`mb-12 text-xl sm:text-2xl font-light ${textSecondary} animate-slide-up animation-delay-400 w-full text-center`}>
+              Deploy agents across all of your databases & systems of record
+            </p>
+            <div className="flex justify-center w-full animate-slide-up animation-delay-500 mb-16">
+              <DemoRequestButton
+                theme={isLightMode ? 'light' : 'dark'}
+                buttonText="Get a demo"
+              />
+            </div>
           </div>
-          <p className={`mb-12 text-xl md:text-3xl font-light ${textSecondary} animate-slide-up animation-delay-400 w-full text-center`}>
-            Deploy agents across all of your databases & systems of record
-          </p>
-          <div className="flex justify-center w-full animate-slide-up animation-delay-500 mb-16">
-            <DemoRequestButton
-              theme={isLightMode ? 'light' : 'dark'}
-              buttonText="Get a demo"
-            />
-          </div>
+          
+          {/* Mobile InsightsFeed */}
+          <InsightsFeed 
+            theme={isLightMode ? 'light' : 'dark'} 
+            minimal={true} 
+            className="lg:hidden mb-8 px-4" 
+          />
         </div>
         
         {/* Mobile Logo Carousel - Separate from main content */}
-        <div className="bg-transparent backdrop-blur-sm pb-8">
+        <div className={`bg-transparent backdrop-blur-sm pb-8 ${showDebugBorders ? 'border-2 border-blue-500' : ''}`}>
           <div className="mx-auto max-w-7xl px-4">
             <p className={`text-sm font-medium ${isLightMode ? 'text-[#2A3B35]' : 'text-[#B8D8D0]/80'} mb-4 text-center`}>
               Ana finds insights in your existing data stack

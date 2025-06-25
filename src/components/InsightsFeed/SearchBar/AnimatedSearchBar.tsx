@@ -68,8 +68,7 @@ export const AnimatedSearchBar: React.FC<AnimatedSearchBarProps> = memo((props) 
 
   return (
     <div 
-      className="h-[60px] md:h-[80px] relative animate-fade-in-up" 
-      style={{ width: '600px', minWidth: '600px' }}
+      className="h-[60px] md:h-[80px] relative animate-fade-in-up w-full md:w-[600px]" 
     >
       {showPulse && <MemoizedWaveRipples />}
       

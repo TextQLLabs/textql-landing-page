@@ -13,6 +13,27 @@ export default function Navbar() {
   const [isVisible, setIsVisible] = useState(false);
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
   const isDevelopment = import.meta.env.DEV;
+  // Check if debug borders should be shown (look for a global flag or localStorage)
+  const [showDebugBorders, setShowDebugBorders] = useState(false);
+  
+  useEffect(() => {
+    // Listen for debug toggle events or check localStorage
+    const checkDebugState = () => {
+      const debugState = localStorage.getItem('showDebugBorders') === 'true';
+      setShowDebugBorders(debugState);
+    };
+    
+    checkDebugState();
+    // Listen for storage changes
+    window.addEventListener('storage', checkDebugState);
+    // Custom event for same-tab updates
+    window.addEventListener('debugToggle', checkDebugState);
+    
+    return () => {
+      window.removeEventListener('storage', checkDebugState);
+      window.removeEventListener('debugToggle', checkDebugState);
+    };
+  }, []);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -54,13 +75,13 @@ export default function Navbar() {
   };
 
   return (
-    <div className={`fixed top-0 left-0 right-0 z-40 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'} transition-all duration-500 ease-out`}>
-      <nav className={`w-full py-3 md:py-4 transition-all duration-300 ease-out ${
+    <div className={`fixed top-0 left-0 right-0 z-40 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'} transition-all duration-500 ease-out ${showDebugBorders ? 'border-2 border-red-500' : ''}`}>
+      <nav className={`w-full py-3 md:py-4 transition-all duration-300 ease-out border-b ${
         isScrolled 
-          ? 'bg-black/80 backdrop-blur-md shadow-lg' 
-          : 'bg-black/60 backdrop-blur-sm'
-      }`}>
-        <div className="mx-auto max-w-7xl px-4 md:px-6">
+          ? 'bg-black/80 backdrop-blur-md shadow-lg border-white/30' 
+          : 'bg-black/60 backdrop-blur-sm border-white/20'
+      } ${showDebugBorders ? 'border-2 border-cyan-500' : ''}`}>
+        <div className={`mx-auto max-w-7xl px-4 md:px-6 ${showDebugBorders ? 'border-2 border-pink-500' : ''}`}>
           <div className="flex items-center justify-between">
           <Link to="/" className="text-white hover:text-[#B8D8D0] transition-colors duration-300">
             <TextLogo className="h-6 md:h-7 w-auto" />

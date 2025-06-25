@@ -1,4 +1,4 @@
-import React, { useState, useCallback, Suspense, lazy } from 'react';
+import React, { useState, useCallback, Suspense, lazy, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { INDUSTRIES } from './constants';
 import { useInsightFeed } from '../../hooks/useInsightFeed';
@@ -16,14 +16,36 @@ interface InsightsFeedProps {
   theme?: 'light' | 'dark';
   minimal?: boolean;
   enabledIndustries?: Set<string>;
+  className?: string;
 }
 
-export const InsightsFeed: React.FC<InsightsFeedProps> = ({ theme = 'dark', minimal = false, enabledIndustries }) => {
+export const InsightsFeed: React.FC<InsightsFeedProps> = ({ theme = 'dark', minimal = false, enabledIndustries, className = '' }) => {
   const [selectedIndustry, setSelectedIndustry] = useState(INDUSTRIES[0]);
   const { insights, expandedId, handleExpandToggle } = useInsightFeed(selectedIndustry.id);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [isSearchCentered, setIsSearchCentered] = useState(true);
   const [showInsights, setShowInsights] = useState(false);
+  const [showDebugBorders, setShowDebugBorders] = useState(false);
+
+  // Sync debug borders with localStorage
+  useEffect(() => {
+    // Check initial state from localStorage
+    const checkDebugState = () => {
+      const debugState = localStorage.getItem('showDebugBorders') === 'true';
+      setShowDebugBorders(debugState);
+    };
+    
+    checkDebugState();
+    // Listen for storage changes (from other tabs)
+    window.addEventListener('storage', checkDebugState);
+    // Listen for custom event (from same tab)
+    window.addEventListener('debugToggle', checkDebugState);
+    
+    return () => {
+      window.removeEventListener('storage', checkDebugState);
+      window.removeEventListener('debugToggle', checkDebugState);
+    };
+  }, []);
 
   // Handle industry selection
   const handleIndustryChange = (industry: typeof INDUSTRIES[0]) => {
@@ -52,49 +74,36 @@ export const InsightsFeed: React.FC<InsightsFeedProps> = ({ theme = 'dark', mini
   }, [showInsights, insights, isInitialLoad, handleExpandToggle]);
 
   return (
-    <div style={{ width: '600px', minWidth: '600px' }}>
-      <InsightsLayout
-          selectedIndustry={selectedIndustry}
-          insightsCount={insights.length}
-          isInitialLoad={isInitialLoad}
-          isSearchCentered={isSearchCentered}
-          showInsights={showInsights}
-          onIndustrySelect={handleIndustryChange}
-          onSearchComplete={handleSearchComplete}
-          theme={theme}
-          enabledIndustries={enabledIndustries}
-        >
-      {showInsights && (
-        <div className="h-full relative">
-          <div className="h-full overflow-y-auto scrollbar-hide">
-            <div className="space-y-1.5">
-              {insights.map((insight) => (
-                  <div key={insight.id} className="relative">
-                    <Suspense fallback={<LoadingFallback />}>
-                      <InsightCard 
-                        insight={insight}
-                        isExpanded={insight.id === expandedId}
-                        onExpandToggle={(expanded) => handleExpandToggle(insight.id, expanded)}
-                        theme={theme}
-                        minimal={minimal}
-                      />
-                    </Suspense>
-                  </div>
-                ))}
-            </div>
-          </div>
-          
-          {/* Fade out gradient at bottom */}
-          <div className="absolute bottom-0 left-0 right-0 h-8 pointer-events-none">
-            <div className={`w-full h-full bg-gradient-to-t ${
-              theme === 'light' 
-                ? 'from-[#F7F7F7] to-transparent'
-                : 'from-black to-transparent'
-            }`} />
-          </div>
-        </div>
-      )}
-      </InsightsLayout>
-    </div>
+    <InsightsLayout
+        selectedIndustry={selectedIndustry}
+        insightsCount={insights.length}
+        isInitialLoad={isInitialLoad}
+        isSearchCentered={isSearchCentered}
+        showInsights={showInsights}
+        onIndustrySelect={handleIndustryChange}
+        onSearchComplete={handleSearchComplete}
+        theme={theme}
+        enabledIndustries={enabledIndustries}
+        showDebugBorders={showDebugBorders}
+        className={className}
+      >
+    {showInsights && (
+      <>
+        {insights.map((insight, index) => (
+            <Suspense key={insight.id} fallback={<LoadingFallback />}>
+              <div className={`${showDebugBorders ? 'border-2 border-pink-500' : ''} ${index > 0 ? "mt-1.5" : ""}`}>
+                <InsightCard 
+                  insight={insight}
+                  isExpanded={insight.id === expandedId}
+                  onExpandToggle={(expanded) => handleExpandToggle(insight.id, expanded)}
+                  theme={theme}
+                  minimal={minimal}
+                />
+              </div>
+            </Suspense>
+          ))}
+      </>
+    )}
+    </InsightsLayout>
   );
 };
