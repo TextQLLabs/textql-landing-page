@@ -25,7 +25,7 @@ export function CTA({
   buttonText = 'Request Demo'
 }: CTAProps) {
   const bgColor = theme === 'dark' ? 'bg-black' : 'bg-[#F0F5F3]';
-  const minHeight = 'min-h-[400px] md:min-h-[500px]';
+  const minHeight = 'min-h-[250px] md:min-h-[300px]';
   const textColor = theme === 'dark' ? 'text-[#B8D8D0]' : 'text-[#2A3B35]';
     const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ export function CTA({
   };
 
   return (
-    <section className={`relative ${minHeight} ${bgColor} overflow-hidden`}>
+    <section className={`cta-section relative ${minHeight} ${bgColor} overflow-hidden`}>
       {showWave && <WaveGrid />}
       
       <div className={`relative z-10 flex items-center ${minHeight}`}>
@@ -66,7 +66,7 @@ export function CTA({
             {/* Form or Button Section */}
             <div className="flex justify-center items-center w-full">
               <div className="hidden md:block">
-                <DemoRequestForm/>
+                <DemoRequestForm theme={theme} />
               </div>
               <div className="md:hidden flex justify-center">
                 <DemoRequestButton theme={theme} buttonText={buttonText} />

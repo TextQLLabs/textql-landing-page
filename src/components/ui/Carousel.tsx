@@ -8,13 +8,15 @@ interface CarouselProps {
   speed?: number;
   className?: string;
   itemClassName?: string;
+  gradientColor?: string;
 }
 // todo: dejitter the animation
 export function Carousel({
   items,
   speed = 0.05,
   className = '',
-  itemClassName = ''
+  itemClassName = '',
+  gradientColor = 'black'
 }: CarouselProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>();
@@ -73,8 +75,8 @@ export function Carousel({
           ))}
         </div>
         
-        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-black to-transparent" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-black to-transparent" />
+        <div className={`absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-${gradientColor} to-transparent`} />
+        <div className={`absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-${gradientColor} to-transparent`} />
       </div>
     </div>
   );

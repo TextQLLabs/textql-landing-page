@@ -3,6 +3,7 @@ import { type InsightData } from '../../../types/insights';
 export const supplyChainRiskInsight: InsightData = {
   id: 2,
   title: "Supply Chain Risk Alert",
+  timestamp: "45 min ago",
   metrics: {
     value: "$3.2M Annual"
   },

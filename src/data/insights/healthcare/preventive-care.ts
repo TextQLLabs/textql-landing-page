@@ -3,6 +3,7 @@ import { type InsightData } from '../../../types/insights';
 export const preventiveCareInsight: InsightData = {
   id: 4,
   title: "Preventive Care Opportunity",
+  timestamp: "3 days ago",
   metrics: {
     value: "$9.8M Annual"
   },

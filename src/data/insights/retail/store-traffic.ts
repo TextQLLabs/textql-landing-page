@@ -3,6 +3,7 @@ import { type InsightData } from '../../../types/insights';
 export const storeTrafficInsight: InsightData = {
   id: 1,
   title: "Store Traffic Pattern Alert",
+  timestamp: "15 min ago",
   metrics: {
     value: "$25.2M Annual"
   },

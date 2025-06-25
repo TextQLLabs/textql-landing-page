@@ -65,7 +65,7 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-black text-white relative overflow-hidden">
+    <footer className="footer-section w-full bg-black text-white relative overflow-hidden">
       {/* Giant Logo Background */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-[1200px] opacity-[0.02]">

@@ -2,21 +2,15 @@ import { type Industry } from '../../types/insights';
 import { 
   Building2, 
   HeartPulse, 
-  Building, 
   Factory, 
-  Truck, 
-  Film,
-  Shield 
+  TrendingUp 
 } from 'lucide-react';
 
 export const INDUSTRIES: Industry[] = [
-  { id: 'retail', label: 'Retail', icon: Building2 },
+  { id: 'finance', label: 'Finance', icon: TrendingUp },
   { id: 'healthcare', label: 'Healthcare', icon: HeartPulse },
-  { id: 'banking', label: 'Banking', icon: Building },
+  { id: 'retail', label: 'Retail', icon: Building2 },
   { id: 'manufacturing', label: 'Manufacturing', icon: Factory },
-  { id: 'supply-chain', label: 'Supply Chain', icon: Truck },
-  { id: 'media', label: 'Media', icon: Film },
-  { id: 'insurance', label: 'Insurance', icon: Shield },
 ] as const;
 
 export const ANIMATION_VARIANTS = {

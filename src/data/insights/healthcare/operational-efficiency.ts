@@ -3,6 +3,7 @@ import { type InsightData } from '../../../types/insights';
 export const operationalEfficiencyInsight: InsightData = {
   id: 2,
   title: "Operational Efficiency Alert",
+  timestamp: "3 hr ago",
   metrics: {
     value: "$8.6M Annual"
   },

@@ -3,6 +3,7 @@ import { type InsightData } from '../../../types/insights';
 export const qualityControlInsight: InsightData = {
   id: 3,
   title: "Quality Control Enhancement",
+  timestamp: "30 min ago",
   metrics: {
     value: "$7.2M Annual"
   },

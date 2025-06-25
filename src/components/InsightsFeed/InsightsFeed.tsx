@@ -1,140 +1,100 @@
 import React, { useState, useCallback, Suspense, lazy } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { INDUSTRIES } from './constants';
 import { useInsightFeed } from '../../hooks/useInsightFeed';
-import { InsightsLayout } from './InsightsLayout'; // Import directly for faster initial load
+import { InsightsLayout } from './InsightsLayout';
 
 // Only lazy load InsightCard since it's not needed immediately
 const InsightCard = lazy(() => 
   import('./InsightCard').then(module => ({ default: module.InsightCard }))
 );
 
-// Preload InsightCard after initial render
-const preloadInsightCard = () => {
-  const timer = setTimeout(() => {
-    import('./InsightCard');
-  }, 1000);
-  return () => clearTimeout(timer);
-};
+// No loading fallback to prevent flash
+const LoadingFallback = () => null;
 
-// Fallback loading component (no visible spinner)
-const LoadingFallback = () => (
-  <div className="w-full min-h-[200px]">
-    {/* Intentionally empty for a cleaner loading experience */}
-  </div>
-);
+interface InsightsFeedProps {
+  theme?: 'light' | 'dark';
+  minimal?: boolean;
+  enabledIndustries?: Set<string>;
+}
 
-export const InsightsFeed: React.FC = () => {
+export const InsightsFeed: React.FC<InsightsFeedProps> = ({ theme = 'dark', minimal = false, enabledIndustries }) => {
   const [selectedIndustry, setSelectedIndustry] = useState(INDUSTRIES[0]);
   const { insights, expandedId, handleExpandToggle } = useInsightFeed(selectedIndustry.id);
-  const [showInsights, setShowInsights] = useState(false);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [isSearchCentered, setIsSearchCentered] = useState(true);
-  const [isScrolling, setIsScrolling] = useState(false);
-  const [hasOverflow, setHasOverflow] = useState(false);
-  const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+  const [showInsights, setShowInsights] = useState(false);
 
-  // Start preloading InsightCard after mount
-  React.useEffect(preloadInsightCard, []);
-
-  // Memoize callback functions to prevent unnecessary re-renders
-  const handleIndustryChange = useCallback((industry: typeof INDUSTRIES[0]) => {
+  // Handle industry selection
+  const handleIndustryChange = (industry: typeof INDUSTRIES[0]) => {
+    console.log('Industry changing from', selectedIndustry.id, 'to', industry.id);
+    console.log('Current states:', { isSearchCentered, showInsights, isInitialLoad });
     setSelectedIndustry(industry);
-    setShowInsights(false);
-    setIsSearchCentered(isInitialLoad);
-  }, [isInitialLoad]);
-
-  const handleSearchComplete = useCallback(() => {
-    setShowInsights(true);
-    setIsInitialLoad(false);
-    setIsSearchCentered(false);
-  }, []);
-
-  // Check if content overflows container
-  const checkOverflow = useCallback(() => {
-    if (scrollContainerRef.current) {
-      const hasScrollableContent = scrollContainerRef.current.scrollHeight > scrollContainerRef.current.clientHeight;
-      setHasOverflow(hasScrollableContent);
-    }
-  }, []);
-
-  // Handle scroll detection
-  const handleScroll = useCallback(() => {
-    setIsScrolling(true);
-    const timeoutId = setTimeout(() => setIsScrolling(false), 0);
-    return () => clearTimeout(timeoutId);
-  }, []);
-
-  // Check overflow when insights change
-  React.useEffect(() => {
-    if (showInsights) {
-      // Delay to ensure DOM has updated
-      setTimeout(checkOverflow, 100);
-    }
-  }, [showInsights, insights, checkOverflow]);
-
-  // Optimization: Reduce motion complexity for performance
-  const cardVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: (i: number) => ({
-      opacity: showInsights ? 1 : 0,
-      y: showInsights ? 0 : 10,
-      transition: {
-        duration: 0.3,
-        delay: Math.min(i * 0.05, 0.3) // Cap delay to avoid excessive staggering
-      }
-    })
+    setIsInitialLoad(false); // Force initial load to false after any industry change
   };
 
+  // Handle search animation complete
+  const handleSearchComplete = () => {
+    setIsInitialLoad(false);
+    setIsSearchCentered(false);
+    setShowInsights(true);
+  };
+
+  // Auto-expand first card when insights are shown (both initial load and industry changes)
+  React.useEffect(() => {
+    if (showInsights && insights.length > 0) {
+      setTimeout(() => {
+        // Get the first card that will actually be displayed (after sorting)
+        const firstDisplayedCard = insights[0];
+        handleExpandToggle(firstDisplayedCard.id, true);
+      }, isInitialLoad ? 800 : 100); // Longer delay on initial load, shorter for industry switches
+    }
+  }, [showInsights, insights, isInitialLoad, handleExpandToggle]);
+
   return (
-    <InsightsLayout
-      selectedIndustry={selectedIndustry}
-      insightsCount={insights.length}
-      isInitialLoad={isInitialLoad}
-      isSearchCentered={isSearchCentered}
-      showInsights={showInsights}
-      onIndustrySelect={handleIndustryChange}
-      onSearchComplete={handleSearchComplete}
-    >
-      <div className="h-full relative">
-        <div 
-          ref={scrollContainerRef}
-          className="h-full overflow-y-auto scrollbar-hide pr-1 pl-1" 
-          onScroll={handleScroll}
+    <div style={{ width: '600px', minWidth: '600px' }}>
+      <InsightsLayout
+          selectedIndustry={selectedIndustry}
+          insightsCount={insights.length}
+          isInitialLoad={isInitialLoad}
+          isSearchCentered={isSearchCentered}
+          showInsights={showInsights}
+          onIndustrySelect={handleIndustryChange}
+          onSearchComplete={handleSearchComplete}
+          theme={theme}
+          enabledIndustries={enabledIndustries}
         >
-          <div className="space-y-1">
-            {insights.map((insight, index) => (
-              <motion.div
-                key={insight.id}
-                custom={index}
-                initial="hidden"
-                animate="visible"
-                variants={cardVariants}
-                // Optimize motion performance by reducing GPU overhead
-                style={{ willChange: 'transform, opacity' }}
-                // Only animate if needed to reduce CPU/GPU usage
-                layoutId={`insight-${insight.id}`}
-              >
-                <Suspense fallback={
-                  <div className="w-full min-h-[100px] bg-black/20 rounded-sm" />
-                }>
-                  <InsightCard 
-                    insight={insight}
-                    isExpanded={insight.id === expandedId}
-                    onExpandToggle={(expanded) => handleExpandToggle(insight.id, expanded)}
-                  />
-                </Suspense>
-              </motion.div>
-            ))}
+      {showInsights && (
+        <div className="h-full relative">
+          <div className="h-full overflow-y-auto scrollbar-hide">
+            <div className="space-y-1.5">
+              {insights.map((insight) => (
+                  <div key={insight.id} className="relative">
+                    <Suspense fallback={<LoadingFallback />}>
+                      <InsightCard 
+                        insight={insight}
+                        isExpanded={insight.id === expandedId}
+                        onExpandToggle={(expanded) => handleExpandToggle(insight.id, expanded)}
+                        theme={theme}
+                        minimal={minimal}
+                      />
+                    </Suspense>
+                  </div>
+                ))}
+            </div>
+          </div>
+          
+          {/* Fade out gradient at bottom */}
+          <div className="absolute bottom-0 left-0 right-0 h-8 pointer-events-none">
+            <div className={`w-full h-full bg-gradient-to-t ${
+              theme === 'light' 
+                ? 'from-[#F7F7F7] to-transparent'
+                : 'from-black to-transparent'
+            }`} />
           </div>
         </div>
-        {/* Fade out gradient at bottom - positioned relative to viewport, not scroll content */}
-        {!expandedId && !isScrolling && hasOverflow && (
-          <div className="absolute bottom-0 left-0 right-0 h-16 md:h-20 pointer-events-none">
-            <div className="w-full h-full bg-gradient-to-t from-black via-black/70 via-black/40 to-transparent" />
-          </div>
-        )}
-      </div>
-    </InsightsLayout>
+      )}
+      </InsightsLayout>
+    </div>
   );
 };

@@ -23,6 +23,9 @@ export interface InsightData {
   };
   cite_your_sources: string[];
   suggested_actions: SuggestedAction[];
+  alert_level?: 'low' | 'medium' | 'high' | 'critical';
+  category?: 'performance' | 'risk' | 'opportunity' | 'trend';
+  timestamp?: string;
 }
 
 export type MetricType = 'percentage' | 'currency' | 'count' | 'time' | 'ratio';

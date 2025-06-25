@@ -2,7 +2,11 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { isWebGLAvailable } from '../../utils/webgl';
 
-export function WaveBackground() {
+interface WaveBackgroundProps {
+  theme?: 'light' | 'dark';
+}
+
+export function WaveBackground({ theme = 'dark' }: WaveBackgroundProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -22,7 +26,7 @@ export function WaveBackground() {
 
     const init = () => {
       scene = new THREE.Scene();
-      scene.background = new THREE.Color(0x000000);
+      scene.background = new THREE.Color(theme === 'light' ? 0xF7F7F7 : 0x000000);
       
       camera = new THREE.PerspectiveCamera(
         35,
@@ -64,8 +68,8 @@ export function WaveBackground() {
       geometry.rotateX(-Math.PI / 3);
       
       const material = new THREE.PointsMaterial({
-        color: 0xB8D8D0,
-        size: 0.12,
+        color: theme === 'light' ? 0x2A3B35 : 0xB8D8D0,
+        size: 0.15,
         transparent: true,
         opacity: 0.6,
         fog: true
@@ -74,7 +78,7 @@ export function WaveBackground() {
       plane = new THREE.Points(geometry, material);
       scene.add(plane);
       
-      scene.fog = new THREE.Fog(0x000000, 50, 120);
+      scene.fog = new THREE.Fog(theme === 'light' ? 0xF7F7F7 : 0x000000, 50, 120);
     };
 
     const onWindowResize = () => {
@@ -142,7 +146,7 @@ export function WaveBackground() {
         containerRef.current.removeChild(renderer.domElement);
       }
     };
-  }, []);
+  }, [theme]);
 
   return <div ref={containerRef} style={{ 
     position: 'absolute',

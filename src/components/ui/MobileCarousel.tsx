@@ -8,13 +8,15 @@ interface MobileCarouselProps {
   speed?: number;
   className?: string;
   itemClassName?: string;
+  gradientColor?: string;
 }
 
 export function MobileCarousel({
   items,
   speed = 30,
   className = '',
-  itemClassName = ''
+  itemClassName = '',
+  gradientColor = 'black'
 }: MobileCarouselProps) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const animationIdRef = useRef(`mobile-scroll-${Math.floor(Math.random() * 1000000)}`);
@@ -80,8 +82,8 @@ export function MobileCarousel({
         </div>
         
         {/* Gradients */}
-        <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-black to-transparent pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-black to-transparent pointer-events-none" />
+        <div className={`absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-${gradientColor} to-transparent pointer-events-none`} />
+        <div className={`absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-${gradientColor} to-transparent pointer-events-none`} />
       </div>
     </div>
   );

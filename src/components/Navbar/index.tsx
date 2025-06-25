@@ -23,10 +23,10 @@ export default function Navbar() {
 
     window.addEventListener('scroll', handleScroll);
     
-    // Add entrance animation on mount
+    // Animate navbar in after a short delay
     const timer = setTimeout(() => {
       setIsVisible(true);
-    }, 100);
+    }, 200);
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -54,15 +54,16 @@ export default function Navbar() {
   };
 
   return (
-    <div className={`fixed top-0 left-0 right-0 z-40 px-4 px-6 py-4 py-6 mt-2 transition-opacity duration-500 ease-in-out ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-      <nav className={`mx-auto max-w-7xl py-2 transition-all duration-500 ease-in-out ring-1 ring-[#B8D8D0]/20 ${
+    <div className={`fixed top-0 left-0 right-0 z-40 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'} transition-all duration-500 ease-out`}>
+      <nav className={`w-full py-3 md:py-4 transition-all duration-300 ease-out ${
         isScrolled 
-          ? 'bg-black/60 backdrop-blur-md shadow-lg' 
-          : 'bg-black/30 backdrop-blur-sm'
+          ? 'bg-black/80 backdrop-blur-md shadow-lg' 
+          : 'bg-black/60 backdrop-blur-sm'
       }`}>
-        <div className="flex items-center justify-between px-4 md:px-6">
+        <div className="mx-auto max-w-7xl px-4 md:px-6">
+          <div className="flex items-center justify-between">
           <Link to="/" className="text-white hover:text-[#B8D8D0] transition-colors duration-300">
-            <TextLogo className="h-8 md:h-9 w-auto" />
+            <TextLogo className="h-6 md:h-7 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -226,6 +227,7 @@ export default function Navbar() {
               </button>
             </div>
           </div>
+        </div>
         </div>
       </nav>
     </div>

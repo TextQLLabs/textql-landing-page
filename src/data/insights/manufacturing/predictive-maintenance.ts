@@ -3,6 +3,7 @@ import { type InsightData } from '../../../types/insights';
 export const predictiveMaintenanceInsight: InsightData = {
   id: 4,
   title: "Predictive Maintenance Opportunity",
+  timestamp: "yesterday",
   metrics: {
     value: "$5.8M Annual"
   },

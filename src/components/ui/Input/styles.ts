@@ -9,8 +9,8 @@ export const getBaseStyles = (error?: string, theme: 'dark' | 'light' = 'dark') 
       error: 'border-red-400 focus:ring-red-400/30'
     },
     light: {
-      bg: 'bg-[#2A3B35]/10',
-      border: 'border-[#2A3B35]/20',
+      bg: 'bg-white',
+      border: 'border-[#2A3B35]/40',
       text: 'text-[#2A3B35]',
       placeholder: 'placeholder:text-[#2A3B35]/40',
       focus: 'focus:ring-[#2A3B35]/30 focus:border-[#2A3B35]/30',

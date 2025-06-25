@@ -24,6 +24,7 @@ interface InsightsLayoutProps {
   onIndustrySelect: (industry: Industry) => void;
   onSearchComplete: () => void;
   children: React.ReactNode;
+  theme?: 'light' | 'dark';
 }
 
 // The motion components with simpler animations for better performance
@@ -64,7 +65,7 @@ const SearchBarMotion = memo(({
   <motion.div
     className="flex-none"
     animate={{ 
-      y: isSearchCentered ? '20vh' : 0,
+      y: 0,
       marginTop: isSearchCentered ? 0 : '0.75rem',
       marginBottom: isSearchCentered ? 0 : '0.75rem'
     }}
@@ -116,34 +117,48 @@ export const InsightsLayout: React.FC<InsightsLayoutProps> = ({
   showInsights,
   onIndustrySelect,
   onSearchComplete,
-  children
+  children,
+  theme = 'dark'
 }) => {
   return (
-    <div className="h-full flex flex-col">
+    <div className="min-h-0 max-h-[calc(100vh-220px)] min-w-[600px] w-[600px] flex flex-col relative overflow-hidden" style={{ contain: 'layout' }}>
       {/* Industry Pills */}
-      <IndustryPillsMotion isSearchCentered={isSearchCentered}>
-        <IndustryPills
-          selectedIndustry={selectedIndustry}
-          onSelect={onIndustrySelect}
-        />
-      </IndustryPillsMotion>
+      {!isSearchCentered && (
+        <IndustryPillsMotion isSearchCentered={false}>
+          <IndustryPills
+            selectedIndustry={selectedIndustry}
+            onSelect={onIndustrySelect}
+            theme={theme}
+          />
+        </IndustryPillsMotion>
+      )}
 
       {/* Search Bar */}
-      <SearchBarMotion isSearchCentered={isSearchCentered}>
+      <SearchBarMotion isSearchCentered={false}>
         <Suspense fallback={<SearchBarFallback />}>
           <AnimatedSearchBar
             industryLabel={selectedIndustry.label}
             insightsCount={insightsCount}
             onAnimationComplete={onSearchComplete}
             isInitialLoad={isInitialLoad}
+            theme={theme}
           />
         </Suspense>
       </SearchBarMotion>
 
-      {/* Insights Feed */}
-      <ContentMotion showInsights={showInsights}>
-        {children}
-      </ContentMotion>
+        {/* Insights Feed */}
+        <ContentMotion showInsights={showInsights}>
+          {children}
+        </ContentMotion>
+        
+        {/* Fade out gradient at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-[25px] pointer-events-none">
+          <div className={`w-full h-full bg-gradient-to-t ${
+            theme === 'light' 
+              ? 'from-[#F7F7F7] to-transparent'
+              : 'from-black to-transparent'
+          }`} />
+        </div>
     </div>
   );
 };

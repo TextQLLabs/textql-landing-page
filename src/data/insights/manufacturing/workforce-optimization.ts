@@ -3,6 +3,7 @@ import { type InsightData } from '../../../types/insights';
 export const workforceOptimizationInsight: InsightData = {
   id: 5,
   title: "Workforce Optimization Alert",
+  timestamp: "5 days ago",
   metrics: {
     value: "$4.2M Annual"
   },

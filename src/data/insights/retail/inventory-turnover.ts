@@ -3,6 +3,7 @@ import { type InsightData } from '../../../types/insights';
 export const inventoryTurnoverInsight: InsightData = {
   id: 2,
   title: "Inventory Turnover Alert",
+  timestamp: "32 min ago",
   metrics: {
     value: "$4.2M Annual"
   },

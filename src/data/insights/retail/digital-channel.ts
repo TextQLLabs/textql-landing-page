@@ -3,6 +3,7 @@ import { type InsightData } from '../../../types/insights';
 export const digitalChannelInsight: InsightData = {
   id: 4,
   title: "Digital Channel Alert",
+  timestamp: "45 min ago",
   metrics: {
     value: "$12.4M Annual"
   },

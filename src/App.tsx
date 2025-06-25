@@ -9,7 +9,6 @@ import {
   EnterpriseSection 
 } from './components/page-sections/home';
 import { CTA } from './components/sections';
-import DesignSystem from './pages/DesignSystem';
 import Pricing from './pages/Pricing';
 import Enterprise from './pages/Enterprise';
 import About from './pages/About';
@@ -32,6 +31,7 @@ import Snowflake2025 from './pages/Snowflake2025';
 import Team from './pages/Team';
 import SnowflakeMcpIntegration from './pages/integrations/SnowflakeMcpIntegration';
 import Databricks2025 from './pages/Databricks2025';
+import Test from './pages/Test';
 
 function App() {
   const location = useLocation();
@@ -45,7 +45,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/design-system" element={<DesignSystem />} />
+        <Route path="/test" element={<Test />} />
         <Route element={<Layout />}>
           {/* Main Routes */}
           <Route

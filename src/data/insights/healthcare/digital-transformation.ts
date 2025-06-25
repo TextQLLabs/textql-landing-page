@@ -3,6 +3,7 @@ import { type InsightData } from '../../../types/insights';
 export const digitalTransformationInsight: InsightData = {
   id: 3,
   title: "Digital Transformation Gap",
+  timestamp: "8 min ago",
   metrics: {
     value: "$15.2M Annual"
   },

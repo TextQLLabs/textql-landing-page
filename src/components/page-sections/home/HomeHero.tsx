@@ -1,7 +1,9 @@
+import React, { useState } from 'react';
 import { Badge, DemoRequestForm, Carousel, MobileCarousel} from "../../ui";
 import { WaveBackground } from "../../animations";
 import { InsightsFeed } from "../../InsightsFeed/InsightsFeed";
 import { DemoRequestButton } from "../../ui/Button/DemoRequestButton";
+import { Sun, Moon } from 'lucide-react';
 
 
 // const logos = [
@@ -23,31 +25,147 @@ import { DemoRequestButton } from "../../ui/Button/DemoRequestButton";
 //   { src: 'https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/0915f386-644d-40ee-e1c7-ff814a3f6b00/public', alt: 'Oracle' }
 // ];
 
-const logos = [
-  { src: '/images/logos/reshift-nobg.png', alt: 'Redshift' },
-  { src: '/images/logos/snowflake-white.png', alt: 'Snowflake' },
-  { src: '/images/logos/databricks-nobg.png', alt: 'Databricks' },
-  { src: '/images/logos/looker-white.png', alt: 'Looker' },
-  { src: '/images/logos/powerbi-white.png', alt: 'Power BI' },
-  { src: '/images/logos/Tableau White.png', alt: 'Tableau' },
-  { src: '/images/logos/dbt-nobg.png', alt: 'dbt' },
-  { src: '/images/logos/azure-white.png', alt: 'Azure' },
-  { src: '/images/logos/aws-white.png', alt: 'AWS' },
-  { src: '/images/logos/salesforce-white.png', alt: 'Salesforce' },
-  { src: '/images/logos/gcp-white.png', alt: 'Google Cloud' },
-  { src: '/images/logos/teams-white.png', alt: 'Teams' },
-  { src: '/images/logos/slack-white.png', alt: 'Slack' },
-  { src: '/images/logos/alation-white.png', alt: 'Alation' },
-  { src: '/images/logos/sap-white.png', alt: 'SAP' },
-  { src: '/images/logos/oracle.png', alt: 'Oracle' }
+// Logo definitions with theme variants
+const logoData = [
+  { 
+    dark: '/images/logos/reshift-nobg.png', 
+    light: '/images/logos/reshift-nobg.png', // assuming this works for both
+    alt: 'Redshift' 
+  },
+  { 
+    dark: '/images/logos/snowflake-white.png', 
+    light: '/images/logos/snowflake-white.png', // fallback to white for now
+    alt: 'Snowflake' 
+  },
+  { 
+    dark: '/images/logos/databricks-nobg.png', 
+    light: '/images/logos/databricks-nobg.png',
+    alt: 'Databricks' 
+  },
+  { 
+    dark: '/images/logos/looker-white.png', 
+    light: '/images/logos/looker-white.png',
+    alt: 'Looker' 
+  },
+  { 
+    dark: '/images/logos/powerbi-white.png', 
+    light: '/images/logos/powerbi-white.png',
+    alt: 'Power BI' 
+  },
+  { 
+    dark: '/images/logos/Tableau White.png', 
+    light: '/images/logos/Tableau White.png',
+    alt: 'Tableau' 
+  },
+  { 
+    dark: '/images/logos/dbt-nobg.png', 
+    light: '/images/logos/dbt-nobg.png',
+    alt: 'dbt' 
+  },
+  { 
+    dark: '/images/logos/azure-white.png', 
+    light: '/images/logos/azure-white.png',
+    alt: 'Azure' 
+  },
+  { 
+    dark: '/images/logos/aws-white.png', 
+    light: '/images/logos/aws-white.png',
+    alt: 'AWS' 
+  },
+  { 
+    dark: '/images/logos/salesforce-white.png', 
+    light: '/images/logos/salesforce-white.png',
+    alt: 'Salesforce' 
+  },
+  { 
+    dark: '/images/logos/gcp-white.png', 
+    light: '/images/logos/gcp-white.png',
+    alt: 'Google Cloud' 
+  },
+  { 
+    dark: '/images/logos/teams-white.png', 
+    light: '/images/logos/teams-white.png',
+    alt: 'Teams' 
+  },
+  { 
+    dark: '/images/logos/slack-white.png', 
+    light: '/images/logos/slack-white.png',
+    alt: 'Slack' 
+  },
+  { 
+    dark: '/images/logos/alation-white.png', 
+    light: '/images/logos/alation-white.png',
+    alt: 'Alation' 
+  },
+  { 
+    dark: '/images/logos/sap-white.png', 
+    light: '/images/logos/sap-white.png',
+    alt: 'SAP' 
+  },
+  { 
+    dark: '/images/logos/oracle.png', 
+    light: '/images/logos/oracle.png',
+    alt: 'Oracle' 
+  }
 ];
 
 export function HomeHero() {
+  const [isLightMode, setIsLightMode] = useState(true);
+
+  const toggleTheme = () => {
+    setIsLightMode(!isLightMode);
+  };
+
+  // Add/remove body class for hero-scoped styling
+  React.useEffect(() => {
+    if (isLightMode) {
+      document.body.classList.add('hero-light-mode');
+    } else {
+      document.body.classList.remove('hero-light-mode');
+    }
+    
+    // Cleanup on unmount
+    return () => {
+      document.body.classList.remove('hero-light-mode');
+    };
+  }, [isLightMode]);
+
+  // Theme-based styling
+  const bgColor = isLightMode ? 'bg-[#F7F7F7]' : 'bg-black';
+  const textPrimary = isLightMode ? 'text-[#2A3B35]' : 'text-white';
+  const textSecondary = isLightMode ? 'text-[#4A665C]' : 'text-[#B8D8D0]';
+  const accentColor = isLightMode ? '#2A3B35' : '#B8D8D0';
+  const accentColorSecondary = isLightMode ? '#4A665C' : '#729E8C';
+  const badgeBg = isLightMode ? 'bg-[#2A3B35]/10' : 'bg-[#B8D8D0]/10';
+  const badgeBorder = isLightMode ? 'border-[#2A3B35]/20' : 'border-[#B8D8D0]/20';
+  const badgeDot = isLightMode ? 'bg-[#2A3B35]' : 'bg-[#B8D8D0]';
+  
+  // Dynamic logos based on theme
+  const logos = logoData.map(logo => ({
+    src: isLightMode ? logo.light : logo.dark,
+    alt: logo.alt
+  }));
+  
   return (
-    <section className="relative flex flex-col bg-black">
+    <section className={`relative flex flex-col ${bgColor}`}>
     <div className="absolute inset-0 z-0 animate-fade-in animation-delay-400">
-      <WaveBackground />
+      <WaveBackground theme={isLightMode ? 'light' : 'dark'} />
     </div>
+    
+    {/* Theme Toggle Button - Only visible in development */}
+    {import.meta.env.DEV && (
+      <button
+        onClick={toggleTheme}
+        className={`fixed top-20 right-6 z-50 p-3 rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-110 ${
+          isLightMode 
+            ? 'bg-[#2A3B35]/10 hover:bg-[#2A3B35]/20 text-[#2A3B35]'
+            : 'bg-[#B8D8D0]/10 hover:bg-[#B8D8D0]/20 text-[#B8D8D0]'
+        }`}
+        aria-label="Toggle theme"
+      >
+        {isLightMode ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+      </button>
+    )}
   
     {/* Desktop Hero Content - Aligned with navbar */}
     <div className="hidden md:flex relative z-10 flex-1 min-h-safe-screen items-center pb-32">
@@ -60,40 +178,35 @@ export function HomeHero() {
           <div>
             <Badge
               variant="default"
-              className="inline-flex items-center bg-[#B8D8D0]/10 px-2 py-1 mb-6 backdrop-blur-sm border border-[#B8D8D0]/20 animate-slide-up animation-delay-100 text-sm">
-              <div className="text-center h-1.5 w-1.5 bg-[#B8D8D0] animate-pulse mr-2" />
-              <span>Ana is now generally available</span>
+              className={`inline-flex items-center ${badgeBg} px-2 py-1 mb-6 backdrop-blur-sm border ${badgeBorder} animate-slide-up animation-delay-100 text-sm`}>
+              <div className={`text-center h-1.5 w-1.5 ${badgeDot} animate-pulse mr-2`} />
+              <span className={textPrimary}>Ana is now generally available</span>
             </Badge>
           </div>
           {/* Hero Text */}
           <div className="mb-4 lg:mb-6">
             <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light animate-slide-up animation-delay-100">
-              <span className="tracking-tight mb-1 block pb-2" style={{
-                background: 'linear-gradient(to right, #B8D8D0, #B8D8D0, #729E8C)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
-              }}>
+              <span className={`tracking-tight mb-1 block pb-2 ${textPrimary}`}>
                 Agentic Analytics
               </span>
-              <span className="text-white block">
+              <span className={`${textPrimary} block`}>
                 for Every Decision
               </span>
             </h1>
           </div>
           {/* Hero Subtext */}
-          <p className="mb-6 lg:mb-8 text-base md:text-lg lg:text-xl xl:text-2xl font-light text-[#B8D8D0] animate-slide-up animation-delay-300">
+          <p className={`mb-6 lg:mb-8 text-base md:text-lg lg:text-xl xl:text-2xl font-light ${textSecondary} animate-slide-up animation-delay-300`}>
             Deploy Agents designed for enterprise complexity and security
           </p>
               <div className="hidden md:block animate-slide-up animation-delay-400">
-                <DemoRequestForm variant="compact" />
+                <DemoRequestForm variant="compact" theme={isLightMode ? 'light' : 'dark'} />
               </div>
             </div>
       
             {/* Right Content - Insights Feed */}
-            <div className="h-[400px] md:h-[45vh] lg:h-[50vh] xl:h-[55vh] min-h-[350px] hidden md:flex lg:min-h-0 justify-center xl:justify-start mt-12">
+            <div className="h-[450px] md:h-[55vh] lg:h-[60vh] xl:h-[65vh] min-h-[400px] hidden md:flex lg:min-h-0 justify-center xl:justify-start items-center mt-12">
               <div className="w-full max-w-[600px]">
-                <InsightsFeed />
+                <InsightsFeed theme={isLightMode ? 'light' : 'dark'} minimal={true} />
               </div>
             </div>
           </div>
@@ -104,10 +217,12 @@ export function HomeHero() {
     {/* Logo Carousel - DESKTOP - Fixed to bottom */}
     <div className="hidden md:block absolute bottom-0 left-0 right-0 z-10 pb-8">
       <div className="mx-auto max-w-7xl px-6">
-        <p className="text-sm font-medium text-[#B8D8D0]/80 mb-4">
+        <p className={`text-sm font-medium ${isLightMode ? 'text-[#2A3B35]' : 'text-[#B8D8D0]/80'} mb-4`}>
           Ana finds insights in your existing data stack
         </p>
-        <Carousel items={logos} />
+        <div className="logo-carousel">
+          <Carousel items={logos} gradientColor={isLightMode ? '[#F7F7F7]' : 'black'} />
+        </div>
       </div>
     </div>
 
@@ -118,28 +233,32 @@ export function HomeHero() {
         <div className="flex flex-col items-center justify-center flex-1 mx-auto max-w-7xl px-4 pb-24">
           <Badge
             variant="default"
-            className="inline-flex bg-[#B8D8D0]/10 px-3 py-1 mb-8 mt-8 backdrop-blur-sm border border-[#B8D8D0]/20 animate-slide-up animation-delay-100"
+            className={`inline-flex ${badgeBg} px-3 py-1 mb-8 mt-8 backdrop-blur-sm border ${badgeBorder} animate-slide-up animation-delay-100`}
           >
-            <div className=" h-2 w-2 bg-[#B8D8D0] animate-pulse mr-2" />
-            <span className="animate-fade-in animation-delay-200">Ana is now generally available</span>
+            <div className={` h-2 w-2 ${badgeDot} animate-pulse mr-2`} />
+            <span className={`animate-fade-in animation-delay-200 ${textPrimary}`}>Ana is now generally available</span>
           </Badge>
 
           <div className="mb-8 w-full text-center">
-            <h1 className="text-5xl md:text-8xl font-light bg-gradient-to-r from-[#B8D8D0] via-[#B8D8D0] to-[#729E8C] inline-block text-transparent bg-clip-text tracking-tight mb-4 md:mb-6 animate-slide-up animation-delay-200">
+            <h1 className={`text-5xl md:text-8xl font-light inline-block text-transparent bg-clip-text tracking-tight mb-4 md:mb-6 animate-slide-up animation-delay-200 ${
+              isLightMode 
+                ? 'bg-gradient-to-r from-[#1a2622] via-[#2A3B35] to-[#3d5249]'
+                : 'bg-gradient-to-r from-[#9bc4ba] via-[#B8D8D0] to-[#729E8C]'
+            }`}>
               Ana
             </h1>
-            <h2 className="text-4xl md:text-7xl font-light leading-[1.1] text-white animate-slide-up animation-delay-300 text-center">
+            <h2 className={`text-4xl md:text-7xl font-light leading-[1.1] ${textPrimary} animate-slide-up animation-delay-300 text-center`}>
               finds insights
               <br />
               you cannot
             </h2>
           </div>
-          <p className="mb-12 text-xl md:text-3xl font-light text-[#B8D8D0] animate-slide-up animation-delay-400 w-full text-center">
+          <p className={`mb-12 text-xl md:text-3xl font-light ${textSecondary} animate-slide-up animation-delay-400 w-full text-center`}>
             Deploy agents across all of your databases & systems of record
           </p>
           <div className="flex justify-center w-full animate-slide-up animation-delay-500 mb-16">
             <DemoRequestButton
-              theme="dark"
+              theme={isLightMode ? 'light' : 'dark'}
               buttonText="Get a demo"
             />
           </div>
@@ -148,11 +267,11 @@ export function HomeHero() {
         {/* Mobile Logo Carousel - Separate from main content */}
         <div className="bg-transparent backdrop-blur-sm pb-8">
           <div className="mx-auto max-w-7xl px-4">
-            <p className="text-sm font-medium text-[#B8D8D0]/80 mb-4 text-center">
+            <p className={`text-sm font-medium ${isLightMode ? 'text-[#2A3B35]' : 'text-[#B8D8D0]/80'} mb-4 text-center`}>
               Ana finds insights in your existing data stack
             </p>
-            <div className="overflow-hidden">
-              <MobileCarousel items={logos} speed={30} />
+            <div className="overflow-hidden logo-carousel">
+              <MobileCarousel items={logos} speed={30} gradientColor={isLightMode ? '[#F7F7F7]' : 'black'} />
             </div>
           </div>
         </div>

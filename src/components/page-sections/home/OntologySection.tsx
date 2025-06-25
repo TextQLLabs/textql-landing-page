@@ -4,7 +4,7 @@ import { Button } from '../../ui';
 
 export function OntologySection() {
   return (
-    <section className="relative min-h-[600px] bg-black">
+    <section className="ontology-section relative min-h-[600px] bg-black">
       <div className="mx-auto max-w-site px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 min-h-[600px]">
           {/* Left Content */}

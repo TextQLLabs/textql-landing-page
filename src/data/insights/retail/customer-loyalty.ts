@@ -3,6 +3,7 @@ import { type InsightData } from '../../../types/insights';
 export const customerLoyaltyInsight: InsightData = {
   id: 3,
   title: "Customer Loyalty Gap Alert",
+  timestamp: "2 hr ago",
   metrics: {
     value: "$18.6M Annual"
   },

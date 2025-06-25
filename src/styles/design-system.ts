@@ -9,6 +9,7 @@ export const colors = {
       50: '#B8D8D0',  // Mint - Primary text/highlights (5%)
       100: '#729E8C', // Sage - Secondary text (10%)
       200: '#0A1F1C', // Forest Green - UI panels (25%)
+      250: '#0F1712', // Darkest Green - Deep UI elements (slide color)
       300: '#000000', // Black - Background (60%)
     },
     light: {

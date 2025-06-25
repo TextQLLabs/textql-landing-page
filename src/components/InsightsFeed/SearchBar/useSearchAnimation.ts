@@ -7,11 +7,11 @@ interface SearchAnimationProps {
   isInitialLoad: boolean;
 }
 
-// Animation timing constants
-const ANIMATION_FRAME_INTERVAL = 30;
-const DOT_INTERVAL = 500;
-const PULSE_DELAY = 2000;
-const RESULTS_DELAY = 1500;
+// Animation timing constants - Much faster
+const ANIMATION_FRAME_INTERVAL = 20; // Faster typing
+const DOT_INTERVAL = 200; // Faster dots
+const PULSE_DELAY = 800; // Much shorter delay before pulse
+const RESULTS_DELAY = 600; // Much shorter delay for results
 
 export const useSearchAnimation = ({
   industryLabel,
@@ -33,6 +33,7 @@ export const useSearchAnimation = ({
   const isAnimatingRef = useRef(true);
   const industryLabelRef = useRef(industryLabel);
   const insightsCountRef = useRef(insightsCount);
+  const hasAnimatedOnceRef = useRef(false);
   const animationTimersRef = useRef<{
     dotTimer: number | null;
     pulseTimer: number | null;
@@ -92,33 +93,28 @@ export const useSearchAnimation = ({
     }, 50);
   }, [cleanupAnimations]);
 
-  // Handle industry changes
-  useEffect(() => {
-    resetState();
-    return cleanupAnimations;
-  }, [industryLabel, resetState, cleanupAnimations]);
+  // Handle industry changes - only update text, don't restart animation
+  // DISABLED TO DEBUG FINANCE ISSUE
+  // useEffect(() => {
+  //   // If animation has completed, just update the final text without restarting
+  //   if (hasAnimatedOnceRef.current && showResults) {
+  //     const finalText = "Here's what Ana found";
+  //     setTypedText(finalText);
+  //   }
+  //   return cleanupAnimations;
+  // }, [industryLabel, showResults, cleanupAnimations]);
 
   // Initial activation
   useEffect(() => {
-    if (!isInitialLoad) return;
-
-    const startTime = performance.now();
-    const animate = (currentTime: number) => {
-      if (currentTime - startTime >= 500) {
-        setIsSearchActive(true);
-        animationTimersRef.current.rafId = null;
-        return;
-      }
-      animationTimersRef.current.rafId = requestAnimationFrame(animate);
-    };
-    
-    animationTimersRef.current.rafId = requestAnimationFrame(animate);
+    // FORCE ACTIVATION - ALWAYS START
+    setIsSearchActive(true);
+    hasAnimatedOnceRef.current = false; // Reset the animation lock
     return cleanupAnimations;
-  }, [isInitialLoad, cleanupAnimations]);
+  }, [cleanupAnimations]);
 
   // Main animation effect
   useEffect(() => {
-    if (!isSearchActive) return;
+    if (!isSearchActive || hasAnimatedOnceRef.current) return;
 
     let currentIndex = 0;
     let lastFrameTime = 0;
@@ -126,7 +122,7 @@ export const useSearchAnimation = ({
     const getTargetText = () => {
       return currentPhaseRef.current === 'analyzing'
         ? `Ana is analyzing your ${industryLabelRef.current} data`
-        : `Ana has found ${insightsCountRef.current} insights in your ${industryLabelRef.current} data`;
+        : "Here's what Ana found";
     };
 
     const typeText = (timestamp: number) => {
@@ -147,25 +143,28 @@ export const useSearchAnimation = ({
 
     const startResultsPhase = () => {
       if (!isAnimatingRef.current) return;
+      
+      // Stop animation loop first
+      isAnimatingRef.current = false;
+      
+      // Clean up all timers and animation frames
+      cleanupAnimations();
+      
       setShowPulse(false);
       setCurrentPhase('results');
-      currentIndex = 0;
       setShowResults(true);
-      lastFrameTime = 0;
-
-      const animateResults = (timestamp: number) => {
-        if (!isAnimatingRef.current) return;
-        
-        if (typeText(timestamp)) {
-          onAnimationComplete();
-          animationTimersRef.current.resultsTimer = null;
-          return;
-        }
-        
-        animationTimersRef.current.resultsTimer = requestAnimationFrame(animateResults);
-      };
-
-      animationTimersRef.current.resultsTimer = requestAnimationFrame(animateResults);
+      
+      // Set the final text immediately without typing animation
+      const finalText = "Here's what Ana found";
+      setTypedText(finalText);
+      
+      // Mark as completed to prevent restart
+      hasAnimatedOnceRef.current = true;
+      
+      // Delay showing cards slightly after text change to prevent flash
+      setTimeout(() => {
+        onAnimationComplete();
+      }, 100);
     };
 
     const animateTyping = (timestamp: number) => {

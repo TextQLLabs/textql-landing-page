@@ -94,7 +94,7 @@ export function DemoRequestForm({
             error={error}
             disabled={isSubmitting}
             theme={theme}
-            className={`bg-opacity-10 backdrop-blur-lg ${variant === 'small' || variant === 'compact' ? 'pr-36' : 'pr-60'}`}
+            className={`backdrop-blur-lg ${variant === 'small' || variant === 'compact' ? 'pr-36' : 'pr-60'}`}
           />
           <div className="absolute right-3 top-1/2 -translate-y-1/2">
             <Button 

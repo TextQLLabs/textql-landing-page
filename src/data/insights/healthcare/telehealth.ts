@@ -3,6 +3,7 @@ import { type InsightData } from '../../../types/insights';
 export const telehealthInsight: InsightData = {
   id: 5,
   title: "Telehealth Adoption Gap",
+  timestamp: "last week",
   metrics: {
     value: "$7.2M Annual"
   },

@@ -23,7 +23,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: 'text-black hover:text-black/90',
-        secondary: 'text-[#B8D8D0] hover:text-[#B8D8D0]/90',
+        secondary: 'text-[#2A3B35] hover:text-[#2A3B35]/90',
         ghost: 'text-[#B8D8D0] hover:text-[#B8D8D0]/90'
       },
       size: {
@@ -80,7 +80,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         return '#2A3B35'; // lighter theme corners
       }
       // dark theme corners
-      return variant === 'primary' ? '#000000' : '#B8D8D0';
+      return variant === 'primary' ? '#000000' : '#2A3B35';
     };
 
     //
@@ -96,7 +96,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           ${buttonVariants({ variant, size, theme, fullWidth, className })}
           before:absolute before:inset-0 before:transition-colors before:duration-200
           ${variant === 'primary' ? 'before:bg-[#B8D8D0] hover:before:bg-[#729E8C]' : ''}
-          ${variant === 'secondary' ? 'before:bg-[#0A1F1C] hover:before:bg-[#041810]' : ''}
+          ${variant === 'secondary' ? 'before:bg-[#B8D8D0] hover:before:bg-[#729E8C]' : ''}
           ${variant === 'ghost' ? 'before:bg-transparent hover:before:bg-[#B8D8D0]/10' : ''}
         `}
         data-icon-position={iconPosition}

@@ -18,7 +18,7 @@ export const ImpactAnalysisCard: React.FC<ImpactAnalysisCardProps> = ({ impact, 
   }
 
   const isDark = theme === 'dark';
-  const bgColor = isDark ? 'bg-[#0A1F1C]' : 'bg-[#F0F5F3]';
+  const bgColor = isDark ? 'bg-[#0F1712]' : 'bg-[#F0F5F3]';
   const borderColor = isDark ? 'border-[#B8D8D0]/10' : 'border-[#2A3B35]/10';
   const primaryText = isDark ? 'text-[#B8D8D0]' : 'text-[#2A3B35]';
   const secondaryText = isDark ? 'text-[#729E8C]' : 'text-[#4A665C]';
