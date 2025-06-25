@@ -121,7 +121,7 @@ export const InsightsLayout: React.FC<InsightsLayoutProps> = ({
   theme = 'dark'
 }) => {
   return (
-    <div className="min-h-0 max-h-[calc(100vh-220px)] min-w-[600px] w-[600px] flex flex-col relative overflow-hidden" style={{ contain: 'layout' }}>
+    <div className={`min-h-0 max-h-[calc(100vh-220px)] min-w-[600px] w-[600px] flex flex-col relative ${showInsights ? 'overflow-x-hidden overflow-y-hidden' : 'overflow-visible'}`} style={{ contain: 'layout' }}>
       {/* Industry Pills */}
       {!isSearchCentered && (
         <IndustryPillsMotion isSearchCentered={false}>
@@ -151,14 +151,16 @@ export const InsightsLayout: React.FC<InsightsLayoutProps> = ({
           {children}
         </ContentMotion>
         
-        {/* Fade out gradient at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-[25px] pointer-events-none">
-          <div className={`w-full h-full bg-gradient-to-t ${
-            theme === 'light' 
-              ? 'from-[#F7F7F7] to-transparent'
-              : 'from-black to-transparent'
-          }`} />
-        </div>
+        {/* Fade out gradient at bottom - only show when insights are visible */}
+        {showInsights && (
+          <div className="absolute bottom-0 left-0 right-0 h-[25px] pointer-events-none">
+            <div className={`w-full h-full bg-gradient-to-t ${
+              theme === 'light' 
+                ? 'from-[#F7F7F7] to-transparent'
+                : 'from-black to-transparent'
+            }`} />
+          </div>
+        )}
     </div>
   );
 };

@@ -50,7 +50,7 @@ export const AnimatedSearchBar: React.FC<AnimatedSearchBarProps> = memo((props) 
   const containerClasses = React.useMemo(() => `
     w-full h-full
     ${theme === 'light' ? 'bg-white border-2 border-[#2A3B35]/30' : 'bg-[#0F1712] border-2 border-[#B8D8D0]/30'} 
-    overflow-hidden whitespace-nowrap
+    whitespace-nowrap
     transition-all duration-300 ease-out
     transform origin-center shadow-lg ${theme === 'light' ? 'shadow-[#2A3B35]/10' : 'shadow-[#B8D8D0]/10'}
     ${forceActive || isSearchActive ? 'scale-100 opacity-100' : 'scale-100 opacity-50'}
