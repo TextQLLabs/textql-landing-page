@@ -278,11 +278,11 @@ export function HomeHero() {
 
 
       {/* Mobile Content */}
-      <div className={`lg:hidden flex flex-col min-h-screen relative z-10 ${showDebugBorders ? 'border-2 border-red-500' : ''}`} style={{ 
+      <div className={`lg:hidden flex flex-col min-h-screen relative z-10 overflow-visible ${showDebugBorders ? 'border-2 border-red-500' : ''}`} style={{ 
         paddingTop: `${navbarHeight}px`  /* Account for navbar height (dynamic) */
       }}>
         {/* Main mobile content */}
-        <div className={`flex flex-col items-center justify-center flex-1 mx-auto max-w-7xl px-2 pb-4 ${showDebugBorders ? 'border-2 border-green-500' : ''}`}>
+        <div className={`flex flex-col items-center justify-center flex-1 mx-auto w-full px-4 pb-4 overflow-hidden ${showDebugBorders ? 'border-2 border-green-500' : ''}`}>
           <div className={`w-full text-center ${showDebugBorders ? 'border-2 border-cyan-500' : ''}`}>
             <Badge
               variant="default"
@@ -293,13 +293,13 @@ export function HomeHero() {
             </Badge>
 
             <div className="mb-8 w-full text-center">
-              <h1 className={`text-4xl sm:text-5xl font-light leading-[1.1] ${textPrimary} animate-slide-up animation-delay-300 text-center`}>
+              <h1 className={`text-3xl sm:text-4xl md:text-5xl font-light leading-[1.1] ${textPrimary} animate-slide-up animation-delay-300 text-center`}>
                 Agentic Analytics
                 <br />
                 for Every Decision
               </h1>
             </div>
-            <p className={`mb-12 text-xl sm:text-2xl font-light ${textSecondary} animate-slide-up animation-delay-400 w-full text-center`}>
+            <p className={`mb-12 text-lg sm:text-xl md:text-2xl font-light ${textSecondary} animate-slide-up animation-delay-400 w-full text-center`}>
               Deploy agents across all of your databases & systems of record
             </p>
             <div className="flex justify-center w-full animate-slide-up animation-delay-500 mb-16">
@@ -314,13 +314,13 @@ export function HomeHero() {
           <InsightsFeed 
             theme={isLightMode ? 'light' : 'dark'} 
             minimal={true} 
-            className="lg:hidden mb-8 px-4" 
+            className="lg:hidden mb-8 w-full max-w-full" 
           />
         </div>
         
         {/* Mobile Logo Carousel - Separate from main content */}
         <div className={`bg-transparent backdrop-blur-sm pb-8 ${showDebugBorders ? 'border-2 border-blue-500' : ''}`}>
-          <div className="mx-auto max-w-7xl px-4">
+          <div className="mx-auto w-full px-4">
             <p className={`text-sm font-medium ${isLightMode ? 'text-[#2A3B35]' : 'text-[#B8D8D0]/80'} mb-4 text-center`}>
               Ana finds insights in your existing data stack
             </p>

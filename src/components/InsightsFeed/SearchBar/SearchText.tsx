@@ -19,6 +19,7 @@ export const SearchText: React.FC<SearchTextProps> = ({
   industryLabel,
   theme = 'dark',
 }) => {
+  const showDebugBorders = typeof window !== 'undefined' && localStorage.getItem('showDebugBorders') === 'true';
   const colorizeText = (text: string) => {
     const highlightColor = theme === 'light' ? '#2A3B35' : '#B8D8D0';
     
@@ -37,20 +38,21 @@ export const SearchText: React.FC<SearchTextProps> = ({
   };
 
   return (
-    <div className="text-base md:text-xl font-medium tracking-wide flex items-center justify-between w-full">
+    <div className={`text-xs sm:text-sm md:text-xl font-medium tracking-normal md:tracking-wide flex items-center justify-between w-full ${showDebugBorders ? 'border-2 border-blue-500' : ''}`}>
       <span 
         className={`
           transition-all duration-300 group-hover:text-[#B8D8D0] flex-1
           ${showPulse 
-            ? `${theme === 'light' ? 'text-[#2A3B35]' : 'text-[#B8D8D0]'} scale-110 translate-x-2 font-semibold` 
+            ? `${theme === 'light' ? 'text-[#2A3B35]' : 'text-[#B8D8D0]'} md:scale-110 md:translate-x-2 font-semibold` 
             : `${theme === 'light' ? 'text-[#2A3B35]/80' : 'text-[#729E8C]'} scale-100 translate-x-0`
           }
+          ${showDebugBorders ? 'border-2 border-orange-500' : ''}
         `}
         dangerouslySetInnerHTML={{ __html: colorizeText(text) }}
       />
       
       {/* Right side elements */}
-      <div className="flex items-center ml-4">
+      <div className="flex items-center ml-2 sm:ml-4">
         {!showResults && isAnalyzing && (
           <svg 
             className={`w-5 h-5 animate-spin ${theme === 'light' ? 'text-[#2A3B35]/60' : 'text-[#729E8C]/80'}`}

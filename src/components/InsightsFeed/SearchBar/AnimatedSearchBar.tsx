@@ -49,9 +49,9 @@ export const AnimatedSearchBar: React.FC<AnimatedSearchBarProps> = memo((props) 
 
   // Memoize class strings to prevent recalculation
   const containerClasses = React.useMemo(() => `
-    w-full h-full
+    w-full h-full overflow-hidden
     ${theme === 'light' ? 'bg-white border-2 border-[#2A3B35]/30' : 'bg-[#0F1712] border-2 border-[#B8D8D0]/30'} 
-    whitespace-nowrap
+    md:whitespace-nowrap
     transition-all duration-300 ease-out
     transform origin-center shadow-lg ${theme === 'light' ? 'shadow-[#2A3B35]/10' : 'shadow-[#B8D8D0]/10'}
     ${forceActive || isSearchActive ? 'scale-100 opacity-100' : 'scale-100 opacity-50'}
@@ -69,14 +69,14 @@ export const AnimatedSearchBar: React.FC<AnimatedSearchBarProps> = memo((props) 
 
   return (
     <div 
-      className={`h-[60px] md:h-[80px] relative animate-fade-in-up w-full ${showDebugBorders ? 'border-2 border-lime-500' : ''}`} 
+      className={`h-[50px] sm:h-[60px] md:h-[80px] relative animate-fade-in-up w-full ${showDebugBorders ? 'border-2 border-lime-500' : ''}`} 
     >
       {showPulse && <MemoizedWaveRipples />}
       
       <div className={containerClasses} data-debug="search-bar-container">
         {showPulse && <PulseBackground theme={theme} />}
 
-        <div className="flex items-center h-full px-4 md:px-8 relative z-10">
+        <div className={`flex items-center h-full px-2 md:px-8 relative z-10 ${showDebugBorders ? 'border-2 border-red-500' : ''}`}>
           <MemoizedSearchIcon showResults={showResults} showPulse={showPulse} theme={theme} />
           <MemoizedSearchText
             text={typedText}

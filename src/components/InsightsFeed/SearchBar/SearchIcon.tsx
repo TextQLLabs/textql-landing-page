@@ -13,7 +13,7 @@ export const SearchIcon: React.FC<SearchIconProps> = ({ showResults, showPulse, 
   const borderColor = theme === 'light' ? '#2A3B35' : '#B8D8D0';
   
   return (
-  <div className="relative mr-4 md:mr-6">
+  <div className="relative mr-2 sm:mr-4 md:mr-6">
     <div className="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
       <IconLogo className="w-4 h-4 md:w-6 md:h-6 transition-all duration-300" color={iconColor} />
       {!showResults && (

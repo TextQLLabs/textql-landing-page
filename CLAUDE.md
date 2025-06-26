@@ -41,6 +41,94 @@
 - **Infrastructure**: aws-users
 - **Examples**: demo, flow-hs-example
 
+## MCP (Model Context Protocol) Server Configuration
+
+### Critical Paths
+- **MCP Server Modules**: `/Users/ethanding/projects/node_modules/@modelcontextprotocol/`
+- **Claude Config Location (macOS)**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Claude Config Location (Windows)**: `%APPDATA%\Claude\claude_desktop_config.json`
+- **Claude Config Location (Linux)**: `~/.config/Claude/claude_desktop_config.json`
+
+### Currently Installed MCP Servers
+1. **Puppeteer Server** - Browser automation
+   - Package: `@modelcontextprotocol/server-puppeteer`
+   - Version: ^2025.5.12
+   - Path: `/Users/ethanding/projects/node_modules/@modelcontextprotocol/server-puppeteer/dist/index.js`
+
+### How to Add MCP Servers to Claude
+
+1. **Install the MCP server package**:
+   ```bash
+   cd /Users/ethanding/projects
+   npm install @modelcontextprotocol/server-<name>
+   ```
+
+2. **Open Claude's config file**:
+   ```bash
+   # macOS
+   open ~/Library/Application\ Support/Claude/claude_desktop_config.json
+   
+   # Or use your preferred editor
+   code ~/Library/Application\ Support/Claude/claude_desktop_config.json
+   ```
+
+3. **Add the server configuration**:
+   ```json
+   {
+     "mcpServers": {
+       "puppeteer": {
+         "command": "node",
+         "args": ["/Users/ethanding/projects/node_modules/@modelcontextprotocol/server-puppeteer/dist/index.js"]
+       },
+       "your-new-server": {
+         "command": "node",
+         "args": ["/path/to/server/index.js"]
+       }
+     }
+   }
+   ```
+
+4. **Restart Claude** to load the new MCP server
+
+### Available MCP Servers
+Common MCP servers you can install:
+- `@modelcontextprotocol/server-puppeteer` - Browser automation
+- `@modelcontextprotocol/server-filesystem` - Enhanced file system access
+- `@modelcontextprotocol/server-git` - Git operations
+- `@modelcontextprotocol/server-github` - GitHub API access
+- `@modelcontextprotocol/server-postgres` - PostgreSQL database access
+- `@modelcontextprotocol/server-sqlite` - SQLite database access
+
+### Maintenance
+
+1. **Update MCP servers**:
+   ```bash
+   cd /Users/ethanding/projects
+   npm update @modelcontextprotocol/server-<name>
+   ```
+
+2. **Check installed versions**:
+   ```bash
+   npm list | grep @modelcontextprotocol
+   ```
+
+3. **Remove an MCP server**:
+   - Uninstall the package: `npm uninstall @modelcontextprotocol/server-<name>`
+   - Remove its configuration from Claude's config file
+   - Restart Claude
+
+4. **Troubleshooting**:
+   - If MCP server doesn't appear in Claude, check the config file for JSON syntax errors
+   - Ensure the path in the config matches the actual installation path
+   - Check Claude's developer console for error messages
+   - Verify the server package is properly installed with `npm list`
+
+### Best Practices
+- Keep all MCP servers in a central location (e.g., `/Users/ethanding/projects`)
+- Document which projects use which MCP servers
+- Regularly update MCP servers for security and feature updates
+- Test MCP server configurations before critical work sessions
+
 # Important Instruction Reminders
 Do what has been asked; nothing more, nothing less.
 NEVER create files unless they're absolutely necessary for achieving your goal.

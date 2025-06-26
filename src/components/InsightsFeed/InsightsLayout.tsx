@@ -41,7 +41,7 @@ const IndustryPillsMotion = memo(({
   showDebugBorders?: boolean;
 }) => (
   <motion.div 
-    className={`flex-none ${showDebugBorders ? 'border-2 border-yellow-500' : ''}`}
+    className={`flex-none w-full ${showDebugBorders ? 'border-2 border-yellow-500' : ''}`}
     initial={{ opacity: 0 }}
     animate={{ 
       opacity: isSearchCentered ? 0 : 1,
@@ -92,14 +92,21 @@ SearchBarMotion.displayName = 'SearchBarMotion';
 const ContentMotion = memo(({ 
   showInsights, 
   children,
-  showDebugBorders 
+  showDebugBorders,
+  isMobile,
+  isDropdownOpen
 }: { 
   showInsights: boolean; 
   children: React.ReactNode;
   showDebugBorders?: boolean;
+  isMobile?: boolean;
+  isDropdownOpen?: boolean;
 }) => (
   <motion.div 
-    className={`min-h-0 overflow-y-auto scrollbar-hide relative ${showDebugBorders ? 'border-2 border-green-500' : ''}`}
+    className={`min-h-0 ${
+      // Only apply overflow-y-auto on desktop or when dropdown is closed on mobile
+      isMobile && isDropdownOpen ? '' : 'overflow-y-auto'
+    } scrollbar-hide relative ${showDebugBorders ? 'border-2 border-green-500' : ''}`}
     initial={{ opacity: 0 }}
     animate={{ 
       opacity: showInsights ? 1 : 0,
@@ -132,9 +139,12 @@ export const InsightsLayout: React.FC<InsightsLayoutProps> = ({
   showDebugBorders = false,
   className = ''
 }) => {
+  const isMobile = className?.includes('lg:hidden');
+  const [dropdownOpen, setDropdownOpen] = React.useState(false);
+  
   return (
     <div 
-      className={`w-full flex flex-col justify-center relative ${showDebugBorders ? 'border-2 border-purple-500' : ''} ${showInsights ? 'overflow-x-hidden overflow-y-hidden' : 'overflow-visible'} ${className}`} 
+      className={`w-full flex flex-col justify-center relative ${showDebugBorders ? 'border-2 border-purple-500' : ''} ${className}`} 
       style={{ 
         contain: 'layout',
         /* InsightsFeed height constraint for desktop only */
@@ -142,6 +152,10 @@ export const InsightsLayout: React.FC<InsightsLayoutProps> = ({
           maxHeight: 'calc(100vh - 280px)',
           height: 'calc(100vh - 280px)',
           minHeight: '400px'
+        }),
+        /* Ensure mobile doesn't overflow viewport */
+        ...(className?.includes('lg:hidden') && {
+          maxWidth: '100%'
         })
       }}
     >
@@ -152,6 +166,9 @@ export const InsightsLayout: React.FC<InsightsLayoutProps> = ({
             selectedIndustry={selectedIndustry}
             onSelect={onIndustrySelect}
             theme={theme}
+            enabledIndustries={enabledIndustries}
+            showDebugBorders={showDebugBorders}
+            onDropdownChange={setDropdownOpen}
           />
         </IndustryPillsMotion>
       )}
@@ -171,7 +188,12 @@ export const InsightsLayout: React.FC<InsightsLayoutProps> = ({
       </SearchBarMotion>
 
         {/* Insights Feed */}
-        <ContentMotion showInsights={showInsights} showDebugBorders={showDebugBorders}>
+        <ContentMotion 
+          showInsights={showInsights} 
+          showDebugBorders={showDebugBorders}
+          isMobile={isMobile}
+          isDropdownOpen={dropdownOpen}
+        >
           {children}
         </ContentMotion>
         

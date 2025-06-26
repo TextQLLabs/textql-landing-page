@@ -56,7 +56,7 @@ export const InsightCard: React.FC<InsightCardProps> = ({
   const borderColor = theme === 'dark' ? 'border-[#2A3B35]/50' : 'border-[#2A3B35]/40';
   const textColor = theme === 'dark' ? 'text-[#729E8C]' : 'text-[#4A665C]';
   
-  const padding = 'p-2.5 md:p-3.5';
+  const padding = 'p-2 sm:p-2.5 md:p-3.5';
   const textSize = 'text-sm md:text-base';
 
   return (
@@ -152,14 +152,14 @@ export const InsightCard: React.FC<InsightCardProps> = ({
             >
               {minimal ? (
                 // Minimal mode: title + timestamp on left, impact on right, NO priority badge
-                <div className="flex items-center w-full mr-4 min-w-0">
-                  <h3 className={`text-lg font-medium ${theme === 'dark' ? 'text-[#B8D8D0]' : 'text-[#2A3B35]'} leading-tight truncate flex-1 min-w-0 transition-colors duration-300 group-hover:text-[#B8D8D0]`}>
+                <div className="flex items-center w-full mr-2 min-w-0">
+                  <h3 className={`text-sm sm:text-lg font-medium ${theme === 'dark' ? 'text-[#B8D8D0]' : 'text-[#2A3B35]'} leading-tight truncate flex-1 min-w-0 transition-colors duration-300 group-hover:text-[#B8D8D0]`}>
                     {insight.title}
                   </h3>
-                  <span className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'} whitespace-nowrap ml-3 flex-shrink-0 transition-colors duration-300 group-hover:text-[#729E8C]`}>
+                  <span className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'} whitespace-nowrap ml-2 sm:ml-3 flex-shrink-0 transition-colors duration-300 group-hover:text-[#729E8C] hidden sm:inline`}>
                     {insight.timestamp || "Just now"}
                   </span>
-                  <div className={`text-lg font-medium ${theme === 'dark' ? 'text-[#B8D8D0]' : 'text-[#2A3B35]'} ml-3 flex-shrink-0 transition-colors duration-300 group-hover:text-[#B8D8D0]`}>
+                  <div className={`text-sm sm:text-lg font-medium ${theme === 'dark' ? 'text-[#B8D8D0]' : 'text-[#2A3B35]'} ml-2 sm:ml-3 flex-shrink-0 transition-colors duration-300 group-hover:text-[#B8D8D0]`}>
                     {insight.metrics.value.startsWith('$') ? insight.metrics.value : `$${insight.metrics.value}`}
                   </div>
                 </div>

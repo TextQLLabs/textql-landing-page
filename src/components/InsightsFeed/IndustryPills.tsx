@@ -7,6 +7,8 @@ interface IndustryPillsProps {
   onSelect: (industry: (typeof INDUSTRIES)[0]) => void;
   theme?: 'light' | 'dark';
   enabledIndustries?: Set<string>;
+  onDropdownChange?: (isOpen: boolean) => void;
+  showDebugBorders?: boolean;
 }
 
 // Memoized industry button to prevent unnecessary re-renders
@@ -65,18 +67,26 @@ const MobileDropdownButton = memo(
   }) => (
     <button
       onClick={onClick}
-      className={`w-full flex items-center justify-between gap-2 px-3 py-1.5 rounded-sm text-sm font-medium ${
+      onTouchEnd={(e) => {
+        e.preventDefault();
+        onClick();
+      }}
+      className={`w-full flex items-center justify-between gap-2 px-3 py-1.5 rounded-sm text-sm font-medium touch-manipulation relative z-30 ${
         theme === 'light' 
-          ? 'bg-[#2A3B35] text-white'
-          : 'bg-[#B8D8D0] text-black'
+          ? 'bg-[#2A3B35] text-white active:bg-[#2A3B35]/90'
+          : 'bg-[#B8D8D0] text-black active:bg-[#B8D8D0]/90'
       }`}
+      style={{ 
+        touchAction: 'manipulation',
+        WebkitTapHighlightColor: 'transparent'
+      }}
     >
-      <div className="flex items-center gap-1.5">
+      <div className="flex items-center gap-1.5 pointer-events-none">
         {React.createElement(industry.icon, { className: "w-3.5 h-3.5" })}
         {industry.label}
       </div>
       <ChevronDown
-        className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+        className={`w-4 h-4 transition-transform pointer-events-none ${isOpen ? "rotate-180" : ""}`}
       />
     </button>
   )
@@ -88,73 +98,109 @@ export const IndustryPills: React.FC<IndustryPillsProps> = ({
   selectedIndustry,
   onSelect,
   theme = 'dark',
-  enabledIndustries
+  enabledIndustries,
+  onDropdownChange,
+  showDebugBorders = false
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   // Use useCallback to prevent recreating these functions on each render
   const toggleDropdown = useCallback(() => {
-    setIsOpen((prev) => !prev);
-  }, []);
+    setIsOpen((prev) => {
+      const newState = !prev;
+      onDropdownChange?.(newState);
+      return newState;
+    });
+  }, [onDropdownChange]);
 
   const closeDropdown = useCallback(() => {
     setIsOpen(false);
-  }, []);
+    onDropdownChange?.(false);
+  }, [onDropdownChange]);
 
   const handleSelect = useCallback(
     (industry: (typeof INDUSTRIES)[0]) => {
       onSelect(industry);
       setIsOpen(false);
+      onDropdownChange?.(false);
     },
-    [onSelect]
-  );
-
-  // Mobile dropdown
-  const renderMobileDropdown = () => (
-    <div className="relative">
-      <MobileDropdownButton
-        industry={selectedIndustry}
-        isOpen={isOpen}
-        onClick={toggleDropdown}
-        theme={theme}
-      />
-
-      {isOpen && (
-        <>
-          <div className="fixed inset-0 z-10" onClick={closeDropdown} />
-          <div className="absolute top-full left-0 right-0 mt-1 z-20 bg-black border border-[#B8D8D0]/20 rounded-sm shadow-lg">
-            <div className="py-1">
-              {INDUSTRIES.filter(industry => !enabledIndustries || enabledIndustries.has(industry.id)).map((industry) => (
-                <button
-                  key={industry.id}
-                  onClick={() => handleSelect(industry)}
-                  className={`
-                    w-full flex items-center gap-1.5 px-3 py-2
-                    text-sm font-medium transition-colors
-                    ${
-                      selectedIndustry.id === industry.id
-                        ? "bg-[#B8D8D0]/10 text-[#B8D8D0]"
-                        : "text-[#B8D8D0]/80 hover:bg-[#B8D8D0]/5"
-                    }
-                  `}
-                >
-                  {React.createElement(industry.icon, {
-                    className: "w-3.5 h-3.5",
-                  })}
-                  {industry.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </>
-      )}
-    </div>
+    [onSelect, onDropdownChange]
   );
 
   return (
     <>
       {/* Mobile View - Dropdown */}
-      <div className="md:hidden">{renderMobileDropdown()}</div>
+      <div className={`md:hidden relative ${showDebugBorders ? 'border-2 border-yellow-500' : ''}`} 
+           style={{ 
+             isolation: 'isolate',
+             zIndex: 800,
+             transform: 'translateZ(0)', // Force stacking context
+             ...(isOpen ? { paddingBottom: '160px' } : {})
+           }}>
+        <div className="relative z-50 overflow-visible">
+          <MobileDropdownButton
+            industry={selectedIndustry}
+            isOpen={isOpen}
+            onClick={toggleDropdown}
+            theme={theme}
+          />
+          
+          {isOpen && (
+            <>
+              {/* Backdrop - use higher z-index and ensure it's touchable */}
+              <div 
+                className="fixed inset-0 z-[90]" 
+                onClick={closeDropdown}
+                onTouchStart={closeDropdown}
+                style={{ touchAction: 'auto' }}
+              />
+              {/* Dropdown menu - higher z-index than backdrop */}
+              <div className={`absolute top-full left-0 right-0 mt-1 z-[999] rounded-sm shadow-lg ${
+                theme === 'light' 
+                  ? 'bg-white border border-[#2A3B35]/20' 
+                  : 'bg-[#0F1712] border border-[#B8D8D0]/20'
+              }`}
+              style={{ 
+                // Ensure the dropdown is above other elements and touchable
+                position: 'absolute',
+                touchAction: 'auto',
+                WebkitOverflowScrolling: 'touch'
+              }}>
+                <div className="py-1 max-h-[60vh] overflow-y-auto">
+                  {INDUSTRIES.filter(industry => !enabledIndustries || enabledIndustries.has(industry.id)).map((industry) => (
+                    <button
+                      key={industry.id}
+                      onClick={() => handleSelect(industry)}
+                      onTouchEnd={(e) => {
+                        e.preventDefault();
+                        handleSelect(industry);
+                      }}
+                      className={`
+                        w-full flex items-center gap-1.5 px-3 py-2
+                        text-sm font-medium transition-colors
+                        ${
+                          selectedIndustry.id === industry.id
+                            ? theme === 'light' 
+                              ? "bg-[#2A3B35]/10 text-[#2A3B35]"
+                              : "bg-[#B8D8D0]/10 text-[#B8D8D0]"
+                            : theme === 'light'
+                              ? "text-[#4A665C] hover:bg-[#2A3B35]/5"
+                              : "text-[#729E8C] hover:bg-[#B8D8D0]/5"
+                        }
+                      `}
+                    >
+                      {React.createElement(industry.icon, {
+                        className: "w-3.5 h-3.5",
+                      })}
+                      {industry.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
 
       {/* Desktop View - Full width like search bar */}
       <div className="hidden md:block">

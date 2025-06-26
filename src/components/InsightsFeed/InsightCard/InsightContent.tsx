@@ -86,8 +86,8 @@ export const InsightContent: React.FC<InsightContentProps> = ({ insight, onExpan
         {/* Larger header */}
         <div className="mb-4">
           <div className="flex items-start justify-between">
-            <div className="flex-1 mr-6">
-              <h2 className={`text-2xl md:text-3xl font-light ${theme === 'dark' ? 'text-[#B8D8D0]' : 'text-[#2A3B35]'} leading-tight mb-2`}>
+            <div className="flex-1 mr-2 sm:mr-6">
+              <h2 className={`text-xl sm:text-2xl md:text-3xl font-light ${theme === 'dark' ? 'text-[#B8D8D0]' : 'text-[#2A3B35]'} leading-tight mb-2`}>
                 {insight.title}
               </h2>
               {/* Priority badge below title */}
@@ -98,21 +98,21 @@ export const InsightContent: React.FC<InsightContentProps> = ({ insight, onExpan
                 </span>
               </div>
             </div>
-            <div className={`text-2xl md:text-3xl font-light ${theme === 'dark' ? 'text-[#B8D8D0]' : 'text-[#2A3B35]'} shrink-0`}>
+            <div className={`text-xl sm:text-2xl md:text-3xl font-light ${theme === 'dark' ? 'text-[#B8D8D0]' : 'text-[#2A3B35]'} shrink-0`}>
               {insight.metrics.value.startsWith('$') ? insight.metrics.value : `$${insight.metrics.value}`}
             </div>
           </div>
         </div>
 
-        {/* Chart and content side by side */}
-        <div className="flex gap-4 mb-3">
-          {/* Left side: Clean Chart (60% width) */}
-          <div className="w-3/5">
+        {/* Chart and content side by side - responsive on mobile */}
+        <div className="flex flex-col sm:flex-row gap-4 mb-3">
+          {/* Left side: Clean Chart - full width on mobile, 60% on larger screens */}
+          <div className="w-full sm:w-3/5">
             <CleanMinimalChart insight={insight} theme={theme} />
           </div>
           
-          {/* Right side: Key insight text (40% width) - centered vertically */}
-          <div className="w-2/5 flex items-center">
+          {/* Right side: Key insight text - full width on mobile, 40% on larger screens */}
+          <div className="w-full sm:w-2/5 flex items-center">
             <div className="w-full">
               <div className="flex items-start">
                 <TrendingUp className={`w-4 h-4 ${textColor} mr-2 mt-1 shrink-0`} />

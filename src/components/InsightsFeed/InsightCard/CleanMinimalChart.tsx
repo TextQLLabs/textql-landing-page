@@ -85,7 +85,7 @@ export const CleanMinimalChart: React.FC<CleanMinimalChartProps> = ({ insight, t
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={data}
-            margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
+            margin={{ top: 25, right: 10, left: 10, bottom: 25 }}
             barCategoryGap="20%"
           >
             <defs>

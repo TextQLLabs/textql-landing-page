@@ -97,19 +97,19 @@ const Test: React.FC = () => {
     switch (selectedComponent) {
       case 'insights-feed':
         return (
-          <div className="h-full flex">
+          <div className="h-full flex flex-col lg:flex-row">
             {/* Industry Sidebar */}
-            <div className={`w-64 border-r p-6 ${
+            <div className={`w-full lg:w-64 border-b lg:border-b-0 lg:border-r p-4 lg:p-6 ${
               theme === 'dark' 
                 ? 'border-[#1A1D21] bg-[#0F1114]' 
                 : 'border-gray-200 bg-white'
             }`}>
-              <h3 className={`text-sm font-semibold mb-4 ${
+              <h3 className={`text-sm font-semibold mb-3 lg:mb-4 ${
                 theme === 'dark' ? 'text-[#B8D8D0]' : 'text-[#2A3B35]'
               }`}>
                 Industries
               </h3>
-              <div className="space-y-2">
+              <div className="grid grid-cols-2 lg:grid-cols-1 gap-2">
                 {INDUSTRIES.map((industry) => {
                   const Icon = industry.icon;
                   const isEnabled = enabledIndustries.has(industry.id);
@@ -117,7 +117,7 @@ const Test: React.FC = () => {
                   return (
                     <label
                       key={industry.id}
-                      className={`flex items-center gap-3 p-3 rounded-md cursor-pointer transition-all duration-200 ${
+                      className={`flex items-center gap-2 lg:gap-3 p-2 lg:p-3 rounded-md cursor-pointer transition-all duration-200 ${
                         isEnabled
                           ? (theme === 'dark' 
                               ? 'bg-[#B8D8D0]/15 text-[#B8D8D0] border border-[#B8D8D0]/20' 
@@ -133,23 +133,23 @@ const Test: React.FC = () => {
                         onChange={() => toggleIndustry(industry.id)}
                         className="sr-only"
                       />
-                      <Icon className="w-4 h-4" />
-                      <span className="text-sm">{industry.label}</span>
+                      <Icon className="w-3 h-3 lg:w-4 lg:h-4 flex-shrink-0" />
+                      <span className="text-xs lg:text-sm truncate">{industry.label}</span>
                     </label>
                   );
                 })}
               </div>
               
               {/* View Mode Toggle */}
-              <div className="mt-8 pt-6 border-t ${
+              <div className="mt-4 lg:mt-8 pt-4 lg:pt-6 border-t ${
                 theme === 'dark' ? 'border-[#1A1D21]' : 'border-gray-200'
               }">
-                <h3 className={`text-sm font-semibold mb-4 ${
+                <h3 className={`text-sm font-semibold mb-3 lg:mb-4 ${
                   theme === 'dark' ? 'text-[#B8D8D0]' : 'text-[#2A3B35]'
                 }`}>
                   View Mode
                 </h3>
-                <div className="space-y-2">
+                <div className="flex lg:flex-col gap-2">
                   <label className={`flex items-center gap-3 p-3 rounded-md cursor-pointer transition-all duration-200 ${
                     cardType === 'large'
                       ? (theme === 'dark' 
@@ -194,8 +194,8 @@ const Test: React.FC = () => {
             </div>
 
             {/* Main Content */}
-            <div className="flex-1 flex justify-center">
-              <div className="w-2/3 flex flex-col">
+            <div className="flex-1 flex justify-center p-4 lg:p-0">
+              <div className="w-full lg:w-2/3 flex flex-col">
                 {/* View Toggle Bar - Above feed like insight card styling */}
                 <div className={`
                   flex items-center justify-between p-4 rounded-lg border mb-4
@@ -250,8 +250,8 @@ const Test: React.FC = () => {
       
       case 'insights-feed-static':
         return (
-          <div className="h-full flex justify-center">
-            <div className="w-2/3 flex flex-col">
+          <div className="h-full flex justify-center p-4 lg:p-0">
+            <div className="w-full lg:w-2/3 flex flex-col">
               {/* View Toggle Bar - Above feed like insight card styling */}
               <div className={`
                 flex items-center justify-between p-3 rounded-lg border
@@ -305,9 +305,9 @@ const Test: React.FC = () => {
       
       case 'insight-cards':
         return (
-          <div className="p-6 space-y-6">
+          <div className="p-4 lg:p-6 space-y-4 lg:space-y-6">
             {/* Component-specific controls */}
-            <div className={`flex items-center gap-4 p-4 rounded-lg border ${
+            <div className={`flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 p-3 lg:p-4 rounded-lg border ${
               theme === 'dark' 
                 ? 'bg-[#0F1114] border-[#1A1D21]' 
                 : 'bg-white border-gray-200 shadow-sm'
@@ -320,7 +320,7 @@ const Test: React.FC = () => {
               <div className="flex gap-2">
                 <button
                   onClick={() => setCardType('large')}
-                  className={`px-3 py-1 rounded-md text-sm transition-colors ${
+                  className={`px-2 lg:px-3 py-1 rounded-md text-xs lg:text-sm transition-colors ${
                     cardType === 'large'
                       ? (theme === 'dark' 
                           ? 'bg-[#B8D8D0] text-black' 
@@ -334,7 +334,7 @@ const Test: React.FC = () => {
                 </button>
                 <button
                   onClick={() => setCardType('minimal')}
-                  className={`px-3 py-1 rounded-md text-sm transition-colors ${
+                  className={`px-2 lg:px-3 py-1 rounded-md text-xs lg:text-sm transition-colors ${
                     cardType === 'minimal'
                       ? (theme === 'dark' 
                           ? 'bg-[#B8D8D0] text-black' 
@@ -350,7 +350,7 @@ const Test: React.FC = () => {
             </div>
             
             {/* Cards grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-3 lg:gap-4">
               {sampleInsights.map((insight, index) => (
                 <motion.div
                   key={insight.id}
@@ -385,9 +385,9 @@ const Test: React.FC = () => {
       
       case 'insight-content':
         return (
-          <div className="p-6 space-y-6">
+          <div className="p-4 lg:p-6 space-y-4 lg:space-y-6">
             {/* Component-specific controls */}
-            <div className={`flex items-center gap-4 p-4 rounded-lg border ${
+            <div className={`flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 p-3 lg:p-4 rounded-lg border ${
               theme === 'dark' 
                 ? 'bg-[#0F1114] border-[#1A1D21]' 
                 : 'bg-white border-gray-200 shadow-sm'
@@ -400,7 +400,7 @@ const Test: React.FC = () => {
               <div className="flex gap-2">
                 <button
                   onClick={() => setCardType('large')}
-                  className={`px-3 py-1 rounded-md text-sm transition-colors ${
+                  className={`px-2 lg:px-3 py-1 rounded-md text-xs lg:text-sm transition-colors ${
                     cardType === 'large'
                       ? (theme === 'dark' 
                           ? 'bg-[#B8D8D0] text-black' 
@@ -414,7 +414,7 @@ const Test: React.FC = () => {
                 </button>
                 <button
                   onClick={() => setCardType('minimal')}
-                  className={`px-3 py-1 rounded-md text-sm transition-colors ${
+                  className={`px-2 lg:px-3 py-1 rounded-md text-xs lg:text-sm transition-colors ${
                     cardType === 'minimal'
                       ? (theme === 'dark' 
                           ? 'bg-[#B8D8D0] text-black' 
@@ -430,7 +430,7 @@ const Test: React.FC = () => {
             </div>
             
             {/* Content preview */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
               {sampleInsights.slice(0, 2).map((insight, index) => (
                 <motion.div
                   key={insight.id}
@@ -468,7 +468,7 @@ const Test: React.FC = () => {
       
       case 'demo-form':
         return (
-          <div className="p-6 space-y-6">
+          <div className="p-4 lg:p-6 space-y-4 lg:space-y-6">
             {/* Component-specific info */}
             <div className={`flex items-center gap-4 p-4 rounded-lg border ${
               theme === 'dark' 
@@ -483,7 +483,7 @@ const Test: React.FC = () => {
             </div>
             
             {/* Demo Form Preview */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
               <div className={`border rounded-lg p-6 ${
                 theme === 'dark' 
                   ? 'border-[#1A1D21] bg-[#0F1114]' 
@@ -529,28 +529,28 @@ const Test: React.FC = () => {
       
       case 'buttons':
         return (
-          <div className="p-6 space-y-8">
+          <div className="p-4 lg:p-6 space-y-4 lg:space-y-8">
             {/* Button Variants */}
-            <div className={`p-6 rounded-lg border ${
+            <div className={`p-4 lg:p-6 rounded-lg border ${
               theme === 'dark' 
                 ? 'bg-[#0F1114] border-[#1A1D21]' 
                 : 'bg-white border-gray-200 shadow-sm'
             }`}>
-              <h3 className={`text-lg font-medium mb-4 ${
+              <h3 className={`text-base lg:text-lg font-medium mb-4 ${
                 theme === 'dark' ? 'text-white' : 'text-[#2A3B35]'
               }`}>
                 Button Variants - {theme === 'dark' ? 'Dark' : 'Light'} Theme
               </h3>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6">
                 {/* Primary Buttons */}
-                <div className="space-y-3">
-                  <h4 className={`text-sm font-medium ${
+                <div className="space-y-2 lg:space-y-3">
+                  <h4 className={`text-xs lg:text-sm font-medium ${
                     theme === 'dark' ? 'text-[#B8D8D0]' : 'text-[#2A3B35]'
                   }`}>
                     Primary
                   </h4>
-                  <div className="space-y-2">
+                  <div className="flex flex-col gap-2">
                     <Button variant="primary" theme={theme} size="sm">
                       Small Primary
                     </Button>
@@ -570,13 +570,13 @@ const Test: React.FC = () => {
                 </div>
 
                 {/* Secondary Buttons */}
-                <div className="space-y-3">
-                  <h4 className={`text-sm font-medium ${
+                <div className="space-y-2 lg:space-y-3">
+                  <h4 className={`text-xs lg:text-sm font-medium ${
                     theme === 'dark' ? 'text-[#B8D8D0]' : 'text-[#2A3B35]'
                   }`}>
                     Secondary
                   </h4>
-                  <div className="space-y-2">
+                  <div className="flex flex-col gap-2">
                     <Button variant="secondary" theme={theme} size="sm">
                       Small Secondary
                     </Button>
@@ -596,13 +596,13 @@ const Test: React.FC = () => {
                 </div>
 
                 {/* Ghost Buttons */}
-                <div className="space-y-3">
-                  <h4 className={`text-sm font-medium ${
+                <div className="space-y-2 lg:space-y-3">
+                  <h4 className={`text-xs lg:text-sm font-medium ${
                     theme === 'dark' ? 'text-[#B8D8D0]' : 'text-[#2A3B35]'
                   }`}>
                     Ghost
                   </h4>
-                  <div className="space-y-2">
+                  <div className="flex flex-col gap-2">
                     <Button variant="ghost" theme={theme} size="sm">
                       Small Ghost
                     </Button>
@@ -624,18 +624,18 @@ const Test: React.FC = () => {
             </div>
 
             {/* Loading States */}
-            <div className={`p-6 rounded-lg border ${
+            <div className={`p-4 lg:p-6 rounded-lg border ${
               theme === 'dark' 
                 ? 'bg-[#0F1114] border-[#1A1D21]' 
                 : 'bg-white border-gray-200 shadow-sm'
             }`}>
-              <h3 className={`text-lg font-medium mb-4 ${
+              <h3 className={`text-base lg:text-lg font-medium mb-4 ${
                 theme === 'dark' ? 'text-white' : 'text-[#2A3B35]'
               }`}>
                 Loading States
               </h3>
               
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 lg:gap-4">
                 <Button variant="primary" theme={theme} loading>
                   Loading Primary
                 </Button>
@@ -649,19 +649,19 @@ const Test: React.FC = () => {
             </div>
 
             {/* Interactive Examples */}
-            <div className={`p-6 rounded-lg border ${
+            <div className={`p-4 lg:p-6 rounded-lg border ${
               theme === 'dark' 
                 ? 'bg-[#0F1114] border-[#1A1D21]' 
                 : 'bg-white border-gray-200 shadow-sm'
             }`}>
-              <h3 className={`text-lg font-medium mb-4 ${
+              <h3 className={`text-base lg:text-lg font-medium mb-4 ${
                 theme === 'dark' ? 'text-white' : 'text-[#2A3B35]'
               }`}>
                 Interactive Examples
               </h3>
               
-              <div className="space-y-4">
-                <div className="flex gap-3">
+              <div className="space-y-3 lg:space-y-4">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <Button 
                     variant="primary" 
                     theme={theme}
@@ -678,7 +678,7 @@ const Test: React.FC = () => {
                   </Button>
                 </div>
                 
-                <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <Button variant="ghost" theme={theme} disabled>
                     Disabled Ghost
                   </Button>
@@ -693,9 +693,9 @@ const Test: React.FC = () => {
       
       case 'ui-components':
         return (
-          <div className="p-6 space-y-8">
+          <div className="p-4 lg:p-6 space-y-4 lg:space-y-8">
             {/* Badges */}
-            <div className={`p-6 rounded-lg border ${
+            <div className={`p-4 lg:p-6 rounded-lg border ${
               theme === 'dark' 
                 ? 'bg-[#0F1114] border-[#1A1D21]' 
                 : 'bg-white border-gray-200 shadow-sm'
@@ -831,9 +831,9 @@ const Test: React.FC = () => {
       
       case 'typography':
         return (
-          <div className="p-6 space-y-8">
+          <div className="p-4 lg:p-6 space-y-4 lg:space-y-8">
             {/* Text Variants */}
-            <div className={`p-6 rounded-lg border ${
+            <div className={`p-4 lg:p-6 rounded-lg border ${
               theme === 'dark' 
                 ? 'bg-[#0F1114] border-[#1A1D21]' 
                 : 'bg-white border-gray-200 shadow-sm'
@@ -1027,16 +1027,68 @@ const Test: React.FC = () => {
 
   return (
     <div 
-      className={`min-h-screen flex ${theme === 'dark' ? 'bg-[#0A0B0D] text-white' : 'bg-[#FAFBFC] text-[#2A3B35]'} transition-colors duration-300 relative`}
+      className={`min-h-screen flex flex-col lg:flex-row ${theme === 'dark' ? 'bg-[#0A0B0D] text-white' : 'bg-[#FAFBFC] text-[#2A3B35]'} transition-colors duration-300 relative`}
       style={{
         backgroundImage: theme === 'dark' 
           ? 'radial-gradient(circle at 20% 80%, rgba(184, 216, 208, 0.03) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(184, 216, 208, 0.02) 0%, transparent 50%)' 
           : 'radial-gradient(circle at 20% 80%, rgba(42, 59, 53, 0.02) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(42, 59, 53, 0.01) 0%, transparent 50%)'
       }}
     >
-      {/* Sidebar */}
+      {/* Mobile Header with Component Selector */}
+      <div className={`lg:hidden border-b ${
+        theme === 'dark' 
+          ? 'bg-[#0F1114] border-[#1A1D21]' 
+          : 'bg-white border-gray-200 shadow-sm'
+      } transition-colors duration-300`}>
+        <div className="p-3">
+          <div className="flex items-center justify-between mb-3">
+            <h1 className={`text-lg font-bold ${
+              theme === 'dark' ? 'text-white' : 'text-[#1A1F2E]'
+            }`}>Components</h1>
+            {/* Mobile Theme Toggle */}
+            <button
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className={`flex items-center gap-1 px-2 py-1 rounded-md transition-all duration-200 ${
+                theme === 'dark'
+                  ? 'bg-[#B8D8D0] text-black hover:bg-[#96B5A6]'
+                  : 'bg-[#2A3B35] text-white hover:bg-[#1F2B24]'
+              }`}
+            >
+              {theme === 'dark' ? <Sun className="w-3 h-3" /> : <Moon className="w-3 h-3" />}
+              <span className="text-xs font-medium">
+                {theme === 'dark' ? 'Light' : 'Dark'}
+              </span>
+            </button>
+          </div>
+          
+          {/* Mobile Component Dropdown */}
+          <select
+            value={selectedComponent}
+            onChange={(e) => setSelectedComponent(e.target.value as ComponentType)}
+            className={`w-full p-2 rounded-lg text-sm ${
+              theme === 'dark'
+                ? 'bg-[#1A1D21] text-white border border-[#2A2D31]'
+                : 'bg-gray-50 text-[#1A1F2E] border border-gray-200'
+            }`}
+          >
+            {COMPONENTS.map((component) => (
+              <option key={component.id} value={component.id}>
+                {component.name}
+              </option>
+            ))}
+          </select>
+          
+          <p className={`text-xs mt-2 ${
+            theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+          }`}>
+            {COMPONENTS.find(c => c.id === selectedComponent)?.description}
+          </p>
+        </div>
+      </div>
+
+      {/* Desktop Sidebar */}
       <div 
-        className={`w-80 border-r ${
+        className={`hidden lg:block lg:w-80 border-r ${
           theme === 'dark' 
             ? 'bg-[#0F1114] border-[#1A1D21]' 
             : 'bg-white border-gray-200 shadow-sm'
@@ -1089,10 +1141,10 @@ const Test: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col">
-        {/* Header */}
+      <div className="flex-1 flex flex-col min-w-0">
+        {/* Desktop Header */}
         <div 
-          className={`border-b p-6 ${
+          className={`hidden lg:block border-b p-6 ${
             theme === 'dark' 
               ? 'bg-[#0F1114] border-[#1A1D21]' 
               : 'bg-white border-gray-200 shadow-sm'
