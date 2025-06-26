@@ -99,12 +99,12 @@ const Test: React.FC = () => {
         return (
           <div className="h-full flex">
             {/* Industry Sidebar */}
-            <div className={`w-64 border-r p-4 ${
+            <div className={`w-64 border-r p-6 ${
               theme === 'dark' 
-                ? 'border-[#B8D8D0]/10 bg-[#0F1712]' 
-                : 'border-[#2A3B35]/10 bg-white'
+                ? 'border-[#1A1D21] bg-[#0F1114]' 
+                : 'border-gray-200 bg-white'
             }`}>
-              <h3 className={`text-sm font-medium mb-3 ${
+              <h3 className={`text-sm font-semibold mb-4 ${
                 theme === 'dark' ? 'text-[#B8D8D0]' : 'text-[#2A3B35]'
               }`}>
                 Industries
@@ -117,14 +117,14 @@ const Test: React.FC = () => {
                   return (
                     <label
                       key={industry.id}
-                      className={`flex items-center gap-3 p-2 rounded cursor-pointer transition-colors ${
+                      className={`flex items-center gap-3 p-3 rounded-md cursor-pointer transition-all duration-200 ${
                         isEnabled
                           ? (theme === 'dark' 
-                              ? 'bg-[#B8D8D0]/10 text-[#B8D8D0]' 
-                              : 'bg-[#2A3B35]/10 text-[#2A3B35]')
+                              ? 'bg-[#B8D8D0]/15 text-[#B8D8D0] border border-[#B8D8D0]/20' 
+                              : 'bg-[#2A3B35]/10 text-[#2A3B35] border border-[#2A3B35]/20')
                           : (theme === 'dark' 
-                              ? 'text-gray-400 hover:bg-[#B8D8D0]/5' 
-                              : 'text-gray-600 hover:bg-[#2A3B35]/5')
+                              ? 'text-gray-500 hover:bg-[#1A1D21] hover:text-gray-300 border border-transparent' 
+                              : 'text-gray-600 hover:bg-gray-50 hover:text-[#2A3B35] border border-transparent')
                       }`}
                     >
                       <input
@@ -141,21 +141,23 @@ const Test: React.FC = () => {
               </div>
               
               {/* View Mode Toggle */}
-              <div className="mt-6">
-                <h3 className={`text-sm font-medium mb-3 ${
+              <div className="mt-8 pt-6 border-t ${
+                theme === 'dark' ? 'border-[#1A1D21]' : 'border-gray-200'
+              }">
+                <h3 className={`text-sm font-semibold mb-4 ${
                   theme === 'dark' ? 'text-[#B8D8D0]' : 'text-[#2A3B35]'
                 }`}>
                   View Mode
                 </h3>
                 <div className="space-y-2">
-                  <label className={`flex items-center gap-3 p-2 rounded cursor-pointer transition-colors ${
+                  <label className={`flex items-center gap-3 p-3 rounded-md cursor-pointer transition-all duration-200 ${
                     cardType === 'large'
                       ? (theme === 'dark' 
-                          ? 'bg-[#B8D8D0]/10 text-[#B8D8D0]' 
-                          : 'bg-[#2A3B35]/10 text-[#2A3B35]')
+                          ? 'bg-[#B8D8D0]/15 text-[#B8D8D0] border border-[#B8D8D0]/20' 
+                          : 'bg-[#2A3B35]/10 text-[#2A3B35] border border-[#2A3B35]/20')
                       : (theme === 'dark' 
-                          ? 'text-gray-400 hover:bg-[#B8D8D0]/5' 
-                          : 'text-gray-600 hover:bg-[#2A3B35]/5')
+                          ? 'text-gray-500 hover:bg-[#1A1D21] hover:text-gray-300 border border-transparent' 
+                          : 'text-gray-600 hover:bg-gray-50 hover:text-[#2A3B35] border border-transparent')
                   }`}>
                     <input
                       type="radio"
@@ -168,14 +170,14 @@ const Test: React.FC = () => {
                     <span className="text-sm">Large</span>
                   </label>
                   
-                  <label className={`flex items-center gap-3 p-2 rounded cursor-pointer transition-colors ${
+                  <label className={`flex items-center gap-3 p-3 rounded-md cursor-pointer transition-all duration-200 ${
                     cardType === 'minimal'
                       ? (theme === 'dark' 
-                          ? 'bg-[#B8D8D0]/10 text-[#B8D8D0]' 
-                          : 'bg-[#2A3B35]/10 text-[#2A3B35]')
+                          ? 'bg-[#B8D8D0]/15 text-[#B8D8D0] border border-[#B8D8D0]/20' 
+                          : 'bg-[#2A3B35]/10 text-[#2A3B35] border border-[#2A3B35]/20')
                       : (theme === 'dark' 
-                          ? 'text-gray-400 hover:bg-[#B8D8D0]/5' 
-                          : 'text-gray-600 hover:bg-[#2A3B35]/5')
+                          ? 'text-gray-500 hover:bg-[#1A1D21] hover:text-gray-300 border border-transparent' 
+                          : 'text-gray-600 hover:bg-gray-50 hover:text-[#2A3B35] border border-transparent')
                   }`}>
                     <input
                       type="radio"
@@ -196,10 +198,10 @@ const Test: React.FC = () => {
               <div className="w-2/3 flex flex-col">
                 {/* View Toggle Bar - Above feed like insight card styling */}
                 <div className={`
-                  flex items-center justify-between p-3 rounded-lg border
+                  flex items-center justify-between p-4 rounded-lg border mb-4
                   ${theme === 'dark' 
-                    ? 'bg-[#0F1712] border-[#B8D8D0]/10' 
-                    : 'bg-white border-[#2A3B35]/10'
+                    ? 'bg-[#0F1114] border-[#1A1D21]' 
+                    : 'bg-white border-gray-200 shadow-sm'
                   }
                 `}>
                   <div className="flex gap-1">
@@ -307,8 +309,8 @@ const Test: React.FC = () => {
             {/* Component-specific controls */}
             <div className={`flex items-center gap-4 p-4 rounded-lg border ${
               theme === 'dark' 
-                ? 'bg-white/5 border-white/10' 
-                : 'bg-black/5 border-black/10'
+                ? 'bg-[#0F1114] border-[#1A1D21]' 
+                : 'bg-white border-gray-200 shadow-sm'
             }`}>
               <span className={`text-sm font-medium ${
                 theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
@@ -355,7 +357,11 @@ const Test: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: 0.1 * index }}
-                  className="border border-white/10 rounded-lg overflow-hidden"
+                  className={`rounded-lg overflow-hidden border ${
+                    theme === 'dark' 
+                      ? 'border-[#1A1D21]' 
+                      : 'border-gray-200'
+                  }`}
                 >
                   <InsightCard
                     insight={insight}
@@ -383,8 +389,8 @@ const Test: React.FC = () => {
             {/* Component-specific controls */}
             <div className={`flex items-center gap-4 p-4 rounded-lg border ${
               theme === 'dark' 
-                ? 'bg-white/5 border-white/10' 
-                : 'bg-black/5 border-black/10'
+                ? 'bg-[#0F1114] border-[#1A1D21]' 
+                : 'bg-white border-gray-200 shadow-sm'
             }`}>
               <span className={`text-sm font-medium ${
                 theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
@@ -433,8 +439,8 @@ const Test: React.FC = () => {
                   transition={{ duration: 0.3, delay: 0.1 * index }}
                   className={`border rounded-lg p-4 ${
                     theme === 'dark' 
-                      ? 'border-white/10 bg-[#0F1712]' 
-                      : 'border-black/10 bg-white'
+                      ? 'border-[#1A1D21] bg-[#0F1114]' 
+                      : 'border-gray-200 bg-white'
                   }`}
                 >
                   <h3 className={`text-sm font-medium mb-3 ${
@@ -480,8 +486,8 @@ const Test: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className={`border rounded-lg p-6 ${
                 theme === 'dark' 
-                  ? 'border-white/10 bg-[#0F1712]' 
-                  : 'border-black/10 bg-white'
+                  ? 'border-[#1A1D21] bg-[#0F1114]' 
+                  : 'border-gray-200 bg-white'
               }`}>
                 <h3 className={`text-sm font-medium mb-4 ${
                   theme === 'dark' ? 'text-white' : 'text-[#2A3B35]'
@@ -500,8 +506,8 @@ const Test: React.FC = () => {
               
               <div className={`border rounded-lg p-6 ${
                 theme === 'dark' 
-                  ? 'border-white/10 bg-[#0F1712]' 
-                  : 'border-black/10 bg-white'
+                  ? 'border-[#1A1D21] bg-[#0F1114]' 
+                  : 'border-gray-200 bg-white'
               }`}>
                 <h3 className={`text-sm font-medium mb-4 ${
                   theme === 'dark' ? 'text-white' : 'text-[#2A3B35]'
@@ -527,8 +533,8 @@ const Test: React.FC = () => {
             {/* Button Variants */}
             <div className={`p-6 rounded-lg border ${
               theme === 'dark' 
-                ? 'bg-white/5 border-white/10' 
-                : 'bg-black/5 border-black/10'
+                ? 'bg-[#0F1114] border-[#1A1D21]' 
+                : 'bg-white border-gray-200 shadow-sm'
             }`}>
               <h3 className={`text-lg font-medium mb-4 ${
                 theme === 'dark' ? 'text-white' : 'text-[#2A3B35]'
@@ -620,8 +626,8 @@ const Test: React.FC = () => {
             {/* Loading States */}
             <div className={`p-6 rounded-lg border ${
               theme === 'dark' 
-                ? 'bg-white/5 border-white/10' 
-                : 'bg-black/5 border-black/10'
+                ? 'bg-[#0F1114] border-[#1A1D21]' 
+                : 'bg-white border-gray-200 shadow-sm'
             }`}>
               <h3 className={`text-lg font-medium mb-4 ${
                 theme === 'dark' ? 'text-white' : 'text-[#2A3B35]'
@@ -645,8 +651,8 @@ const Test: React.FC = () => {
             {/* Interactive Examples */}
             <div className={`p-6 rounded-lg border ${
               theme === 'dark' 
-                ? 'bg-white/5 border-white/10' 
-                : 'bg-black/5 border-black/10'
+                ? 'bg-[#0F1114] border-[#1A1D21]' 
+                : 'bg-white border-gray-200 shadow-sm'
             }`}>
               <h3 className={`text-lg font-medium mb-4 ${
                 theme === 'dark' ? 'text-white' : 'text-[#2A3B35]'
@@ -691,8 +697,8 @@ const Test: React.FC = () => {
             {/* Badges */}
             <div className={`p-6 rounded-lg border ${
               theme === 'dark' 
-                ? 'bg-white/5 border-white/10' 
-                : 'bg-black/5 border-black/10'
+                ? 'bg-[#0F1114] border-[#1A1D21]' 
+                : 'bg-white border-gray-200 shadow-sm'
             }`}>
               <h3 className={`text-lg font-medium mb-4 ${
                 theme === 'dark' ? 'text-white' : 'text-[#2A3B35]'
@@ -719,8 +725,8 @@ const Test: React.FC = () => {
             {/* Cards */}
             <div className={`p-6 rounded-lg border ${
               theme === 'dark' 
-                ? 'bg-white/5 border-white/10' 
-                : 'bg-black/5 border-black/10'
+                ? 'bg-[#0F1114] border-[#1A1D21]' 
+                : 'bg-white border-gray-200 shadow-sm'
             }`}>
               <h3 className={`text-lg font-medium mb-4 ${
                 theme === 'dark' ? 'text-white' : 'text-[#2A3B35]'
@@ -773,8 +779,8 @@ const Test: React.FC = () => {
             {/* Interactive States */}
             <div className={`p-6 rounded-lg border ${
               theme === 'dark' 
-                ? 'bg-white/5 border-white/10' 
-                : 'bg-black/5 border-black/10'
+                ? 'bg-[#0F1114] border-[#1A1D21]' 
+                : 'bg-white border-gray-200 shadow-sm'
             }`}>
               <h3 className={`text-lg font-medium mb-4 ${
                 theme === 'dark' ? 'text-white' : 'text-[#2A3B35]'
@@ -790,7 +796,11 @@ const Test: React.FC = () => {
                     Hover Effects
                   </h4>
                   <div className="space-y-2">
-                    <Card className="p-3 hover:shadow-md transition-shadow cursor-pointer">
+                    <Card className={`p-3 cursor-pointer transition-all duration-200 ${
+                      theme === 'dark' 
+                        ? 'hover:shadow-xl hover:shadow-[#B8D8D0]/5 hover:border-[#B8D8D0]/20' 
+                        : 'hover:shadow-md hover:border-[#2A3B35]/20'
+                    }`}>
                       <p className="text-sm">Hover for shadow effect</p>
                     </Card>
                     <Badge className="cursor-pointer hover:opacity-80 transition-opacity">
@@ -825,8 +835,8 @@ const Test: React.FC = () => {
             {/* Text Variants */}
             <div className={`p-6 rounded-lg border ${
               theme === 'dark' 
-                ? 'bg-white/5 border-white/10' 
-                : 'bg-black/5 border-black/10'
+                ? 'bg-[#0F1114] border-[#1A1D21]' 
+                : 'bg-white border-gray-200 shadow-sm'
             }`}>
               <h3 className={`text-lg font-medium mb-4 ${
                 theme === 'dark' ? 'text-white' : 'text-[#2A3B35]'
@@ -873,8 +883,8 @@ const Test: React.FC = () => {
             {/* Text Colors */}
             <div className={`p-6 rounded-lg border ${
               theme === 'dark' 
-                ? 'bg-white/5 border-white/10' 
-                : 'bg-black/5 border-black/10'
+                ? 'bg-[#0F1114] border-[#1A1D21]' 
+                : 'bg-white border-gray-200 shadow-sm'
             }`}>
               <h3 className={`text-lg font-medium mb-4 ${
                 theme === 'dark' ? 'text-white' : 'text-[#2A3B35]'
@@ -924,8 +934,8 @@ const Test: React.FC = () => {
             {/* Typography Scale */}
             <div className={`p-6 rounded-lg border ${
               theme === 'dark' 
-                ? 'bg-white/5 border-white/10' 
-                : 'bg-black/5 border-black/10'
+                ? 'bg-[#0F1114] border-[#1A1D21]' 
+                : 'bg-white border-gray-200 shadow-sm'
             }`}>
               <h3 className={`text-lg font-medium mb-4 ${
                 theme === 'dark' ? 'text-white' : 'text-[#2A3B35]'
@@ -980,8 +990,8 @@ const Test: React.FC = () => {
             {/* Theme Demonstration */}
             <div className={`p-6 rounded-lg border ${
               theme === 'dark' 
-                ? 'bg-white/5 border-white/10' 
-                : 'bg-black/5 border-black/10'
+                ? 'bg-[#0F1114] border-[#1A1D21]' 
+                : 'bg-white border-gray-200 shadow-sm'
             }`}>
               <h3 className={`text-lg font-medium mb-4 ${
                 theme === 'dark' ? 'text-white' : 'text-[#2A3B35]'
@@ -1017,15 +1027,25 @@ const Test: React.FC = () => {
 
   return (
     <div 
-      className={`min-h-screen flex ${theme === 'dark' ? 'bg-black text-white' : 'bg-[#F7F7F7] text-[#2A3B35]'} transition-colors duration-300`}
+      className={`min-h-screen flex ${theme === 'dark' ? 'bg-[#0A0B0D] text-white' : 'bg-[#FAFBFC] text-[#2A3B35]'} transition-colors duration-300 relative`}
+      style={{
+        backgroundImage: theme === 'dark' 
+          ? 'radial-gradient(circle at 20% 80%, rgba(184, 216, 208, 0.03) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(184, 216, 208, 0.02) 0%, transparent 50%)' 
+          : 'radial-gradient(circle at 20% 80%, rgba(42, 59, 53, 0.02) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(42, 59, 53, 0.01) 0%, transparent 50%)'
+      }}
     >
       {/* Sidebar */}
       <div 
-        className={`w-80 border-r ${theme === 'dark' ? 'border-white/10' : 'border-black/10 bg-white/50'}`}
-        style={theme === 'dark' ? { background: '#000000 !important' } : {}}
+        className={`w-80 border-r ${
+          theme === 'dark' 
+            ? 'bg-[#0F1114] border-[#1A1D21]' 
+            : 'bg-white border-gray-200 shadow-sm'
+        } transition-colors duration-300`}
       >
         <div className="p-6">
-          <h1 className="text-2xl font-bold mb-6">Components</h1>
+          <h1 className={`text-2xl font-bold mb-6 ${
+            theme === 'dark' ? 'text-white' : 'text-[#1A1F2E]'
+          }`}>Components</h1>
           
           <div className="space-y-2">
             {COMPONENTS.map((component) => {
@@ -1039,21 +1059,25 @@ const Test: React.FC = () => {
                   className={`w-full text-left p-4 rounded-lg transition-all duration-200 ${
                     isSelected
                       ? (theme === 'dark' 
-                          ? 'bg-[#B8D8D0]/10 border border-[#B8D8D0]/20 text-[#B8D8D0]' 
-                          : 'bg-[#2A3B35]/10 border border-[#2A3B35]/20 text-[#2A3B35]')
+                          ? 'bg-[#B8D8D0]/15 border border-[#B8D8D0]/30 text-[#B8D8D0] shadow-lg shadow-[#B8D8D0]/10' 
+                          : 'bg-[#2A3B35]/10 border border-[#2A3B35]/20 text-[#2A3B35] shadow-md')
                       : (theme === 'dark'
-                          ? 'hover:bg-white/5 border border-transparent text-gray-300 hover:text-white'
-                          : 'hover:bg-black/5 border border-transparent text-gray-700 hover:text-black')
+                          ? 'hover:bg-[#1A1D21] border border-transparent text-gray-400 hover:text-white hover:border-[#2A2D31]'
+                          : 'hover:bg-gray-50 border border-transparent text-gray-600 hover:text-[#1A1F2E] hover:border-gray-200')
                   }`}
                 >
                   <div className="flex items-center gap-3 mb-2">
-                    <Icon className="w-5 h-5" />
+                    <Icon className={`w-5 h-5 ${
+                      isSelected 
+                        ? '' 
+                        : 'opacity-70'
+                    }`} />
                     <span className="font-medium">{component.name}</span>
                   </div>
-                  <p className={`text-sm ${
+                  <p className={`text-sm leading-relaxed ${
                     isSelected 
-                      ? (theme === 'dark' ? 'text-[#729E8C]' : 'text-[#4A665C]')
-                      : (theme === 'dark' ? 'text-gray-400' : 'text-gray-600')
+                      ? (theme === 'dark' ? 'text-[#96B5A6]' : 'text-[#4A665C]')
+                      : (theme === 'dark' ? 'text-gray-500' : 'text-gray-500')
                   }`}>
                     {component.description}
                   </p>
@@ -1068,15 +1092,22 @@ const Test: React.FC = () => {
       <div className="flex-1 flex flex-col">
         {/* Header */}
         <div 
-          className={`border-b ${theme === 'dark' ? 'border-white/10' : 'border-black/10 bg-white/50'} p-6`}
-          style={theme === 'dark' ? { background: '#000000 !important' } : {}}
+          className={`border-b p-6 ${
+            theme === 'dark' 
+              ? 'bg-[#0F1114] border-[#1A1D21]' 
+              : 'bg-white border-gray-200 shadow-sm'
+          } transition-colors duration-300`}
         >
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-xl font-semibold">
+              <h2 className={`text-xl font-semibold ${
+                theme === 'dark' ? 'text-white' : 'text-[#1A1F2E]'
+              }`}>
                 {COMPONENTS.find(c => c.id === selectedComponent)?.name}
               </h2>
-              <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+              <p className={`text-sm mt-1 ${
+                theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+              }`}>
                 {COMPONENTS.find(c => c.id === selectedComponent)?.description}
               </p>
             </div>
@@ -1088,10 +1119,10 @@ const Test: React.FC = () => {
               </span>
               <button
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-200 ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
                   theme === 'dark'
-                    ? 'bg-[#B8D8D0] text-black hover:bg-[#729E8C]'
-                    : 'bg-[#2A3B35] text-white hover:bg-[#4A665C]'
+                    ? 'bg-[#B8D8D0] text-black hover:bg-[#96B5A6] shadow-md'
+                    : 'bg-[#2A3B35] text-white hover:bg-[#1F2B24] shadow-md'
                 }`}
               >
                 {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -1104,7 +1135,9 @@ const Test: React.FC = () => {
         </div>
 
         {/* Component Preview */}
-        <div className="flex-1 overflow-hidden">
+        <div className={`flex-1 overflow-auto ${
+          theme === 'dark' ? 'bg-[#0A0B0D]' : 'bg-[#FAFBFC]'
+        }`}>
           <motion.div
             key={selectedComponent}
             initial={{ opacity: 0, x: 20 }}
