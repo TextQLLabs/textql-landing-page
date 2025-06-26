@@ -10,6 +10,7 @@ interface AnimatedSearchBarProps {
   onAnimationComplete: () => void;
   isInitialLoad: boolean;
   theme?: 'light' | 'dark';
+  showDebugBorders?: boolean;
 }
 
 // Memoize sub-components for better performance
@@ -27,7 +28,7 @@ const PulseBackground = memo(({ theme = 'dark' }: { theme?: 'light' | 'dark' }) 
 PulseBackground.displayName = 'PulseBackground';
 
 export const AnimatedSearchBar: React.FC<AnimatedSearchBarProps> = memo((props) => {
-  const { theme = 'dark' } = props;
+  const { theme = 'dark', showDebugBorders = false } = props;
   const {
     isSearchActive,
     typedText,
@@ -68,7 +69,7 @@ export const AnimatedSearchBar: React.FC<AnimatedSearchBarProps> = memo((props) 
 
   return (
     <div 
-      className="h-[60px] md:h-[80px] relative animate-fade-in-up w-full md:w-[600px]" 
+      className={`h-[60px] md:h-[80px] relative animate-fade-in-up w-full ${showDebugBorders ? 'border-2 border-lime-500' : ''}`} 
     >
       {showPulse && <MemoizedWaveRipples />}
       

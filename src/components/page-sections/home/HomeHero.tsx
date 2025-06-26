@@ -282,7 +282,7 @@ export function HomeHero() {
         paddingTop: `${navbarHeight}px`  /* Account for navbar height (dynamic) */
       }}>
         {/* Main mobile content */}
-        <div className={`flex flex-col items-center justify-center flex-1 mx-auto max-w-7xl px-2 pb-24 ${showDebugBorders ? 'border-2 border-green-500' : ''}`}>
+        <div className={`flex flex-col items-center justify-center flex-1 mx-auto max-w-7xl px-2 pb-4 ${showDebugBorders ? 'border-2 border-green-500' : ''}`}>
           <div className={`w-full text-center ${showDebugBorders ? 'border-2 border-cyan-500' : ''}`}>
             <Badge
               variant="default"

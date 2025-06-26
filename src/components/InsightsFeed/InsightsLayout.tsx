@@ -165,6 +165,7 @@ export const InsightsLayout: React.FC<InsightsLayoutProps> = ({
             onAnimationComplete={onSearchComplete}
             isInitialLoad={isInitialLoad}
             theme={theme}
+            showDebugBorders={showDebugBorders}
           />
         </Suspense>
       </SearchBarMotion>
@@ -174,8 +175,8 @@ export const InsightsLayout: React.FC<InsightsLayoutProps> = ({
           {children}
         </ContentMotion>
         
-        {/* Fade out gradient at bottom - only show when insights are visible */}
-        {showInsights && (
+        {/* Fade out gradient at bottom - only show when insights are visible and on desktop */}
+        {showInsights && !className?.includes('lg:hidden') && (
           <div className="absolute bottom-0 left-0 right-0 h-[25px] pointer-events-none">
             <div className={`w-full h-full bg-gradient-to-t ${
               theme === 'light' 
