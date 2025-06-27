@@ -1,9 +1,11 @@
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import { SEO } from './components/SEO';
+import { DebugProvider } from './contexts/DebugContext';
+import { DebugToggle } from './components/DebugToggle';
 import { 
   HomeHero, 
-  WorkflowCarousel, 
+  SolutionCarousel, 
   JoinsSection,
   OntologySection,
   EnterpriseSection 
@@ -18,8 +20,8 @@ import Privacy from './pages/Privacy';
 import Ontology from './pages/Ontology';
 import Blog from './pages/blog';
 import BlogPost from './pages/blog/[id]';
-import WorkflowLibrary from './pages/workflows';
-import WorkflowTemplate from './pages/workflows/[id]';
+import SolutionLibrary from './pages/solutions';
+import SolutionTemplate from './pages/solutions/[id]';
 import Demo from './pages/Demo';
 import AllIntegrations from './pages/AllIntegrations';
 import TableauMcpIntegration from './pages/integrations/TableauMcpIntegration';
@@ -32,6 +34,8 @@ import Team from './pages/Team';
 import SnowflakeMcpIntegration from './pages/integrations/SnowflakeMcpIntegration';
 import Databricks2025 from './pages/Databricks2025';
 import Test from './pages/Test';
+import Customers from './pages/Customers';
+import Fortune500Financial from './pages/customers/Fortune500Financial';
 
 function App() {
   const location = useLocation();
@@ -43,7 +47,8 @@ function App() {
   const canonical = `${baseUrl}${currentPath}`;
 
   return (
-    <>
+    <DebugProvider>
+      <DebugToggle />
       <Routes>
         <Route path="/test" element={<Test />} />
         <Route element={<Layout />}>
@@ -61,7 +66,7 @@ function App() {
                 <HomeHero />
                 <JoinsSection />
                 <OntologySection />
-                <WorkflowCarousel />
+                <SolutionCarousel />
                 <EnterpriseSection />
                 <CTA />
               </main>
@@ -70,9 +75,11 @@ function App() {
           
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/enterprise" element={<Enterprise />} />
-          <Route path="/templates" element={<Navigate to="/workflows" replace />} />
-          <Route path="/workflows" element={<WorkflowLibrary />} />
-          <Route path="/workflows/:id" element={<WorkflowTemplate />} />
+          <Route path="/templates" element={<Navigate to="/solutions" replace />} />
+          <Route path="/workflows" element={<Navigate to="/solutions" replace />} />
+          <Route path="/solutions" element={<SolutionLibrary />} />
+          <Route path="/solutions/:id" element={<SolutionTemplate />} />
+          <Route path="/workflows/:id" element={<Navigate to={`/solutions/${location.pathname.split('/').pop()}`} replace />} />
           <Route path="/about" element={<About />} />
           <Route path="/agents" element={<Agents />} />
           <Route path="/ontology" element={<Ontology />} />
@@ -88,6 +95,12 @@ function App() {
           <Route path="/team" element={<Team />} />
           <Route path="/snowflake-2025" element={<Snowflake2025 />} />
           <Route path="/databricks-2025" element={<Databricks2025 />} />
+          {isDevelopment && (
+            <>
+              <Route path="/customers" element={<Customers />} />
+              <Route path="/customers/fortune-500-financial-services" element={<Fortune500Financial />} />
+            </>
+          )}
           
           {/* Blog Routes */}
           <Route path="/blog" element={<Blog />} />
@@ -96,7 +109,7 @@ function App() {
           <Route path="/demo" element={<Demo />} />
         </Route>
       </Routes>
-    </>
+    </DebugProvider>
   );
 }
 

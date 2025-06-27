@@ -82,7 +82,7 @@ export function Feature({
   );
 
   return (
-    <section className={`py-24 ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
+    <section className={`py-24 ${theme === 'dark' ? 'bg-black' : 'bg-[#F7F7F7]'}`}>
       <div className="mx-auto max-w-site px-6">
         <div className={`grid lg:grid-cols-2 gap-16 ${imagePosition === 'left' ? 'lg:grid-flow-col' : ''}`}>
           {/* Content */}
@@ -105,7 +105,7 @@ export function Feature({
                 className="w-full h-full object-cover transform scale-110 group-hover:scale-100 transition-transform duration-500"
               />
               {/* Decorative elements */}
-              <div className={`absolute inset-0 ${theme === 'dark' ? 'bg-black' : 'bg-white'} opacity-10 group-hover:opacity-0 transition-opacity duration-500`} />
+              <div className={`absolute inset-0 ${theme === 'dark' ? 'bg-black' : 'bg-[#F7F7F7]'} opacity-10 group-hover:opacity-0 transition-opacity duration-500`} />
               <div className={`absolute inset-0 border-8 ${borderColor} opacity-20 group-hover:opacity-0 transition-opacity duration-500`} />
             </div>
 

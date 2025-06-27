@@ -5,7 +5,7 @@ import { SEO } from '../components/SEO';
 
 export default function About() {
   return (
-    <div className="bg-black">
+    <div className="bg-black" style={{ backgroundColor: '#000000' }}>
       <SEO 
         title="About | TextQL"
         description="Learn about TextQL's mission and team. We're building the future of enterprise data analysis with AI."

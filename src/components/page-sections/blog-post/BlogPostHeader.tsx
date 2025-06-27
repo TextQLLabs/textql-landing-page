@@ -8,52 +8,70 @@ interface BlogPostHeaderProps {
 }
 
 export function BlogPostHeader({ post }: BlogPostHeaderProps) {
+  // Determine header image source based on useLocalImage flag
+  const headerImageSource = post.useLocalImage 
+    ? `/images/blog/${post.id}/header.png`
+    : post.image;
+
   return (
-    <header className="relative bg-black">
-      {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-transparent" />
-      
-      <div className="relative z-20 pt-12 pb-48">
-        <div className="mx-auto max-w-3xl px-6">
+    <header className="border-b border-white/10" style={{ backgroundColor: '#000000' }}>
+      <div className="pt-32 pb-12">
+        <div className="mx-auto max-w-7xl px-6">
           {/* Back Link */}
           <Link 
             to="/blog" 
-            className="inline-flex items-center gap-2 text-[#B8D8D0] hover:text-[#729E8C] transition-colors mb-8"
+            className="inline-flex items-center gap-2 text-[#B8D8D0] hover:text-white transition-colors mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Blog
           </Link>
 
-          {/* Title */}
-          <Heading level={1} className="text-4xl font-light mb-4">
-            {post.title}
-          </Heading>
+          {/* Title and Image Row */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8 items-center">
+            {/* Left Column - Title and Meta */}
+            <div className="py-4">
+              {/* Title */}
+              <Heading level={1} className="text-4xl font-light mb-4 text-white" theme="dark">
+                {post.title}
+              </Heading>
 
-          {/* Description */}
-          <Text color="muted" className="text-lg mb-6">
-            {post.description}
-          </Text>
+              {/* Description */}
+              <Text color="muted" className="text-lg mb-6 text-[#B8D8D0]" theme="dark">
+                {post.description}
+              </Text>
 
-          {/* Author Info, Badge, and Date in a single line */}
-          <div className="flex items-center gap-4 text-sm">
-            <Text className="font-medium">
-              {post.author.name}
-            </Text>
-            {post.category && (
-              <>
-                <div className="w-[1px] h-4 bg-[#B8D8D0]/20" />
-                <Badge 
-                  variant="outline" 
-                  className="bg-[#B8D8D0]/10 backdrop-blur-sm"
-                >
-                  {post.category}
-                </Badge>
-              </>
-            )}
-            <div className="w-[1px] h-4 bg-[#B8D8D0]/20" />
-            <Text color="muted">
-              {post.date}
-            </Text>
+              {/* Author Info, Badge, and Date in a single line */}
+              <div className="flex items-center gap-4 text-sm">
+                <Text className="font-medium text-white" theme="dark">
+                  {post.author.name}
+                </Text>
+                {post.category && (
+                  <>
+                    <div className="w-[1px] h-4 bg-white/20" />
+                    <Badge 
+                      variant="outline" 
+                      theme="dark"
+                      className="bg-white/10 backdrop-blur-sm border-[#B8D8D0] text-[#B8D8D0]"
+                    >
+                      {post.category}
+                    </Badge>
+                  </>
+                )}
+                <div className="w-[1px] h-4 bg-white/20" />
+                <Text color="muted" className="text-[#B8D8D0]" theme="dark">
+                  {post.date}
+                </Text>
+              </div>
+            </div>
+
+            {/* Right Column - Image */}
+            <div className="rounded-lg overflow-hidden">
+              <img
+                src={headerImageSource}
+                alt={post.title}
+                className="w-full h-auto object-contain"
+              />
+            </div>
           </div>
         </div>
       </div>

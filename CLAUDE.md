@@ -129,6 +129,118 @@ Common MCP servers you can install:
 - Regularly update MCP servers for security and feature updates
 - Test MCP server configurations before critical work sessions
 
+# TextQL Landing Page Blog Structure
+
+## Blog Architecture Overview
+This project implements a structured blog system with TypeScript definitions and markdown content management. The blog is built using React Router, React components, and Vite for the build system.
+
+## Key Blog Components
+
+### 1. Blog Data Structure
+- **Location**: `src/data/blog/`
+- **Main index**: `src/data/blog/index.ts`
+- **Type definitions**: `src/data/blog/types.ts`
+
+### 2. Blog Post Structure
+Each blog post consists of:
+- **Metadata file**: `{post-id}.ts` - Contains title, description, author, date, etc.
+- **Content file**: `{post-id}/content.md` - Markdown content for the post
+- **Images**: `public/images/blog/{post-id}/` - Header images and assets
+
+### 3. Blog Components
+- **Blog Index Page**: `src/pages/blog/index.tsx`
+- **Individual Post Page**: `src/pages/blog/[id].tsx`
+- **Blog Components**: `src/components/page-sections/blog/`
+  - `BlogHeader.tsx` - Featured post hero section
+  - `BlogGrid.tsx` - Grid layout for posts
+  - `BlogCard.tsx` - Individual post cards
+  - `types.ts` - TypeScript interfaces
+
+## Adding New Blog Posts
+
+### Step 1: Create Metadata File
+Create `src/data/blog/{post-id}.ts`:
+```typescript
+import type { BlogPost } from '../../components/page-sections/blog/types';
+
+export const post: BlogPost = {
+  id: 'your-post-id',
+  title: 'Your Post Title',
+  description: 'Brief description',
+  image: '/images/blog/your-post-id/header.png',
+  useLocalImage: true,
+  author: {
+    name: 'Author Name',
+    role: 'Title',
+    company: 'TextQL'
+  },
+  date: 'Month DD, YYYY',
+  readTime: 'X min read',
+  category: 'category-name',
+  featured: false // Set to true for featured posts
+};
+```
+
+### Step 2: Create Content File
+Create `src/data/blog/{post-id}/content.md` with your markdown content.
+
+### Step 3: Add Images
+Place header image at `public/images/blog/{post-id}/header.png` and any additional assets.
+
+### Step 4: Update Index File
+Add to `src/data/blog/index.ts`:
+1. Import the post: `import { post as yourPostId } from './your-post-id';`
+2. Add to blogPosts array (most recent first)
+3. Add case to getPostContent() switch statement
+4. Add content loading function
+
+## Content Loading System
+The blog uses Vite's `import.meta.glob()` to dynamically load markdown content:
+- Content is loaded as raw text using `?raw` query
+- Each post has a dedicated content loading function
+- Content is loaded eagerly for better performance
+
+## Image Management
+- **Header images**: Stored in `public/images/blog/{post-id}/`
+- **Local images**: Use `useLocalImage: true` flag in metadata
+- **External images**: Set `useLocalImage: false` and provide full URL
+
+## Blog Features
+- **Featured posts**: Set `featured: true` in metadata for hero display
+- **Categories**: Organize posts by category for filtering
+- **Reading time**: Estimated reading time for each post
+- **Author information**: Name, role, and company for each author
+- **Responsive design**: Mobile-first approach with Tailwind CSS
+- **SEO optimization**: Meta tags and structured data
+
+## Styling & UI
+- **CSS Framework**: Tailwind CSS
+- **Components**: Custom UI components in `src/components/ui/`
+- **Icons**: Lucide React icons
+- **Typography**: Custom heading and text components
+- **Theme**: Consistent design system with dark/light variants
+
+## Build & Deployment
+- **Dev server**: `npm run dev` (localhost:5173)
+- **Build**: `npm run build`
+- **Preview**: `npm run preview`
+- **Prerendering**: `npm run prerender` (for static generation)
+
+## Current Blog Posts
+The blog currently contains 18 posts covering topics like:
+- AI/ML and text-to-SQL technology
+- Data engineering and analytics
+- Company announcements and fundraising
+- Technical deep-dives (Haskell, embeddings, benchmarks)
+- Industry integrations (Tableau, NBA, SOC2)
+
+## Development Workflow
+1. Create post metadata and content files
+2. Add images to public directory
+3. Update index.ts with new post
+4. Test locally with `npm run dev`
+5. Build and deploy when ready
+
 # Important Instruction Reminders
 Do what has been asked; nothing more, nothing less.
 NEVER create files unless they're absolutely necessary for achieving your goal.

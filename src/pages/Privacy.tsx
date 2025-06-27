@@ -4,7 +4,7 @@ import { SEO } from '../components/SEO';
 
 export default function Privacy() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#F7F7F7]">
       <SEO 
         title="Privacy Policy | TextQL"
         description="Privacy policy for TextQL services. Learn how we collect, use, and protect your data."

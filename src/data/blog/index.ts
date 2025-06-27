@@ -1,8 +1,8 @@
 import type { BlogPost } from '../../components/page-sections/blog/types';
 
 // Import individual blog posts
+import { post as aiAnalyticsAdoption } from './ai-analytics-adoption';
 import { post as buildingDataAgent } from './building-data-agent';
-import { post as futureOfData } from './future-of-data';
 import { post as tenYearThesis } from './ten-year-thesis';
 import { post as twitterBenchmark } from './vision-benchmark';
 import { post as sqlModel } from './sql-model';
@@ -20,6 +20,7 @@ import { post as fermiEstimation } from './fermi-estimation';
 // Export all blog posts
 // most recent at top
 export const blogPosts: BlogPost[] = [
+  aiAnalyticsAdoption,
   fermiEstimation,
   twitterBenchmark,
   anaSmall,
@@ -32,7 +33,6 @@ export const blogPosts: BlogPost[] = [
   nbaLaunchpad,
   fundraising,
   buildingDataAgent,
-  futureOfData,
   tenYearThesis,
   sqlModel,
 ];
@@ -41,6 +41,8 @@ export const blogPosts: BlogPost[] = [
 export function getPostContent(id: string): string {
   try {
     switch (id) {
+      case 'ai-analytics-adoption':
+        return getAIAnalyticsAdoptionContent();
       case 'fermi-estimation':
         return getFermiEstimationContent();
       case 'vision-benchmark':
@@ -51,8 +53,6 @@ export function getPostContent(id: string): string {
         return getSQLProcessContent();
       case 'building-data-agent':
         return getBuildingDataAgentContent();
-      case 'future-of-data':
-        return getFutureOfDataContent();
       case 'ten-year-thesis':
         return getTenYearThesisContent();
       case 'sql-model':
@@ -120,13 +120,6 @@ export function getBuildingDataAgentContent(): string {
   })['./building-data-agent/content.md'] as string;
 }
 
-export function getFutureOfDataContent(): string {
-  return import.meta.glob('./future-of-data/content.md', {
-    query: '?raw',
-    import: 'default',
-    eager: true,
-  })['./future-of-data/content.md'] as string;
-}
 
 export function getTenYearThesisContent(): string {
   return import.meta.glob('./ten-year-thesis/content.md', {
@@ -198,4 +191,12 @@ export function getWhyOntologyContent(): string {
     import: 'default',
     eager: true,
   })['./why-ontology/content.md'] as string;
+}
+
+export function getAIAnalyticsAdoptionContent(): string {
+  return import.meta.glob('./ai-analytics-adoption/content.md', {
+    query: '?raw',
+    import: 'default',
+    eager: true,
+  })['./ai-analytics-adoption/content.md'] as string;
 }

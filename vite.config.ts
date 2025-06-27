@@ -4,6 +4,7 @@ import mdx from '@mdx-js/rollup';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/', // Add explicit base path
   plugins: [
     mdx({
       providerImportSource: "@mdx-js/react"

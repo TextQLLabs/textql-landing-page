@@ -34,11 +34,6 @@ export default function Team() {
       image: "https://cdn.prod.website-files.com/65233261a2e59a440d833232/653fdc5f4fa18f1eceadcdb6_DSCF0671-2-p-800.jpg"
     },
     {
-      name: "Leonardo von Mutius",
-      title: "Member of Technical Staff",
-      image: "https://cdn.prod.website-files.com/65233261a2e59a440d833232/679ab27bf8496151fc5209bf_p1030330_720.jpg"
-    },
-    {
       name: "Armaan Kapoor",
       title: "Member of Technical Staff",
       image: "https://cdn.prod.website-files.com/65233261a2e59a440d833232/679abaa2ff53477a0271627e_pic_720.png"
@@ -77,7 +72,7 @@ export default function Team() {
   ];
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black" style={{ backgroundColor: '#000000' }}>
       <SEO 
         title="Our Team | TextQL"
         description="Meet the team building the future of data at TextQL."
@@ -88,7 +83,7 @@ export default function Team() {
       {/* Hero Section */}
       <div className="relative overflow-hidden min-h-[300px]">
         {/* Background with gradient */}
-        <div className="absolute inset-0 bg-black" />
+        <div className="absolute inset-0" style={{ backgroundColor: '#000000' }} />
         
         {/* Content */}
         <div className="relative z-10 pt-32 pb-16 px-4">

@@ -1,4 +1,4 @@
-import { workflows } from '../../data/workflows';
+import { solutions } from '../../data/solutions';
 import { DEMO_CONFIG } from '../constants';
 import type { DemoRequestPayload, DemoRequestResult } from './types';
 
@@ -8,19 +8,19 @@ export const handleSimpleDemoRequest = async (pathname: string): Promise<DemoReq
     const pagePath = pathname.substring(1) || 'home';
     const fullUrl = `${DEMO_CONFIG.BASE_DOMAIN}/${pagePath}`;
     
-    // Get workflow info if on a workflow page
-    let workflowName = 'no workflow requested';
-    if (pagePath.startsWith('workflows/')) {
-      const workflowId = pagePath.split('/')[1];
-      const workflow = workflows.find(w => w.id === workflowId);
-      if (workflow) {
-        workflowName = workflow.title;
+    // Get solution info if on a solution page
+    let solutionName = 'no solution requested';
+    if (pagePath.startsWith('solutions/') || pagePath.startsWith('workflows/')) {
+      const solutionId = pagePath.split('/')[1];
+      const solution = solutions.find(s => s.id === solutionId);
+      if (solution) {
+        solutionName = solution.title;
       }
     }
 
     // Send to Slack webhook with expected payload format
     const payload: DemoRequestPayload = {
-      "workflow-name": workflowName,
+      "solution-name": solutionName,
       "page-name": fullUrl,
       "url": fullUrl
     };

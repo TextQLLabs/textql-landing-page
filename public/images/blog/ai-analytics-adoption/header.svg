@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#1a1a1a"/>
+  
+  <!-- Grid background -->
+  <defs>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#333" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  
+  <!-- Title -->
+  <text x="600" y="300" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#fff">
+    AI Analytics Adoption Levels
+  </text>
+  
+  <!-- Bars representing levels -->
+  <g transform="translate(250, 380)">
+    <rect x="0" y="0" width="100" height="80" fill="#6366f1" opacity="0.8"/>
+    <rect x="150" y="-40" width="100" height="120" fill="#8b5cf6" opacity="0.8"/>
+    <rect x="300" y="-80" width="100" height="160" fill="#ec4899" opacity="0.8"/>
+    <rect x="450" y="-120" width="100" height="200" fill="#f97316" opacity="0.8"/>
+  </g>
+  
+  <!-- Level labels -->
+  <text x="300" y="500" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#999">Level 1</text>
+  <text x="450" y="500" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#999">Level 2</text>
+  <text x="600" y="500" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#999">Level 3</text>
+  <text x="750" y="500" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#999">Level 4</text>
+</svg>

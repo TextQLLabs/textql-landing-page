@@ -7,7 +7,7 @@ import { SEO } from '../components/SEO';
 
 export default function Pricing() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#F7F7F7]">
       <SEO 
         title="Pricing | TextQL"
         description="Transparent pricing with predictable ROI for TextQL's AI platform. Choose the perfect deployment option for your needs."

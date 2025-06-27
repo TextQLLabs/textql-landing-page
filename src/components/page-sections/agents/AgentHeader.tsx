@@ -3,7 +3,7 @@ import { Badge } from '../../ui';
 
 export function AgentHeader() {
   return (
-    <section className="relative min-h-[600px] overflow-hidden bg-black">
+    <section className="relative min-h-[600px] overflow-hidden" style={{ backgroundColor: '#000000' }}>
       <div className="absolute inset-0 z-0">
         <WaveBackground />
       </div>

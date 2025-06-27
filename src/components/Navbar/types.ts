@@ -63,6 +63,42 @@ export const navigation: NavItem[] = [
               description: 'Resilience, scalability, and security',
               href: '/enterprise',
               icon: 'Building'
+            },
+            {
+              label: 'Ana Small',
+              description: 'Free, open-source text-to-SQL',
+              href: 'https://small.textql.com/',
+              external: true,
+              icon: 'Zap'
+            }
+          ]
+        },
+        {
+          title: 'Integrations',
+          items: [
+            {
+              label: 'All Integrations',
+              description: 'Browse all available integrations',
+              href: '/integrations',
+              icon: 'Grid'
+            },
+            {
+              label: 'Databricks MCP',
+              description: 'Native Databricks integration',
+              href: '/integrations/databricks',
+              icon: '/images/navbar/databricks.png'
+            },
+            {
+              label: 'Snowflake MCP',
+              description: 'Connect to Snowflake warehouses',
+              href: '/integrations/snowflake',
+              icon: '/images/navbar/snowflake.png'
+            },
+            {
+              label: 'Tableau MCP',
+              description: 'Enhanced visualization with Tableau',
+              href: '/integrations/tableau',
+              icon: '/images/navbar/tableau.png'
             }
           ]
         }
@@ -79,34 +115,34 @@ export const navigation: NavItem[] = [
     }
   },
   {
-    label: 'Workflows',
+    label: 'Solutions',
     megaMenu: {
       sections: [
         {
-          title: 'Browse Workflows',
+          title: 'Browse Solutions',
           items: [
             {
-              label: 'All Workflows',
+              label: 'All Solutions',
               description: '',
-              href: '/workflows',
+              href: '/solutions',
               icon: 'GitMerge'
             },
             {
               label: 'Banking',
               description: '',
-              href: '/workflows?industry=banking',
+              href: '/solutions?industry=banking',
               icon: 'Building2'
             },
             {
               label: 'Healthcare',
               description: '',
-              href: '/workflows?industry=healthcare',
+              href: '/solutions?industry=healthcare',
               icon: 'Heart'
             },
             {
               label: 'Insurance',
               description: '',
-              href: '/workflows?industry=insurance',
+              href: '/solutions?industry=insurance',
               icon: 'Shield'
             }
           ]
@@ -117,69 +153,24 @@ export const navigation: NavItem[] = [
             {
               label: 'Manufacturing',
               description: '',
-              href: '/workflows?industry=manufacturing',
+              href: '/solutions?industry=manufacturing',
               icon: 'Factory'
             },
             {
               label: 'Media',
               description: '',
-              href: '/workflows?industry=media',
+              href: '/solutions?industry=media',
               icon: 'Newspaper'
             },
             {
               label: 'Retail',
               description: '',
-              href: '/workflows?industry=retail',
+              href: '/solutions?industry=retail',
               icon: 'Building2'
             }
           ]
         }
       ]
-    }
-  },
-  {
-    label: 'Integrations',
-    megaMenu: {
-      sections: [
-        {
-          title: 'Browse Integrations',
-          items: [
-            {
-              label: 'All Integrations',
-              description: '',
-              href: '/integrations',
-              icon: 'Grid'
-            },
-            {
-              label: 'Databricks MCP',
-              description: '',
-              href: '/integrations/databricks',
-              icon: '/images/navbar/databricks.png'
-            },
-            {
-              label: 'Snowflake MCP',
-              description: '',
-              href: '/integrations/snowflake',
-              icon: '/images/navbar/snowflake.png'
-            },
-            {
-              label: 'Tableau MCP',
-              description: '',
-              href: '/integrations/tableau',
-              icon: '/images/navbar/tableau.png'
-            }
-          ]
-        }
-      ],
-      featuredImage: {
-        sectionTitle: 'FEATURED',
-        src: '/images/navbar/textql-tableau.png',
-        alt: 'TextQL Tableau Integration',
-        title: 'Tableau Integration',
-        description: 'Seamless integration with Tableau for enhanced data visualization',
-        href: '/blog/tableau-integration',
-        external: false
-      }
     }
   },
   {
@@ -250,3 +241,13 @@ export const navigation: NavItem[] = [
     href: '/pricing'
   },
 ];
+
+// Add Customers section only in development
+if (import.meta.env.DEV) {
+  // Find the index where we want to insert (after Solutions, before Resources)
+  const resourcesIndex = navigation.findIndex(item => item.label === 'Resources');
+  navigation.splice(resourcesIndex, 0, {
+    label: 'Customers',
+    href: '/customers'
+  });
+}

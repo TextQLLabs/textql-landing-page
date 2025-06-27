@@ -152,7 +152,7 @@ export default function TableauMcpIntegration() {
           left: '0',
         },
       ],
-      bgColor: 'bg-white'
+      bgColor: 'bg-[#F7F7F7]'
     },
     'Run Deep Analysis': {
       title: 'Run Deep Analysis',
@@ -220,7 +220,7 @@ export default function TableauMcpIntegration() {
           right: '0',
         },
       ],
-      bgColor: 'bg-white'
+      bgColor: 'bg-[#F7F7F7]'
     }
   };
  

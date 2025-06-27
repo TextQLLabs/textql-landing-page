@@ -3,6 +3,11 @@ import { Bug } from 'lucide-react';
 import { useDebug } from '../contexts/DebugContext';
 
 export function DebugToggle() {
+  // Don't render debug toggle in production
+  if (import.meta.env.PROD) {
+    return null;
+  }
+
   const { debugMode, toggleDebug } = useDebug();
 
   return (

@@ -2,9 +2,9 @@ import { FunnelFlow } from '../../animations/FunnelFlow';
 
 export function AllIntegrationsHeader() {
   return (
-    <div className="relative overflow-hidden min-h-[500px]">
+    <div className="relative overflow-hidden min-h-[500px] bg-black">
       {/* Background with gradient */}
-      {/* <div className="absolute inset-0 bg-gradient-to-b from-[#0A1F1C] to-black" /> */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0A1F1C] to-black" />
 
       {/* FunnelFlow Animation */}
       <div className="absolute inset-0 z-0 opacity-60 scale-125 translate-y-[-10%] md:translate-y-[-5%] lg:translate-y-[-10%] xl:translate-y-[-20%]">

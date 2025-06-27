@@ -80,7 +80,7 @@ export default function Whitepaper() {
         </div>
 
         {/* Whitepaper Content */}
-        <div className="bg-white py-16">
+        <div className="bg-[#F7F7F7] py-16">
           <WhitepaperContent />
         </div>
         

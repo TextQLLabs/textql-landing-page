@@ -19,7 +19,7 @@ export default function Enterprise() {
       <EnterpriseHero />
 
       {/* Security Features - Light Mode */}
-      <section className="bg-white">
+      <section className="bg-[#F7F7F7]">
         <div className="mx-auto max-w-site px-6 py-16 md:py-24">
           <EnterpriseFeatureGrid1 theme="light" />
         </div>

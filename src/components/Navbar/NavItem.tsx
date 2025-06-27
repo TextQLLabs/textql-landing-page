@@ -7,16 +7,17 @@ import { NavDropdown } from './NavDropdown';
 
 interface NavItemProps {
   item: NavItemType;
+  isDarkPage?: boolean;
 }
 
-export function NavItem({ item }: NavItemProps) {
+export function NavItem({ item, isDarkPage = false }: NavItemProps) {
   const [isOpen, setIsOpen] = useState(false);
   const closeTimeoutRef = useRef<number | null>(null);
 
   const baseStyle = item.textColor ? {
     color: item.textColor,
     '--hover-color': `${item.textColor}cc`
-  } as React.CSSProperties : {};
+  } as React.CSSProperties : undefined;
 
   // Render icon based on type (string path or Lucide icon name)
   const renderIcon = () => {
@@ -26,7 +27,7 @@ export function NavItem({ item }: NavItemProps) {
     if (typeof item.icon === 'string' && item.icon.includes('/')) {
       return (
         <div 
-          className="w-4 h-4 flex-shrink-0 bg-[#B8D8D0] opacity-75 hover:opacity-100 transition-opacity"
+          className="w-4 h-4 flex-shrink-0 bg-gray-600 opacity-75 hover:opacity-100 transition-opacity"
           style={{
             mask: `url(${item.icon}) no-repeat center/contain`,
             WebkitMask: `url(${item.icon}) no-repeat center/contain`
@@ -66,7 +67,7 @@ export function NavItem({ item }: NavItemProps) {
         href={item.href}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-1.5 text-[#B8D8D0] hover:text-[--hover-color] transition-colors text-sm"
+        className={isDarkPage ? "flex items-center gap-1.5 text-gray-300 hover:text-gray-100 transition-colors text-sm px-3 py-2 rounded-md hover:bg-gray-800" : "flex items-center gap-1.5 text-gray-700 hover:text-gray-900 transition-colors text-sm px-3 py-2 rounded-md hover:bg-gray-50"}
         style={baseStyle}
       >
         {renderIcon()}
@@ -76,7 +77,7 @@ export function NavItem({ item }: NavItemProps) {
     ) : (
       <Link
         to={item.href}
-        className="flex items-center gap-1.5 text-[#B8D8D0] hover:text-[--hover-color] transition-colors text-sm"
+        className={isDarkPage ? "flex items-center gap-1.5 text-gray-300 hover:text-gray-100 transition-colors text-sm px-3 py-2 rounded-md hover:bg-gray-800" : "flex items-center gap-1.5 text-gray-700 hover:text-gray-900 transition-colors text-sm px-3 py-2 rounded-md hover:bg-gray-50"}
         style={baseStyle}
       >
         {renderIcon()}
@@ -86,12 +87,17 @@ export function NavItem({ item }: NavItemProps) {
   }
 
   return (
-    <div className="relative inline-block">
+    <div 
+      className="relative inline-block"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <button 
-        className="flex items-center gap-1 text-[#B8D8D0] hover:text-[--hover-color] transition-colors text-sm"
-        style={baseStyle}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        className={`flex items-center gap-1 transition-all text-sm px-3 py-2 rounded-md ${
+          isOpen 
+            ? isDarkPage ? 'bg-gray-800 text-gray-100' : 'bg-gray-100 text-gray-900'
+            : isDarkPage ? 'text-gray-300 hover:text-gray-100 hover:bg-gray-800' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
+        }`}
       >
         {renderIcon()}
         {item.label}
@@ -104,6 +110,7 @@ export function NavItem({ item }: NavItemProps) {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClose={() => setIsOpen(false)}
+        isDarkPage={isDarkPage}
       />
     </div>
   );

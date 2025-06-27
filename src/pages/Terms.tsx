@@ -10,7 +10,7 @@ import termsContent from '../data/legal/terms.md?raw';
 
 export default function Terms() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#F7F7F7]">
       <SEO 
         title="Terms & Conditions | TextQL"
         description="Terms and conditions for using TextQL services. Please read these Terms carefully before using the Site."

@@ -9,6 +9,12 @@ interface DebugWrapperProps {
 }
 
 export function DebugWrapper({ children, label, color = 'red', className = '' }: DebugWrapperProps) {
+  // In production, always just render children without debug borders
+  if (import.meta.env.PROD) {
+    return <>{children}</>;
+  }
+
+  // In development, use the debug context
   const { debugMode } = useDebug();
 
   if (!debugMode) {

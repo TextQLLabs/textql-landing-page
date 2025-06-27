@@ -7,7 +7,7 @@ export default function Blog() {
   const featuredPost = blogPosts.find(post => post.featured);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#F7F7F7]">
       <SEO 
         title="Blog | TextQL"
         description="Insights and updates from our team on AI, data analysis, and the future of enterprise intelligence"

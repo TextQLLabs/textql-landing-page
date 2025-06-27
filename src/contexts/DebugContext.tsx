@@ -9,12 +9,28 @@ const DebugContext = createContext<DebugContextType | undefined>(undefined);
 
 export function DebugProvider({ children }: { children: React.ReactNode }) {
   const [debugMode, setDebugMode] = useState(() => {
-    const saved = localStorage.getItem('debugMode');
-    return saved === 'true';
+    // Safely check localStorage only in browser environment
+    if (typeof window !== 'undefined' && window.localStorage) {
+      try {
+        const saved = localStorage.getItem('debugMode');
+        return saved === 'true';
+      } catch (e) {
+        console.warn('Failed to access localStorage:', e);
+        return false;
+      }
+    }
+    return false;
   });
 
   useEffect(() => {
-    localStorage.setItem('debugMode', debugMode.toString());
+    // Safely write to localStorage only in browser environment
+    if (typeof window !== 'undefined' && window.localStorage) {
+      try {
+        localStorage.setItem('debugMode', debugMode.toString());
+      } catch (e) {
+        console.warn('Failed to write to localStorage:', e);
+      }
+    }
   }, [debugMode]);
 
   const toggleDebug = () => {

@@ -1,5 +1,5 @@
 export * from './HomeHero';
-export * from './WorkflowCarousel';
+export * from './SolutionCarousel';
 export * from './OntologySection';
 export * from './EnterpriseSection';
 export * from './JoinsSection';

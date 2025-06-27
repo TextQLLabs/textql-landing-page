@@ -4,7 +4,7 @@ import {
   JoinsSection,
   AgentOntologySection 
 } from '../components/page-sections/agents';
-import { WorkflowCarousel } from '../components/page-sections/home';
+import { SolutionCarousel } from '../components/page-sections/home';
 import { CTA } from '../components/sections';
 import { SEO } from '../components/SEO';
 
@@ -19,7 +19,7 @@ export default function Agents() {
       />
       
       <AgentHeader />
-      <section className="py-12 bg-white">
+      <section className="py-12 bg-[#F7F7F7]">
         <div className="mx-auto max-w-site px-6">
           <AgentFeature1 />
         </div>
@@ -31,8 +31,8 @@ export default function Agents() {
       {/* Ontology Section */}
       <AgentOntologySection />
 
-      {/* Workflow Carousel */}
-      <WorkflowCarousel />
+      {/* Solution Carousel */}
+      <SolutionCarousel />
 
       {/* CTA Section */}
       <CTA 
