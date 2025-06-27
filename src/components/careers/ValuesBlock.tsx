@@ -1,6 +1,6 @@
 export function ValuesBlock() {
   return (
-    <section className="py-8">
+    <section className="py-8 bg-black">
       <div className="mx-auto max-w-site px-6">
         <h2 className="text-xl font-extralight text-[#B8D8D0] mb-4 uppercase tracking-wider">Real Values</h2>
         

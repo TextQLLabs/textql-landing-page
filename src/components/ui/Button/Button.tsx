@@ -27,17 +27,13 @@ const buttonVariants = cva(
         ghost: 'text-[#B8D8D0] hover:text-[#B8D8D0]/90'
       },
       size: {
-        sm: 'h-9 px-4 text-sm',
-        md: 'h-11 px-6 text-base',
-        lg: 'h-12 px-8 text-lg'
+        sm: 'h-11 px-5 text-sm',
+        md: 'h-14 px-8 text-base',
+        lg: 'h-16 px-10 text-lg'
       },
       theme: {
         dark: '',
-        light: `
-          [&.primary]:text-[#2A3B35] [&.primary]:hover:text-[#2A3B35]/90
-          [&.secondary]:text-[#2A3B35] [&.secondary]:hover:text-[#2A3B35]/90
-          [&.ghost]:text-[#2A3B35] [&.ghost]:hover:text-[#2A3B35]/90
-        `
+        light: ''
       },
       fullWidth: {
         true: 'w-full',
@@ -49,7 +45,24 @@ const buttonVariants = cva(
       size: 'md',
       theme: 'dark',
       fullWidth: false
-    }
+    },
+    compoundVariants: [
+      {
+        variant: 'ghost',
+        theme: 'light',
+        className: '!text-[#2A3B35] !hover:text-[#2A3B35]/90'
+      },
+      {
+        variant: 'primary',
+        theme: 'light',
+        className: '!text-[#2A3B35] !hover:text-[#2A3B35]/90'
+      },
+      {
+        variant: 'secondary',
+        theme: 'light',
+        className: '!text-[#2A3B35] !hover:text-[#2A3B35]/90'
+      }
+    ]
   }
 );
 

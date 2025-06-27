@@ -15,17 +15,17 @@ export function BlogHeader({ featuredPost }: BlogHeaderProps) {
     : featuredPost?.image;
 
   return (
-    <div className="relative bg-black">
+    <div className="relative" style={{ backgroundColor: '#000000' }}>
       {/* Background */}
       <div className="absolute inset-0">
         <WaveBackground />
       </div>
       
-      <div className="relative z-10 mx-auto max-w-7xl px-12 flex flex-col justify-center">
-        <div className="grid lg:grid-cols-[1fr,1.5fr] gap-16 items-center justify-center py-12 md:py-24 md:pb-0">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-6 flex flex-col justify-center">
+        <div className="grid lg:grid-cols-[1fr,1.5fr] gap-16 items-center justify-center pt-32 pb-12 md:pt-40 md:pb-24">
           {/* Left Content */}
           <div>
-            <h1 className="text-4xl lg:text-6xl text-[#B8D8D0] font-extralight mb-6">
+            <h1 className="text-4xl lg:text-6xl text-white font-extralight mb-6">
               TextQL Blog
             </h1>
             <Text color="muted" className="text-md lg:text-xl max-w-xl">

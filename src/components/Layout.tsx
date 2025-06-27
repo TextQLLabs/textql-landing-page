@@ -1,11 +1,17 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
 
 export default function Layout() {
+  const location = useLocation();
+  
+  // Check if current page should have dark background
+  const isDarkPage = location.pathname.startsWith('/careers') || 
+                     location.pathname.startsWith('/about');
+  
   return (
-    <div className="min-h-screen">
+    <div className={`min-h-screen ${isDarkPage ? 'bg-black' : ''}`}>
       {/* 
         Fixed navbar overlay - positioned above all content
         The navbar uses fixed positioning and overlays the viewport

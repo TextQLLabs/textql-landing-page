@@ -6,12 +6,14 @@ import { NavItem } from './NavItem';
 import { navigation } from './types';
 import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 import { handleSimpleDemoRequest } from '../../utils/demo-requests/simple';
+import { DebugWrapper } from '../DebugWrapper';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
+  const [isDarkPage, setIsDarkPage] = useState(false);
   const isDevelopment = import.meta.env.DEV;
   // Check if debug borders should be shown (look for a global flag or localStorage)
   const [showDebugBorders, setShowDebugBorders] = useState(false);
@@ -36,6 +38,20 @@ export default function Navbar() {
   }, []);
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Check if current page has dark background
+  useEffect(() => {
+    const checkPageTheme = () => {
+      // Define pages with dark backgrounds
+      const isDarkPage = location.pathname.startsWith('/careers') || 
+                         location.pathname.startsWith('/about');
+      // Blog posts have light backgrounds
+      const lightPages = location.pathname.startsWith('/blog/');
+      setIsDarkPage(isDarkPage && !lightPages);
+    };
+
+    checkPageTheme();
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,22 +91,27 @@ export default function Navbar() {
   };
 
   return (
-    <div className={`fixed top-0 left-0 right-0 z-40 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'} transition-all duration-500 ease-out ${showDebugBorders ? 'border-2 border-red-500' : ''}`}>
+    <DebugWrapper label={`Navbar - ${isDarkPage ? 'Dark' : 'Light'} Theme`} color="purple">
+      <div className={`fixed top-0 left-0 right-0 z-40 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'} transition-all duration-500 ease-out ${showDebugBorders ? 'border-2 border-red-500' : ''}`}>
       <nav className={`w-full py-3 md:py-4 transition-all duration-300 ease-out border-b ${
-        isScrolled 
-          ? 'bg-black/80 backdrop-blur-md shadow-lg border-white/30' 
-          : 'bg-black/60 backdrop-blur-sm border-white/20'
+        isDarkPage
+          ? isScrolled 
+            ? 'bg-black/90 backdrop-blur-md shadow-lg border-gray-800' 
+            : 'bg-black/80 backdrop-blur-sm border-gray-800'
+          : isScrolled 
+            ? 'bg-white/90 backdrop-blur-md shadow-lg border-gray-200' 
+            : 'bg-white/80 backdrop-blur-sm border-gray-200'
       } ${showDebugBorders ? 'border-2 border-cyan-500' : ''}`}>
         <div className={`mx-auto max-w-7xl px-4 md:px-6 ${showDebugBorders ? 'border-2 border-pink-500' : ''}`}>
           <div className="flex items-center justify-between">
-          <Link to="/" className="text-white hover:text-[#B8D8D0] transition-colors duration-300">
-            <TextLogo className="h-6 md:h-7 w-auto" />
+          <Link to="/" className={isDarkPage ? "text-gray-100 hover:text-gray-300 transition-colors duration-300" : "text-gray-900 hover:text-gray-700 transition-colors duration-300"}>
+            <TextLogo className="h-6 md:h-7 w-auto" color={isDarkPage ? "#D1D5DB" : "#1F2937"} />
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
             {navigation.map((item) => (
-              <NavItem key={item.label} item={item} />
+              <NavItem key={item.label} item={item} isDarkPage={isDarkPage} />
             ))}
           </div>
 
@@ -108,11 +129,12 @@ export default function Navbar() {
               target="_blank" 
               rel="noopener noreferrer"
             >
-              <Button variant="ghost" size="sm">Sign In</Button>
+              <Button variant="ghost" size="sm" theme={isDarkPage ? "dark" : "light"}>Sign In</Button>
             </a>
             <Button 
               variant="primary" 
               size="sm"
+              theme={isDarkPage ? "dark" : "light"}
               onClick={onDemoRequest}
             >
               Request a Demo
@@ -122,7 +144,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 text-[#B8D8D0] hover:text-[#729E8C] transition-colors duration-300"
+            className={isDarkPage ? "lg:hidden p-2 text-gray-300 hover:text-gray-100 transition-colors duration-300" : "lg:hidden p-2 text-gray-700 hover:text-gray-900 transition-colors duration-300"}
           >
             {isMenuOpen ? (
               <X className="w-6 h-6" />
@@ -251,6 +273,7 @@ export default function Navbar() {
         </div>
         </div>
       </nav>
-    </div>
+      </div>
+    </DebugWrapper>
   );
 }
