@@ -1,16 +1,18 @@
 import { useState } from 'react';
-import { ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../Button';
-import { Input } from '../Input';
 import type { DemoRequestFormProps } from './types';
+import { useComponentTheme } from '../../../hooks/useComponentTheme';
+import { getThemeClasses } from '../../../utils/theme-utils';
+import { COLORS } from '../../../styles/constants';
 
 export function DemoRequestForm({ 
-  variant = 'default',
-  theme = 'dark',
+  theme,
   onSubmit,
   className = ''
 }: DemoRequestFormProps) {
+  const globalTheme = useComponentTheme();
+  const effectiveTheme = theme || globalTheme;
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | undefined>(undefined);
@@ -58,7 +60,6 @@ export function DemoRequestForm({
     setIsSubmitting(true);
     
     try {
-      // Store email in session storage for the /demo page to use
       sessionStorage.setItem('demo_email', email);
       onSubmit?.(email);
       navigate('/demo');
@@ -70,19 +71,26 @@ export function DemoRequestForm({
     }
   };
 
-  // unused
-  const variants = {
-    default: 'max-w-md w-full space-y-4',
-    compact: 'max-w-sm w-full space-y-3',
-    small: 'max-w-xs w-full space-y-2',
-    wide: 'max-w-xl w-full space-y-4'
-  };
+  const themeClasses = getThemeClasses(effectiveTheme === 'light');
+  
+  const inputStyles = `
+    w-full
+    bg-white
+    border border-gray-300
+    !text-gray-900 text-md font-light
+    placeholder:text-gray-500
+    px-4 py-4 pr-24
+    focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500
+    backdrop-blur-md
+    transition-colors
+    ${error ? 'border-red-400 focus:ring-red-400/30' : ''}
+  `;
 
   return (
-    <div className={`${variants[variant]} ${className}`}>
-      <form onSubmit={handleSubmit} className="relative">
+    <div className={`w-full ${className}`}>
+      <form onSubmit={handleSubmit} className="space-y-2">
         <div className="relative">
-          <Input
+          <input
             type="email"
             placeholder="Enter your work email"
             value={email}
@@ -91,25 +99,32 @@ export function DemoRequestForm({
               setError(undefined);
             }}
             required
-            error={error}
             disabled={isSubmitting}
-            theme={theme}
-            className={`backdrop-blur-lg ${variant === 'small' || variant === 'compact' ? 'pr-36' : 'pr-60'}`}
+            className={inputStyles.replace(/\s+/g, ' ').trim()}
           />
-          <div className="absolute right-3 top-1/2 -translate-y-1/2">
+          <div className="absolute right-2 top-4 bottom-4 flex items-center">
             <Button 
               type="submit"
               variant="primary"
-              size={variant === 'small' || variant === 'compact' ? 'sm' : 'md'}
+              size="sm"
               loading={isSubmitting}
-              // icon={ArrowRight}
-              iconPosition="right"
               disabled={isSubmitting}
-              theme={theme}
+              theme={effectiveTheme}
             >
               Request Demo
             </Button>
           </div>
+        </div>
+        
+        {/* Error message with reserved space */}
+        <div className="h-6">
+          {error && (
+            <p className={`text-sm font-light transition-opacity duration-200 ${
+              effectiveTheme === 'dark' ? 'text-red-400' : 'text-red-500'
+            }`}>
+              {error}
+            </p>
+          )}
         </div>
       </form>
     </div>

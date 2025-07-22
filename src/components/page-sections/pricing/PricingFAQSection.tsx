@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
-import { Text } from '../../ui';
+import { Text, Section } from '../../ui';
 
 const faqs = [
   {
@@ -33,8 +33,11 @@ export function PricingFAQSection() {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
 
   return (
-    <div className="bg-[#F0F5F3] py-24">
-      <div className="max-w-3xl mx-auto px-4">
+    <Section
+      variant="narrower"
+      padding="lg"
+      background="accent"
+    >
         <Text variant="header" theme="light" className="text-3xl text-center mb-12">
           Frequently Asked Questions
         </Text>
@@ -67,13 +70,12 @@ export function PricingFAQSection() {
         <div className="mt-12 text-center">
           <Text theme="light" color="muted">
             Additional Questions? Contact us at{' '}
-            <a href="mailto:support@textql.ai" className="text-[#2A3B35] hover:underline">
-              support@textql.ai
+            <a href="mailto:support@textql.com" className="text-[#2A3B35] hover:underline">
+              support@textql.com
             </a>
             {' '}for more information.
           </Text>
         </div>
-      </div>
-    </div>
+    </Section>
   );
 }

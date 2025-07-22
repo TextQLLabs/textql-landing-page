@@ -1,11 +1,16 @@
 import { ValuesBlock } from '../components/careers/ValuesBlock';
-import { AboutHero, AboutMission, AboutValues } from '../components/page-sections/about';
+import { AboutHero, AboutValues } from '../components/page-sections/about';
 import { missionEssay } from '../components/page-sections/about/content/mission';
 import { SEO } from '../components/SEO';
+import { Section } from '../components/ui/Section';
+import { useGlobalTheme } from '../components/GlobalThemeProvider';
+import { getThemeClasses } from '../utils/theme-utils';
 
 export default function About() {
+  const { isLightMode } = useGlobalTheme();
+  const themeClasses = getThemeClasses(isLightMode);
   return (
-    <div className="bg-black" style={{ backgroundColor: '#000000' }}>
+    <div className={themeClasses.bgSecondary}>
       <SEO 
         title="About | TextQL"
         description="Learn about TextQL's mission and team. We're building the future of enterprise data analysis with AI."
@@ -13,18 +18,20 @@ export default function About() {
         ogImage="https://textql.com/social-preview.png"
       />
       
-      <div className="min-h-screen flex flex-col justify-center"> 
       <AboutHero />
-      <AboutMission />
-      </div>
       {/* Mission Essay */}
-      <div className="max-w-2xl lg:max-w-site px-12 lg:px-12 flex flex-col justify-center mx-auto space-y-12 pb-12">
-          {missionEssay.map((paragraph, index) => (
-            <p key={index} className="text-base lg:text-xl justify-center font-light text-[#B8D8D0] leading-relaxed">
-              {paragraph}
-            </p>
-          ))}
-        </div>
+      <Section
+        variant="content"
+        padding="sm"
+        background="secondary"
+        className="flex flex-col justify-center space-y-12"
+      >
+        {missionEssay.map((paragraph, index) => (
+          <p key={index} className={`text-base lg:text-xl font-light ${themeClasses.textSecondary} leading-relaxed`}>
+            {paragraph}
+          </p>
+        ))}
+      </Section>
       <ValuesBlock />
     </div>
   );

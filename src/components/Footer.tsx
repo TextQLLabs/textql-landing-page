@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { TextLogo, IconLogo } from './Logo';
+import { useComponentTheme } from '../hooks/useComponentTheme';
+import { themeBackgroundSecondary, themeText, themeTextSecondary } from '../utils/theme-utils';
 
 const footerLinks = {
   product: {
@@ -57,7 +59,7 @@ const footerLinks = {
         label: 'Get a Demo', 
         href: '/demo'
       },
-      { label: 'Email', href: 'mailto:ethan@textql.com' },
+      { label: 'Email', href: 'mailto:support@textql.com' },
       { label: 'LinkedIn', href: 'https://linkedin.com/company/textql' },
       { label: 'X / Twitter', href: 'https://twitter.com/textql' }
     ]
@@ -65,8 +67,9 @@ const footerLinks = {
 };
 
 export default function Footer() {
+  const theme = useComponentTheme();
   return (
-    <footer className="footer-section w-full bg-black text-white relative overflow-hidden">
+    <footer className={`footer-section w-full ${themeBackgroundSecondary(theme)} ${themeText(theme)} relative overflow-hidden`}>
       {/* Giant Logo Background */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-[1200px] opacity-[0.02]">
@@ -77,7 +80,7 @@ export default function Footer() {
       {/* Content */}
       <div className="relative w-full">
         {/* Links Section */}
-        <div className="w-full border-b border-white/10">
+        <div className={`w-full border-b ${theme === 'light' ? 'border-black/10' : 'border-white/10'}`}>
           <div className="mx-auto max-w-site px-6 py-12">
             {/* Logo and Description */}
             {/* <div className="mb-12">
@@ -92,7 +95,7 @@ export default function Footer() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(4,1fr)] gap-6">
               {Object.entries(footerLinks).map(([key, section]) => (
                 <div key={key}>
-                  <h3 className="text-sm font-medium text-white mb-4">
+                  <h3 className={`text-sm font-medium ${themeText(theme)} mb-4`}>
                     {section.title}
                   </h3>
                   <ul className="space-y-3">
@@ -103,14 +106,14 @@ export default function Footer() {
                             href={link.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-sm text-white/60 hover:text-white/80 transition-colors"
+                            className={`text-sm ${themeTextSecondary(theme)} ${theme === 'light' ? 'hover:text-black/80' : 'hover:text-white/80'} transition-colors`}
                           >
                             {link.label}
                           </a>
                         ) : (
                           <Link
                             to={link.href}
-                            className="text-sm text-white/60 hover:text-white/80 transition-colors"
+                            className={`text-sm ${themeTextSecondary(theme)} ${theme === 'light' ? 'hover:text-black/80' : 'hover:text-white/80'} transition-colors`}
                           >
                             {link.label}
                           </Link>
@@ -130,7 +133,7 @@ export default function Footer() {
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <div className="flex items-center gap-4">
                 <TextLogo className="h-6" />
-                <span className="text-sm text-white/60">
+                <span className={`text-sm ${themeTextSecondary(theme)}`}>
                   © Copyright {new Date().getFullYear()}
                 </span>
               </div>

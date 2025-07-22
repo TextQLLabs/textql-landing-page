@@ -1,20 +1,36 @@
 import { Text } from '../../ui';
+import { Section } from '../../ui/Section';
+import { missionEssay } from './content/mission';
+import { useGlobalTheme } from '../../GlobalThemeProvider';
+import { getThemeClasses } from '../../../utils/theme-utils';
 
 export function AboutHero() {
+  const { isLightMode } = useGlobalTheme();
+  const themeClasses = getThemeClasses(isLightMode);
   return (
-    <section className="relative overflow-hidden min-h-[400px]" style={{ backgroundColor: '#000000' }}>
-      <div className="relative z-10 flex items-center justify-center min-h-[400px] pt-32 pb-16">
-        <div className="mx-auto max-w-4xl px-6">
-          <div className="text-center">
-            <h1 className="text-2xl md:text-2xl lg:text-3xl font-extralight text-[#B8D8D0] mb-6">
-              We're building the last software company.
-            </h1>
-            <Text color="muted" className="text-base lg:text-lg font-light">
-              We're in the endgame now.
-            </Text>
-          </div>
-        </div>
+    <Section
+      variant="content"
+      padding="none"
+      paddingTop="md"
+      paddingBottom="sm"
+      background="black"
+      hasNavbarOffset
+      className="flex items-center"
+    >
+      {/* Mission Header */}
+      <div className="text-center">
+        <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extralight mb-8 leading-none tracking-tight ${themeClasses.textPrimary}`}>
+          The Mission
+        </h1>
+        <a 
+          href="https://textql.notion.site/onboarding-library-5766c3ba046e479b878de22cb1d786c4?pvs=4"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`inline-flex items-center gap-2 transition-colors text-lg sm:text-xl md:text-2xl ${themeClasses.linkPrimary} hover:opacity-75`}
+        >
+          Our Intelligence Hub →
+        </a>
       </div>
-    </section>
+    </Section>
   );
 }

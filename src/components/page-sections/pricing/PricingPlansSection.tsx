@@ -1,5 +1,5 @@
 import { ArrowRight, Cloud, Shield, Palette, Database, Check, X } from 'lucide-react';
-import { Text, Button } from '../../ui';
+import { Text, Button, Section } from '../../ui';
 import { useNavigate } from 'react-router-dom';
 
 const plans = [
@@ -9,7 +9,7 @@ const plans = [
     tagline: 'The introductory offering with everything connected',
     description: 'Perfect for teams getting started with TextQL\'s AI-powered data analysis capabilities.',
     price: '$2.00',
-    unit: 'per 100 ACUs',
+    unit: 'per 1000 ACUs',
     // location: 'AWS, US East (Northern Virginia)',
     features: [
       { text: 'Everything connected', included: true },
@@ -17,7 +17,7 @@ const plans = [
       { text: 'RBAC controls', included: false }
     ],
     popular: false,
-    buttonText: 'GET STARTED',
+    buttonText: 'Get Started',
     viewFeaturesLink: '#'
   },
   {
@@ -26,7 +26,7 @@ const plans = [
     tagline: 'For companies with large-scale data initiatives',
     description: 'Designed for organizations that need advanced security features and user management capabilities.',
     price: '$3.00',
-    unit: 'per 100 ACUs',
+    unit: 'per 1000 ACUs',
     // location: 'AWS, US East (Northern Virginia)',
     features: [
       { text: 'Everything in Standard', included: true },
@@ -34,7 +34,7 @@ const plans = [
       { text: 'Extended capabilities', included: true }
     ],
     popular: true,
-    buttonText: 'GET STARTED',
+    buttonText: 'Get Started',
     viewFeaturesLink: '#'
   },
   {
@@ -43,7 +43,7 @@ const plans = [
     tagline: 'For regulated industries with sensitive data',
     description: 'Enhanced security features and controls for organizations with strict compliance requirements.',
     price: '$4.00',
-    unit: 'per 100 ACUs',
+    unit: 'per 1000 ACUs',
     // location: 'AWS, US East (Northern Virginia)',
     features: [
       { text: 'Everything in Enterprise', included: true },
@@ -51,7 +51,7 @@ const plans = [
       { text: 'Disaster recovery', included: true }
     ],
     popular: false,
-    buttonText: 'GET STARTED',
+    buttonText: 'Get Started',
     viewFeaturesLink: '#'
   },
   {
@@ -68,7 +68,7 @@ const plans = [
       { text: 'Deep integration', included: true }
     ],
     popular: false,
-    buttonText: 'TALK TO SALES',
+    buttonText: 'Contact Sales',
     viewFeaturesLink: '#'
   }
 ];
@@ -82,8 +82,11 @@ export function PricingPlansSection() {
   };
 
   return (
-    <section className="py-24">
-      <div className="max-w-7xl mx-auto px-6">
+    <Section 
+      variant="wide"
+      padding="lg"
+      className="bg-[#F7F7F7]"
+    >
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-2xl lg:text-4xl font-extralight text-[#2A3B35] mb-4">
@@ -179,18 +182,17 @@ export function PricingPlansSection() {
                 <Button
                   variant={plan.name === 'White Label' ? 'secondary' : 'primary'}
                   theme="light"
-                  fullWidth
-                  className="group"
+                  size="sm"
+                  className="group text-xs lg:text-sm px-6"
                   onClick={onDemoRequest}
                 >
                   <span>{plan.buttonText}</span>
-                  <ArrowRight className="w-3 lg:w-4 h-3 lg:h-4 ml-2 text-xs lg:text-sm transition-transform group-hover:translate-x-0.5" />
+                  <ArrowRight className="w-3 h-3 ml-1 transition-transform group-hover:translate-x-0.5" />
                 </Button>
               </div>
             );
           })}
         </div>
-      </div>
-    </section>
+    </Section>
   );
 }
