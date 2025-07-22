@@ -1,5 +1,13 @@
 # Our Ontology-Based Text to SQL Generation Process
 
+## Table of Contents
+- [Process Summary](#process-summary)
+  - [1. Create a Company-Specific Ontology](#1-create-a-company-specific-ontology)
+  - [2. Identify Relevant Attributes with NLP](#2-identify-relevant-attributes-with-nlp)
+  - [3. Map Attributes to Ontology](#3-map-attributes-to-ontology)
+  - [4. Compile SQL Based on Pre-Defined Actions](#4-compile-sql-based-on-pre-defined-actions)
+- [Conclusion](#conclusion)
+
 At TextQL, we've taken a unique approach to generating SQL queries, relying on ontology-based methods instead of LLMs.
 
 This post will walk you through the four steps we use to transform natural language questions into SQL queries using an ontology that maps business concepts to database structures—like organizing a library to make finding books easier.

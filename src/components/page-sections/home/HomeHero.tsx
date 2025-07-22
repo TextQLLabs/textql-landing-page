@@ -1,9 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Badge, DemoRequestForm, Carousel, MobileCarousel} from "../../ui";
+import { Section, sectionPresets } from "../../ui/Section";
 import { WaveBackground } from "../../animations";
 import { InsightsFeed } from "../../InsightsFeed/InsightsFeed";
 import { DemoRequestButton } from "../../ui/Button/DemoRequestButton";
-import { Sun, Moon, Eye, EyeOff } from 'lucide-react';
+import { useNavbarHeight } from '../../../hooks/useNavbarHeight';
+import { useDebug } from '../../../contexts/DebugContext';
+import { useGlobalTheme } from '../../GlobalThemeProvider';
+import { getThemeClasses } from '../../../utils/theme-utils';
+import { COLORS } from '../../../styles/constants';
 
 
 // const logos = [
@@ -109,66 +114,24 @@ const logoData = [
   }
 ];
 
-export function HomeHero() {
-  const [isLightMode, setIsLightMode] = useState(true);
-  const [navbarHeight, setNavbarHeight] = useState(60); // fallback to 60px
-  const [showDebugBorders, setShowDebugBorders] = useState(false);
+interface HomeHeroProps {
+  // No longer need globalTheme prop - always uses global theme
+}
 
-  const toggleTheme = () => {
-    setIsLightMode(!isLightMode);
-  };
+export function HomeHero({}: HomeHeroProps = {}) {
+  // Always use global theme - no fallback
+  const { isLightMode, toggleTheme } = useGlobalTheme();
+  
+  const navbarHeight = useNavbarHeight(); // Use shared hook
+  const { debugMode } = useDebug(); // Use unified debug system
 
-  const toggleDebugBorders = () => {
-    const newState = !showDebugBorders;
-    setShowDebugBorders(newState);
-    // Save to localStorage and dispatch event
-    localStorage.setItem('showDebugBorders', newState.toString());
-    window.dispatchEvent(new Event('debugToggle'));
-  };
+  // Note: navbar height is now handled by the shared useNavbarHeight hook
 
-  // Dynamically measure navbar height
-  useEffect(() => {
-    const measureNavbarHeight = () => {
-      const navbar = document.querySelector('nav');
-      if (navbar) {
-        setNavbarHeight(navbar.offsetHeight);
-      }
-    };
-
-    // Measure on mount
-    measureNavbarHeight();
-    
-    // Measure on window resize (navbar height might change)
-    window.addEventListener('resize', measureNavbarHeight);
-    
-    return () => {
-      window.removeEventListener('resize', measureNavbarHeight);
-    };
-  }, []);
-
-  // Add/remove body class for hero-scoped styling
-  useEffect(() => {
-    if (isLightMode) {
-      document.body.classList.add('hero-light-mode');
-    } else {
-      document.body.classList.remove('hero-light-mode');
-    }
-    
-    // Cleanup on unmount
-    return () => {
-      document.body.classList.remove('hero-light-mode');
-    };
-  }, [isLightMode]);
-
-  // Theme-based styling
-  const bgColor = isLightMode ? 'bg-[#F7F7F7]' : 'bg-black';
-  const textPrimary = isLightMode ? 'text-[#2A3B35]' : 'text-white';
-  const textSecondary = isLightMode ? 'text-[#4A665C]' : 'text-[#B8D8D0]';
-  const accentColor = isLightMode ? '#2A3B35' : '#B8D8D0';
-  const accentColorSecondary = isLightMode ? '#4A665C' : '#729E8C';
-  const badgeBg = isLightMode ? 'bg-[#2A3B35]/10' : 'bg-[#B8D8D0]/10';
-  const badgeBorder = isLightMode ? 'border-[#2A3B35]/20' : 'border-[#B8D8D0]/20';
-  const badgeDot = isLightMode ? 'bg-[#2A3B35]' : 'bg-[#B8D8D0]';
+  // Theme-based styling using theme utilities
+  const theme = isLightMode ? 'light' : 'dark';
+  const themeClasses = getThemeClasses(isLightMode);
+  const accentColor = isLightMode ? COLORS.brand.deepForest : COLORS.brand.mint;
+  const accentColorSecondary = isLightMode ? COLORS.brand.sage : COLORS.brand.sage;
   
   // Dynamic logos based on theme
   const logos = logoData.map(logo => ({
@@ -177,82 +140,51 @@ export function HomeHero() {
   }));
   
   return (
-    <section className={`relative flex flex-col min-h-screen ${bgColor} ${showDebugBorders ? 'border-4 border-yellow-500' : ''}`}>
-    <div className={`absolute inset-0 z-0 animate-fade-in animation-delay-400 ${showDebugBorders ? 'border-4 border-purple-500' : ''}`}>
-      <WaveBackground theme={isLightMode ? 'light' : 'dark'} />
-    </div>
-    
-    {/* Development Tools - Only visible in development */}
-    {import.meta.env.DEV && (
-      <div className="fixed top-20 right-6 z-50 flex flex-col gap-2">
-        {/* Theme Toggle Button */}
-        <button
-          onClick={toggleTheme}
-          className={`p-3 rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-110 ${
-            isLightMode 
-              ? 'bg-[#2A3B35]/10 hover:bg-[#2A3B35]/20 text-[#2A3B35]'
-              : 'bg-[#B8D8D0]/10 hover:bg-[#B8D8D0]/20 text-[#B8D8D0]'
-          }`}
-          aria-label="Toggle theme"
-        >
-          {isLightMode ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
-        </button>
-        
-        {/* Debug Borders Toggle Button */}
-        <button
-          onClick={toggleDebugBorders}
-          className={`p-3 rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-110 ${
-            showDebugBorders
-              ? 'bg-green-500/20 hover:bg-green-500/30 text-green-600'
-              : isLightMode 
-                ? 'bg-[#2A3B35]/10 hover:bg-[#2A3B35]/20 text-[#2A3B35]'
-                : 'bg-[#B8D8D0]/10 hover:bg-[#B8D8D0]/20 text-[#B8D8D0]'
-          }`}
-          aria-label="Toggle debug borders"
-        >
-          {showDebugBorders ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}
-        </button>
+    <Section
+      height="screen"
+      padding="none"
+      background="primary"
+      overflow="hidden"
+      className={`relative animate-fade-in animation-delay-400 ${debugMode ? 'border-4 border-yellow-500' : ''}`}
+    >
+      {/* Background Animation */}
+      <div className={`absolute inset-0 z-0 ${debugMode ? 'border-4 border-purple-500' : ''}`}>
+        <WaveBackground theme={isLightMode ? 'light' : 'dark'} />
       </div>
-    )}
-  
-    {/* Desktop Hero Content - Positioned below navbar */}
-    <div className="hidden lg:flex w-full relative z-10" style={{ 
-      marginTop: `${navbarHeight}px`  /* Push entire content below navbar (dynamic) */
-    }}>
-      <div className={`mx-auto max-w-7xl w-full px-4 md:px-6 ${showDebugBorders ? 'border-2 border-green-500' : ''}`} style={{ 
-        height: `calc(100vh - ${navbarHeight}px - 96px)`,  /* Viewport minus navbar (dynamic) and logo carousel (96px) */
-        display: 'flex',
-        alignItems: 'center'
-      }}>
-          <div className={`grid grid-cols-1 lg:gap-8 xl:gap-16 lg:grid-cols-[1fr,clamp(400px,50vw,600px)] w-full items-center ${showDebugBorders ? 'border-2 border-yellow-500' : ''}`}>
+      
+      {/* Desktop Hero Content */}
+      <div className="hidden lg:flex w-full h-full relative z-10 flex-col pt-[var(--navbar-height,80px)]">
+        {/* Main content container - centered in available space */}
+        <div className={`flex-1 w-full flex items-center justify-center ${debugMode ? 'border-2 border-green-500' : ''}`}>
+          <div className={`grid grid-cols-1 lg:gap-8 xl:gap-16 lg:grid-cols-[1fr,clamp(400px,50vw,600px)] w-full items-center px-6 max-w-7xl ${debugMode ? 'border-2 border-yellow-500' : ''}`}>
             {/* Left Content */}
             <div className="flex flex-col justify-center">
           {/* Badge */}
           <div className="text-center lg:text-left">
             <Badge
               variant="default"
-              className={`inline-flex items-center ${badgeBg} px-2 py-1 mb-6 backdrop-blur-sm border ${badgeBorder} animate-slide-up animation-delay-100 text-sm`}>
-              <div className={`text-center h-1.5 w-1.5 ${badgeDot} animate-pulse mr-2`} />
-              <span className={textPrimary}>Ana is now generally available</span>
+              className={`inline-flex items-center ${themeClasses.badgeBg} px-2 py-1 mb-6 backdrop-blur-sm border ${themeClasses.badgeBorder} animate-slide-up animation-delay-100 text-sm`}>
+              <div className={`text-center h-1.5 w-1.5 ${themeClasses.badgeDot} animate-pulse mr-2`} />
+              <span className={themeClasses.textPrimary}>Ana is now generally available</span>
             </Badge>
           </div>
           {/* Hero Text */}
           <div className="mb-4 lg:mb-6 text-center lg:text-left">
             <h1 className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-light animate-slide-up animation-delay-100">
-              <span className={`tracking-tight mb-1 block pb-2 ${textPrimary}`}>
+              <span className={`tracking-tight mb-1 block pb-2 ${themeClasses.textPrimary}`}>
                 Agentic Analytics
               </span>
-              <span className={`${textPrimary} block`}>
+              <span className={`${themeClasses.textPrimary} block`}>
                 for Every Decision
               </span>
             </h1>
           </div>
           {/* Hero Subtext */}
-          <p className={`mb-6 lg:mb-8 text-base md:text-lg lg:text-xl xl:text-2xl font-light ${textSecondary} animate-slide-up animation-delay-300 text-center lg:text-left`}>
+          <p className={`mb-6 lg:mb-8 text-base md:text-lg lg:text-xl xl:text-2xl font-light ${themeClasses.textSecondary} animate-slide-up animation-delay-300 text-center lg:text-left`}>
             Deploy Agents designed for enterprise complexity and security
           </p>
-              <div className="hidden lg:flex justify-center lg:justify-start animate-slide-up animation-delay-400">
-                <DemoRequestForm variant="compact" theme={isLightMode ? 'light' : 'dark'} />
+              <div className="hidden lg:flex justify-center lg:justify-start animate-slide-up animation-delay-400 max-w-md">
+                <DemoRequestForm theme={isLightMode ? 'light' : 'dark'} />
               </div>
             </div>
       
@@ -261,48 +193,46 @@ export function HomeHero() {
               <InsightsFeed theme={isLightMode ? 'light' : 'dark'} minimal={true} />
             </div>
           </div>
-      </div>
-    </div>
-    
-    {/* Logo Carousel - DESKTOP - Positioned at viewport bottom */}
-    <div className={`hidden lg:block absolute left-0 right-0 bottom-0 z-10 h-20 flex items-end ${showDebugBorders ? 'border-2 border-blue-500' : ''}`}>
-      <div className={`mx-auto max-w-7xl px-6 w-full pb-4 ${showDebugBorders ? 'border-2 border-purple-500' : ''}`}>
-        <p className={`text-sm font-medium ${isLightMode ? 'text-[#2A3B35]' : 'text-[#B8D8D0]/80'} mb-2`}>
-          Ana finds insights in your existing data stack
-        </p>
-        <div className={`logo-carousel ${showDebugBorders ? 'border-2 border-orange-500' : ''}`}>
-          <Carousel items={logos} gradientColor={isLightMode ? '[#F7F7F7]' : 'black'} />
+        </div>
+        
+        {/* Logo Carousel - DESKTOP - Fixed at bottom */}
+        <div className={`hidden lg:block z-10 pb-6 ${debugMode ? 'border-2 border-blue-500' : ''}`}>
+          <div className={`mx-auto max-w-7xl px-6 w-full ${debugMode ? 'border-2 border-purple-500' : ''}`}>
+            <p className={`text-sm font-medium ${themeClasses.textPrimary} mb-2`}>
+              Ana finds insights in your existing data stack
+            </p>
+            <div className={`logo-carousel ${debugMode ? 'border-2 border-orange-500' : ''}`}>
+              <Carousel items={logos} gradientColor={isLightMode ? '#F7F7F7' : 'black'} theme={isLightMode ? 'light' : 'dark'} />
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
 
       {/* Mobile Content */}
-      <div className={`lg:hidden flex flex-col min-h-screen relative z-10 overflow-visible ${showDebugBorders ? 'border-2 border-red-500' : ''}`} style={{ 
-        paddingTop: `${navbarHeight}px`  /* Account for navbar height (dynamic) */
-      }}>
+      <div className={`lg:hidden flex flex-col h-full relative z-10 pt-[var(--navbar-height,80px)] ${debugMode ? 'border-2 border-red-500' : ''}`}>
         {/* Main mobile content */}
-        <div className={`flex flex-col items-center justify-center flex-1 mx-auto w-full px-4 pb-4 overflow-hidden ${showDebugBorders ? 'border-2 border-green-500' : ''}`}>
-          <div className={`w-full text-center ${showDebugBorders ? 'border-2 border-cyan-500' : ''}`}>
+        <div className={`flex flex-col items-center justify-center flex-1 mx-auto w-full px-4 overflow-hidden ${debugMode ? 'border-2 border-green-500' : ''}`}>
+          <div className={`w-full text-center ${debugMode ? 'border-2 border-cyan-500' : ''}`}>
             <Badge
               variant="default"
-              className={`inline-flex ${badgeBg} px-3 py-1 mb-8 mt-8 backdrop-blur-sm border ${badgeBorder} animate-slide-up animation-delay-100`}
+              className={`inline-flex ${themeClasses.badgeBg} px-3 py-1 mb-6 backdrop-blur-sm border ${themeClasses.badgeBorder} animate-slide-up animation-delay-100`}
             >
-              <div className={` h-2 w-2 ${badgeDot} animate-pulse mr-2`} />
-              <span className={`animate-fade-in animation-delay-200 ${textPrimary}`}>Ana is now generally available</span>
+              <div className={` h-2 w-2 ${themeClasses.badgeDot} animate-pulse mr-2`} />
+              <span className={`animate-fade-in animation-delay-200 ${themeClasses.textPrimary}`}>Ana is now generally available</span>
             </Badge>
 
             <div className="mb-8 w-full text-center">
-              <h1 className={`text-3xl sm:text-4xl md:text-5xl font-light leading-[1.1] ${textPrimary} animate-slide-up animation-delay-300 text-center`}>
+              <h1 className={`text-3xl sm:text-4xl md:text-5xl font-light leading-[1.1] ${themeClasses.textPrimary} animate-slide-up animation-delay-300 text-center`}>
                 Agentic Analytics
                 <br />
                 for Every Decision
               </h1>
             </div>
-            <p className={`mb-12 text-lg sm:text-xl md:text-2xl font-light ${textSecondary} animate-slide-up animation-delay-400 w-full text-center`}>
+            <p className={`mb-12 text-lg sm:text-xl md:text-2xl font-light ${themeClasses.textSecondary} animate-slide-up animation-delay-400 w-full text-center`}>
               Deploy agents across all of your databases & systems of record
             </p>
-            <div className="flex justify-center w-full animate-slide-up animation-delay-500 mb-16">
+            <div className="flex justify-center w-full animate-slide-up animation-delay-500 mb-8">
               <DemoRequestButton
                 theme={isLightMode ? 'light' : 'dark'}
                 buttonText="Get a demo"
@@ -319,19 +249,18 @@ export function HomeHero() {
         </div>
         
         {/* Mobile Logo Carousel - Separate from main content */}
-        <div className={`bg-transparent backdrop-blur-sm pb-8 ${showDebugBorders ? 'border-2 border-blue-500' : ''}`}>
+        <div className={`bg-transparent backdrop-blur-sm py-4 ${debugMode ? 'border-2 border-blue-500' : ''}`}>
           <div className="mx-auto w-full px-4">
-            <p className={`text-sm font-medium ${isLightMode ? 'text-[#2A3B35]' : 'text-[#B8D8D0]/80'} mb-4 text-center`}>
+            <p className={`text-sm font-medium ${themeClasses.textPrimary} mb-2 text-center`}>
               Ana finds insights in your existing data stack
             </p>
             <div className="overflow-hidden logo-carousel">
-              <MobileCarousel items={logos} speed={30} gradientColor={isLightMode ? '[#F7F7F7]' : 'black'} />
+              <MobileCarousel items={logos} speed={30} gradientColor={isLightMode ? '#F7F7F7' : 'black'} theme={isLightMode ? 'light' : 'dark'} />
             </div>
           </div>
         </div>
       </div>
-    </section>
-    
+    </Section>
   );
 }
 

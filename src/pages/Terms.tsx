@@ -4,11 +4,15 @@ import remarkGfm from 'remark-gfm';
 import { Text } from '../components/ui';
 import { TermsHeader } from '../components/page-sections/legal';
 import { SEO } from '../components/SEO';
+import { Section } from '../components/ui/Section';
+import { useComponentTheme } from '../hooks/useComponentTheme';
 
 // Import terms content with the updated syntax
 import termsContent from '../data/legal/terms.md?raw';
 
 export default function Terms() {
+  const theme = useComponentTheme();
+  
   return (
     <div className="min-h-screen bg-[#F7F7F7]">
       <SEO 
@@ -21,12 +25,15 @@ export default function Terms() {
       <TermsHeader />
 
       {/* Content */}
-      <div className="max-w-4xl mx-auto px-4 py-16">
+      <Section 
+        variant="narrow"
+        padding="md"
+      >
         <div className="prose prose-lg max-w-none">
           <ReactMarkdown 
             remarkPlugins={[remarkGfm]}
             components={{
-              p: ({node, ...props}) => <Text theme="light" className="text-lg leading-relaxed mb-6" {...props} />,
+              p: ({node, ...props}) => <Text theme={theme} className="text-lg leading-relaxed mb-6" {...props} />,
               h1: ({node, ...props}) => <h1 className="text-4xl font-extralight text-[#2A3B35] mb-8" {...props} />,
               h2: ({node, ...props}) => <h2 className="text-2xl font-light text-[#2A3B35] mt-12 mb-6" {...props} />,
               h3: ({node, ...props}) => <h3 className="text-xl font-medium text-[#2A3B35] mt-8 mb-4" {...props} />,
@@ -43,7 +50,7 @@ export default function Terms() {
             {termsContent}
           </ReactMarkdown>
         </div>
-      </div>
+      </Section>
     </div>
   );
 }

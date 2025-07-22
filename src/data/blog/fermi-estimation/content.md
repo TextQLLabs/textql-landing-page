@@ -1,5 +1,15 @@
 # Beyond Guesswork: How Different AI Models Handle Fermi Estimation
 
+## Table of Contents
+- [What Are Fermi Problems?](#what-are-fermi-problems)
+- [Our Experimental Setup](#our-experimental-setup)
+  - [Prompt Templates](#prompt-templates)
+- [Results: Which Model Performs Best?](#results-which-model-performs-best)
+  - [Claude 3.7 Leads the Pack](#claude-37-leads-the-pack)
+  - [The Hallucination Problem](#the-hallucination-problem)
+- [Does Prompting Strategy Matter?](#does-prompting-strategy-matter)
+- [Practical Implications](#practical-implications)
+- [Conclusion: The Future of AI Estimation](#conclusion-the-future-of-ai-estimation)
 
 ## What Are Fermi Problems?
 

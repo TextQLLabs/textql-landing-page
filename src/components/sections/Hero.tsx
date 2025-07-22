@@ -7,7 +7,7 @@ export default function Hero() {
     <section className="relative min-h-screen">
       <WaveBackground />
       <div className="mx-auto max-w-7xl px-6">
-        <div className="grid min-h-[calc(100vh-16rem)] items-center gap-16 pt-20 lg:grid-cols-[1fr,600px]">
+        <div className="grid min-h-[calc(100vh-16rem)] items-center gap-16 navbar-offset lg:grid-cols-[1fr,600px]">
           {/* Left Content */}
           <div>
             <div className="mb-8">
@@ -24,7 +24,7 @@ export default function Hero() {
               Deploy AI agents to find trends across all of your data that makes you money
             </p>
             <div className="opacity-0 animate-slide-up animation-delay-400">
-              <DemoRequestForm />
+              <DemoRequestForm theme="dark" />
             </div>
           </div>
 

@@ -1,6 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Text, Badge, Heading } from '../../ui';
+import { Text, Badge, Heading, Section } from '../../ui';
 import { WaveBackground } from '../../animations';
 import type { BlogPost } from './types';
 
@@ -21,8 +21,14 @@ export function BlogHeader({ featuredPost }: BlogHeaderProps) {
         <WaveBackground />
       </div>
       
-      <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-6 flex flex-col justify-center">
-        <div className="grid lg:grid-cols-[1fr,1.5fr] gap-16 items-center justify-center pt-32 pb-12 md:pt-40 md:pb-24">
+      <Section
+        variant="wide"
+        paddingTop="navbar"
+        paddingBottom="lg"
+        background="transparent"
+        className="relative z-10"
+      >
+        <div className="grid lg:grid-cols-[1fr,1.5fr] gap-16 items-center justify-center">
           {/* Left Content */}
           <div>
             <h1 className="text-4xl lg:text-6xl text-white font-extralight mb-6">
@@ -82,7 +88,7 @@ export function BlogHeader({ featuredPost }: BlogHeaderProps) {
             </Link>
           )}
         </div>
-      </div>
+      </Section>
     </div>
   );
 }

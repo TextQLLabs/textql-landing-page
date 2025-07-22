@@ -1,5 +1,8 @@
 import { ArrowRight, Shield, Lock, Server, Cloud } from 'lucide-react';
 import { Button, Text } from '../../ui';
+import { Section } from '../../ui/Section';
+import { useComponentTheme } from '../../../hooks/useComponentTheme';
+import { themeBackgroundSecondary, themeText } from '../../../utils/theme-utils';
 
 const features = [
   {
@@ -31,13 +34,18 @@ const cloudLogos = [
 ];
 
 export function EnterpriseSection() {
+  const theme = useComponentTheme();
   return (
-    <section className="security-section bg-black py-16 md:py-24">
-      <div className="mx-auto max-w-site px-6">
+    <Section
+      variant="content"
+      padding="md"
+      background="secondary"
+      className="security-section"
+    >
         <div className="grid grid-cols-1 lg:grid-cols-[1fr,1.5fr] gap-8 md:gap-12 lg:gap-16 items-center">
           {/* Left Content */}
           <div className="text-center lg:text-left">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extralight text-white mb-6 lg:mb-8">
+            <h2 className={`text-3xl md:text-4xl lg:text-5xl font-extralight ${themeText(theme)} mb-6 lg:mb-8`}>
               Secure & On Your Own Cloud
             </h2>
             
@@ -46,7 +54,7 @@ export function EnterpriseSection() {
               {cloudLogos.map((logo) => (
                 <div 
                   key={logo.alt}
-                  className="flex items-center justify-center w-20 h-12 md:w-24 md:h-14 lg:w-28 lg:h-16 bg-[#B8D8D0]/10 border border-[#B8D8D0]/20 hover:border-[#B8D8D0]/40 transition-colors rounded-lg"
+                  className={`flex items-center justify-center w-20 h-12 md:w-24 md:h-14 lg:w-28 lg:h-16 rounded-lg transition-colors ${theme === 'light' ? 'bg-[#2A3B35]/10 border border-[#2A3B35]/20 hover:border-[#2A3B35]/40' : 'bg-[#B8D8D0]/10 border border-[#B8D8D0]/20 hover:border-[#B8D8D0]/40'}`}
                 >
                   <img
                     src={logo.src}
@@ -57,7 +65,7 @@ export function EnterpriseSection() {
               ))}
             </div>
             
-            <p className="text-base md:text-lg lg:text-xl text-[#B8D8D0] mb-8 md:mb-10 max-w-xl mx-auto lg:mx-0">
+            <p className={`text-base md:text-lg lg:text-xl mb-8 md:mb-10 max-w-xl mx-auto lg:mx-0 ${theme === 'light' ? 'text-[#2A3B35]' : 'text-[#B8D8D0]'}`}>
               Deploy TextQL in your infrastructure with enterprise-grade security and complete data sovereignty
             </p>
 
@@ -66,7 +74,7 @@ export function EnterpriseSection() {
                 <Button 
                   variant="primary" 
                   theme="dark"
-                  size="lg"
+                  size="md"
                   className="group"
                 >
                   Learn More About Enterprise
@@ -81,17 +89,17 @@ export function EnterpriseSection() {
             {features.map((feature) => (
               <div 
                 key={feature.title}
-                className="p-4 md:p-5 lg:p-6 bg-[#0A1F1C] border border-[#B8D8D0]/20 hover:border-[#B8D8D0]/40 transition-colors text-center sm:text-left"
+                className={`p-4 md:p-5 lg:p-6 transition-colors text-center sm:text-left ${theme === 'light' ? 'bg-[#2A3B35]/10 border border-[#2A3B35]/20 hover:border-[#2A3B35]/40' : 'bg-[#0A1F1C] border border-[#B8D8D0]/20 hover:border-[#B8D8D0]/40'}`}
               >
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 md:gap-4">
-                  <div className="p-2 bg-[#B8D8D0]/10 rounded-lg flex-shrink-0">
-                    <feature.icon className="w-5 h-5 md:w-6 md:h-6 text-[#B8D8D0]" />
+                  <div className={`p-2 rounded-lg flex-shrink-0 ${theme === 'light' ? 'bg-[#2A3B35]/10' : 'bg-[#B8D8D0]/10'}`}>
+                    <feature.icon className={`w-5 h-5 md:w-6 md:h-6 ${theme === 'light' ? 'text-[#2A3B35]' : 'text-[#B8D8D0]'}`} />
                   </div>
                   <div>
-                    <h3 className="text-white font-medium mb-2 text-sm md:text-base">
+                    <h3 className={`${themeText(theme)} font-medium mb-2 text-sm md:text-base`}>
                       {feature.title}
                     </h3>
-                    <p className="text-[#729E8C] text-sm md:text-base">
+                    <p className={`text-sm md:text-base ${theme === 'light' ? 'text-[#4A665C]' : 'text-[#729E8C]'}`}>
                       {feature.description}
                     </p>
                   </div>
@@ -100,7 +108,6 @@ export function EnterpriseSection() {
             ))}
           </div>
         </div>
-      </div>
-    </section>
+    </Section>
   );
 }

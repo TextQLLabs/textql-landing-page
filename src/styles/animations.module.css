@@ -1,0 +1,234 @@
+/**
+ * Animation CSS Module
+ * Contains complex animations that can't be easily expressed with Tailwind utilities
+ */
+
+/* Fade animations with custom timing */
+@keyframes customFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes customFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+/* Slide animations */
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Scale animations */
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Wave animations for backgrounds */
+@keyframes wave {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(-25%) translateY(-10px);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@keyframes waveReverse {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(25%) translateY(10px);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+/* Rotation animations */
+@keyframes rotate360 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateY360 {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+/* Loading animations */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
+
+/* Animation classes */
+.fadeIn {
+  animation: customFadeIn 0.5s ease-out forwards;
+}
+
+.fadeOut {
+  animation: customFadeOut 0.5s ease-out forwards;
+}
+
+.slideInRight {
+  animation: slideInFromRight 0.6s ease-out forwards;
+}
+
+.slideInLeft {
+  animation: slideInFromLeft 0.6s ease-out forwards;
+}
+
+.scaleIn {
+  animation: scaleIn 0.4s ease-out forwards;
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.wave {
+  animation: wave 20s ease-in-out infinite;
+}
+
+.waveReverse {
+  animation: waveReverse 20s ease-in-out infinite;
+}
+
+.rotate {
+  animation: rotate360 20s linear infinite;
+}
+
+.rotateY {
+  animation: rotateY360 10s linear infinite;
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.bounce {
+  animation: bounce 1s infinite;
+}
+
+/* Stagger animations for lists */
+.staggerChildren > * {
+  opacity: 0;
+  animation: customFadeIn 0.5s ease-out forwards;
+}
+
+.staggerChildren > *:nth-child(1) { animation-delay: 0.1s; }
+.staggerChildren > *:nth-child(2) { animation-delay: 0.2s; }
+.staggerChildren > *:nth-child(3) { animation-delay: 0.3s; }
+.staggerChildren > *:nth-child(4) { animation-delay: 0.4s; }
+.staggerChildren > *:nth-child(5) { animation-delay: 0.5s; }
+.staggerChildren > *:nth-child(6) { animation-delay: 0.6s; }
+.staggerChildren > *:nth-child(7) { animation-delay: 0.7s; }
+.staggerChildren > *:nth-child(8) { animation-delay: 0.8s; }
+
+/* Hover animations */
+.hoverFloat {
+  transition: transform 0.3s ease;
+}
+
+.hoverFloat:hover {
+  transform: translateY(-5px);
+}
+
+.hoverScale {
+  transition: transform 0.3s ease;
+}
+
+.hoverScale:hover {
+  transform: scale(1.05);
+}
+
+/* Theme-aware animations */
+:global(.global-light-mode) .fadeIn {
+  animation-duration: 0.3s;
+}
+
+:global(.global-light-mode) .wave {
+  animation-duration: 25s;
+}

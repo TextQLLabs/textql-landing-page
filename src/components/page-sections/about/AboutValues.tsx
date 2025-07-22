@@ -1,3 +1,4 @@
+import { Section } from '../../ui/Section';
 import { type Value } from './types';
 
 const values: Value[] = [
@@ -30,8 +31,11 @@ const values: Value[] = [
 
 export function AboutValues() {
   return (
-    <section className="bg-[#0A1F1C] py-12 flex flex-col justify-center">
-      <div className="mx-auto max-w-site px-12">
+    <Section
+      variant="content"
+      padding="sm"
+      className="bg-[#0A1F1C] flex flex-col justify-center"
+    >
         <div className="grid md:grid-cols-[1fr,1.5fr] gap-24">
           {/* Left Side - Header and Links */}
           <div className="space-y-8">
@@ -78,7 +82,6 @@ export function AboutValues() {
             ))}
           </div>
         </div>
-      </div>
-    </section>
+    </Section>
   );
 }

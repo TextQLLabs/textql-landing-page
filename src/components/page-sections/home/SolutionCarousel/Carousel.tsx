@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { SolutionCard } from '../../../page-sections/solution-library';
 import { solutions } from '../../../../data/solutions';
+import { useComponentTheme } from '../../../../hooks/useComponentTheme';
+import { themeGradientFromContrast } from '../../../../utils/theme-utils';
 
 // Select featured solutions and duplicate them for continuous scrolling
 const FEATURED_SOLUTIONS = [
@@ -9,6 +11,7 @@ const FEATURED_SOLUTIONS = [
 ];
 
 export function Carousel() {
+  const theme = useComponentTheme();
   const scrollRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>();
   const speedRef = useRef(0.5);
@@ -52,8 +55,8 @@ export function Carousel() {
       <div className="max-w-site mx-auto px-6">
         <div className="relative">
           {/* Gradient Overlays */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10" />
+          <div className={`absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r ${themeGradientFromContrast(theme)} to-transparent z-10`} />
+          <div className={`absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l ${themeGradientFromContrast(theme)} to-transparent z-10`} />
 
           {/* Carousel Content */}
           <div 

@@ -4,18 +4,21 @@ import * as LucideIcons from 'lucide-react';
 import { Link } from 'react-router-dom';
 import type { NavItem as NavItemType } from './types';
 import { NavDropdown } from './NavDropdown';
+import { useGlobalTheme } from '../GlobalThemeProvider';
+import filterStyles from '../../styles/filters.module.css';
 
 interface NavItemProps {
   item: NavItemType;
-  isDarkPage?: boolean;
 }
 
-export function NavItem({ item, isDarkPage = false }: NavItemProps) {
+export function NavItem({ item }: NavItemProps) {
+  const { isLightMode } = useGlobalTheme();
   const [isOpen, setIsOpen] = useState(false);
   const closeTimeoutRef = useRef<number | null>(null);
 
-  const baseStyle = item.textColor ? {
-    color: item.textColor,
+  // CSS variables for custom text color
+  const cssVars = item.textColor ? {
+    '--text-color': item.textColor,
     '--hover-color': `${item.textColor}cc`
   } as React.CSSProperties : undefined;
 
@@ -27,10 +30,10 @@ export function NavItem({ item, isDarkPage = false }: NavItemProps) {
     if (typeof item.icon === 'string' && item.icon.includes('/')) {
       return (
         <div 
-          className="w-4 h-4 flex-shrink-0 bg-gray-600 opacity-75 hover:opacity-100 transition-opacity"
+          className={`w-4 h-4 flex-shrink-0 ${isLightMode ? filterStyles.iconMaskLight : filterStyles.iconMaskDark}`}
           style={{
-            mask: `url(${item.icon}) no-repeat center/contain`,
-            WebkitMask: `url(${item.icon}) no-repeat center/contain`
+            maskImage: `url(${item.icon})`,
+            WebkitMaskImage: `url(${item.icon})`
           }}
         />
       );
@@ -67,8 +70,8 @@ export function NavItem({ item, isDarkPage = false }: NavItemProps) {
         href={item.href}
         target="_blank"
         rel="noopener noreferrer"
-        className={isDarkPage ? "flex items-center gap-1.5 text-gray-300 hover:text-gray-100 transition-colors text-sm px-3 py-2 rounded-md hover:bg-gray-800" : "flex items-center gap-1.5 text-gray-700 hover:text-gray-900 transition-colors text-sm px-3 py-2 rounded-md hover:bg-gray-50"}
-        style={baseStyle}
+        className={!isLightMode ? "flex items-center gap-1.5 text-gray-300 hover:text-gray-100 transition-colors text-sm px-3 py-2 rounded-md hover:bg-gray-800 cursor-pointer" : "flex items-center gap-1.5 text-gray-700 hover:text-gray-900 transition-colors text-sm px-3 py-2 rounded-md hover:bg-gray-50 cursor-pointer"}
+        style={cssVars}
       >
         {renderIcon()}
         {item.label}
@@ -77,8 +80,8 @@ export function NavItem({ item, isDarkPage = false }: NavItemProps) {
     ) : (
       <Link
         to={item.href}
-        className={isDarkPage ? "flex items-center gap-1.5 text-gray-300 hover:text-gray-100 transition-colors text-sm px-3 py-2 rounded-md hover:bg-gray-800" : "flex items-center gap-1.5 text-gray-700 hover:text-gray-900 transition-colors text-sm px-3 py-2 rounded-md hover:bg-gray-50"}
-        style={baseStyle}
+        className={!isLightMode ? "flex items-center gap-1.5 text-gray-300 hover:text-gray-100 transition-colors text-sm px-3 py-2 rounded-md hover:bg-gray-800 cursor-pointer" : "flex items-center gap-1.5 text-gray-700 hover:text-gray-900 transition-colors text-sm px-3 py-2 rounded-md hover:bg-gray-50 cursor-pointer"}
+        style={cssVars}
       >
         {renderIcon()}
         {item.label}
@@ -93,10 +96,10 @@ export function NavItem({ item, isDarkPage = false }: NavItemProps) {
       onMouseLeave={handleMouseLeave}
     >
       <button 
-        className={`flex items-center gap-1 transition-all text-sm px-3 py-2 rounded-md ${
+        className={`flex items-center gap-1 transition-all text-sm px-3 py-2 rounded-md cursor-pointer ${
           isOpen 
-            ? isDarkPage ? 'bg-gray-800 text-gray-100' : 'bg-gray-100 text-gray-900'
-            : isDarkPage ? 'text-gray-300 hover:text-gray-100 hover:bg-gray-800' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
+            ? !isLightMode ? 'bg-gray-800 text-gray-100' : 'bg-gray-100 text-gray-900'
+            : !isLightMode ? 'text-gray-300 hover:text-gray-100 hover:bg-gray-800' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
         }`}
       >
         {renderIcon()}
@@ -110,7 +113,6 @@ export function NavItem({ item, isDarkPage = false }: NavItemProps) {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClose={() => setIsOpen(false)}
-        isDarkPage={isDarkPage}
       />
     </div>
   );

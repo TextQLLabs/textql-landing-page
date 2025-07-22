@@ -1,375 +1,260 @@
-# TextQLLabs Project Information
+# TextQL Landing Page - Claude AI Context
 
-## GitHub Account
-- **Logged in as**: TheEthanDing
-- **Token scopes**: admin:org, delete:packages, repo, workflow, write:packages
+## Project Overview
 
-## Organizations
-- project-alexander
-- TextQLLabs
+This is the **TextQL Landing Page** project - the official marketing website for TextQL built with React, TypeScript, and Vite.
 
-## TextQLLabs Repositories
-- demo
-- blog  
-- dbt-documentor
-- fe
-- TqlApi
-- mkprompt
-- dbt-redshift
-- textql-frontend
-- ana-engine
-- dbt-doc-py
-- ana
-- ana-services
-- ana-sandbox
-- looker2dbt
-- dialogue-engine
-- dbt-doc-web
-- aws-users
-- dbt_test
-- context-hub
-- flow-hs-example
-- thread-ux-study (this repository)
+### Key Information
+- **Repository**: textql-landing-page
+- **Purpose**: Marketing website with product info, blog, integrations, and company information
+- **Deployment**: Netlify (auto-deploy from main branch)
+- **Tech Stack**: React 18, TypeScript, Vite, Tailwind CSS
 
-## Project Mappings
-- **Frontend**: textql-frontend, fe
-- **Backend API**: TqlApi, ana-engine, ana-services
-- **Analytics**: ana, ana-sandbox
-- **Documentation**: dbt-documentor, dbt-doc-py, dbt-doc-web, blog
-- **Data Tools**: dbt-redshift, looker2dbt, dbt_test
-- **AI/ML**: dialogue-engine, mkprompt, context-hub
-- **Infrastructure**: aws-users
-- **Examples**: demo, flow-hs-example
+## Quick Reference
 
-## MCP (Model Context Protocol) Server Configuration
+### Documentation
+📁 **Complete documentation is available in the [`docs/`](./docs/) folder:**
 
-### Critical Paths
-- **MCP Server Modules**: `/Users/ethanding/projects/node_modules/@modelcontextprotocol/`
-- **Claude Config Location (macOS)**: `~/Library/Application Support/Claude/claude_desktop_config.json`
-- **Claude Config Location (Windows)**: `%APPDATA%\Claude\claude_desktop_config.json`
-- **Claude Config Location (Linux)**: `~/.config/Claude/claude_desktop_config.json`
+- **[Getting Started](./docs/development-setup.md)** - Development environment setup
+- **[Project Architecture](./docs/architecture.md)** - Codebase structure and tech stack
+- **[Contributing Guidelines](./docs/contributing.md)** - How to contribute to the project
+- **[Component Development](./docs/component-development.md)** - UI component guidelines
+- **[Environment Variables](./docs/environment-variables.md)** - Configuration management
+- **[Deployment Guide](./docs/deployment.md)** - Netlify deployment process
+- **[Testing Guide](./docs/testing.md)** - Quality assurance and testing
+- **[Blog System](./docs/blog-system.md)** - Content management for blog posts
+- **[Asset Management](./docs/asset-management.md)** - Images, videos, and static assets
+- **[Performance Guide](./docs/performance.md)** - Optimization strategies
+- **[Troubleshooting](./docs/troubleshooting.md)** - Common issues and solutions
 
-### Currently Installed MCP Servers
-1. **Puppeteer Server** - Browser automation
-   - Package: `@modelcontextprotocol/server-puppeteer`
-   - Version: ^2025.5.12
-   - Path: `/Users/ethanding/projects/node_modules/@modelcontextprotocol/server-puppeteer/dist/index.js`
+### Essential Commands
+```bash
+# Development
+npm run dev          # Start development server (localhost:5173)
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run lint         # Run ESLint
 
-### How to Add MCP Servers to Claude
-
-1. **Install the MCP server package**:
-   ```bash
-   cd /Users/ethanding/projects
-   npm install @modelcontextprotocol/server-<name>
-   ```
-
-2. **Open Claude's config file**:
-   ```bash
-   # macOS
-   open ~/Library/Application\ Support/Claude/claude_desktop_config.json
-   
-   # Or use your preferred editor
-   code ~/Library/Application\ Support/Claude/claude_desktop_config.json
-   ```
-
-3. **Add the server configuration**:
-   ```json
-   {
-     "mcpServers": {
-       "puppeteer": {
-         "command": "node",
-         "args": ["/Users/ethanding/projects/node_modules/@modelcontextprotocol/server-puppeteer/dist/index.js"]
-       },
-       "your-new-server": {
-         "command": "node",
-         "args": ["/path/to/server/index.js"]
-       }
-     }
-   }
-   ```
-
-4. **Restart Claude** to load the new MCP server
-
-### Available MCP Servers
-Common MCP servers you can install:
-- `@modelcontextprotocol/server-puppeteer` - Browser automation
-- `@modelcontextprotocol/server-filesystem` - Enhanced file system access
-- `@modelcontextprotocol/server-git` - Git operations
-- `@modelcontextprotocol/server-github` - GitHub API access
-- `@modelcontextprotocol/server-postgres` - PostgreSQL database access
-- `@modelcontextprotocol/server-sqlite` - SQLite database access
-
-### Maintenance
-
-1. **Update MCP servers**:
-   ```bash
-   cd /Users/ethanding/projects
-   npm update @modelcontextprotocol/server-<name>
-   ```
-
-2. **Check installed versions**:
-   ```bash
-   npm list | grep @modelcontextprotocol
-   ```
-
-3. **Remove an MCP server**:
-   - Uninstall the package: `npm uninstall @modelcontextprotocol/server-<name>`
-   - Remove its configuration from Claude's config file
-   - Restart Claude
-
-4. **Troubleshooting**:
-   - If MCP server doesn't appear in Claude, check the config file for JSON syntax errors
-   - Ensure the path in the config matches the actual installation path
-   - Check Claude's developer console for error messages
-   - Verify the server package is properly installed with `npm list`
-
-### Best Practices
-- Keep all MCP servers in a central location (e.g., `/Users/ethanding/projects`)
-- Document which projects use which MCP servers
-- Regularly update MCP servers for security and feature updates
-- Test MCP server configurations before critical work sessions
-
-# TextQL Landing Page Blog Structure
-
-## Blog Architecture Overview
-This project implements a structured blog system with TypeScript definitions and markdown content management. The blog is built using React Router, React components, and Vite for the build system.
-
-## Key Blog Components
-
-### 1. Blog Data Structure
-- **Location**: `src/data/blog/`
-- **Main index**: `src/data/blog/index.ts`
-- **Type definitions**: `src/data/blog/types.ts`
-
-### 2. Blog Post Structure
-Each blog post consists of:
-- **Metadata file**: `{post-id}.ts` - Contains title, description, author, date, etc.
-- **Content file**: `{post-id}/content.md` - Markdown content for the post
-- **Images**: `public/images/blog/{post-id}/` - Header images and assets
-
-### 3. Blog Components
-- **Blog Index Page**: `src/pages/blog/index.tsx`
-- **Individual Post Page**: `src/pages/blog/[id].tsx`
-- **Blog Components**: `src/components/page-sections/blog/`
-  - `BlogHeader.tsx` - Featured post hero section
-  - `BlogGrid.tsx` - Grid layout for posts
-  - `BlogCard.tsx` - Individual post cards
-  - `types.ts` - TypeScript interfaces
-
-## Adding New Blog Posts
-
-### Step 1: Create Metadata File
-Create `src/data/blog/{post-id}.ts`:
-```typescript
-import type { BlogPost } from '../../components/page-sections/blog/types';
-
-export const post: BlogPost = {
-  id: 'your-post-id',
-  title: 'Your Post Title',
-  description: 'Brief description',
-  image: '/images/blog/your-post-id/header.png',
-  useLocalImage: true,
-  author: {
-    name: 'Author Name',
-    role: 'Title',
-    company: 'TextQL'
-  },
-  date: 'Month DD, YYYY',
-  readTime: 'X min read',
-  category: 'category-name',
-  featured: false // Set to true for featured posts
-};
+# Quality Checks (always run before committing)
+npm run lint         # Check code style
+npx tsc --noEmit     # TypeScript type checking
+npm run build        # Ensure production build works
 ```
 
-### Step 2: Create Content File
-Create `src/data/blog/{post-id}/content.md` with your markdown content.
-
-### Step 3: Add Images
-Place header image at `public/images/blog/{post-id}/header.png` and any additional assets.
-
-### Step 4: Update Index File
-Add to `src/data/blog/index.ts`:
-1. Import the post: `import { post as yourPostId } from './your-post-id';`
-2. Add to blogPosts array (most recent first)
-3. Add case to getPostContent() switch statement
-4. Add content loading function
-
-## Content Loading System
-The blog uses Vite's `import.meta.glob()` to dynamically load markdown content:
-- Content is loaded as raw text using `?raw` query
-- Each post has a dedicated content loading function
-- Content is loaded eagerly for better performance
-
-## Image Management
-- **Header images**: Stored in `public/images/blog/{post-id}/`
-- **Local images**: Use `useLocalImage: true` flag in metadata
-- **External images**: Set `useLocalImage: false` and provide full URL
-
-## Blog Features
-- **Featured posts**: Set `featured: true` in metadata for hero display
-- **Categories**: Organize posts by category for filtering
-- **Reading time**: Estimated reading time for each post
-- **Author information**: Name, role, and company for each author
-- **Responsive design**: Mobile-first approach with Tailwind CSS
-- **SEO optimization**: Meta tags and structured data
-
-## Styling & UI
-- **CSS Framework**: Tailwind CSS
-- **Components**: Custom UI components in `src/components/ui/`
-- **Icons**: Lucide React icons
-- **Typography**: Custom heading and text components
-- **Theme**: Consistent design system with dark/light variants
-
-## Build & Deployment
-- **Dev server**: `npm run dev` (localhost:5173)
-- **Build**: `npm run build`
-- **Preview**: `npm run preview`
-- **Prerendering**: `npm run prerender` (for static generation)
-
-## Current Blog Posts
-The blog currently contains 18 posts covering topics like:
-- AI/ML and text-to-SQL technology
-- Data engineering and analytics
-- Company announcements and fundraising
-- Technical deep-dives (Haskell, embeddings, benchmarks)
-- Industry integrations (Tableau, NBA, SOC2)
+### Project Structure
+```
+textql-landing-page/
+├── docs/                    # 📖 Complete documentation
+├── src/
+│   ├── components/          # React components
+│   │   ├── ui/             # Reusable UI components
+│   │   └── page-sections/  # Page-specific sections
+│   ├── data/               # Static content (blog, solutions)
+│   ├── pages/              # Route components
+│   └── styles/             # Global styles
+├── public/                 # Static assets (images, videos)
+└── [config files]         # Vite, TypeScript, Tailwind
+```
 
 ## Development Workflow
-1. Create post metadata and content files
-2. Add images to public directory
-3. Update index.ts with new post
-4. Test locally with `npm run dev`
-5. Build and deploy when ready
 
-# Important Instruction Reminders
-Do what has been asked; nothing more, nothing less.
-NEVER create files unless they're absolutely necessary for achieving your goal.
-ALWAYS prefer editing an existing file to creating a new one.
-NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.
+### Environment Setup
+1. **Prerequisites**: Node.js 18+, npm
+2. **Install**: `npm install`
+3. **Develop**: `npm run dev`
+4. **Test**: Visit `http://localhost:5173`
 
-# Development Workflow - Make Changes and Test on Localhost
+### Component Development
+- **Reusable components**: `src/components/ui/` (used in 2+ places)
+- **Page-specific components**: `src/components/page-sections/` (unique to one page)
+- **Styling**: Tailwind CSS with mobile-first responsive design
+- **TypeScript**: Strict typing with proper interfaces
 
-## Overview
-When making changes to the TextQL landing page, follow this workflow to ensure changes are properly tested before committing.
+See [Component Development Guide](./docs/component-development.md) for detailed guidelines.
 
-## Prerequisites
-- **Development server is already running** on http://localhost:5173
-- You DON'T need to run `npm run dev` - it's already running
-- Use MCP Playwright tools to test changes in the browser
+### Content Management
 
-## Browser-Safe Testing Dimensions
-Always test responsive layouts at these viewport sizes that account for typical browser chrome heights (~100-140px):
+#### Blog Posts
+- **Structure**: Metadata file (`post-id.ts`) + content file (`post-id/content.md`)
+- **Images**: Organized in `public/images/blog/post-id/`
+- **Process**: Create metadata → Write content → Add images → Update index
 
-1. **Mobile**: 375px × 667px (standard mobile viewport)
-2. **Tablet**: 768px × 850px (tablet with browser UI)
-3. **Laptop**: 1280px × 680px (laptop with browser chrome)
-4. **Desktop**: 1920px × 900px (desktop with browser UI)
+See [Blog System Guide](./docs/blog-system.md) for complete workflow.
 
-### Testing with MCP Playwright
+#### Assets
+- **Images**: WebP preferred, PNG fallback, organized by feature
+- **Optimization**: Compress images, use appropriate sizes
+- **Loading**: Lazy loading for non-critical content
+
+See [Asset Management Guide](./docs/asset-management.md) for optimization strategies.
+
+## Deployment & Operations
+
+### Netlify Deployment
+- **Auto-deploy**: Push to `main` branch triggers deployment
+- **Preview**: Pull requests get unique preview URLs
+- **Environment**: Variables managed via Netlify dashboard
+- **Build**: `npm run build` → static files in `dist/`
+
+### Environment Variables
 ```bash
-# Test all standard viewports
-mcp__playwright__browser_resize -> width: 375, height: 667   # Mobile
-mcp__playwright__browser_resize -> width: 768, height: 850   # Tablet
-mcp__playwright__browser_resize -> width: 1280, height: 680  # Laptop
-mcp__playwright__browser_resize -> width: 1920, height: 900  # Desktop
+# Example .env.local
+VITE_API_BASE_URL=http://localhost:3000/api
+VITE_ENVIRONMENT=development
+VITE_ENABLE_DEBUG=true
 ```
 
-### Chrome DevTools Testing (Alternative)
-1. Open DevTools (F12)
-2. Toggle device toolbar (Ctrl+Shift+M or Cmd+Shift+M on Mac)
-3. Choose "Responsive" mode
-4. Manually set these exact dimensions
-5. The viewport will show the actual content area excluding browser UI
+All client variables must start with `VITE_` prefix.
 
-**Note**: MCP Playwright browser tools already show the viewport excluding browser chrome, so these dimensions are perfect for testing real-world scenarios.
+See [Environment Variables Guide](./docs/environment-variables.md) for complete setup.
 
-## Workflow Steps
+### Performance Targets
+- **Lighthouse**: 90+ performance score
+- **Core Web Vitals**: LCP < 2.5s, FID < 100ms, CLS < 0.1
+- **Bundle size**: < 250KB JavaScript, < 50KB CSS
 
-### 1. Get Instructions
-- Receive specific change request from user
-- Understand what needs to be modified (e.g., "fix heading alignment on medium screens")
+See [Performance Guide](./docs/performance.md) for optimization strategies.
 
-### 2. Find the Relevant Files
-- Use search tools (Grep, Glob, or Task) to locate the component
-- For component changes, typically look in `/src/components/`
-- Read the file to understand current implementation
+## Quality Assurance
 
-### 3. Make the Change
-- Edit the file with the required changes
-- For responsive design, use Tailwind CSS classes:
-  - `sm:` (640px+), `md:` (768px+), `lg:` (1024px+), `xl:` (1280px+)
-  - Example: `text-center xl:text-left` (center on small, left on xl+)
-
-### 4. Test on Localhost Using MCP Playwright
+### Pre-Commit Checklist
 ```bash
-# Navigate to localhost
-mcp__playwright__browser_navigate -> http://localhost:5173
-
-# Test different viewport sizes
-mcp__playwright__browser_resize -> width: 768, height: 600   # Mobile
-mcp__playwright__browser_resize -> width: 1024, height: 768  # Tablet
-mcp__playwright__browser_resize -> width: 1920, height: 1080 # Desktop
-
-# Take screenshots to verify changes
-mcp__playwright__browser_take_screenshot -> filename: "after-changes.png"
+# Always run before committing:
+npm run lint         # ✅ Code style
+npx tsc --noEmit     # ✅ Type checking  
+npm run build        # ✅ Production build
+# Test responsive design manually
 ```
 
-### 5. Verify the Fix
-- Check that the change works at all breakpoints
-- Ensure no unintended side effects
-- Confirm the fix addresses the original issue
+### Testing Strategy
+- **Manual testing**: Responsive design, cross-browser, accessibility
+- **Performance**: Lighthouse audits, Core Web Vitals monitoring
+- **Quality checks**: ESLint, TypeScript, build verification
 
-## Example: Fixing Hero Section Alignment
+See [Testing Guide](./docs/testing.md) for complete testing procedures.
 
-**Problem**: Heading stays left-aligned when layout stacks on medium screens
+## Getting Help
 
-**Solution Applied**:
-1. Located the file: `/src/components/page-sections/home/HomeHero.tsx`
-2. Added responsive text alignment classes:
-   - Badge: `text-center xl:text-left`
-   - Heading: `text-center xl:text-left`
-   - Subtext: `text-center xl:text-left`
-   - Form container: `justify-center xl:justify-start`
-3. Tested at 1024px width to confirm center alignment
-4. Tested at 1920px width to confirm left alignment on xl screens
+### Documentation
+- **Primary**: Check [`docs/`](./docs/) folder first
+- **Specific issues**: See [Troubleshooting Guide](./docs/troubleshooting.md)
+- **Architecture questions**: See [Project Architecture](./docs/architecture.md)
 
-**Result**: Content properly centers on medium screens and stays left-aligned on extra-large screens
+### Common Issues
+- **Development server**: Check [Troubleshooting Guide](./docs/troubleshooting.md#development-server-issues)
+- **Build failures**: See [Troubleshooting Guide](./docs/troubleshooting.md#build-issues)
+- **Styling problems**: See [Troubleshooting Guide](./docs/troubleshooting.md#styling-issues)
 
-# InsightsFeed Animation Sequence (Correct Implementation)
+---
 
-## Current Animation Phases
-1. **initial** (RED debug bar) - Starting state
-2. **cards-entering** (YELLOW debug bar) - Cards animating in
-3. **cards-visible** (GREEN debug bar) - All cards visible and settled
-4. **first-expanding** (BLUE debug bar) - First card expanding
+## Context Notes for Claude
 
-## Correct Animation Flow
+### Component Architecture
+This project follows the **reusable vs page-specific component** pattern established in the main CLAUDE.md context:
+- Create reusable components when used in 2+ places
+- Keep page-specific logic in page-section components
+- Use Tailwind CSS with mobile-first responsive design
+- Follow TypeScript strict typing patterns
 
-### On Page Load:
-1. **initial** → Search animation plays → **cards-entering**
-2. **cards-entering** → Cards slide in (all collapsed) with stagger → **cards-visible**
-3. **cards-visible** → Brief pause (500ms) → **first-expanding**
-4. **first-expanding** → First card expands
+### Debug Tools & DevTools Integration
+**IMPORTANT**: The project has a unified DevTools panel in the bottom-right corner (`/src/components/DevTools.tsx`) that consolidates all development tools. 
 
-### On Industry Pill Click:
-1. **first-expanding** → Reset expansion state → **initial**
-2. **initial** → Brief pause (100ms) → **cards-entering**  
-3. **cards-entering** → New cards slide in (all collapsed) → **cards-visible**
-4. **cards-visible** → Brief pause (500ms) → **first-expanding**
-5. **first-expanding** → First card expands
+**Current DevTools Features:**
+- **Debug Borders Toggle**: Shows/hides debug borders around components
+- **Theme Toggle**: Switches between light/dark mode (when available)
+- **Debug Conflicts Detection**: Integrated panel that shows overlapping debug borders
+  - Shows conflict count badge
+  - "Scan" button to trigger conflict detection
+  - Lists conflicts with severity levels (high/medium/low)
+  - Color-coded by severity (red/yellow/blue)
 
-## Card States During Animation
-- **cards-entering**: ALL cards collapsed, animating in with stagger
-- **cards-visible**: ALL cards collapsed, stationary
-- **first-expanding**: First card expanded, others collapsed
+**For Future Sessions - Adding New Debug Tools:**
+When adding new debug/development features, **ALWAYS integrate them into the existing DevTools panel** rather than creating separate floating panels. This prevents UI conflicts and provides a unified developer experience.
 
-## Known Issues
-- **Flash during cards-entering**: Cards animate to wrong position, then flash to correct position
-- **Suspected cause**: Searchbar length change causing layout shift when industry pill clicked
-- **Debug approach**: Check if searchbar width changes during industry transitions
+**How to add new tools:**
+1. Add tool definition to `coreTools` or `futureTools` array in `DevTools.tsx`
+2. Create the tool's functionality as a section within the expanded DevTools panel
+3. Use the existing dark theme styling (`bg-gray-900`, `text-white`, etc.)
+4. Follow the pattern of the Debug Conflicts section for complex tools
 
-## Animation Implementation Details
-- Uses CSS transitions with stagger delays instead of Framer Motion
-- `displayInsights` state keeps cards stable during industry transitions
-- `cardsAnimationStage` controls opacity/transform for entrance animation
-- Debug colors show current phase visually
+**Debug Conflicts System:**
+- **Context**: `/src/contexts/DebugRegistryContext.tsx` - Tracks all debug elements and detects overlaps
+- **Detection**: Manual trigger via "Scan" button (to avoid infinite loops)
+- **Integration**: Built into DevTools panel, only shows when debug mode is active
+- **Conflicts**: Detects overlap percentage, z-index conflicts, and fixed positioning issues
+
+### Development Best Practices
+- **Documentation-first**: All major features documented in `docs/`
+- **Quality gates**: Lint, type check, and build before committing  
+- **Performance-focused**: Monitor Core Web Vitals and bundle size
+- **Accessibility**: WCAG compliance and semantic HTML
+- **SEO-optimized**: Meta tags, structured data, performance
+
+### CSS Best Practices & Conventions
+
+**IMPORTANT: When fixing CSS/styling issues, ALWAYS follow these conventions:**
+
+1. **Read First**: Check `/docs/css-guidelines.md` for comprehensive CSS best practices
+2. **Use Theme System**: Import from `theme-utils.ts` and use `constants.ts` for all values
+3. **Follow the Plan**: Reference `/CSS_DEBT_REDUCTION_PLAN.md` for approach and methodology
+
+#### Quick Reference - DO's and DON'Ts:
+- **DO**: Use Tailwind classes or CSS modules for styling
+- **DO**: Use theme utilities (`getThemeClasses()`) for theme-aware styling
+- **DO**: Use design tokens from `src/styles/constants.ts`
+- **DON'T**: Add inline styles (except for truly dynamic values)
+- **DON'T**: Use `!important` (only 7 allowed in entire codebase)
+- **DON'T**: Override `.bg-black` or other Tailwind classes with global CSS
+- **DON'T**: Create circular references in constants
+
+#### Key Files for CSS Conventions:
+- **📖 `/docs/css-guidelines.md`** - Comprehensive CSS best practices and patterns
+- **📊 `/CSS_DEBT_REDUCTION_PLAN.md`** - Methodology for fixing CSS issues properly
+- **🎨 `/src/utils/theme-utils.ts`** - Theme utilities to use instead of hardcoded values
+- **🔧 `/src/styles/constants.ts`** - All design tokens (colors, spacing, animations)
+- **🐛 `/src/styles/debug.module.css`** - Where ALL debug styles must go
+
+#### When Fixing CSS Issues:
+```bash
+# 1. Check current debt metrics first
+grep -r "!important" src/ --include="*.css" --include="*.tsx" | wc -l  # Should be ≤ 7
+grep -r "style={{" src/ --include="*.tsx" | wc -l                      # Should be < 15
+
+# 2. Use theme utilities instead of hardcoded values
+import { getThemeClasses } from '@/utils/theme-utils';
+import { COLORS, SPACING } from '@/styles/constants';
+
+# 3. Follow the established patterns in the CSS guidelines
+```
+
+#### Common Fixes Done Right:
+- **Transparency issues**: Don't use global CSS overrides, rewrite component cleanly
+- **Height calculations**: Use Tailwind classes, avoid calc() with hardcoded values
+- **Theme colors**: Use theme utilities, never hardcode hex values
+- **Debug styles**: Move to debug.module.css, never inline
+
+**Before making ANY CSS changes**, tell Claude to "follow the CSS conventions in `/docs/css-guidelines.md` and the approach in `/CSS_DEBT_REDUCTION_PLAN.md`".
+
+### Project-Specific Patterns
+- **Blog system**: TypeScript metadata + markdown content
+- **Asset organization**: Feature-based directory structure
+- **Responsive design**: Mobile-first with specific breakpoint testing
+- **Environment management**: Vite environment variables with `VITE_` prefix
+
+
+## Legacy Content Documentation
+
+*Note: The following sections contain detailed implementation notes that have been moved to the comprehensive documentation in the [`docs/`](./docs/) folder. For current information, please refer to the specific documentation files linked above.*
+
+### Blog System Details
+For complete blog system documentation, see: **[Blog System Guide](./docs/blog-system.md)**
+
+### Development Workflow Details  
+For development workflow and testing procedures, see: **[Development Setup](./docs/development-setup.md)** and **[Testing Guide](./docs/testing.md)**
+
+### Animation Implementation Notes
+For component-specific implementation details, see: **[Component Development Guide](./docs/component-development.md)**
+
+---
+
+*This legacy content section preserves important implementation details while directing users to the organized documentation structure in the `docs/` folder.*

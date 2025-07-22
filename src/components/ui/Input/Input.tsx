@@ -2,6 +2,7 @@ import { forwardRef } from 'react';
 import { type InputProps } from './types';
 import { getBaseStyles } from './styles';
 import { ExternalLinkIcon } from 'lucide-react';
+import { useComponentTheme } from '../../../hooks/useComponentTheme';
 
 export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps & { link?: string }>(({
   label,
@@ -11,18 +12,20 @@ export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputPro
   className = '',
   as = 'input',
   rows = 3,
-  theme = 'dark',
+  theme,
   link,
   ...props
 }, ref) => {
+  const globalTheme = useComponentTheme();
+  const effectiveTheme = theme || globalTheme;
   const Component = as;
-  const baseStyles = getBaseStyles(error, theme);
+  const baseStyles = getBaseStyles(error, effectiveTheme);
 
   return (
     <div className={`${fullWidth ? 'w-full' : ''}`}>
       {label && (link ? (
         <label className={`block text-xs font-medium tracking-wide ${
-          theme === 'dark' ? 'text-[#B8D8D0]/80' : 'text-[#2A3B35]/80'
+          effectiveTheme === 'dark' ? 'text-[#B8D8D0]/80' : 'text-[#2A3B35]/80'
         } mb-2`}>
         <a href={link} target="_blank" rel="noopener noreferrer" className="underline flex items-top">
           {label}
@@ -31,7 +34,7 @@ export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputPro
         </label>
       ) : (
         <label className={`block text-xs font-medium tracking-wide ${
-          theme === 'dark' ? 'text-[#B8D8D0]/80' : 'text-[#2A3B35]/80'
+          effectiveTheme === 'dark' ? 'text-[#B8D8D0]/80' : 'text-[#2A3B35]/80'
         } mb-2`}>
           {label}
         </label>
@@ -42,13 +45,16 @@ export const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputPro
         rows={as === 'textarea' ? rows : undefined}
         {...props}
       />
-      {(error || hint) && (
-        <p className={`mt-2 text-sm font-light ${
-          error ? 'text-red-400' : theme === 'dark' ? 'text-[#B8D8D0]/60' : 'text-[#2A3B35]/60'
-        }`}>
-          {error || hint}
-        </p>
-      )}
+      {/* Reserve space for error message to prevent layout shift */}
+      <div className="h-6 mt-2">
+        {(error || hint) && (
+          <p className={`text-sm font-light transition-opacity duration-200 ${
+            error ? 'text-red-400' : effectiveTheme === 'dark' ? 'text-[#B8D8D0]/60' : 'text-[#2A3B35]/60'
+          }`}>
+            {error || hint}
+          </p>
+        )}
+      </div>
     </div>
   );
 });

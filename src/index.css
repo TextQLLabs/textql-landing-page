@@ -2,60 +2,95 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Critical rendering styles - Default to light mode */
+/* ============================================================================
+   THEME SYSTEM SETUP
+   ============================================================================ */
+
+/* CSS Custom Properties for Theme System */
 :root {
   color-scheme: light;
-  background: #F7F7F7;
   overscroll-behavior: none;
-  --header-height: auto; /* Dynamically calculated by grid */
+  --header-height: auto;
+  --navbar-height: 80px;
+  
+  /* Light Theme Colors */
+  --theme-bg-primary: #F7F7F7;
+  --theme-bg-secondary: #FFFFFF;
+  --theme-text-primary: #2A3B35;
+  --theme-text-secondary: #4A665C;
+  --theme-accent: #2A3B35;
+  --theme-accent-secondary: #4A665C;
+  --theme-navbar-bg: rgba(247, 247, 247, 0.9);
+  --theme-navbar-text: #2A3B35;
+  --theme-navbar-hover: #4A665C;
+  
+  /* Dark Theme Colors (will be overridden) */
+  --theme-bg-dark: #0F1712;
+  --theme-bg-dark-secondary: #000000;
+  --theme-text-dark: #FFFFFF;
+  --theme-text-dark-secondary: #B8D8D0;
+  --theme-accent-dark: #B8D8D0;
+  --theme-accent-dark-secondary: #729E8C;
+  --theme-navbar-bg-dark: rgba(0, 0, 0, 0.9);
+  --theme-navbar-text-dark: #FFFFFF;
+  --theme-navbar-hover-dark: #B8D8D0;
+  
+  /* Transition Settings */
+  --theme-transition: all 0.2s ease-in-out;
 }
 
-/* Apply hero-light-mode class immediately for SSR/initial load */
-body {
-  /* This will be the default until React loads */
-}
-
-html {
-  background: #F7F7F7;
+/* Critical: Unified background for initial load - Prevent FOUC */
+html, body, #root {
+  background: var(--theme-bg-primary) !important;
   min-height: 100vh;
   overscroll-behavior: none;
+  transition: var(--theme-transition);
 }
 
+/* Critical: Prevent FOUC during initial load */
 body {
   margin: 0;
   padding: 0;
-  background: #F7F7F7 !important;
-  min-height: 100vh;
   display: block !important;
-  overscroll-behavior: none;
+  color: var(--theme-text-primary);
+  transition: var(--theme-transition);
 }
 
+/* Critical: Prevent FOUC for React root */
 #root {
-  min-height: 100vh;
   opacity: 1 !important;
   visibility: visible !important;
-  background: #F7F7F7 !important;
 }
 
-/* Ensure no black flashes during page load */
-html::before,
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #F7F7F7;
-  z-index: -1;
+/* ============================================================================
+   THEME SWITCHING LOGIC
+   ============================================================================ */
+
+/* Dark Theme Override */
+body:not(.global-light-mode) {
+  --theme-bg-primary: var(--theme-bg-dark);
+  --theme-bg-secondary: var(--theme-bg-dark-secondary);
+  --theme-text-primary: var(--theme-text-dark);
+  --theme-text-secondary: var(--theme-text-dark-secondary);
+  --theme-accent: var(--theme-accent-dark);
+  --theme-accent-secondary: var(--theme-accent-dark-secondary);
+  --theme-navbar-bg: var(--theme-navbar-bg-dark);
+  --theme-navbar-text: var(--theme-navbar-text-dark);
+  --theme-navbar-hover: var(--theme-navbar-hover-dark);
 }
 
-/* Minimal initial styling for fast load */
-html, body, #root {
-  background: #F7F7F7 !important;
+/* Update background colors to use CSS variables */
+body.global-light-mode,
+body.global-light-mode #root {
+  background: var(--theme-bg-primary);
+  color: var(--theme-text-primary);
 }
 
-/* Clean up - no longer needed since hero-light-mode is applied from HTML */
+body:not(.global-light-mode),
+body:not(.global-light-mode) #root {
+  background: var(--theme-bg-primary);
+  color: var(--theme-text-primary);
+}
 
 /* Page transition animation */
 .page-transition-enter {
@@ -199,7 +234,7 @@ html, body, #root {
 }
 
 :root {
-  --header-offset: 60px;
+  --header-offset: 48px;
 }
 
 /* Safe viewport height that excludes header space */
@@ -209,6 +244,19 @@ html, body, #root {
 
 .h-safe-screen {
   height: calc(100vh - var(--header-offset, 0px));
+}
+
+/* Navbar spacing utilities */
+.navbar-offset {
+  padding-top: var(--navbar-height, 80px);
+}
+
+.content-below-navbar {
+  margin-top: var(--navbar-height, 80px);
+}
+
+.min-h-below-navbar {
+  min-height: calc(100vh - var(--navbar-height, 80px));
 }
 
 /* Flex utilities for content areas */
@@ -224,208 +272,370 @@ html, body, #root {
   flex-direction: column;
 }
 
-/* Light mode navbar - only when hero is in light mode */
-body.hero-light-mode nav {
-  background: rgba(247, 247, 247, 0.9) !important;
-  backdrop-filter: blur(12px) !important;
+/* ============================================================================
+   NAVBAR THEME SYSTEM
+   ============================================================================ */
+
+/* Unified navbar styling using CSS variables */
+nav {
+  background: var(--theme-navbar-bg);
+  backdrop-filter: blur(12px);
+  transition: var(--theme-transition);
 }
 
-body.hero-light-mode nav *:not(svg):not(img),
-body.hero-light-mode nav span,
-body.hero-light-mode nav a,
-body.hero-light-mode nav button {
-  color: #2A3B35 !important;
+nav a,
+nav .nav-text,
+nav .nav-link,
+nav .nav-button {
+  color: var(--theme-navbar-text);
+  transition: var(--theme-transition);
 }
 
-body.hero-light-mode nav a:hover,
-body.hero-light-mode nav button:hover {
-  color: #4A665C !important;
+
+/* Apply navbar text color only to nav-specific buttons */
+nav .nav-button {
+  color: var(--theme-navbar-text);
+  transition: var(--theme-transition);
 }
 
-/* Style navbar logo in light mode */
-body.hero-light-mode nav svg,
-body.hero-light-mode nav img {
-  filter: brightness(0) saturate(100%) invert(23%) sepia(18%) saturate(1069%) hue-rotate(127deg) brightness(92%) contrast(95%) !important;
+nav a:hover,
+nav .nav-button:hover {
+  color: var(--theme-navbar-hover);
 }
 
-/* Style logo carousel in light mode - dark forest green - hero only */
-.hero-light-mode .logo-carousel svg,
-.hero-light-mode .logo-carousel img {
-  filter: brightness(0) saturate(100%) invert(23%) sepia(18%) saturate(1069%) hue-rotate(127deg) brightness(100%) contrast(110%) !important;
-  opacity: 1 !important;
+/* Light mode navbar logo styling */
+body.global-light-mode nav svg,
+body.global-light-mode nav img {
+  filter: brightness(0) saturate(100%) invert(23%) sepia(18%) saturate(1069%) hue-rotate(127deg) brightness(92%) contrast(95%);
+  transition: var(--theme-transition);
 }
 
-/* Light mode navbar dropdown styling */
-body.hero-light-mode .bg-black {
-  background: white !important;
-  border-color: rgba(42, 59, 53, 0.2) !important;
+/* Dark mode navbar logo styling */
+body:not(.global-light-mode) nav svg,
+body:not(.global-light-mode) nav img {
+  filter: none;
+  transition: var(--theme-transition);
 }
 
-body.hero-light-mode .text-\[#B8D8D0\] {
-  color: #2A3B35 !important;
+/* ============================================================================
+   LOGO CAROUSEL THEME SYSTEM
+   ============================================================================ */
+
+/* Light mode logo carousel styling */
+.global-light-mode .logo-carousel svg,
+.global-light-mode .logo-carousel img {
+  filter: brightness(0) saturate(100%) invert(23%) sepia(18%) saturate(1069%) hue-rotate(127deg) brightness(100%) contrast(110%);
+  opacity: 1;
+  transition: var(--theme-transition);
 }
 
-body.hero-light-mode .text-\[#729E8C\] {
-  color: #4A665C !important;
+/* Dark mode logo carousel styling */
+body:not(.global-light-mode) .logo-carousel svg,
+body:not(.global-light-mode) .logo-carousel img {
+  filter: none;
+  opacity: 1;
+  transition: var(--theme-transition);
 }
 
-body.hero-light-mode .group-hover\:text-white:hover {
-  color: #2A3B35 !important;
+/* ============================================================================
+   NAVBAR DROPDOWN THEME SYSTEM
+   ============================================================================ */
+
+/* Light mode dropdown styling */
+body.global-light-mode .bg-black {
+  background: var(--theme-bg-secondary);
+  border-color: rgba(42, 59, 53, 0.2);
+  transition: var(--theme-transition);
 }
 
-body.hero-light-mode .hover\:bg-\[#B8D8D0\]\/10:hover {
-  background-color: rgba(42, 59, 53, 0.1) !important;
+body.global-light-mode .text-\[#B8D8D0\] {
+  color: var(--theme-text-primary);
 }
 
-body.hero-light-mode .bg-\[#B8D8D0\] {
-  background-color: #2A3B35 !important;
+body.global-light-mode .text-\[#729E8C\] {
+  color: var(--theme-text-secondary);
 }
 
-/* Light mode global background overrides */
-body.hero-light-mode {
-  background: #F7F7F7 !important;
+body.global-light-mode .group-hover\:text-white:hover {
+  color: var(--theme-text-primary);
 }
 
-body.hero-light-mode #root {
-  background: #F7F7F7 !important;
+body.global-light-mode .hover\:bg-\[#B8D8D0\]\/10:hover {
+  background-color: rgba(42, 59, 53, 0.1);
 }
 
-/* Dark mode global background overrides */
-body:not(.hero-light-mode) {
-  background: #0F1712 !important;
+body.global-light-mode .bg-\[#B8D8D0\] {
+  background-color: var(--theme-accent);
 }
 
-body:not(.hero-light-mode) #root {
-  background: #0F1712 !important;
+/* Dark mode dropdown styling */
+body:not(.global-light-mode) .bg-black {
+  background: var(--theme-bg-dark-secondary);
+  border-color: rgba(184, 216, 208, 0.2);
+  transition: var(--theme-transition);
 }
 
-/* Force specific sections to stay dark even in light mode */
+body:not(.global-light-mode) .text-\[#B8D8D0\] {
+  color: var(--theme-text-dark-secondary);
+}
+
+body:not(.global-light-mode) .text-\[#729E8C\] {
+  color: var(--theme-accent-dark-secondary);
+}
+
+body:not(.global-light-mode) .group-hover\:text-white:hover {
+  color: var(--theme-text-dark);
+}
+
+body:not(.global-light-mode) .hover\:bg-\[#B8D8D0\]\/10:hover {
+  background-color: rgba(184, 216, 208, 0.1);
+}
+
+body:not(.global-light-mode) .bg-\[#B8D8D0\] {
+  background-color: var(--theme-accent-dark);
+}
+
+/* Theme-specific background overrides moved to theme switching section above */
+
+/* ============================================================================
+   DARK SECTIONS SYSTEM
+   ============================================================================ */
+
+/* Dark section base styling - always dark background regardless of theme */
+.dark-section {
+  background: var(--theme-bg-dark);
+  color: var(--theme-text-dark);
+  transition: var(--theme-transition);
+}
+
+/* Apply dark section styling to specific sections */
 .ontology-section,
 .security-section,
 .cta-section,
 .footer-section {
-  background: #0F1712 !important;
-  color: white !important;
+  background: var(--theme-bg-dark);
+  color: var(--theme-text-dark);
+  transition: var(--theme-transition);
 }
 
-.ontology-section *,
-.security-section *,
-.cta-section *,
-.footer-section * {
-  color: inherit !important;
+/* Light mode specific overrides for dark sections */
+body.global-light-mode .dark-section,
+body.global-light-mode .ontology-section,
+body.global-light-mode .security-section,
+body.global-light-mode .cta-section,
+body.global-light-mode .footer-section {
+  background: var(--theme-bg-dark-secondary);
+  color: var(--theme-text-dark);
 }
 
-/* Ensure footer and CTA stay dark with proper background override */
-body.hero-light-mode .footer-section {
-  background: #000000 !important;
+/* Dark section text color inheritance */
+.dark-section,
+.dark-section * {
+  color: inherit;
+  transition: var(--theme-transition);
 }
 
-body.hero-light-mode .footer-section * {
-  color: white !important;
+/* Explicit text color for dark sections in all theme modes */
+.dark-section .dark-text,
+.dark-section h1,
+.dark-section h2,
+.dark-section h3,
+.dark-section h4,
+.dark-section h5,
+.dark-section h6,
+.dark-section p,
+.dark-section li,
+.dark-section .text-content {
+  color: var(--theme-text-dark);
 }
 
-body.hero-light-mode .cta-section {
-  background: #000000 !important;
+/* Links in dark sections */
+.dark-section a:not(.btn):not(.button) {
+  color: var(--theme-text-dark);
+  opacity: 0.9;
+  transition: opacity 0.2s;
 }
 
-body.hero-light-mode .cta-section * {
-  color: white !important;
+.dark-section a:not(.btn):not(.button):hover {
+  opacity: 1;
 }
 
-/* Ensure security section stays dark */
-body.hero-light-mode .security-section {
-  background: #000000 !important;
+/* Ensure specific sections maintain dark theme text */
+.ontology-section,
+.security-section,
+.cta-section,
+.footer-section {
+  color: var(--theme-text-dark);
 }
 
-body.hero-light-mode .security-section * {
-  color: white !important;
+/* Child elements inherit text color */
+.ontology-section *:not(.btn):not(.button),
+.security-section *:not(.btn):not(.button),
+.cta-section *:not(.btn):not(.button),
+.footer-section *:not(.btn):not(.button) {
+  color: inherit;
 }
 
-/* Primary buttons should have black text and icons even in dark sections */
-body.hero-light-mode .security-section button[class*="primary"] span,
-body.hero-light-mode .security-section .group span,
-.security-section button[class*="primary"] span,
-.security-section .group span {
-  color: black !important;
+/* ============================================================================
+   UNIFIED BUTTON STYLING SYSTEM
+   ============================================================================
+   This section consolidates all primary button styling across all sections.
+   
+   Design Rules:
+   - All primary button text is black for readability on light button backgrounds
+   - All primary button icons are black by default
+   - Security section is an exception: icons are mint color (#B8D8D0) for design consistency
+   - Works in both light and dark mode
+   
+   Selector Strategy:
+   - Uses data-variant="primary" attribute selector for reliability
+   - Button component automatically adds data-variant attribute based on variant prop
+   - Also targets .group class as a fallback for button containers
+   
+   Sections covered: CTA, Security, Ontology, Enterprise
+   ============================================================================ */
+
+/* Base primary button containers (simplified) */
+.cta-section button[data-variant="primary"],
+.cta-section .group,
+.security-section button[data-variant="primary"],
+.security-section .group,
+.ontology-section button[data-variant="primary"],
+.ontology-section .group,
+.enterprise-section button[data-variant="primary"],
+.enterprise-section .group {
+  /* Base container - specific styling applied in rules below */
+  transition: var(--theme-transition);
 }
 
-body.hero-light-mode .security-section button[class*="primary"] svg,
-body.hero-light-mode .security-section .group svg,
-.security-section button[class*="primary"] svg,
-.security-section .group svg {
-  color: black !important;
+/* PRIMARY BUTTON TEXT - Unified black color for all sections */
+/* Using higher specificity without !important */
+.cta-section button[data-variant="primary"] > span,
+.cta-section button.group > span,
+.security-section button[data-variant="primary"] > span,
+.security-section button.group > span,
+.ontology-section button[data-variant="primary"] > span,
+.ontology-section button.group > span,
+.enterprise-section button[data-variant="primary"] > span,
+.enterprise-section button.group > span {
+  color: black;
+  transition: var(--theme-transition);
 }
 
-/* Primary buttons in ontology section should have black text */
-.ontology-section button[class*="primary"],
-.ontology-section button[class*="primary"] span,
-.ontology-section .group span {
-  color: black !important;
+/* Ensure text color persists in nested spans */
+.cta-section button[data-variant="primary"] span span,
+.security-section button[data-variant="primary"] span span,
+.ontology-section button[data-variant="primary"] span span,
+.enterprise-section button[data-variant="primary"] span span {
+  color: inherit;
 }
 
-.ontology-section button[class*="primary"] svg,
-.ontology-section .group svg {
-  color: black !important;
+/* PRIMARY BUTTON ICONS - Unified black color for all sections except security */
+/* Using attribute selectors and child combinators for specificity */
+.cta-section button[data-variant="primary"] svg,
+.cta-section button.group svg,
+.ontology-section button[data-variant="primary"] svg,
+.ontology-section button.group svg,
+.enterprise-section button[data-variant="primary"] svg,
+.enterprise-section button.group svg {
+  color: black;
+  fill: black;
+  transition: var(--theme-transition);
 }
 
-/* Primary buttons in enterprise section should have black text and icons */
-.enterprise-section button[class*="primary"],
-.enterprise-section button[class*="primary"] span,
-.enterprise-section .group span {
-  color: black !important;
+/* Additional specificity for enterprise section buttons */
+.enterprise-section button:not([data-variant="secondary"]):not([data-variant="ghost"]) svg,
+.enterprise-section a > button:not([data-variant="secondary"]):not([data-variant="ghost"]) svg,
+.enterprise-section button.group svg[class*="w-5"],
+.enterprise-section button.group svg[class*="w-4"] {
+  color: black;
+  fill: black;
 }
 
-.enterprise-section button[class*="primary"] svg,
-.enterprise-section .group svg,
-.enterprise-section button svg,
-.enterprise-section a button svg,
-.enterprise-section .group .w-5 {
-  color: black !important;
-  fill: black !important;
+
+/* Removed duplicate security section button rules - now handled by unified system above */
+
+/* Removed duplicate ontology section button rules - now handled by unified system above */
+
+/* Removed duplicate enterprise section button rules - now handled by unified system above */
+
+/* SECURITY SECTION EXCEPTION - Primary button icons should be mint color */
+/* Using cascading order and specificity instead of !important */
+.security-section button[data-variant="primary"] svg,
+.security-section button.group svg {
+  color: var(--theme-accent-dark);
+  fill: var(--theme-accent-dark);
+  transition: var(--theme-transition);
 }
 
-/* Security section - primary button arrows should be mint color */
-.security-section button[class*="primary"] svg,
-.security-section .group svg,
-.security-section button svg,
-.security-section a button svg,
-.security-section .group .w-5,
-.security-section .w-4,
-.security-section .w-5 {
-  color: #B8D8D0 !important;
-  fill: #B8D8D0 !important;
+/* More specific rules for security section SVG icons */
+.security-section button:not([data-variant="secondary"]):not([data-variant="ghost"]) svg,
+.security-section a > button:not([data-variant="secondary"]):not([data-variant="ghost"]) svg,
+.security-section button svg[class*="w-4"],
+.security-section button svg[class*="w-5"],
+.security-section .group svg[class*="w-4"],
+.security-section .group svg[class*="w-5"] {
+  color: var(--theme-accent-dark);
+  fill: var(--theme-accent-dark);
 }
 
-/* Fix dropdown featured images in light mode */
-body.hero-light-mode nav .bg-\[#B8D8D0\]\/5 {
-  background-color: rgba(247, 247, 247, 0.8) !important;
+/* Ensure security section rule takes precedence over general rules */
+.security-section button[data-variant="primary"] svg:not([class*="hidden"]),
+.security-section button.group svg:not([class*="hidden"]) {
+  color: var(--theme-accent-dark);
+  fill: var(--theme-accent-dark);
 }
 
-body.hero-light-mode nav img {
-  opacity: 1 !important;
-  filter: none !important;
+/* ============================================================================
+   END UNIFIED BUTTON STYLING SYSTEM
+   ============================================================================ */
+
+/* ============================================================================
+   NAVBAR FEATURED IMAGES THEME SYSTEM
+   ============================================================================ */
+
+/* Light mode navbar featured images */
+body.global-light-mode nav .bg-\[#B8D8D0\]\/5 {
+  background-color: rgba(247, 247, 247, 0.8);
+  transition: var(--theme-transition);
 }
 
-/* MCP server logos in navbar should adapt to theme */
-body.hero-light-mode nav .bg-\[#B8D8D0\] {
-  background-color: #2A3B35 !important;
+body.global-light-mode nav img {
+  opacity: 1;
+  filter: none;
+  transition: var(--theme-transition);
+}
+
+body.global-light-mode nav .bg-\[#B8D8D0\] {
+  background-color: var(--theme-accent);
+  transition: var(--theme-transition);
+}
+
+/* Dark mode navbar featured images */
+body:not(.global-light-mode) nav .bg-\[#B8D8D0\]\/5 {
+  background-color: rgba(184, 216, 208, 0.05);
+  transition: var(--theme-transition);
+}
+
+body:not(.global-light-mode) nav img {
+  opacity: 1;
+  filter: none;
+  transition: var(--theme-transition);
+}
+
+body:not(.global-light-mode) nav .bg-\[#B8D8D0\] {
+  background-color: var(--theme-accent-dark);
+  transition: var(--theme-transition);
 }
 
 /* Override any nested backgrounds in ontology section */
 .ontology-section div,
 .ontology-section section,
-.ontology-section > * {
-  background: transparent !important;
-}
-
-/* Ensure ontology section stays fully dark */
-body.hero-light-mode .ontology-section {
-  background: #000000 !important;
-}
-
-body.hero-light-mode .ontology-section div,
-body.hero-light-mode .ontology-section section,
-body.hero-light-mode .ontology-section > * {
-  background: transparent !important;
+.ontology-section header,
+.ontology-section article,
+.ontology-section aside,
+.ontology-section main,
+.ontology-section footer {
+  background: transparent;
 }
 

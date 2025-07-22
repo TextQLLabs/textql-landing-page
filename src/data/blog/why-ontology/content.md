@@ -1,5 +1,10 @@
 # Why We Use an Ontology for Text to SQL
 
+## Table of Contents
+- [The Problem: Data is Complex](#the-problem-data-is-complex)
+- [The Solution: An Ontology Architecture](#the-solution-an-ontology-architecture)
+- [What Inspired Us](#what-inspired-us)
+
 We spent our first 12 months learning the hard way that LLM generated text-to-SQL doesn't work.
 
 Today, we still talk to dozens of Fortune 500 companies who are attempting this and are burning millions of dollars fine tuning and building custom models. So I wanted to take a minute to share why we no longer use this approach and the better approach to solve for it.

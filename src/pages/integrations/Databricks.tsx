@@ -2,6 +2,7 @@ import React from 'react';
 import { SEO } from '../../components/SEO';
 import StaggeredScreenshots from '../../components/StaggeredScreenshots';
 import { Text } from '../../components/ui';
+import { Section } from '../../components/ui/Section';
 import { Testimonial } from '../../components/Testimonial';
 import HeroSection from '../../components/integrations/IntegrationHeroSection';
 import FaqSection from '../../components/integrations/FaqSection';
@@ -10,8 +11,11 @@ import { FeatureSection } from '../../components/FeatureSection';
 import { Plug, RefreshCw, Cpu } from 'lucide-react';
 import { JoinsChart } from '../../components/page-sections/agents/joins/JoinsChart';
 import TabsDisplay, { TabContentType } from '../../components/TabsDisplay';
+import { useComponentTheme } from '../../hooks/useComponentTheme';
 
 export default function DatabricksMcpIntegration() {
+  const theme = useComponentTheme();
+  
   const screenshots = [
     {
       src: "/images/integrations/databricks/1-large.png",
@@ -218,13 +222,11 @@ export default function DatabricksMcpIntegration() {
         canonical="https://textql.com/integrations/databricks-mcp/"
         ogImage="https://textql.com/social-preview.png"
       />
-      <section>
-        <HeroSection 
-          headline="Powerful AI Research Within Your Databricks Environment"
-          description="TextQL's MCP integration connects intelligent analysis with your Databricks lakehouse, enabling our AI agents to work directly with all of your datasets and ML workflows."
-          videoUrl="/images/integrations/databricks/databricks-visual.m4v"
-        />
-      </section>
+      <HeroSection 
+        headline="Powerful AI Research Within Your Databricks Environment"
+        description="TextQL's MCP integration connects intelligent analysis with your Databricks lakehouse, enabling our AI agents to work directly with all of your datasets and ML workflows."
+        videoUrl="/images/integrations/databricks/databricks-visual.m4v"
+      />
 
 
 <FeatureSection
@@ -250,10 +252,15 @@ export default function DatabricksMcpIntegration() {
       />
 
 
-      <section className="relative overflow-hidden bg-black">
+      <Section 
+        variant="wide"
+        padding="none"
+        background="black"
+        overflow="hidden"
+        className="relative"
+      >
         {/* Content */}
         <div className="relative z-10 px-4">
-          <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-8 items-center">
               <div className="relative">
                 <div className="relative max-w-full">
@@ -281,9 +288,8 @@ export default function DatabricksMcpIntegration() {
                 </div>
               </div>
             </div>
-          </div>
         </div>
-      </section>   
+      </Section>   
       
 
 <TabsDisplay
@@ -299,7 +305,7 @@ export default function DatabricksMcpIntegration() {
       />
         
       <CTA 
-        theme="dark"
+        theme={theme}
         showWave={true}
         variant="wide"
         heading="Ready to learn more?"

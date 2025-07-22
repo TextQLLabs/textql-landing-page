@@ -1,11 +1,14 @@
 import { industries } from '../../../data/industries';
 import type { Solution } from '../../../data/solutions/types';
+import { useComponentTheme } from '../../../hooks/useComponentTheme';
+import { themeGradientOverlay } from '../../../utils/theme-utils';
 
 interface SolutionCardProps {
   solution: Solution;
 }
 
 export function SolutionCard({ solution }: SolutionCardProps) {
+  const theme = useComponentTheme();
   const industry = industries.find(i => i.id === solution.industryId);
 
   return (
@@ -16,7 +19,7 @@ export function SolutionCard({ solution }: SolutionCardProps) {
       {/* Image Container with Techno Overlay - Fixed Height */}
       <div className="relative h-[220px] overflow-hidden">
         {/* Dark Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10" />
+        <div className={`absolute inset-0 bg-gradient-to-t ${themeGradientOverlay(theme)} to-transparent z-10`} />
         
         {/* Geometric Overlay */}
         <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_40%,rgba(42,59,53,0.1)_40%,rgba(42,59,53,0.1)_60%,transparent_60%)] z-20" />

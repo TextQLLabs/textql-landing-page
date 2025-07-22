@@ -58,7 +58,7 @@ export function AgentFeature1() {
         >
           <Button 
             variant="primary"
-            size="lg"
+            size="md"
             className="group"
           >
             Read more about how we built Ana

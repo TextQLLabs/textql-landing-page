@@ -2,8 +2,11 @@ import { SEO } from '../../components/SEO';
 import JobPostingTemplate from '../../components/JobPostingTemplate';
 import { jobs } from '../../data/JobData';
 import { useParams, Navigate } from 'react-router-dom';
+import { useComponentTheme } from '../../hooks/useComponentTheme';
+import { themeBackgroundSecondary } from '../../utils/theme-utils';
 
 export default function JobPostingPage() {
+  const theme = useComponentTheme();
   // Get job ID from URL parameters
   const { jobId } = useParams<{ jobId: string }>();
   
@@ -16,7 +19,7 @@ export default function JobPostingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black mt-16">
+    <div className={`min-h-screen ${themeBackgroundSecondary(theme)} mt-16`}>
       <SEO 
         title={`${job.title} | TextQL`}
         description={`Join TextQL as ${job.title} and help build the future of data analysis.`}

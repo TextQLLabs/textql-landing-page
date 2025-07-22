@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface TextProps extends React.HTMLAttributes<HTMLParagraphElement> {
   variant?: 'body' | 'subheader' | 'header' | 'metrics';
   color?: 'primary' | 'secondary' | 'muted';

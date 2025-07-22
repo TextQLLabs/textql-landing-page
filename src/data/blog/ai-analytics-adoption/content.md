@@ -1,5 +1,14 @@
 # Level 5 Agentic Analytics
 
+## Table of Contents
+- [The five levels of analytical AI adoption](#the-five-levels-of-analytical-ai-adoption)
+- [Why everyone is stuck at Level 2](#why-everyone-is-stuck-at-level-2)
+- [The economics of moving up](#the-economics-of-moving-up)
+- [The interface problem](#the-interface-problem)
+- [What this means for your team](#what-this-means-for-your-team)
+- [The uncomfortable truth about Level 4](#the-uncomfortable-truth-about-level-4)
+- [Getting unstuck](#getting-unstuck)
+
 When Waymo's robotaxis started operating without safety drivers in Phoenix, they represented Level 4 autonomous driving—vehicles that can handle the entire driving task in specific conditions without human intervention. But the automotive industry has long recognized that the ultimate goal is Level 5: full automation that works anywhere, anytime, without geographic or weather restrictions.
 
 We're seeing the same progression in analytics AI, but most data teams don't realize they're stuck in the equivalent of Level 2 "partial automation"—constantly hands-on-wheel, ready to take control when the AI inevitably gets confused.

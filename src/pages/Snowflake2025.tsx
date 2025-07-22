@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ArrowRight, MapPin } from 'lucide-react';
 import { Button, Text } from '../components/ui';
+import { Section } from '../components/ui/Section';
 import { WaveBackground } from '../components/animations';
 import { SEO } from '../components/SEO';
 import { DEMO_CONFIG } from '../utils/constants';

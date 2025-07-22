@@ -1,5 +1,18 @@
 # What If The Model Isn't Good Enough?
 
+## Table of Contents
+- [SQL-to-Text on Query History](#sql-to-text-on-query-history)
+- [100 Domain-Specific Pre-Trained Queries](#100-domain-specific-pre-trained-queries)
+- [Power Laws](#power-laws)
+- [Semantic Layers & DBT](#semantic-layers--dbt)
+- [Data Dictionary Generation and Alation | Collibra](#data-dictionary-generation-and-alation--collibra)
+- [Fine Tuning on APIs](#fine-tuning-on-apis)
+- [Regex Error Catching](#regex-error-catching)
+- [Unspecified Way of Adding More Context](#unspecified-way-of-adding-more-context)
+- [If Nothing Else Works?](#if-nothing-else-works)
+- [And if That Still Doesn't Work?](#and-if-that-still-doesnt-work)
+- [You're Just Going to Say This Recursively Huh?](#youre-just-going-to-say-this-recursively-huh)
+
 TL;DR: Give more context, let AI get better, repeat until it's good enough or money and willpower runs out.
 
 So you've heard the pitch; "We're going to generate SQL for you using the schema in your warehouse/DB," and you think to yourself... How are we going to infer what prod_stripe_reports_<productname3>_q4_demo_final in the warehouse means or what sandbox_id ends up joining against? How are we going to get the context to begin to understand this without spending so much time crawling and onboarding that we're basically doing manual labor for every incremental customer. Good question…

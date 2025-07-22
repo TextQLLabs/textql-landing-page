@@ -9,6 +9,7 @@ interface MobileCarouselProps {
   className?: string;
   itemClassName?: string;
   gradientColor?: string;
+  theme?: 'light' | 'dark';
 }
 
 export function MobileCarousel({
@@ -16,7 +17,8 @@ export function MobileCarousel({
   speed = 30,
   className = '',
   itemClassName = '',
-  gradientColor = 'black'
+  gradientColor = 'black',
+  theme = 'dark'
 }: MobileCarouselProps) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const animationIdRef = useRef(`mobile-scroll-${Math.floor(Math.random() * 1000000)}`);
@@ -75,7 +77,7 @@ export function MobileCarousel({
               src={item.src}
               alt={item.alt}
               className={`h-6 w-auto max-w-20 object-contain opacity-60 grayscale flex-shrink-0 ${itemClassName}`}
-              style={{ filter: 'brightness(0) invert(1)' }}
+              style={theme === 'light' ? { filter: 'brightness(0) saturate(100%) invert(23%) sepia(18%) saturate(1069%) hue-rotate(127deg) brightness(100%) contrast(110%)' } : { filter: 'brightness(0) invert(1)' }}
               loading="lazy"
             />
           ))}

@@ -24,7 +24,7 @@ export const getBaseStyles = (error?: string, theme: 'dark' | 'light' = 'dark') 
     border ${colors[theme].border}
     ${colors[theme].text} text-md font-light
     ${colors[theme].placeholder}
-    px-5 py-5
+    px-4 py-4
     focus:outline-none focus:ring-2 ${colors[theme].focus}
     backdrop-blur-md
     transition-colors

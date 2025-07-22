@@ -1,5 +1,5 @@
 import { Calculator, Database, Brain, PieChart, Cpu } from 'lucide-react';
-import { Text } from '../../ui';
+import { Text, Section } from '../../ui';
 
 const categories = [
   {
@@ -36,8 +36,11 @@ const categories = [
 
 export function PricingFundamentals() {
   return (
-    <section className="bg-[#0A1F1C]">
-      <div className="max-w-7xl mx-auto px-6 py-24">
+    <Section
+      variant="wide"
+      padding="lg"
+      className="bg-[#0A1F1C]"
+    >
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-4xl text-[#B8D8D0] mb-6">
@@ -96,7 +99,6 @@ export function PricingFundamentals() {
             Contact us for a detailed breakdown and custom pricing for your specific needs.
           </Text>
         </div>
-      </div>
-    </section>
+    </Section>
   );
 }

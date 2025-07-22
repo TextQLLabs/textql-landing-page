@@ -19,42 +19,49 @@ export const IntegrationCard: React.FC<IntegrationCardProps> = ({
   href,
   isComingSoon = false
 }) => {
-  // Debug logging
-  console.log(`${name}: href=${href}, isComingSoon=${isComingSoon}`);
-  
   const CardContent = () => (
-    <div className={`bg-white shadow-sm p-6 h-full border border-[#2A3B35]/20 flex transition-all duration-200 ${
-      isComingSoon ? 'opacity-60 grayscale' : 'hover:shadow-md'
+    <div className={`bg-white rounded-lg shadow-sm border border-gray-200 p-6 h-full transition-all duration-200 ${
+      isComingSoon 
+        ? 'opacity-60 cursor-not-allowed' 
+        : href 
+          ? 'hover:shadow-md hover:border-gray-300 cursor-pointer' 
+          : ''
     }`}>
-      {/* Left Column - Logo */}
-      <div className="w-20 h-20 flex items-center justify-center flex-shrink-0 mr-4">
+      {/* Logo */}
+      <div className="h-16 flex items-center justify-center mb-4">
         <img
           src={logoSrc}
           alt={`${name} logo`}
-          className="w-16 h-16 object-contain"
+          className="h-12 w-auto object-contain"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src = '/images/integrations/placeholder.png';
+          }}
         />
       </div>
       
-      {/* Right Column - Title and Category */}
-      <div className="flex-1 flex flex-col min-w-0 relative">
-        {/* Title positioned in center but gravitating down */}
-        <div className="flex-1 flex items-center justify-between pb-10">
-          <h3 className="text-xl font-medium text-[#0A1F1C] leading-tight flex-1 min-w-0 break-words transform translate-y-2">{name}</h3>
-          <div className="flex-shrink-0">
-            {isComingSoon && (
-              <span className="text-xs font-medium bg-gray-200 text-gray-600 py-1 px-2 whitespace-nowrap">
-                Coming Soon
-              </span>
-            )}
-            {!isComingSoon && false && href && (
-              <ArrowUpRight className="w-5 h-5 text-[#0A1F1C]/70 flex-shrink-0" />
-            )}
-          </div>
+      {/* Content */}
+      <div className="space-y-3">
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="text-lg font-semibold text-gray-900 line-clamp-1">
+            {name}
+          </h3>
+          {isComingSoon && (
+            <span className="text-xs font-medium bg-gray-100 text-gray-600 px-2 py-1 rounded-full whitespace-nowrap">
+              Coming Soon
+            </span>
+          )}
+          {!isComingSoon && href && (
+            <ArrowUpRight className="w-4 h-4 text-gray-400 flex-shrink-0 mt-0.5" />
+          )}
         </div>
         
-        {/* Bottom Row - Category Tag */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <span className="text-xs font-medium bg-[#B8D8D0]/30 text-[#0A1F1C]/70 py-1 px-2 inline-block max-w-full truncate">
+        <p className="text-sm text-gray-600 line-clamp-2">
+          {description}
+        </p>
+        
+        <div className="pt-2">
+          <span className="inline-block text-xs font-medium bg-blue-50 text-blue-700 px-2 py-1 rounded">
             {category}
           </span>
         </div>
@@ -65,29 +72,17 @@ export const IntegrationCard: React.FC<IntegrationCardProps> = ({
   if (href && !isComingSoon) {
     // Check if it's an external link
     const isExternalLink = href.startsWith('http');
-    console.log(`${name}: isExternalLink=${isExternalLink}`);
     
     if (isExternalLink) {
-      const handleClick = (e: React.MouseEvent) => {
-        e.preventDefault();
-        window.open(href, '_blank', 'noopener,noreferrer');
-      };
-      
       return (
-        <div 
-          onClick={handleClick}
-          className="block h-full cursor-pointer"
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              window.open(href, '_blank', 'noopener,noreferrer');
-            }
-          }}
+        <a 
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block h-full"
         >
           <CardContent />
-        </div>
+        </a>
       );
     } else {
       return (
@@ -99,4 +94,4 @@ export const IntegrationCard: React.FC<IntegrationCardProps> = ({
   }
 
   return <CardContent />;
-}; 
+};

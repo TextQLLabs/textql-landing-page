@@ -2,6 +2,7 @@ import React from 'react';
 import { SEO } from '../../components/SEO';
 import StaggeredScreenshots from '../../components/StaggeredScreenshots';
 import { Text } from '../../components/ui';
+import { Section } from '../../components/ui/Section';
 import { Testimonial } from '../../components/Testimonial';
 import HeroSection from '../../components/integrations/IntegrationHeroSection';
 import FaqSection from '../../components/integrations/FaqSection';
@@ -9,8 +10,11 @@ import { CTA } from '../../components/sections';
 import { FeatureSection } from '../../components/FeatureSection';
 import { Plug, RefreshCw, Cpu } from 'lucide-react';
 import TabsDisplay, { TabContentType } from '../../components/TabsDisplay';
+import { useComponentTheme } from '../../hooks/useComponentTheme';
 
 export default function TableauMcpIntegration() {
+  const theme = useComponentTheme();
+  
   const screenshots = [
     {
       src: "/images/integrations/tableau/1-large.png",
@@ -234,12 +238,11 @@ export default function TableauMcpIntegration() {
           canonical="https://textql.com/integrations/tableau-mcp/"
           ogImage="https://textql.com/social-preview.png"
         />
-        <section> <HeroSection 
+        <HeroSection 
           headline="Seamless AI Research Within Your Tableau Environment"
           description="TextQL's MCP integration bridges the gap between visualization and intelligent analysis, enabling our AI agents to work directly with your Tableau datasets."
           videoUrl="/videos/tableau-mcp.m4v"
         />
-      </section>
       {/* <Testimonial
           quote="This is the best Tableau AI on the market—by a massive margin."
           author="F100 CIO"
@@ -247,8 +250,12 @@ export default function TableauMcpIntegration() {
 
         
     
-      <section className="bg-transparent">
-        <div className="mx-auto max-w-7xl px-6 relative z-20">
+      <Section 
+        variant="wide"
+        padding="md"
+        background="transparent"
+        className="relative z-20"
+      >
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 items-center">
             <div className="lg:col-span-2 relative -translate-x-[10%] md:-translate-x-[5%] xl:-translate-x-[10%] pl-16">
               <StaggeredScreenshots screenshots={screenshots} />
@@ -267,8 +274,7 @@ export default function TableauMcpIntegration() {
               </div>
               </div>
             </div>
-          </div>
-      </section>   
+      </Section>   
       
 
       <FeatureSection
@@ -307,7 +313,7 @@ export default function TableauMcpIntegration() {
         />
         
         <CTA 
-          theme="dark"
+          theme={theme}
           showWave={false}
           variant="wide"
           heading="Ready to learn more?"

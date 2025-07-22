@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom';
 import { Text, Badge, Heading } from '../../ui';
 import type { BlogPost } from './types';
+import { useComponentTheme } from '../../../hooks/useComponentTheme';
+import { themeConditional } from '../../../utils/theme-utils';
 
 interface BlogCardProps {
   post: BlogPost;
 }
 
 export function BlogCard({ post }: BlogCardProps) {
+  const theme = useComponentTheme();
   // Determine image source based on useLocalImage flag
   const imageSource = post.useLocalImage 
     ? `/images/blog/${post.id}/header.png`
@@ -27,7 +30,7 @@ export function BlogCard({ post }: BlogCardProps) {
 
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-t from-[#2A3B35] via-[#2A3B35]/90 to-transparent z-10" />
+        <div className={`absolute inset-0 bg-gradient-to-t ${themeConditional(theme, 'from-[#2A3B35]/80 via-[#2A3B35]/60', 'from-black/80 via-black/60')} to-transparent z-10`} />
         <img
           src={imageSource}
           alt={post.title}

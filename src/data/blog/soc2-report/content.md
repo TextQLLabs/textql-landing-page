@@ -1,5 +1,10 @@
 # Announcing TextQL's SOC II Report
 
+## Table of Contents
+- [Unpacking the SOC 2 Type I Report](#unpacking-the-soc-2-type-i-report)
+- [What This Means for You](#what-this-means-for-you)
+- [Looking Ahead](#looking-ahead)
+
 Security Security Security
 
 TextQL, at it's heart, is a data platform. And whether you're using Ana to analyze patterns in sensitive patient medical records full of PHI or you're using our automations to schedule tweets about the most popular types of cheese in Belgium, we give a shit about making sure your data is private and secure.

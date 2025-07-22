@@ -9,9 +9,15 @@ import { INDUSTRIES } from '../components/InsightsFeed/constants';
 import { DemoRequestForm } from '../components/ui/DemoRequestForm/DemoRequestForm';
 import Button from '../components/ui/Button/Button';
 import { Text, Badge, Card } from '../components/ui';
-import { Sun, Moon, Grid3X3, Layout, FileText, Mail, Zap, Type, Square } from 'lucide-react';
+import { Sun, Moon, Grid3X3, Layout, FileText, Mail, Zap, Type, Square, MessageSquare, Smartphone, Navigation, Archive, Search } from 'lucide-react';
+import SlackBotPreview from '../components/ui/SlackBotPreview';
+import EmailBotPreview from '../components/ui/EmailBotPreview';
+import TextBotPreview from '../components/ui/TextBotPreview';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import { useGlobalTheme } from '../components/GlobalThemeProvider';
 
-type ComponentType = 'insights-feed' | 'insights-feed-static' | 'insight-cards' | 'insight-content' | 'demo-form' | 'buttons' | 'ui-components' | 'typography';
+type ComponentType = 'insights-feed' | 'insights-feed-static' | 'insight-cards' | 'insight-content' | 'demo-form' | 'buttons' | 'ui-components' | 'typography' | 'slack-bot-preview' | 'email-bot-preview' | 'text-bot-preview' | 'navbar' | 'footer';
 
 interface ComponentInfo {
   id: ComponentType;
@@ -68,14 +74,57 @@ const COMPONENTS: ComponentInfo[] = [
     name: 'Typography',
     description: 'Text components and typography variants',
     icon: Type
+  },
+  {
+    id: 'slack-bot-preview',
+    name: 'Slack Bot Preview',
+    description: 'TextQL Analytics bot integration preview with traditional Slack styling',
+    icon: MessageSquare
+  },
+  {
+    id: 'email-bot-preview',
+    name: 'Email Bot Preview',
+    description: 'TextQL Analytics email alerts preview with Gmail-style interface',
+    icon: Mail
+  },
+  {
+    id: 'text-bot-preview',
+    name: 'Text Bot Preview',
+    description: 'TextQL Analytics text notifications on mobile phone interface',
+    icon: Smartphone
+  },
+  {
+    id: 'navbar',
+    name: 'Navbar',
+    description: 'Navigation bar component with responsive design and theme support',
+    icon: Navigation
+  },
+  {
+    id: 'footer',
+    name: 'Footer',
+    description: 'Footer component with links, company info, and theme support',
+    icon: Archive
   }
 ];
 
 const Test: React.FC = () => {
-  const [selectedComponent, setSelectedComponent] = useState<ComponentType>('buttons');
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+  // Global theme controls
+  const { isLightMode, toggleTheme: toggleGlobalTheme } = useGlobalTheme();
+  
+  // Component testing controls
+  const [selectedComponent, setSelectedComponent] = useState<ComponentType>('slack-bot-preview');
   const [cardType, setCardType] = useState<'large' | 'minimal'>('minimal');
   const [enabledIndustries, setEnabledIndustries] = useState<Set<string>>(new Set(['retail', 'healthcare', 'manufacturing', 'finance']));
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  
+  // Theme always follows global
+  const theme = isLightMode ? 'light' : 'dark';
+    
+  // Filtered components based on search
+  const filteredComponents = COMPONENTS.filter(component =>
+    component.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    component.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
   
   // Get sample insights data for individual cards
   const { insights, expandedId, handleExpandToggle } = useInsightFeed(INDUSTRIES[0].id);
@@ -483,7 +532,7 @@ const Test: React.FC = () => {
             </div>
             
             {/* Demo Form Preview */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
               <div className={`border rounded-lg p-6 ${
                 theme === 'dark' 
                   ? 'border-[#1A1D21] bg-[#0F1114]' 
@@ -492,16 +541,17 @@ const Test: React.FC = () => {
                 <h3 className={`text-sm font-medium mb-4 ${
                   theme === 'dark' ? 'text-white' : 'text-[#2A3B35]'
                 }`}>
-                  Default Variant
+                  Small Container (280px)
                 </h3>
-                <DemoRequestForm 
-                  theme={theme}
-                  variant="default"
-                  onSubmit={async (email) => {
-                    console.log('Demo form submitted:', email);
-                    return { success: true };
-                  }}
-                />
+                <div className="w-[280px]">
+                  <DemoRequestForm 
+                    theme={theme}
+                    onSubmit={async (email) => {
+                      console.log('Demo form submitted:', email);
+                      return { success: true };
+                    }}
+                  />
+                </div>
               </div>
               
               <div className={`border rounded-lg p-6 ${
@@ -512,17 +562,58 @@ const Test: React.FC = () => {
                 <h3 className={`text-sm font-medium mb-4 ${
                   theme === 'dark' ? 'text-white' : 'text-[#2A3B35]'
                 }`}>
-                  Compact Variant
+                  Medium Container (384px)
                 </h3>
-                <DemoRequestForm 
-                  theme={theme}
-                  variant="compact"
-                  onSubmit={async (email) => {
-                    console.log('Demo form submitted:', email);
-                    return { success: true };
-                  }}
-                />
+                <div className="w-[384px]">
+                  <DemoRequestForm 
+                    theme={theme}
+                    onSubmit={async (email) => {
+                      console.log('Demo form submitted:', email);
+                      return { success: true };
+                    }}
+                  />
+                </div>
               </div>
+              
+              <div className={`border rounded-lg p-6 ${
+                theme === 'dark' 
+                  ? 'border-[#1A1D21] bg-[#0F1114]' 
+                  : 'border-gray-200 bg-white'
+              }`}>
+                <h3 className={`text-sm font-medium mb-4 ${
+                  theme === 'dark' ? 'text-white' : 'text-[#2A3B35]'
+                }`}>
+                  Large Container (512px)
+                </h3>
+                <div className="w-[512px]">
+                  <DemoRequestForm 
+                    theme={theme}
+                    onSubmit={async (email) => {
+                      console.log('Demo form submitted:', email);
+                      return { success: true };
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+            
+            <div className={`border rounded-lg p-6 ${
+              theme === 'dark' 
+                ? 'border-[#1A1D21] bg-[#0F1114]' 
+                : 'border-gray-200 bg-white'
+            }`}>
+              <h3 className={`text-sm font-medium mb-4 ${
+                theme === 'dark' ? 'text-white' : 'text-[#2A3B35]'
+              }`}>
+                Full Width Container
+              </h3>
+              <DemoRequestForm 
+                theme={theme}
+                onSubmit={async (email) => {
+                  console.log('Demo form submitted:', email);
+                  return { success: true };
+                }}
+              />
             </div>
           </div>
         );
@@ -557,7 +648,7 @@ const Test: React.FC = () => {
                     <Button variant="primary" theme={theme} size="md">
                       Medium Primary
                     </Button>
-                    <Button variant="primary" theme={theme} size="lg">
+                    <Button variant="primary" theme={theme} size="md">
                       Large Primary
                     </Button>
                     <Button variant="primary" theme={theme} size="md" icon={Zap}>
@@ -583,7 +674,7 @@ const Test: React.FC = () => {
                     <Button variant="secondary" theme={theme} size="md">
                       Medium Secondary
                     </Button>
-                    <Button variant="secondary" theme={theme} size="lg">
+                    <Button variant="secondary" theme={theme} size="md">
                       Large Secondary
                     </Button>
                     <Button variant="secondary" theme={theme} size="md" icon={Mail}>
@@ -609,7 +700,7 @@ const Test: React.FC = () => {
                     <Button variant="ghost" theme={theme} size="md">
                       Medium Ghost
                     </Button>
-                    <Button variant="ghost" theme={theme} size="lg">
+                    <Button variant="ghost" theme={theme} size="md">
                       Large Ghost
                     </Button>
                     <Button variant="ghost" theme={theme} size="md" icon={Sun}>
@@ -708,16 +799,14 @@ const Test: React.FC = () => {
               
               <div className="space-y-4">
                 <div className="flex flex-wrap gap-3">
-                  <Badge>Default Badge</Badge>
-                  <Badge variant="secondary">Secondary Badge</Badge>
-                  <Badge variant="outline">Outline Badge</Badge>
-                  <Badge variant="destructive">Destructive Badge</Badge>
+                  <Badge theme={theme}>Default Badge</Badge>
+                  <Badge theme={theme} variant="outline">Outline Badge</Badge>
+                  <Badge theme={theme} variant="solid">Solid Badge</Badge>
                 </div>
                 
                 <div className="flex flex-wrap gap-3">
-                  <Badge size="sm">Small</Badge>
-                  <Badge size="md">Medium</Badge>
-                  <Badge size="lg">Large</Badge>
+                  <Badge theme={theme} size="sm">Small</Badge>
+                  <Badge theme={theme} size="md">Medium</Badge>
                 </div>
               </div>
             </div>
@@ -803,7 +892,7 @@ const Test: React.FC = () => {
                     }`}>
                       <p className="text-sm">Hover for shadow effect</p>
                     </Card>
-                    <Badge className="cursor-pointer hover:opacity-80 transition-opacity">
+                    <Badge theme={theme} className="cursor-pointer hover:opacity-80 transition-opacity">
                       Hover for opacity change
                     </Badge>
                   </div>
@@ -1020,6 +1109,83 @@ const Test: React.FC = () => {
           </div>
         );
       
+      case 'slack-bot-preview':
+        return (
+          <div className="h-full flex items-center justify-center p-6">
+            <SlackBotPreview />
+          </div>
+        );
+      
+      case 'email-bot-preview':
+        return (
+          <div className="h-full flex items-center justify-center p-6">
+            <EmailBotPreview />
+          </div>
+        );
+      
+      case 'text-bot-preview':
+        return (
+          <div className="h-full flex items-center justify-center p-6">
+            <TextBotPreview />
+          </div>
+        );
+      
+      case 'navbar':
+        return (
+          <div className="h-full flex flex-col">
+            <div className="flex-shrink-0">
+              <Navbar />
+            </div>
+            <div className={`flex-1 p-6 ${theme === 'dark' ? 'bg-[#0A0B0D]' : 'bg-[#FAFBFC]'}`}>
+              <div className={`p-4 rounded-lg border ${
+                theme === 'dark' 
+                  ? 'bg-[#0F1114] border-[#1A1D21]' 
+                  : 'bg-white border-gray-200 shadow-sm'
+              }`}>
+                <h3 className={`text-lg font-medium mb-4 ${
+                  theme === 'dark' ? 'text-white' : 'text-[#1A1F2E]'
+                }`}>
+                  Navbar Component
+                </h3>
+                <p className={`text-sm ${
+                  theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                }`}>
+                  The navigation bar component with responsive design, theme support, and smooth animations. 
+                  It includes desktop navigation with dropdowns and mobile menu with expandable sections.
+                </p>
+              </div>
+            </div>
+          </div>
+        );
+      
+      case 'footer':
+        return (
+          <div className="h-full flex flex-col">
+            <div className={`flex-1 p-6 ${theme === 'dark' ? 'bg-[#0A0B0D]' : 'bg-[#FAFBFC]'}`}>
+              <div className={`p-4 rounded-lg border ${
+                theme === 'dark' 
+                  ? 'bg-[#0F1114] border-[#1A1D21]' 
+                  : 'bg-white border-gray-200 shadow-sm'
+              }`}>
+                <h3 className={`text-lg font-medium mb-4 ${
+                  theme === 'dark' ? 'text-white' : 'text-[#1A1F2E]'
+                }`}>
+                  Footer Component
+                </h3>
+                <p className={`text-sm ${
+                  theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                }`}>
+                  The footer component with organized link sections, company information, and theme-aware styling. 
+                  Includes product links, solutions, resources, and contact information.
+                </p>
+              </div>
+            </div>
+            <div className="flex-shrink-0">
+              <Footer />
+            </div>
+          </div>
+        );
+      
       default:
         return <div>Component not found</div>;
     }
@@ -1027,13 +1193,13 @@ const Test: React.FC = () => {
 
   return (
     <div 
-      className={`min-h-screen flex flex-col lg:flex-row ${theme === 'dark' ? 'bg-[#0A0B0D] text-white' : 'bg-[#FAFBFC] text-[#2A3B35]'} transition-colors duration-300 relative`}
-      style={{
-        backgroundImage: theme === 'dark' 
-          ? 'radial-gradient(circle at 20% 80%, rgba(184, 216, 208, 0.03) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(184, 216, 208, 0.02) 0%, transparent 50%)' 
-          : 'radial-gradient(circle at 20% 80%, rgba(42, 59, 53, 0.02) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(42, 59, 53, 0.01) 0%, transparent 50%)'
-      }}
-    >
+        className={`min-h-screen flex flex-col lg:flex-row ${theme === 'dark' ? 'bg-[#0A0B0D] text-white' : 'bg-[#FAFBFC] text-[#2A3B35]'} transition-colors duration-300 relative`}
+        style={{
+          backgroundImage: theme === 'dark' 
+            ? 'radial-gradient(circle at 20% 80%, rgba(184, 216, 208, 0.03) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(184, 216, 208, 0.02) 0%, transparent 50%)' 
+            : 'radial-gradient(circle at 20% 80%, rgba(42, 59, 53, 0.02) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(42, 59, 53, 0.01) 0%, transparent 50%)'
+        }}
+      >
       {/* Mobile Header with Component Selector */}
       <div className={`lg:hidden border-b ${
         theme === 'dark' 
@@ -1045,18 +1211,19 @@ const Test: React.FC = () => {
             <h1 className={`text-lg font-bold ${
               theme === 'dark' ? 'text-white' : 'text-[#1A1F2E]'
             }`}>Components</h1>
-            {/* Mobile Theme Toggle */}
+            {/* Global Theme Toggle */}
             <button
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              onClick={toggleGlobalTheme}
               className={`flex items-center gap-1 px-2 py-1 rounded-md transition-all duration-200 ${
-                theme === 'dark'
-                  ? 'bg-[#B8D8D0] text-black hover:bg-[#96B5A6]'
-                  : 'bg-[#2A3B35] text-white hover:bg-[#1F2B24]'
+                isLightMode
+                  ? 'bg-[#2A3B35] text-white hover:bg-[#1F2B24]'
+                  : 'bg-[#B8D8D0] text-black hover:bg-[#96B5A6]'
               }`}
+              title="Toggle Global Theme"
             >
-              {theme === 'dark' ? <Sun className="w-3 h-3" /> : <Moon className="w-3 h-3" />}
+              {isLightMode ? <Sun className="w-3 h-3" /> : <Moon className="w-3 h-3" />}
               <span className="text-xs font-medium">
-                {theme === 'dark' ? 'Light' : 'Dark'}
+                {isLightMode ? 'Light' : 'Dark'}
               </span>
             </button>
           </div>
@@ -1071,77 +1238,94 @@ const Test: React.FC = () => {
                 : 'bg-gray-50 text-[#1A1F2E] border border-gray-200'
             }`}
           >
-            {COMPONENTS.map((component) => (
+            {filteredComponents.map((component) => (
               <option key={component.id} value={component.id}>
                 {component.name}
               </option>
             ))}
           </select>
-          
-          <p className={`text-xs mt-2 ${
-            theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
-          }`}>
-            {COMPONENTS.find(c => c.id === selectedComponent)?.description}
-          </p>
         </div>
       </div>
 
       {/* Desktop Sidebar */}
       <div 
-        className={`hidden lg:block lg:w-80 border-r ${
+        className={`hidden lg:block lg:w-80 lg:fixed lg:left-0 lg:top-0 lg:bottom-0 lg:overflow-y-auto border-r ${
           theme === 'dark' 
             ? 'bg-[#0F1114] border-[#1A1D21]' 
             : 'bg-white border-gray-200 shadow-sm'
         } transition-colors duration-300`}
       >
         <div className="p-6">
-          <h1 className={`text-2xl font-bold mb-6 ${
+          <h1 className={`text-2xl font-bold mb-4 ${
             theme === 'dark' ? 'text-white' : 'text-[#1A1F2E]'
           }`}>Components</h1>
           
+          {/* Search Bar */}
+          <div className="relative mb-6">
+            <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 ${
+              theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+            }`} />
+            <input
+              type="text"
+              placeholder="Search components..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className={`w-full pl-10 pr-4 py-2 rounded-lg text-sm transition-colors ${
+                theme === 'dark'
+                  ? 'bg-[#1A1D21] text-white border border-[#2A2D31] placeholder-gray-400 focus:border-[#B8D8D0]/50'
+                  : 'bg-gray-50 text-[#1A1F2E] border border-gray-200 placeholder-gray-500 focus:border-[#2A3B35]/50'
+              } focus:outline-none focus:ring-2 focus:ring-opacity-20 ${
+                theme === 'dark' ? 'focus:ring-[#B8D8D0]' : 'focus:ring-[#2A3B35]'
+              }`}
+            />
+          </div>
+          
           <div className="space-y-2">
-            {COMPONENTS.map((component) => {
-              const Icon = component.icon;
-              const isSelected = selectedComponent === component.id;
-              
-              return (
-                <button
-                  key={component.id}
-                  onClick={() => setSelectedComponent(component.id)}
-                  className={`w-full text-left p-4 rounded-lg transition-all duration-200 ${
-                    isSelected
-                      ? (theme === 'dark' 
-                          ? 'bg-[#B8D8D0]/15 border border-[#B8D8D0]/30 text-[#B8D8D0] shadow-lg shadow-[#B8D8D0]/10' 
-                          : 'bg-[#2A3B35]/10 border border-[#2A3B35]/20 text-[#2A3B35] shadow-md')
-                      : (theme === 'dark'
-                          ? 'hover:bg-[#1A1D21] border border-transparent text-gray-400 hover:text-white hover:border-[#2A2D31]'
-                          : 'hover:bg-gray-50 border border-transparent text-gray-600 hover:text-[#1A1F2E] hover:border-gray-200')
-                  }`}
-                >
-                  <div className="flex items-center gap-3 mb-2">
-                    <Icon className={`w-5 h-5 ${
-                      isSelected 
-                        ? '' 
-                        : 'opacity-70'
-                    }`} />
-                    <span className="font-medium">{component.name}</span>
-                  </div>
-                  <p className={`text-sm leading-relaxed ${
-                    isSelected 
-                      ? (theme === 'dark' ? 'text-[#96B5A6]' : 'text-[#4A665C]')
-                      : (theme === 'dark' ? 'text-gray-500' : 'text-gray-500')
-                  }`}>
-                    {component.description}
-                  </p>
-                </button>
-              );
-            })}
+            {filteredComponents.length > 0 ? (
+              filteredComponents.map((component) => {
+                const Icon = component.icon;
+                const isSelected = selectedComponent === component.id;
+                
+                return (
+                  <button
+                    key={component.id}
+                    onClick={() => setSelectedComponent(component.id)}
+                    className={`w-full text-left p-3 rounded-lg transition-all duration-200 ${
+                      isSelected
+                        ? (theme === 'dark' 
+                            ? 'bg-[#B8D8D0]/15 border border-[#B8D8D0]/30 text-[#B8D8D0] shadow-lg shadow-[#B8D8D0]/10' 
+                            : 'bg-[#2A3B35]/10 border border-[#2A3B35]/20 text-[#2A3B35] shadow-md')
+                        : (theme === 'dark'
+                            ? 'hover:bg-[#1A1D21] border border-transparent text-gray-400 hover:text-white hover:border-[#2A2D31]'
+                            : 'hover:bg-gray-50 border border-transparent text-gray-600 hover:text-[#1A1F2E] hover:border-gray-200')
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <Icon className={`w-4 h-4 ${
+                        isSelected 
+                          ? '' 
+                          : 'opacity-70'
+                      }`} />
+                      <span className="font-medium text-sm">{component.name}</span>
+                    </div>
+                  </button>
+                );
+              })
+            ) : (
+              <div className={`text-center py-8 ${
+                theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+              }`}>
+                <Search className="w-8 h-8 mx-auto mb-2 opacity-50" />
+                <p className="text-sm">No components found</p>
+                <p className="text-xs mt-1">Try a different search term</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 lg:ml-80">
         {/* Desktop Header */}
         <div 
           className={`hidden lg:block border-b p-6 ${
@@ -1170,16 +1354,17 @@ const Test: React.FC = () => {
                 Theme:
               </span>
               <button
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                onClick={toggleGlobalTheme}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
-                  theme === 'dark'
-                    ? 'bg-[#B8D8D0] text-black hover:bg-[#96B5A6] shadow-md'
-                    : 'bg-[#2A3B35] text-white hover:bg-[#1F2B24] shadow-md'
+                  isLightMode
+                    ? 'bg-[#2A3B35] text-white hover:bg-[#1F2B24] shadow-md'
+                    : 'bg-[#B8D8D0] text-black hover:bg-[#96B5A6] shadow-md'
                 }`}
+                title="Toggle Global Theme"
               >
-                {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                {isLightMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
                 <span className="text-sm font-medium">
-                  {theme === 'dark' ? 'Light' : 'Dark'}
+                  {isLightMode ? 'Light' : 'Dark'}
                 </span>
               </button>
             </div>

@@ -1,11 +1,18 @@
 import { ArrowRight } from 'lucide-react';
 import { OntologyPolyhedron } from '../../animations/ontology';
 import { Button } from '../../ui';
+import { Section } from '../../ui/Section';
 
 export function OntologySection() {
+  
   return (
-    <section className="ontology-section relative min-h-[600px] bg-black">
-      <div className="mx-auto max-w-site px-6">
+    <Section
+      variant="content"
+      padding="none"
+      background="black"
+      height="auto"
+      className="ontology-section relative min-h-[600px]"
+    >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 min-h-[600px]">
           {/* Left Content */}
           <div className="flex flex-col justify-center py-16 lg:py-0">
@@ -21,7 +28,7 @@ export function OntologySection() {
               <a href="/ontology">
                 <Button 
                   variant="primary" 
-                  size="lg"
+                  size="md"
                   className="group"
                 >
                   Learn How It Works
@@ -41,13 +48,12 @@ export function OntologySection() {
               <OntologyPolyhedron config={{ interactive: false }} /> 
           </div>
         </div>
-      </div>
 
-      {/* Gradient overlays */}
+      {/* Gradient overlays - using from-black for both themes since section has dark background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black to-transparent" />
       </div>
-    </section>
+    </Section>
   );
 }

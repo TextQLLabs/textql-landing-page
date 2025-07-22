@@ -2,6 +2,7 @@ import React from 'react';
 import { SEO } from '../../components/SEO';
 import StaggeredScreenshots from '../../components/StaggeredScreenshots';
 import { Text } from '../../components/ui';
+import { Section } from '../../components/ui/Section';
 import { Testimonial } from '../../components/Testimonial';
 import HeroSection from '../../components/integrations/IntegrationHeroSection';
 import FaqSection from '../../components/integrations/FaqSection';
@@ -9,8 +10,11 @@ import { CTA } from '../../components/sections';
 import { FeatureSection } from '../../components/FeatureSection';
 import { Plug, RefreshCw, Cpu } from 'lucide-react';
 import TabsDisplay, { TabContentType } from '../../components/TabsDisplay';
+import { useComponentTheme } from '../../hooks/useComponentTheme';
 
 export default function SnowflakeMcpIntegration() {
+  const theme = useComponentTheme();
+  
   const screenshots = [
     {
       src: "/images/integrations/snowflake/1-large.png",
@@ -218,13 +222,11 @@ export default function SnowflakeMcpIntegration() {
         canonical="https://textql.com/integrations/snowflake-mcp/"
         ogImage="https://textql.com/social-preview.png"
       />
-      <section>
-        <HeroSection 
-          headline="Powerful AI Research Within Your Snowflake Environment"
-          description="TextQL's MCP integration connects intelligent analysis with your Snowflake data warehouse, enabling our AI agents to work directly with all of your datasets."
-          videoUrl="/images/integrations/snowflake/snowflake.m4v"
-        />
-      </section>
+      <HeroSection 
+        headline="Powerful AI Research Within Your Snowflake Environment"
+        description="TextQL's MCP integration connects intelligent analysis with your Snowflake data warehouse, enabling our AI agents to work directly with all of your datasets."
+        videoUrl="/images/integrations/snowflake/snowflake.m4v"
+      />
       
       <FeatureSection
         title="Massive scale. Advanced reasoning."
@@ -254,8 +256,11 @@ export default function SnowflakeMcpIntegration() {
         title=""
       />
 
-<section className="bg-transparent py-20">
-        <div className="mx-auto max-w-7xl px-6 md:px-12">
+<Section 
+        variant="wide"
+        padding="lg"
+        background="transparent"
+      >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="relative z-19">
               <video 
@@ -281,8 +286,7 @@ export default function SnowflakeMcpIntegration() {
               </div>
             </div>
           </div>
-        </div>
-      </section>   
+      </Section>   
 
 <TabsDisplay
       title="Find Deep Value Hidden in Your Snowflake Data"
@@ -297,7 +301,7 @@ export default function SnowflakeMcpIntegration() {
       />
         
       <CTA 
-        theme="dark"
+        theme={theme}
         showWave={true}
         variant="wide"
         heading="Ready to learn more?"

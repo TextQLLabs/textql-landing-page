@@ -1,0 +1,460 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Critical rendering styles - Default to light mode */
+:root {
+  color-scheme: light;
+  background: #F7F7F7;
+  overscroll-behavior: none;
+  --header-height: auto; /* Dynamically calculated by grid */
+  --navbar-height: 80px; /* Fallback, dynamically updated by Layout */
+}
+
+/* Apply hero-light-mode class immediately for SSR/initial load */
+body {
+  /* This will be the default until React loads */
+}
+
+html {
+  background: #F7F7F7;
+  min-height: 100vh;
+  overscroll-behavior: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #F7F7F7 !important;
+  min-height: 100vh;
+  display: block !important;
+  overscroll-behavior: none;
+}
+
+#root {
+  min-height: 100vh;
+  opacity: 1 !important;
+  visibility: visible !important;
+  background: #F7F7F7 !important;
+}
+
+/* Ensure no black flashes during page load */
+html::before,
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #F7F7F7;
+  z-index: -1;
+}
+
+/* Minimal initial styling for fast load */
+html, body, #root {
+  background: #F7F7F7 !important;
+}
+
+/* Clean up - no longer needed since hero-light-mode is applied from HTML */
+
+/* Page transition animation */
+.page-transition-enter {
+  opacity: 0;
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.page-transition-exit {
+  opacity: 1;
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transition: opacity 0.1s ease-in-out;
+}
+
+/* Essential animations - Fixed to prevent FOUC */
+.animate-slide-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUpFade 1.0s ease forwards;
+  animation-fill-mode: both;
+}
+
+.animate-fade-in {
+  opacity: 0;
+  animation: fadeIn 1.0s ease forwards;
+  animation-fill-mode: both;
+}
+
+.animate-fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+  animation-fill-mode: both;
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes progress {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes wave {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Animation delays */
+.animation-delay-50 { animation-delay: 50ms; }
+.animation-delay-100 { animation-delay: 100ms; }
+.animation-delay-200 { animation-delay: 200ms; }
+.animation-delay-300 { animation-delay: 300ms; }
+.animation-delay-400 { animation-delay: 400ms; }
+.animation-delay-500 { animation-delay: 500ms; }
+.animation-delay-600 { animation-delay: 600ms; }
+.animation-delay-700 { animation-delay: 700ms; }
+.animation-delay-800 { animation-delay: 800ms; }
+.animation-delay-900 { animation-delay: 900ms; }
+.animation-delay-1000 { animation-delay: 1000ms; }
+
+/* Logo carousel animation */
+@keyframes scroll-x {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-x {
+  animation: scroll-x 30s linear infinite;
+}
+
+/* Line clamp utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Hide scrollbar but allow scrolling */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+:root {
+  --header-offset: 48px;
+}
+
+/* Safe viewport height that excludes header space */
+.min-h-safe-screen {
+  min-height: calc(100vh - var(--header-offset, 0px));
+}
+
+.h-safe-screen {
+  height: calc(100vh - var(--header-offset, 0px));
+}
+
+/* Navbar spacing utilities */
+.navbar-offset {
+  padding-top: var(--navbar-height, 80px);
+}
+
+.content-below-navbar {
+  margin-top: var(--navbar-height, 80px);
+}
+
+.min-h-below-navbar {
+  min-height: calc(100vh - var(--navbar-height, 80px));
+}
+
+/* Flex utilities for content areas */
+.content-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.content-fill {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Light mode navbar - only when hero is in light mode */
+body.hero-light-mode nav {
+  background: rgba(247, 247, 247, 0.9) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+body.hero-light-mode nav *:not(svg):not(img),
+body.hero-light-mode nav span,
+body.hero-light-mode nav a,
+body.hero-light-mode nav button {
+  color: #2A3B35 !important;
+}
+
+body.hero-light-mode nav a:hover,
+body.hero-light-mode nav button:hover {
+  color: #4A665C !important;
+}
+
+/* Style navbar logo in light mode */
+body.hero-light-mode nav svg,
+body.hero-light-mode nav img {
+  filter: brightness(0) saturate(100%) invert(23%) sepia(18%) saturate(1069%) hue-rotate(127deg) brightness(92%) contrast(95%) !important;
+}
+
+/* Style logo carousel in light mode - dark forest green - hero only */
+.hero-light-mode .logo-carousel svg,
+.hero-light-mode .logo-carousel img {
+  filter: brightness(0) saturate(100%) invert(23%) sepia(18%) saturate(1069%) hue-rotate(127deg) brightness(100%) contrast(110%) !important;
+  opacity: 1 !important;
+}
+
+/* Light mode navbar dropdown styling */
+body.hero-light-mode .bg-black {
+  background: white !important;
+  border-color: rgba(42, 59, 53, 0.2) !important;
+}
+
+body.hero-light-mode .text-\[#B8D8D0\] {
+  color: #2A3B35 !important;
+}
+
+body.hero-light-mode .text-\[#729E8C\] {
+  color: #4A665C !important;
+}
+
+body.hero-light-mode .group-hover\:text-white:hover {
+  color: #2A3B35 !important;
+}
+
+body.hero-light-mode .hover\:bg-\[#B8D8D0\]\/10:hover {
+  background-color: rgba(42, 59, 53, 0.1) !important;
+}
+
+body.hero-light-mode .bg-\[#B8D8D0\] {
+  background-color: #2A3B35 !important;
+}
+
+/* Light mode global background overrides */
+body.hero-light-mode {
+  background: #F7F7F7 !important;
+}
+
+body.hero-light-mode #root {
+  background: #F7F7F7 !important;
+}
+
+/* Dark mode global background overrides */
+body:not(.hero-light-mode) {
+  background: #0F1712 !important;
+}
+
+body:not(.hero-light-mode) #root {
+  background: #0F1712 !important;
+}
+
+/* Force specific sections to stay dark even in light mode */
+.ontology-section,
+.security-section,
+.cta-section,
+.footer-section {
+  background: #0F1712 !important;
+  color: white !important;
+}
+
+.ontology-section *,
+.security-section *,
+.cta-section *,
+.footer-section * {
+  color: inherit !important;
+}
+
+/* Ensure footer and CTA stay dark with proper background override */
+body.hero-light-mode .footer-section {
+  background: #000000 !important;
+}
+
+body.hero-light-mode .footer-section * {
+  color: white !important;
+}
+
+body.hero-light-mode .cta-section {
+  background: #000000 !important;
+}
+
+body.hero-light-mode .cta-section * {
+  color: white !important;
+}
+
+/* Primary buttons should have black text and icons even in dark sections */
+body.hero-light-mode .cta-section button[class*="primary"] span,
+body.hero-light-mode .cta-section .group span,
+.cta-section button[class*="primary"] span,
+.cta-section .group span {
+  color: black !important;
+}
+
+body.hero-light-mode .cta-section button[class*="primary"] svg,
+body.hero-light-mode .cta-section .group svg,
+.cta-section button[class*="primary"] svg,
+.cta-section .group svg {
+  color: black !important;
+}
+
+/* Ensure security section stays dark */
+body.hero-light-mode .security-section {
+  background: #000000 !important;
+}
+
+body.hero-light-mode .security-section * {
+  color: white !important;
+}
+
+/* Primary buttons should have black text and icons even in dark sections */
+body.hero-light-mode .security-section button[class*="primary"] span,
+body.hero-light-mode .security-section .group span,
+.security-section button[class*="primary"] span,
+.security-section .group span {
+  color: black !important;
+}
+
+body.hero-light-mode .security-section button[class*="primary"] svg,
+body.hero-light-mode .security-section .group svg,
+.security-section button[class*="primary"] svg,
+.security-section .group svg {
+  color: black !important;
+}
+
+/* Primary buttons in ontology section should have black text */
+.ontology-section button[class*="primary"],
+.ontology-section button[class*="primary"] span,
+.ontology-section .group span {
+  color: black !important;
+}
+
+.ontology-section button[class*="primary"] svg,
+.ontology-section .group svg {
+  color: black !important;
+}
+
+/* Primary buttons in enterprise section should have black text and icons */
+.enterprise-section button[class*="primary"],
+.enterprise-section button[class*="primary"] span,
+.enterprise-section .group span {
+  color: black !important;
+}
+
+.enterprise-section button[class*="primary"] svg,
+.enterprise-section .group svg,
+.enterprise-section button svg,
+.enterprise-section a button svg,
+.enterprise-section .group .w-5 {
+  color: black !important;
+  fill: black !important;
+}
+
+/* Security section - primary button arrows should be mint color */
+.security-section button[class*="primary"] svg,
+.security-section .group svg,
+.security-section button svg,
+.security-section a button svg,
+.security-section .group .w-5,
+.security-section .w-4,
+.security-section .w-5 {
+  color: #B8D8D0 !important;
+  fill: #B8D8D0 !important;
+}
+
+/* Fix dropdown featured images in light mode */
+body.hero-light-mode nav .bg-\[#B8D8D0\]\/5 {
+  background-color: rgba(247, 247, 247, 0.8) !important;
+}
+
+body.hero-light-mode nav img {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* MCP server logos in navbar should adapt to theme */
+body.hero-light-mode nav .bg-\[#B8D8D0\] {
+  background-color: #2A3B35 !important;
+}
+
+/* Override any nested backgrounds in ontology section */
+.ontology-section div,
+.ontology-section section,
+.ontology-section > * {
+  background: transparent !important;
+}
+
+/* Ensure ontology section stays fully dark */
+body.hero-light-mode .ontology-section {
+  background: #000000 !important;
+}
+
+body.hero-light-mode .ontology-section div,
+body.hero-light-mode .ontology-section section,
+body.hero-light-mode .ontology-section > * {
+  background: transparent !important;
+}
+

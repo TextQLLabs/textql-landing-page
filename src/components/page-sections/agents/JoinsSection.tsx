@@ -1,16 +1,21 @@
 import { JoinsChart, JoinsContent } from './joins';
+import { Section } from '../../ui/Section';
 
 export function JoinsSection() {
   return (
-    <section className="bg-white relative overflow-hidden">
-      <div className="mx-auto max-w-site px-6">
-        <JoinsContent />
-        
-        {/* Full-width Chart */}
-        <div className="hidden lg:block w-full">
-          <JoinsChart />
-        </div>
+    <Section 
+      variant="content"
+      padding="lg"
+      background="white"
+      overflow="hidden"
+      className="relative"
+    >
+      <JoinsContent />
+      
+      {/* Full-width Chart */}
+      <div className="hidden lg:block w-full">
+        <JoinsChart />
       </div>
-    </section>
+    </Section>
   );
 }

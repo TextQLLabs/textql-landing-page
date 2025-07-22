@@ -1,6 +1,7 @@
 import { BlogHeader, BlogGrid } from '../../components/page-sections/blog';
 import { blogPosts } from '../../data/blog';
 import { SEO } from '../../components/SEO';
+import { Section } from '../../components/ui/Section';
 
 export default function Blog() {
   // Find featured post
@@ -19,9 +20,13 @@ export default function Blog() {
       <BlogHeader featuredPost={featuredPost} />
 
       {/* Blog Posts Grid */}
-      <div className="max-w-7xl mx-auto px-6 py-12 md:py-24">
+      <Section
+        variant="wide"
+        padding="md"
+        background="transparent"
+      >
         <BlogGrid posts={blogPosts} />
-      </div>
+      </Section>
     </div>
   );
 }

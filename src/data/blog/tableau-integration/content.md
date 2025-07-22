@@ -1,5 +1,16 @@
 # Tableau & TextQL: Augmenting Your Dashboards with Generative AI
 
+## Table of Contents
+- [Bridging the Gap Between Visualization and Understanding](#bridging-the-gap-between-visualization-and-understanding)
+  - [What's New: TextQL + Tableau Integration](#whats-new-textql--tableau-integration)
+- [Key Features](#key-features)
+- [Watch It in Action](#watch-it-in-action)
+- [Benefits for Your Team](#benefits-for-your-team)
+- [Ready to Transform Your Tableau Experience?](#ready-to-transform-your-tableau-experience)
+  - [Meet Us at Snowflake Summit 2024](#meet-us-at-snowflake-summit-2024)
+  - [Get Started Today](#get-started-today)
+- [Looking Ahead](#looking-ahead)
+
 For years, we've heard the same question: "Are you building another BI tool?" Today, we're excited to put those questions to rest with our Tableau integration release for Ana. We're not here to replace your BI tools – we're here to make them smarter.
 
 ![Tableau Integration](/images/blog/tableau-integration/header.jpg)

@@ -1,5 +1,11 @@
 # Haskell in Production: TextQL's Ontology Service
 
+## Table of Contents
+- [Strong Types](#strong-types)
+- [ADTs](#adts)
+- [Recruiting](#recruiting)
+- [Conclusion / TL;DR](#conclusion--tldr)
+
 The TextQL platform is split into three core services:
 
 1. The frontend and web backend packaged together as a Sveltekit Typescript app, containing all user facing interaction through both the web app and API, all direct app database access and communication with other services.

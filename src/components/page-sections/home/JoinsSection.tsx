@@ -1,11 +1,15 @@
 import { JoinsChart } from '../agents/joins';
 import { Text } from '../../ui';
+import { Section } from '../../ui/Section';
 import { Brain, Network, Cpu } from 'lucide-react';
 
 export function JoinsSection() {
   return (
-    <section className="bg-[#F5F9F8] py-16 md:py-24">
-      <div className="mx-auto max-w-site px-6">
+    <Section
+      variant="content"
+      padding="md"
+      background="secondary"
+    >
         {/* Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr,1.2fr] gap-16 items-start">
           {/* Left Content */}
@@ -85,7 +89,6 @@ export function JoinsSection() {
             />
           </div>
         </div>
-      </div>
-    </section>
+    </Section>
   );
 }

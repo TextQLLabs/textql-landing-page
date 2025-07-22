@@ -4,6 +4,7 @@ import { Industry, industries } from '../../data/industries';
 import { SolutionLibraryHeader, SolutionGrid } from '../../components/page-sections/solution-library';
 import { CTA } from '../../components/sections';
 import { Text } from '../../components/ui';
+import { Section } from '../../components/ui/Section';
 import { solutions } from '../../data/solutions';
 import { SEO } from '../../components/SEO';
 
@@ -101,9 +102,13 @@ export default function SolutionLibrary() {
         </div>
 
         {/* Solutions Grid */}
-        <div className="max-w-7xl mx-auto px-6 py-12">
+        <Section 
+          variant="wide"
+          paddingTop="sm"
+          paddingBottom="sm"
+        >
           <SolutionGrid selectedIndustry={selectedIndustry} />
-        </div>
+        </Section>
       </div>
 
       {/* CTA Section */}

@@ -1,5 +1,11 @@
 # TextQL's Ten Year Thesis
 
+## Table of Contents
+- [The Current Landscape](#the-current-landscape)
+- [Our Vision](#our-vision)
+- [How We'll Get There](#how-well-get-there)
+- [Join Us](#join-us)
+
 Our vision for the future of enterprise data and AI is bold. Here's how we see the next decade unfolding.
 
 ## The Current Landscape

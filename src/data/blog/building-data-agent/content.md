@@ -1,5 +1,12 @@
 # Building the Most Advanced Data Agent
 
+## Table of Contents
+- [The Challenge](#the-challenge)
+- [Our Solution](#our-solution)
+- [Technical Architecture](#technical-architecture)
+- [Results](#results)
+- [What's Next](#whats-next)
+
 At TextQL, we've developed Ana, the most advanced data agent in the industry. This post explores how we built it and the technical challenges we overcame.
 
 ## The Challenge

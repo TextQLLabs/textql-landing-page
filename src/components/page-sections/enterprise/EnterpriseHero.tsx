@@ -1,10 +1,19 @@
 import { Badge, Text } from '../../ui';
+import { Section } from '../../ui/Section';
 
 export function EnterpriseHero() {
   return (
-    <section className="relative overflow-hidden" style={{ backgroundColor: '#000000' }}>
-      <div className="relative min-h-screen z-10 px-6 flex items-center justify-center max-w-site mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.5fr,1fr] gap-8 lg:gap-24 items-center w-full   py-16 lg:py-0">
+    <Section 
+      variant="content"
+      padding="none"
+      height="hero"
+      background="black"
+      hasNavbarOffset
+      overflow="hidden"
+      className="relative"
+    >
+      <div className="relative z-10 flex items-center justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.5fr,1fr] gap-8 lg:gap-24 items-center w-full py-16 lg:py-0">
           {/* Left Content */}
           <div className="text-center lg:text-left">
             <Badge
@@ -55,6 +64,6 @@ export function EnterpriseHero() {
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

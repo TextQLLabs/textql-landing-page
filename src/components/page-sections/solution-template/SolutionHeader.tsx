@@ -27,7 +27,7 @@ export function SolutionHeader({ solution }: SolutionHeaderProps) {
   };
 
   return (
-    <div className="relative min-h-[400px] pt-32 pb-16">
+    <div className="relative min-h-[400px] navbar-offset pb-16">
       {/* Background with gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0A1F1C] via-[#0A1F1C]/80 to-black" />
 
@@ -50,7 +50,7 @@ export function SolutionHeader({ solution }: SolutionHeaderProps) {
               title={solution.title}
               description={solution.description}
               theme="dark"
-              size="lg"
+              size="md"
               align="left"
               className="mb-8"
             />
@@ -60,7 +60,7 @@ export function SolutionHeader({ solution }: SolutionHeaderProps) {
               {/* Demo Button */}
               <Button 
                 variant="primary" 
-                size="lg" 
+                size="md" 
                 className="flex-1"
                 onClick={onDemoRequest}
               >

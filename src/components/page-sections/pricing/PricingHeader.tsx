@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Button } from '../../ui';
+import { Button, Section } from '../../ui';
 import { WaveBackground } from '../../animations';
 import { ArrowRight } from 'lucide-react';
 import { Text } from '../../ui';
@@ -13,15 +13,22 @@ export function PricingHeader() {
   };
 
   return (
-    <div className="relative overflow-hidden bg-black">
+    <Section
+      variant="narrow"
+      padding="none"
+      paddingBottom="lg"
+      paddingTop="navbar"
+      background="black"
+      overflow="hidden"
+      className="relative"
+    >
       {/* Animated Background */}
       <div className="absolute inset-0 z-0">
         <WaveBackground />
       </div>
       
       {/* Content */}
-      <div className="relative z-10 flex items-center pb-20 mt-12">
-        <div className="mx-auto max-w-4xl px-6 text-center">
+      <div className="relative z-10 text-center">
           {/* Tech-inspired decorative element */}
           <div className="mb-8 pt-10 flex justify-center">
             <div className="inline-flex items-center gap-2 bg-[#B8D8D0]/10 px-4 py-2 rounded-full border border-[#B8D8D0]/20 backdrop-blur-sm">
@@ -39,25 +46,24 @@ export function PricingHeader() {
           </h1>
 
           {/* Subheadline */}
-          <h2 className="text-base lg:text-2xl font-light text-[#729E8C] mb-12 max-w-3xl mx-auto">
+          <h2 className="text-base lg:text-2xl font-light text-[#729E8C] mb-12">
             Transparent Pricing, Predictable ROI – Every task measured in Agent Compute Units
           </h2>
 
           {/* CTA */}
           <Button 
             variant="primary" 
-            size="lg"
+            size="md"
             className="group"
             onClick={onDemoRequest}
           >
             Schedule a Demo
             <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
           </Button>
-        </div>
       </div>
 
       {/* Bottom Gradient */}
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent" />
-    </div>
+    </Section>
   );
 }

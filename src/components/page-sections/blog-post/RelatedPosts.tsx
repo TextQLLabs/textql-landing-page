@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Text, Heading } from '../../ui';
+import { Text, Heading, Section } from '../../ui';
 import type { BlogPost } from '../blog/types';
 import { blogPosts } from '../../../data/blog';
 
@@ -24,8 +24,12 @@ export function RelatedPosts({ currentPostId, currentCategory }: RelatedPostsPro
     .slice(0, 3);
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <Section
+      variant="wide"
+      padding="lg"
+      background="white"
+      as="section"
+    >
         <Heading level={2} className="text-3xl font-light text-[#2A3B35] mb-12 text-center" theme="light">
           Related Articles
         </Heading>
@@ -71,7 +75,6 @@ export function RelatedPosts({ currentPostId, currentCategory }: RelatedPostsPro
             );
           })}
         </div>
-      </div>
-    </section>
+    </Section>
   );
 }

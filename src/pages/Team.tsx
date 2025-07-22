@@ -1,4 +1,7 @@
 import { SEO } from '../components/SEO';
+import { Section } from '../components/ui/Section';
+import { useComponentTheme } from '../hooks/useComponentTheme';
+import { themeBackgroundSecondary } from '../utils/theme-utils';
 
 interface TeamMember {
   name: string;
@@ -7,6 +10,7 @@ interface TeamMember {
 }
 
 export default function Team() {
+  const theme = useComponentTheme();
   const teamMembers: TeamMember[] = [
     {
       name: "Ethan Ding",
@@ -72,7 +76,7 @@ export default function Team() {
   ];
 
   return (
-    <div className="min-h-screen bg-black" style={{ backgroundColor: '#000000' }}>
+    <div className={`min-h-screen ${themeBackgroundSecondary(theme)}`}>
       <SEO 
         title="Our Team | TextQL"
         description="Meet the team building the future of data at TextQL."
@@ -81,36 +85,40 @@ export default function Team() {
       />
       
       {/* Hero Section */}
-      <div className="relative overflow-hidden min-h-[300px]">
+      <Section
+        variant="wider"
+        paddingTop="navbar"
+        paddingBottom="md"
+        overflow="hidden"
+        className="relative min-h-[300px]"
+      >
         {/* Background with gradient */}
-        <div className="absolute inset-0" style={{ backgroundColor: '#000000' }} />
+        <div className={`absolute inset-0 ${themeBackgroundSecondary(theme)}`} />
         
         {/* Content */}
-        <div className="relative z-10 pt-32 pb-16 px-4">
-          <div className="max-w-5xl mx-auto text-center">
-            <div className="mb-6">
-              <h1 className="text-6xl font-extralight mb-6 text-[#B8D8D0]">
-                Team
-              </h1>
-              <p className="text-2xl text-[#729E8C] font-light max-w-3xl mx-auto mb-8">
-                Meet the people behind TextQL.
-              </p>
-            </div>
-          </div>
+        <div className="relative z-10 text-center">
+          <h1 className="text-6xl font-extralight mb-6 text-[#B8D8D0]">
+            Team
+          </h1>
+          <p className="text-2xl text-[#729E8C] font-light max-w-3xl mx-auto mb-8">
+            Meet the people behind TextQL.
+          </p>
         </div>
         
         {/* Bottom Gradient */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent z-20" />
-      </div>
+        <div className={`absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t ${theme === 'light' ? 'from-[#F7F7F7]' : 'from-black'} to-transparent z-20`} />
+      </Section>
 
       {/* Team Members Grid */}
-      <section className="py-16">
-        <div className="mx-auto max-w-site px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <Section 
+        variant="content"
+        padding="md"
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {teamMembers.map((member, index) => (
               <div key={index} className="group">
                 <div className="aspect-square overflow-hidden rounded-lg mb-4 relative">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
+                  <div className={`absolute inset-0 bg-gradient-to-t ${theme === 'light' ? 'from-white/70' : 'from-black/70'} via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10`}></div>
                   <img 
                     src={member.image} 
                     alt={member.name} 
@@ -121,9 +129,8 @@ export default function Team() {
                 <p className="text-[#729E8C] font-light">{member.title}</p>
               </div>
             ))}
-          </div>
         </div>
-      </section>
+      </Section>
     </div>
   );
 }

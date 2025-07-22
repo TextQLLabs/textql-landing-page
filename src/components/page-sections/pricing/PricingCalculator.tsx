@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Calculator, Database, Search, PieChart, Monitor, Cpu } from 'lucide-react';
-import { Text, Card } from '../../ui';
+import { Text, Card, Section } from '../../ui';
 
 const acuCategories = [
   {
@@ -61,8 +61,11 @@ export function PricingCalculator() {
   const estimatedCost = (monthlyUsage / 1000) * pricePerThousandACUs;
 
   return (
-    <section className="py-24 bg-[#F0F5F3]">
-      <div className="max-w-7xl mx-auto px-6">
+    <Section
+      variant="wide"
+      padding="lg"
+      background="accent"
+    >
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl text-[#2A3B35] mb-4">
@@ -179,7 +182,6 @@ export function PricingCalculator() {
             </Text>
           </div>
         </Card>
-      </div>
-    </section>
+    </Section>
   );
 }

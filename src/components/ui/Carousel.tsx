@@ -9,6 +9,7 @@ interface CarouselProps {
   className?: string;
   itemClassName?: string;
   gradientColor?: string;
+  theme?: 'light' | 'dark';
 }
 // todo: dejitter the animation
 export function Carousel({
@@ -16,7 +17,8 @@ export function Carousel({
   speed = 0.05,
   className = '',
   itemClassName = '',
-  gradientColor = 'black'
+  gradientColor = 'black',
+  theme = 'dark'
 }: CarouselProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>();
@@ -70,7 +72,7 @@ export function Carousel({
               src={item.src}
               alt={item.alt}
               className={`h-8 w-auto max-w-24 object-contain opacity-60 grayscale hover:opacity-100 transition-opacity ${itemClassName}`}
-              style={{ filter: 'brightness(0) invert(1)' }}
+              style={theme === 'light' ? { filter: 'brightness(0) saturate(100%) invert(23%) sepia(18%) saturate(1069%) hue-rotate(127deg) brightness(100%) contrast(110%)' } : { filter: 'brightness(0) invert(1)' }}
             />
           ))}
         </div>

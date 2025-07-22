@@ -5,13 +5,15 @@ import {
   TableOfContents,
   RelatedPosts
 } from '../../components/page-sections/blog-post';
-import { Text } from '../../components/ui';
+import { Text, Section } from '../../components/ui';
 import { blogPosts, getPostContent } from '../../data/blog';
 import { SEO } from '../../components/SEO';
 import { CTA } from '../../components/sections';
+import { useComponentTheme } from '../../hooks/useComponentTheme';
 
 export default function BlogPost() {
   const { id } = useParams();
+  const theme = useComponentTheme();
   
   // Find matching post
   const post = blogPosts.find(p => p.id === id);
@@ -19,13 +21,20 @@ export default function BlogPost() {
 
   if (!post || !content) {
     return (
-      <div className="min-h-screen bg-[#F0F5F3] pt-32 px-4">
-        <div className="max-w-4xl mx-auto text-center">
+      <Section
+        variant="narrow"
+        padding="md"
+        height="min-screen"
+        hasNavbarOffset={true}
+        background="secondary"
+        className="flex items-center"
+      >
+        <div className="text-center">
           <Text variant="header" className="text-4xl mb-6 text-[#2A3B35]">
             Blog Post Not Found
           </Text>
         </div>
-      </div>
+      </Section>
     );
   }
 
@@ -48,7 +57,11 @@ export default function BlogPost() {
       <BlogPostHeader post={post} />
       
       {/* Main Content with Sidebar */}
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <Section
+        variant="wide"
+        padding="sm"
+        background="transparent"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-12">
           {/* Main Article */}
           <div className="min-w-0">
@@ -60,14 +73,14 @@ export default function BlogPost() {
             <TableOfContents />
           </aside>
         </div>
-      </div>
+      </Section>
       
       {/* Related Posts */}
       <RelatedPosts currentPostId={post.id} currentCategory={post.category} />
       
       {/* CTA Section */}
       <CTA 
-        theme="dark"
+        theme={theme}
         showWave={true}
         heading="Ready to Transform Your Data Analysis?"
         subheader="Join leading enterprises using TextQL to unlock insights from their data"

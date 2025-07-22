@@ -119,54 +119,72 @@ export const navigation: NavItem[] = [
     megaMenu: {
       sections: [
         {
-          title: 'Browse Solutions',
+          title: 'Featured Solutions',
           items: [
             {
               label: 'All Solutions',
-              description: '',
+              description: 'Browse our complete library of industry solutions',
               href: '/solutions',
               icon: 'GitMerge'
             },
             {
-              label: 'Banking',
-              description: '',
-              href: '/solutions?industry=banking',
-              icon: 'Building2'
+              label: 'Digital Banking',
+              description: 'Transform traditional banking into seamless digital experiences',
+              href: '/solutions/digital-banking',
+              icon: 'Smartphone'
             },
             {
-              label: 'Healthcare',
-              description: '',
-              href: '/solutions?industry=healthcare',
-              icon: 'Heart'
+              label: 'Predictive Maintenance',
+              description: 'Maximize equipment reliability with IoT-powered predictions',
+              href: '/solutions/predictive-maintenance',
+              icon: 'Wrench'
             },
             {
-              label: 'Insurance',
-              description: '',
-              href: '/solutions?industry=insurance',
+              label: 'Fraud Prevention',
+              description: 'Advanced AI-powered fraud detection and prevention',
+              href: '/solutions/fraud-prevention',
               icon: 'Shield'
             }
           ]
         },
         {
-          title: '',
+          title: 'By Industry',
           items: [
             {
+              label: 'Banking & Finance',
+              description: 'Digital transformation, fraud prevention, personalization',
+              href: '/solutions?industry=banking',
+              icon: 'Building2'
+            },
+            {
+              label: 'Healthcare',
+              description: 'Patient care optimization, operational efficiency',
+              href: '/solutions?industry=healthcare',
+              icon: 'Heart'
+            },
+            {
               label: 'Manufacturing',
-              description: '',
+              description: 'Predictive maintenance, quality control, efficiency',
               href: '/solutions?industry=manufacturing',
               icon: 'Factory'
             },
             {
-              label: 'Media',
-              description: '',
-              href: '/solutions?industry=media',
-              icon: 'Newspaper'
+              label: 'Insurance',
+              description: 'Claims optimization, risk assessment, automation',
+              href: '/solutions?industry=insurance',
+              icon: 'Shield'
             },
             {
-              label: 'Retail',
-              description: '',
+              label: 'Retail & E-commerce',
+              description: 'Customer loyalty, inventory optimization, personalization',
               href: '/solutions?industry=retail',
-              icon: 'Building2'
+              icon: 'ShoppingCart'
+            },
+            {
+              label: 'Media & Entertainment',
+              description: 'Content performance, audience engagement, optimization',
+              href: '/solutions?industry=media',
+              icon: 'Newspaper'
             }
           ]
         }
@@ -206,19 +224,19 @@ export const navigation: NavItem[] = [
           items: [
             {
               label: 'Careers',
-              description: '',
+              description: 'Join our team building the future of data intelligence',
               href: '/careers',
               icon: 'Briefcase'
             },
             {
               label: 'Mission',
-              description: '',
+              description: 'Our vision to democratize data through natural language',
               href: '/about',
               icon: 'Target'
             },
             {
               label: 'Team',
-              description: '',
+              description: 'Meet the engineers and researchers behind TextQL',
               href: '/team',
               icon: 'Users'
             }

@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FunnelFlow } from '../animations/FunnelFlow';
 import { WaveBackground } from '../animations';
+import { Section } from '../ui/Section';
 
 interface HeroSectionProps {
   headline: string;
@@ -17,7 +18,13 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
   };
   
   return (
-    <section className="z-0 relative">
+    <Section
+      variant="content"
+      paddingBottom="md"
+      paddingTop="none"
+      background="transparent"
+      className="z-0 relative"
+    >
       {/* Background funnel flow - positioned behind everything */}
       {/* <div className="absolute inset-0 -z-1 opacity-60 scale-125 translate-y-[15%]">
         <FunnelFlow />
@@ -26,7 +33,7 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
         <WaveBackground />
       </div>
       
-      <div className="mx-auto max-w-site relative z-10 pb-12">
+      <div className="relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Left Column - Hero Content */}
           <div className="text-left">
@@ -61,6 +68,6 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { IntegrationCard } from '../../integrations/IntegrationCard';
-import { ChevronRight, Search } from 'lucide-react';
+import { Search } from 'lucide-react';
+import { useComponentTheme } from '../../../hooks/useComponentTheme';
+import { themeBackground, themeText, themeTextSecondary } from '../../../utils/theme-utils';
+import { Section } from '../../ui/Section';
 
 type IntegrationType = {
   name: string;
@@ -14,13 +17,12 @@ type IntegrationType = {
 type CategoryInfo = {
   id: string;
   name: string;
-  title: string;
-  subtitle: string;
-  icon?: string;
+  count?: number;
 };
 
 export function AllIntegrationsSection() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('All Integrations');
+  const theme = useComponentTheme();
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   const allIntegrations: IntegrationType[] = [
@@ -54,7 +56,7 @@ export function AllIntegrationsSection() {
       description: 'Leverage TextQL AI capabilities with your Databricks data platform.',
       category: 'Database',
       logoSrc: '/images/integrations/all/databricks.png',
-      href: 'https://databricks.com/',
+      href: '/integrations/databricks',
       isComingSoon: false
     },
     {
@@ -66,7 +68,7 @@ export function AllIntegrationsSection() {
       isComingSoon: false
     },
     {
-      name: 'SAP S/4 Hana',
+      name: 'SAP S/4 HANA',
       description: 'Integrate TextQL with SAP HANA for real-time analytics on enterprise data.',
       category: 'Database',
       logoSrc: '/images/integrations/all/saphana.png',
@@ -113,7 +115,7 @@ export function AllIntegrationsSection() {
       isComingSoon: false
     },
     
-    // BI Tool
+    // BI Tools
     {
       name: 'Tableau',
       description: 'Connect TextQL with your Tableau dashboards for AI-powered analysis and insights.',
@@ -171,7 +173,7 @@ export function AllIntegrationsSection() {
       isComingSoon: false
     },
     {
-      name: 'Quicksight',
+      name: 'QuickSight',
       description: 'Integrate TextQL with Amazon QuickSight for cloud-native business intelligence.',
       category: 'BI Tool',
       logoSrc: '/images/integrations/all/Quicksight.png',
@@ -202,7 +204,7 @@ export function AllIntegrationsSection() {
       href: 'https://www.sigmacomputing.com/',
       isComingSoon: false
     },
-     {
+    {
       name: 'Metabase',
       description: 'Connect TextQL to Metabase for intelligent insights from your business data.',
       category: 'BI Tool',
@@ -210,6 +212,8 @@ export function AllIntegrationsSection() {
       href: 'https://www.metabase.com/',
       isComingSoon: false
     },
+    
+    // Semantic Layers
     {
       name: 'dbt MetricFlow',
       description: 'Connect TextQL with dbt MetricFlow for consistent metric definitions.',
@@ -218,8 +222,6 @@ export function AllIntegrationsSection() {
       href: 'https://docs.getdbt.com/docs/build/about-metricflow',
       isComingSoon: false
     },
-    
-    // Semantic Layers
     {
       name: 'Cube',
       description: 'Integrate TextQL with Cube for semantic layer analytics and metrics.',
@@ -236,22 +238,8 @@ export function AllIntegrationsSection() {
       href: 'https://cloud.google.com/looker/docs/what-is-lookml',
       isComingSoon: false
     },
-    // {
-    //   name: 'Lightdash',
-    //   description: 'Connect TextQL with Lightdash for open-source BI and semantic modeling.',
-    //   category: 'Semantic Layer',
-    //   logoSrc: '/images/integrations/all/Lightdash.png',
-    //   isComingSoon: false
-    // },
     
     // Data Catalog
-    // {
-    //   name: 'Airflow',
-    //   description: 'Connect TextQL with Apache Airflow for workflow orchestration and data lineage.',
-    //   category: 'Data Catalog',
-    //   logoSrc: '/images/integrations/all/airflow.png',
-    //   isComingSoon: false
-    // },
     {
       name: 'DataHub',
       description: 'Integrate TextQL with DataHub for modern data catalog and discovery.',
@@ -292,27 +280,6 @@ export function AllIntegrationsSection() {
       href: 'https://www.getdbt.com/',
       isComingSoon: false
     },
-    // {
-    //   name: 'Select Star',
-    //   description: 'Integrate TextQL with Select Star for automated data discovery.',
-    //   category: 'Data Catalog',
-    //   logoSrc: '/images/integrations/all/Select Star.png',
-    //   isComingSoon: false
-    // },
-    // {
-    //   name: 'Secoda',
-    //   description: 'Connect TextQL with Secoda for data discovery and documentation.',
-    //   category: 'Data Catalog',
-    //   logoSrc: '/images/integrations/all/Secoda.png',
-    //   isComingSoon: false
-    // },
-    // {
-    //   name: 'Informatica',
-    //   description: 'Integrate TextQL with Informatica for enterprise data management.',
-    //   category: 'Data Catalog',
-    //   logoSrc: '/images/integrations/all/Informatica.png',
-    //   isComingSoon: false
-    // },
     
     // Business Context
     {
@@ -408,165 +375,124 @@ export function AllIntegrationsSection() {
 
   const categories: CategoryInfo[] = [
     {
-      id: 'All Integrations',
+      id: 'All',
       name: 'All Integrations',
-      title: 'All integrations',
-      subtitle: 'Plug in TextQL anywhere data lives in your stack'
     },
     {
       id: 'Database',
-      name: 'Database',
-      title: 'Database',
-      subtitle: 'Connect your data storage and warehousing solutions'
+      name: 'Databases',
     },
     {
       id: 'BI Tool',
-      name: 'BI Tool',
-      title: 'BI Tool',
-      subtitle: 'Enhance your analytics and visualization platforms'
+      name: 'BI Tools',
     },
     {
       id: 'Semantic Layer',
-      name: 'Semantic Layer',
-      title: 'Semantic Layers',
-      subtitle: 'Integrate with semantic modeling and metrics platforms'
+      name: 'Semantic Layers',
     },
     {
       id: 'Data Catalog',
-      name: 'Data Catalog',
-      title: 'Data Catalog',
-      subtitle: 'Connect with data discovery and governance tools'
+      name: 'Data Catalogs',
     },
     {
       id: 'Business Context',
       name: 'Business Context',
-      title: 'Business Context',
-      subtitle: 'Analyze documents and knowledge management systems'
     },
     {
       id: 'Framework',
-      name: 'Framework',
-      title: 'Orchestration & Framework',
-      subtitle: 'Integrate with data orchestration and framework tools'
+      name: 'Frameworks',
     }
   ];
+
+  // Add counts to categories
+  const categoriesWithCounts = categories.map(cat => ({
+    ...cat,
+    count: cat.id === 'All' 
+      ? allIntegrations.length 
+      : allIntegrations.filter(i => i.category === cat.id).length
+  }));
   
-  const currentCategory = categories.find(cat => cat.id === selectedCategory) || categories[0];
-  
-  const filteredIntegrations = selectedCategory === 'All Integrations'
-    ? allIntegrations.filter(integration => 
-        integration.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        integration.description.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    : allIntegrations.filter(integration => 
-        integration.category === selectedCategory &&
-        (integration.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-         integration.description.toLowerCase().includes(searchQuery.toLowerCase()))
-      );
+  const filteredIntegrations = allIntegrations.filter(integration => {
+    const matchesCategory = selectedCategory === 'All' || integration.category === selectedCategory;
+    const matchesSearch = searchQuery === '' || 
+      integration.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      integration.description.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
 
   return (
-    <section className="py-20 bg-[#F5F9F8]">
-      <div className="max-w-7xl mx-auto px-6 sm:px-12">
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Left Sidebar */}
-          <div className="lg:w-80 flex-shrink-0">
-            <div className="bg-white p-6 shadow-sm">
-              {/* Category Navigation */}
-              <div className="mb-8">
-                <h3 className="text-sm ml-2font-medium text-[#0A1F1C]/60 mb-4 uppercase tracking-wide">Categories</h3>
-                <nav className="space-y-1">
-                  {categories.map((category) => (
-                    <button
-                      key={category.id}
-                      onClick={() => setSelectedCategory(category.id)}
-                      className={`w-full flex items-center justify-between px-3 py-2 text-left transition-all ${
-                        selectedCategory === category.id
-                          ? 'bg-[#0A1F1C]/5 text-[#0A1F1C] font-medium'
-                          : 'text-[#0A1F1C]/70 hover:bg-[#0A1F1C]/5'
-                      }`}
-                    >
-                      <span className="flex items-center gap-3">
-                        <span className="text-sm">{category.name}</span>
-                      </span>
-                      {selectedCategory === category.id && (
-                        <ChevronRight className="w-4 h-4" />
-                      )}
-                    </button>
-                  ))}
-                </nav>
-              </div>
-
-              {/* Quick Links */}
-              {/* <div>
-                <h3 className="text-sm font-medium text-[#0A1F1C]/60 mb-4 uppercase tracking-wide">Quick links</h3>
-                <div className="space-y-3 ml-2">
-                  {quickLinks.map((link, index) => (
-                    <a
-                      key={index} 
-                      href={link.href}
-                      className="flex items-center gap-2 text-sm text-[#0A1F1C]/70 hover:text-[#0A1F1C] transition-colors group"
-                    >
-                      <span>{link.name}</span>
-                      <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </a>
-                  ))}
-                </div>
-              </div> */}
+    <Section
+      variant="wide"
+      padding="md"
+      background={theme === 'light' ? 'secondary' : 'primary'}
+    >
+        {/* Search and Filter Bar */}
+        <div className="mb-12">
+          <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
+            {/* Search */}
+            <div className="relative w-full lg:w-96">
+              <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 ${theme === 'light' ? 'text-gray-400' : 'text-gray-500'}`} />
+              <input
+                type="text"
+                placeholder="Search integrations..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className={`w-full pl-10 pr-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${theme === 'light' ? 'bg-white border border-gray-200 text-gray-900 placeholder:text-gray-400' : 'bg-gray-800 border border-gray-700 text-white placeholder:text-gray-500'}`}
+              />
             </div>
-          </div>
 
-          {/* Main Content */}
-          <div className="flex-1">
-            {/* Header */}
-            <div className="mb-8">
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-                <div>
-                  <h2 className="text-4xl font-extralight text-[#0A1F1C] mb-2 ml-5">
-                    {currentCategory.title}
-                  </h2>
-                  <p className="text-[#0A1F1C]/60 text-lg ml-5">
-                    {currentCategory.subtitle}
-                  </p>
-                </div>
-              </div>
-              
-              {/* Search Bar */}
-              <div className="relative max-w-md ml-5">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#0A1F1C]/40" />
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 bg-white border border-[#0A1F1C]/10 text-[#0A1F1C] placeholder:text-[#0A1F1C]/40 focus:outline-none focus:ring-2 focus:ring-[#B8D8D0]/50 focus:border-[#B8D8D0] transition-all"
-                />
-              </div>
-            </div>
-            
-            {/* Integrations Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-              {filteredIntegrations.map((integration, index) => (
-                <div key={index} className="transform scale-90">
-                  <IntegrationCard
-                    name={integration.name}
-                    description={integration.description}
-                    category={integration.category}
-                    logoSrc={integration.logoSrc}
-                    href={integration.href}
-                    isComingSoon={integration.isComingSoon}
-                  />
-                </div>
+            {/* Category Pills */}
+            <div className="flex flex-wrap gap-2">
+              {categoriesWithCounts.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => setSelectedCategory(category.id)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                    selectedCategory === category.id
+                      ? (theme === 'light' ? 'bg-gray-900 text-white' : 'bg-white text-gray-900')
+                      : (theme === 'light' ? 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200' : 'bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-600')
+                  }`}
+                >
+                  {category.name}
+                  {category.count !== undefined && (
+                    <span className="ml-2 text-xs opacity-70">
+                      {category.count}
+                    </span>
+                  )}
+                </button>
               ))}
             </div>
-            
-            {filteredIntegrations.length === 0 && (
-              <div className="text-center py-12">
-                <p className="text-[#0A1F1C]/60">No integrations found matching your search.</p>
-              </div>
-            )}
           </div>
         </div>
-      </div>
-    </section>
+
+        {/* Results count */}
+        <div className="mb-8">
+          <p className={theme === 'light' ? 'text-gray-600' : 'text-gray-400'}>
+            Showing {filteredIntegrations.length} integration{filteredIntegrations.length !== 1 ? 's' : ''}
+            {selectedCategory !== 'All' && ` in ${selectedCategory}`}
+          </p>
+        </div>
+        
+        {/* Integrations Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredIntegrations.map((integration, index) => (
+            <IntegrationCard
+              key={index}
+              name={integration.name}
+              description={integration.description}
+              category={integration.category}
+              logoSrc={integration.logoSrc}
+              href={integration.href}
+              isComingSoon={integration.isComingSoon}
+            />
+          ))}
+        </div>
+        
+        {filteredIntegrations.length === 0 && (
+          <div className="text-center py-12">
+            <p className={`text-lg ${theme === 'light' ? 'text-gray-500' : 'text-gray-400'}`}>No integrations found matching your search.</p>
+          </div>
+        )}
+    </Section>
   );
-} 
+}

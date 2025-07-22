@@ -1,25 +1,28 @@
 import { Outlet, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import { useNavbarHeight } from '../hooks/useNavbarHeight';
 
 
 export default function Layout() {
   const location = useLocation();
+  const navbarHeight = useNavbarHeight();
   
-  // Check if current page should have dark background
-  const isDarkPage = location.pathname.startsWith('/careers') || 
-                     location.pathname.startsWith('/about');
+  // Update CSS custom property for navbar height
+  useEffect(() => {
+    document.documentElement.style.setProperty('--navbar-height', `${navbarHeight}px`);
+  }, [navbarHeight]);
   
   return (
-    <div className={`min-h-screen ${isDarkPage ? 'bg-black' : ''}`}>
+    <div className="min-h-screen">
       {/* 
         Fixed navbar overlay - positioned above all content
         The navbar uses fixed positioning and overlays the viewport
         without affecting the layout flow of the main content
+        Note: z-index is now handled by the navbar's DebugWrapper
       */}
-      <div className="fixed top-0 left-0 right-0 z-50">
-        <Navbar/>
-      </div>
+      <Navbar/>
       
       {/* 
         Main content area - full viewport height

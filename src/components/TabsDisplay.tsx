@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text } from './ui';
+import { useComponentTheme } from '../hooks/useComponentTheme';
+import { themeBackgroundSecondary, themeText, themeTextSecondary } from '../utils/theme-utils';
 
 export interface ImageConfig {
   src: string;
@@ -31,6 +33,7 @@ export default function TabsDisplay<T extends string>({
   tabs, 
   defaultActiveTab 
 }: TabsDisplayProps<T>) {
+  const theme = useComponentTheme();
   const tabOptions = Object.keys(tabs) as T[];
   const [activeTab, setActiveTab] = useState<T>(defaultActiveTab || tabOptions[0]);
 
@@ -53,9 +56,9 @@ export default function TabsDisplay<T extends string>({
   const activeTabContent = tabs && activeTab ? tabs[activeTab] : null;
 
   return (
-    <section className="bg-black lg:py-24">
+    <section className={`${themeBackgroundSecondary(theme)} lg:py-24`}>
       <div className="mx-auto max-w-7xl px-6 md:px-12">
-        <h2 className="text-3xl lg:text-5xl font-extralight text-[#B8D8D0] tracking-tight leading-tight text-center mb-8 lg:mb-16">
+        <h2 className={`text-3xl lg:text-5xl font-extralight ${theme === 'light' ? 'text-[#2A3B35]' : 'text-[#B8D8D0]'} tracking-tight leading-tight text-center mb-8 lg:mb-16`}>
           {title}
         </h2>
 
@@ -65,10 +68,10 @@ export default function TabsDisplay<T extends string>({
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 p-12">
             {/* Left column - Text content */}
             <div className="flex flex-col justify-center">
-              <h3 className="text-2xl lg:text-4xl font-light text-gray-900 mb-3 lg:mb-6 transition-opacity duration-300">
+              <h3 className={`text-2xl lg:text-4xl font-light ${theme === 'light' ? 'text-gray-900' : 'text-white'} mb-3 lg:mb-6 transition-opacity duration-300`}>
                 {activeTabContent?.title || ''}
               </h3>
-              <Text className="text-xs md:text-base lg:text-xl font-light leading-relaxed mb-2 text-gray-700 transition-opacity duration-300">
+              <Text className={`text-xs md:text-base lg:text-xl font-light leading-relaxed mb-2 ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'} transition-opacity duration-300`}>
                 {activeTabContent?.description || ''}
               </Text>
             </div>
@@ -117,8 +120,8 @@ export default function TabsDisplay<T extends string>({
               onClick={() => setActiveTab(tab)}
               className={`px-2 md:px-6 py-3 rounded-full text-xs lg:text-sm font-medium transition-colors duration-200 ${
                 activeTab === tab
-                  ? 'bg-white text-black'
-                  : 'bg-[#0A1F1C]/40 text-[#B8D8D0] hover:bg-[#0A1F1C]/60'
+                  ? (theme === 'light' ? 'bg-[#2A3B35] text-white' : 'bg-white text-black')
+                  : (theme === 'light' ? 'bg-[#2A3B35]/20 text-[#2A3B35] hover:bg-[#2A3B35]/30' : 'bg-[#0A1F1C]/40 text-[#B8D8D0] hover:bg-[#0A1F1C]/60')
               }`}
             >
               {tab}

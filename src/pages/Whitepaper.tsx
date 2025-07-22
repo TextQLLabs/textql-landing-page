@@ -5,8 +5,12 @@ import { Button } from '../components/ui';
 import { WaveGrid } from '../components/animations';
 import { ArrowRight, Map, BarChart2, XCircle, Settings } from 'lucide-react';
 import { Badge } from '../components/ui';
+import { Section } from '../components/ui/Section';
+import { useComponentTheme } from '../hooks/useComponentTheme';
+import { themeBackgroundSecondary, themeBackground } from '../utils/theme-utils';
 
 export default function Whitepaper() {
+  const theme = useComponentTheme();
   const handleOpenPDF = () => {
     window.open('/pdf/ana-whitepaper-3-21.pdf', '_blank');
   };
@@ -21,13 +25,17 @@ export default function Whitepaper() {
       
       <div className="min-h-screen">
         {/* Hero Section */}
-        <div className="bg-black pt-20 pb-24">
-          <div className="max-w-7xl mx-auto px-6">
+        <Section 
+          variant="wide"
+          paddingTop="navbar"
+          paddingBottom="lg"
+          background="secondary"
+        >
             <div className="flex flex-col md:flex-row items-start justify-between gap-12">
               <div className="max-w-3xl">
                 <Badge 
                   variant="outline"
-                  theme="dark" 
+                  theme={theme} 
                   className="text-lg px-6 py-2 mb-8"
                 >
                   Technical Documentation
@@ -43,9 +51,9 @@ export default function Whitepaper() {
                 
                 <Button
                   variant="primary"
-                  size="lg"
+                  size="md"
                   onClick={handleOpenPDF}
-                  theme="dark"
+                  theme={theme}
                   className="group"
                 >
                   Download Full PDF
@@ -58,39 +66,48 @@ export default function Whitepaper() {
                   <div className="flex flex-col space-y-5">
                     <div className="flex items-center">
                       <Map className="w-5 h-5 mr-3 flex-shrink-0 text-[#B8D8D0]" />
-                      <Text color="muted" theme="dark">What is TextQL and how can it help you explore your data?</Text>
+                      <Text color="muted" theme={theme}>What is TextQL and how can it help you explore your data?</Text>
                     </div>
                     <div className="flex items-center">
                       <BarChart2 className="w-5 h-5 mr-3 flex-shrink-0 text-[#B8D8D0]" />
-                      <Text color="muted" theme="dark">How does it beat existing, pure-LLM systems?</Text>
+                      <Text color="muted" theme={theme}>How does it beat existing, pure-LLM systems?</Text>
                     </div>
                     <div className="flex items-center">
                       <XCircle className="w-5 h-5 mr-3 flex-shrink-0 text-[#B8D8D0]" />
-                      <Text color="muted" theme="dark">Why won't AI advances alone completely solve the problem?</Text>
+                      <Text color="muted" theme={theme}>Why won't AI advances alone completely solve the problem?</Text>
                     </div>
                     <div className="flex items-center">
                       <Settings className="w-5 h-5 mr-3 flex-shrink-0 text-[#B8D8D0]" />
-                      <Text color="muted" theme="dark">How exactly does it work from the inside?</Text>
+                      <Text color="muted" theme={theme}>How exactly does it work from the inside?</Text>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+        </Section>
 
         {/* Whitepaper Content */}
-        <div className="bg-[#F7F7F7] py-16">
+        <Section 
+          variant="full"
+          padding="md"
+          background="primary"
+        >
           <WhitepaperContent />
-        </div>
+        </Section>
         
         {/* CTA Section with wave effect and PDF button */}
-        <section className="relative min-h-[600px] bg-black overflow-hidden">
+        <Section 
+          variant="content"
+          padding="none"
+          height="min-screen"
+          background="secondary"
+          overflow="hidden"
+          className="relative min-h-[600px]"
+        >
           <WaveGrid />
           
           <div className="relative z-10 flex items-center min-h-[600px]">
-            <div className="mx-auto max-w-site px-6">
-              <div className="max-w-2xl mx-auto text-center space-y-8">
+            <div className="max-w-2xl mx-auto text-center space-y-8">
                 <div className="space-y-4">
                   <h2 className="text-5xl font-extralight text-[#B8D8D0] tracking-tight leading-tight">
                     Deep Dive: Read the Full Technical Report
@@ -98,7 +115,7 @@ export default function Whitepaper() {
                   
                   <Text 
                     color="muted" 
-                    theme="dark"
+                    theme={theme}
                     className="text-xl font-light"
                   >
                     Explore OQL's formal semantics, sandboxing internals, and benchmark methodology.
@@ -108,17 +125,16 @@ export default function Whitepaper() {
                 <div className="flex justify-center">
                   <Button
                     variant="primary"
-                    size="lg"
+                    size="md"
                     onClick={handleOpenPDF}
-                    theme="dark"
+                    theme={theme}
                   >
                     Read Full Whitepaper
                   </Button>
                 </div>
-              </div>
             </div>
           </div>
-        </section>
+        </Section>
       </div>
     </>
   );

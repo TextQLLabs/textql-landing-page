@@ -1,20 +1,23 @@
 import { type ReactNode } from 'react';
 import { type CardProps } from './types';
 import { baseStyles, variants, paddings } from './styles';
+import { useComponentTheme } from '../../../hooks/useComponentTheme';
 
 export function Card({
   children,
   variant = 'default',
   padding = 'md',
-  theme = 'dark',
+  theme,
   className = '',
   ...props
 }: CardProps) {
+  const globalTheme = useComponentTheme();
+  const effectiveTheme = theme || globalTheme;
   return (
     <div
       className={`
-        ${baseStyles[theme]}
-        ${variant === 'elevated' ? variants.elevated[theme] : ''}
+        ${baseStyles[effectiveTheme]}
+        ${variant === 'elevated' ? variants.elevated[effectiveTheme] : ''}
         ${paddings[padding]}
         ${className}
       `}

@@ -1,0 +1,255 @@
+/**
+ * Page Patterns CSS Module
+ * Styles for common page-level patterns that work with data attributes
+ * to eliminate inline styles for dynamic content
+ */
+
+/* ===== BACKGROUND IMAGE PATTERNS ===== */
+
+/* Apply background images via data attributes */
+[data-bg-image] {
+  background-repeat: no-repeat;
+}
+
+[data-bg-image][data-bg-size="cover"] {
+  background-size: cover;
+}
+
+[data-bg-image][data-bg-size="contain"] {
+  background-size: contain;
+}
+
+[data-bg-image][data-bg-position="center"] {
+  background-position: center;
+}
+
+[data-bg-image][data-bg-position="top"] {
+  background-position: top;
+}
+
+[data-bg-image][data-bg-position="bottom"] {
+  background-position: bottom;
+}
+
+/* Use CSS custom property for the actual image URL */
+[data-bg-image] {
+  background-image: var(--bg-image);
+}
+
+/* ===== RESPONSIVE TYPOGRAPHY ===== */
+
+/* Dynamic font sizing using CSS custom properties */
+.dynamic-title {
+  font-size: var(--font-size-responsive, 3rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* Container query support for truly responsive text */
+@container (min-width: 768px) {
+  .container-responsive-text {
+    font-size: calc(1rem + 2vw);
+  }
+}
+
+/* ===== METRIC DISPLAYS ===== */
+
+.metric-display {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.metric-value {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.metric-label {
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+/* ===== LOGO FILTERS ===== */
+
+/* Import filter classes from filters module */
+.filter-light-logo {
+  filter: brightness(0) saturate(100%) invert(100%);
+}
+
+.filter-dark-logo {
+  filter: brightness(0) saturate(100%) invert(18%) sepia(17%) saturate(589%) hue-rotate(93deg) brightness(96%) contrast(93%);
+}
+
+/* ===== CARD OVERLAYS ===== */
+
+.card-overlay {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ===== SCROLL ANIMATIONS ===== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out forwards;
+  animation-delay: var(--animation-delay, 0ms);
+}
+
+.animate-slideUp {
+  animation: slideUp 0.6s ease-out forwards;
+  animation-delay: var(--animation-delay, 0ms);
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.6s ease-out forwards;
+  animation-delay: var(--animation-delay, 0ms);
+}
+
+/* ===== VIEWPORT POSITIONING ===== */
+
+.viewport-container {
+  position: var(--position, fixed);
+  top: var(--top, 0);
+  height: var(--height, 100vh);
+}
+
+/* ===== DYNAMIC CONTENT CONTAINERS ===== */
+
+.dynamic-container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--px, 1rem);
+  padding-right: var(--px, 1rem);
+}
+
+/* ===== EVENT PAGE PATTERNS ===== */
+
+.event-header {
+  position: relative;
+  overflow: hidden;
+  background-color: #000;
+  color: #fff;
+}
+
+.event-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(114, 158, 140, 0.1) 100%);
+  pointer-events: none;
+}
+
+.event-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.event-logo {
+  height: 3rem;
+  width: auto;
+  object-fit: contain;
+}
+
+/* ===== CUSTOMER STORY CARDS ===== */
+
+.story-card {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  background-color: #f3f4f6;
+}
+
+.story-card-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-image: var(--bg-image);
+}
+
+.story-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-gradient, linear-gradient(to bottom right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)));
+}
+
+.story-card-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem;
+  color: white;
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+/* Hide scrollbars but keep scrolling */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth scroll behavior */
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* Prevent text selection */
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Force hardware acceleration */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}

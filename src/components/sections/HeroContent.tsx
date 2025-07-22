@@ -26,7 +26,7 @@ export default function HeroContent() {
         Deploy AI agents to find trends across all of your data that makes you money
       </p>
       <div className="opacity-0 animate-slide-up animation-delay-400">
-        <DemoRequestForm />
+        <DemoRequestForm theme="dark" />
       </div>
     </div>
   );

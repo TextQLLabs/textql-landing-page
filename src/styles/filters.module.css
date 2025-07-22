@@ -1,0 +1,195 @@
+/**
+ * Filter CSS Module
+ * Contains complex SVG filters and image effects that can't be expressed with Tailwind
+ */
+
+/* Logo filters for theme adaptation */
+.logoFilterLight {
+  filter: brightness(0) saturate(100%) invert(18%) sepia(17%) saturate(589%) hue-rotate(93deg) brightness(96%) contrast(93%);
+}
+
+.logoFilterDark {
+  filter: brightness(0) saturate(100%) invert(91%) sepia(21%) saturate(298%) hue-rotate(118deg) brightness(95%) contrast(93%);
+}
+
+/* Grayscale filters with hover effects */
+.grayscaleHover {
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.grayscaleHover:hover {
+  filter: grayscale(0%);
+}
+
+/* Blur filters */
+.blurLight {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.blurDark {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Glass morphism effects */
+.glassMorphism {
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.glassMorphismDark {
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  background-color: rgba(17, 25, 40, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+/* Image overlay filters */
+.imageOverlay {
+  position: relative;
+  overflow: hidden;
+}
+
+.imageOverlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+  z-index: 1;
+}
+
+.imageOverlayLight::before {
+  background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.7) 100%);
+}
+
+/* Duotone effects */
+.duotone {
+  position: relative;
+}
+
+.duotone::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #729E8C;
+  mix-blend-mode: color;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.duotoneLight::after {
+  background: #2A3B35;
+  opacity: 0.3;
+}
+
+/* Brightness and contrast adjustments */
+.brighten {
+  filter: brightness(1.1) contrast(1.05);
+}
+
+.darken {
+  filter: brightness(0.9) contrast(1.1);
+}
+
+/* Complex SVG filters */
+.svgFilter {
+  filter: url(#customFilter);
+}
+
+/* Define reusable SVG filters */
+@supports (filter: url(#test)) {
+  svg.filterDefs {
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+}
+
+/* Glow effects */
+.glowLight {
+  filter: drop-shadow(0 0 20px rgba(184, 216, 208, 0.5));
+}
+
+.glowDark {
+  filter: drop-shadow(0 0 20px rgba(184, 216, 208, 0.3));
+}
+
+/* Color shift on hover */
+.colorShift {
+  transition: filter 0.3s ease;
+}
+
+.colorShift:hover {
+  filter: hue-rotate(10deg) saturate(1.2);
+}
+
+/* Noise texture overlay */
+.noiseTexture {
+  position: relative;
+}
+
+.noiseTexture::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Theme-aware filter adjustments */
+:global(.global-light-mode) .glassMorphism {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+:global(.global-light-mode) .glowLight {
+  filter: drop-shadow(0 0 15px rgba(42, 59, 53, 0.3));
+}
+
+/* Mask styles for icons */
+.iconMaskLight {
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-position: center;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  background-color: #4a665c;
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+}
+
+.iconMaskLight:hover {
+  opacity: 1;
+}
+
+.iconMaskDark {
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-position: center;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  background-color: #9ca3af;
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+}
+
+.iconMaskDark:hover {
+  opacity: 1;
+}

@@ -1,12 +1,16 @@
 import { ArrowRight } from 'lucide-react';
 import { Text, Heading } from '../../../ui';
+import { Section } from '../../../ui/Section';
 import { Carousel } from './Carousel';
 import { MobileCarousel } from './MobileCarousel';
 
 export function SolutionCarousel() {
   return (
-    <section className="bg-[#F5F9F8] py-12 md:py-24">
-      <div className="max-w-site mx-auto px-6">
+    <Section
+      variant="content"
+      padding="md"
+      background="secondary"
+    >
         {/* Header */}
         <div className="hidden md:flex items-center justify-center mb-12">
           <div className="max-w-2xl">
@@ -44,7 +48,6 @@ export function SolutionCarousel() {
         <div className="block md:hidden">
           <MobileCarousel />
         </div>
-      </div>
-    </section>
+    </Section>
   );
 }

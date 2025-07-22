@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { ArrowUpRight, Clock, DollarSign, Zap } from 'lucide-react';
-import { Text, Card } from '../../ui';
+import { Text, Card, Section } from '../../ui';
 
 const useCase = [
   {
@@ -58,8 +58,11 @@ export function PricingROI() {
   const [selectedCase, setSelectedCase] = useState(useCase[0]);
 
   return (
-    <section className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <Section
+      variant="wide"
+      padding="lg"
+      background="white"
+    >
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl text-[#2A3B35] mb-4">
@@ -192,7 +195,6 @@ export function PricingROI() {
             </div>
           </Card>
         </div>
-      </div>
-    </section>
+    </Section>
   );
 }

@@ -5,6 +5,7 @@ import { WaveBackground } from '../animations';
 import { Testimonial } from '../Testimonial';
 import { DemoRequestForm } from '../ui/DemoRequestForm';
 import { DemoRequestButton } from '../ui/Button/DemoRequestButton';
+import { Section } from '../ui/Section';
 
 interface HeroSectionProps {
   headline: string;
@@ -20,7 +21,13 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
   };
   
   return (
-    <section className="z-0 relative">
+    <Section
+      variant="content"
+      padding="none"
+      height="min-screen"
+      background="transparent"
+      className="z-0 relative"
+    >
       {/* Background funnel flow - positioned behind everything */}
       {/* <div className="absolute inset-0 -z-1 opacity-60 scale-125 translate-y-[15%]">
         <FunnelFlow />
@@ -29,7 +36,7 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
         <WaveBackground />
       </div>
       
-      <div className="flex flex-col justify-center mx-auto max-w-site relative z-10 min-h-screen px-6 pb-40 md:pb-20">
+      <div className="flex flex-col justify-center relative z-10 min-h-screen px-6 pb-40 md:pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8 items-center px-6 max-w-xl lg:max-w-site mx-auto lg:min-h-0 pb-10 lg:pb-20">
           {/* Left Column - Hero Content */}
           <div className="text-left">
@@ -82,6 +89,6 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
         />
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

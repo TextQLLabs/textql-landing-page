@@ -1,6 +1,6 @@
 import { ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Text, Badge, Heading } from '../../ui';
+import { Text, Badge, Heading, Section } from '../../ui';
 import type { BlogPost } from '../blog/types';
 
 interface BlogPostHeaderProps {
@@ -15,8 +15,12 @@ export function BlogPostHeader({ post }: BlogPostHeaderProps) {
 
   return (
     <header className="border-b border-white/10" style={{ backgroundColor: '#000000' }}>
-      <div className="pt-32 pb-12">
-        <div className="mx-auto max-w-7xl px-6">
+      <Section
+        variant="wide"
+        paddingTop="navbar"
+        paddingBottom="sm"
+        background="transparent"
+      >
           {/* Back Link */}
           <Link 
             to="/blog" 
@@ -73,8 +77,7 @@ export function BlogPostHeader({ post }: BlogPostHeaderProps) {
               />
             </div>
           </div>
-        </div>
-      </div>
+      </Section>
     </header>
   );
 }

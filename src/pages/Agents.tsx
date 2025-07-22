@@ -7,10 +7,14 @@ import {
 import { SolutionCarousel } from '../components/page-sections/home';
 import { CTA } from '../components/sections';
 import { SEO } from '../components/SEO';
+import { Section } from '../components/ui/Section';
+import { useComponentTheme } from '../hooks/useComponentTheme';
+import { themeBackgroundSecondary } from '../utils/theme-utils';
 
 export default function Agents() {
+  const theme = useComponentTheme();
   return (
-    <div className="min-h-screen bg-black">
+    <div className={`min-h-screen ${themeBackgroundSecondary(theme)}`}>
       <SEO 
         title="AI Agents | TextQL"
         description="Learn about Ana, the most intelligent agent for enterprise data analysis. Discover how we built the Ana agent and its capabilities."
@@ -19,11 +23,14 @@ export default function Agents() {
       />
       
       <AgentHeader />
-      <section className="py-12 bg-[#F7F7F7]">
-        <div className="mx-auto max-w-site px-6">
-          <AgentFeature1 />
-        </div>
-      </section>
+      <Section 
+        variant="content"
+        paddingTop="sm"
+        paddingBottom="sm"
+        background="primary"
+      >
+        <AgentFeature1 />
+      </Section>
 
       {/* Joins Section */}
       <JoinsSection />
@@ -36,7 +43,7 @@ export default function Agents() {
 
       {/* CTA Section */}
       <CTA 
-        theme="dark"
+        theme={theme}
         showWave={true}
         variant="wide"
         heading="Ready to deploy Ana in your organization?"

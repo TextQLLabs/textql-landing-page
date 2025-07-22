@@ -33,6 +33,21 @@ export function DebugProvider({ children }: { children: React.ReactNode }) {
     }
   }, [debugMode]);
 
+  useEffect(() => {
+    // Listen for ESC key toggle event
+    const handleToggleEvent = () => {
+      if (debugMode) {
+        setDebugMode(false);
+      }
+    };
+
+    document.addEventListener('toggleDebugMode', handleToggleEvent);
+    
+    return () => {
+      document.removeEventListener('toggleDebugMode', handleToggleEvent);
+    };
+  }, [debugMode]);
+
   const toggleDebug = () => {
     setDebugMode(prev => !prev);
   };

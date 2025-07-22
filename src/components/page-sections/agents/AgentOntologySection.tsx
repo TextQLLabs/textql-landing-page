@@ -4,26 +4,34 @@ import { Button } from '../../ui';
 
 export function AgentOntologySection() {
   return (
-    <section className="relative min-h-[500px] bg-black overflow-hidden">
-      {/* Background Animation */}
-      <div className="absolute inset-0 opacity-50">
-        <OntologyPolyhedron />
+    <div className="relative w-full min-h-[500px] overflow-hidden" style={{ backgroundColor: '#000000' }}>
+      {/* Orb animation container - only this should have opacity */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div style={{ opacity: 0.5 }}>
+          <OntologyPolyhedron />
+        </div>
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-[500px] px-6">
-        <h2 className="text-5xl font-extralight text-[#B8D8D0] mb-6 tracking-tight text-center">
+      {/* Content container - fully opaque and above the orb */}
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-[500px] px-6 py-16">
+        <h2 
+          className="text-5xl font-extralight mb-6 tracking-tight text-center"
+          style={{ color: '#B8D8D0' }}
+        >
           Powered by The Ontology
         </h2>
 
-        <p className="text-xl text-[#729E8C] max-w-2xl mx-auto text-center mb-8">
+        <p 
+          className="text-xl max-w-2xl mx-auto text-center mb-8"
+          style={{ color: '#729E8C' }}
+        >
           AI's Interface for Enterprise Data
         </p>
 
-        <a href="/ontology">
+        <a href="/ontology" className="inline-block">
           <Button 
             variant="primary" 
-            size="lg"
+            size="md"
             className="group"
           >
             Learn How It Works
@@ -31,12 +39,6 @@ export function AgentOntologySection() {
           </Button>
         </a>
       </div>
-
-      {/* Gradient overlays for smooth edges */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black to-transparent" />
-      </div>
-    </section>
+    </div>
   );
 }

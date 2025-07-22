@@ -5,8 +5,13 @@ import { Link } from 'react-router-dom';
 import { jobs } from '../data/JobData';
 import { MissionBlock, ValuesBlock } from '../components/careers';
 import { WaveBackground } from '../components/animations/WaveBackground';
+import { Section } from '../components/ui/Section';
+import { useGlobalTheme } from '../components/GlobalThemeProvider';
+import { getThemeClasses } from '../utils/theme-utils';
 
 export default function Careers() {
+  const { isLightMode } = useGlobalTheme();
+  const themeClasses = getThemeClasses(isLightMode);
   const rolesRef = useRef<HTMLDivElement>(null);
 
   const scrollToRoles = () => {
@@ -38,7 +43,7 @@ export default function Careers() {
   }));
 
   return (
-    <div className="min-h-screen bg-black" style={{ backgroundColor: '#000000' }}>
+    <div className={`min-h-screen ${themeClasses.bgSecondary}`}>
       <SEO 
         title="Careers | TextQL"
         description="Join TextQL's team and help build the future of enterprise data analysis with AI."
@@ -47,60 +52,70 @@ export default function Careers() {
       />
       
       {/* Hero Section */}
-      <div className="relative overflow-hidden min-h-screen flex flex-col justify-center" style={{ backgroundColor: '#000000' }}>
+      <Section
+        variant="wider"
+        padding="none"
+        height="hero"
+        hasNavbarOffset
+        overflow="hidden"
+        background="secondary"
+        className="relative"
+      >
         {/* Background with gradient */}
         <div className="absolute inset-0 z-0 animate-fade-in animation-delay-400">
-          <WaveBackground />
+          <WaveBackground theme={isLightMode ? 'light' : 'dark'} />
         </div>        
         {/* Content */}
-        <div className="relative z-10 pt-32 pb-16 px-12">
-          <div className="max-w-5xl mx-auto text-center">
-            <div className="mb-6">
-              <h1 className="text-6xl font-extralight mb-6 text-[#B8D8D0]">
+        <div className="relative z-10 flex items-center justify-center h-full">
+          <div className="text-center max-w-4xl mx-auto px-6">
+              <h1 className={`text-4xl sm:text-5xl md:text-6xl font-extralight mb-6 ${themeClasses.textPrimary}`}>
                 Help us build the future of AI
               </h1>
-              <p className="text-2xl text-[#729E8C] font-light max-w-3xl mx-auto mb-8">
+              <p className={`text-lg sm:text-xl md:text-2xl font-light max-w-3xl mx-auto mb-8 ${themeClasses.textSecondary}`}>
                 We're on a mission to drive the cost of a data-driven decision to zero.
               </p>
               <button 
                 onClick={scrollToRoles}
-                className="inline-flex items-center bg-[#0A1F1C] hover:bg-[#0A1F1C]/80 text-[#B8D8D0] font-light py-3 px-6 rounded-md transition-colors duration-200"
+                className={`inline-flex items-center font-medium py-3 px-8 rounded-lg transition-all duration-200 ${themeClasses.buttonPrimary} hover:opacity-90 transform hover:scale-105`}
               >
                 See open roles
               </button>
-            </div>
           </div>
         </div>
         
         {/* Bottom Gradient */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent z-20" />
-      </div>
+        <div className={`absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t ${themeClasses.bgSecondary} to-transparent z-20`} />
+      </Section>
 
       {/* Mission Block */}
       {/* <MissionBlock /> */}
 
       {/* Values Block */}
-      <div className="px-6">
+      <Section variant="content" padding="none">
         <ValuesBlock />
-      </div>
+      </Section>
 
-      <section ref={rolesRef} className="py-16 bg-black">
-        <div className="mx-auto max-w-site px-12">
-          <h2 className="text-4xl font-extralight text-[#B8D8D0] mb-8">Open Roles</h2>
+      <Section 
+        ref={rolesRef} 
+        variant="content"
+        padding="md"
+        background="secondary"
+      >
+          <h2 className={`text-3xl sm:text-4xl font-extralight mb-8 ${themeClasses.textPrimary}`}>Open Roles</h2>
           {categories.map((category, index) => (
             <div key={index} className="mb-16">
-              <h3 className="text-2xl font-extralight text-[#B8D8D0] mb-4">{category.category}</h3>
+              <h3 className={`text-xl sm:text-2xl font-extralight mb-4 ${themeClasses.textPrimary}`}>{category.category}</h3>
               
-              <div className="border-t border-[#0A1F1C]">
+              <div className={`border-t ${themeClasses.border}`}>
                 {category.jobs.map((job, jobIndex) => (
-                  <div key={jobIndex} className="py-6 border-b border-[#0A1F1C] flex justify-between items-center">
+                  <div key={jobIndex} className={`py-6 border-b flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 ${themeClasses.border}`}>
                     <div>
-                      <h4 className="text-md lg:text-xl font-light text-[#B8D8D0]">{job.title}</h4>
-                      <p className="text-xs lg:text-base text-[#729E8C] font-light mt-2">{job.location}</p>
+                      <h4 className={`text-base sm:text-lg lg:text-xl font-medium ${themeClasses.textPrimary}`}>{job.title}</h4>
+                      <p className={`text-sm lg:text-base font-light mt-1 ${themeClasses.textSecondary}`}>{job.location}</p>
                     </div>
                     <Link 
                       to={job.url} 
-                      className="text-[#B8D8D0] hover:text-[#729E8C] font-light flex items-center transition-colors duration-200"
+                      className={`font-medium flex items-center transition-all duration-200 ${themeClasses.linkPrimary} hover:opacity-75 text-sm sm:text-base whitespace-nowrap`}
                     >
                       Apply <span className="ml-2">→</span>
                     </Link>
@@ -109,8 +124,7 @@ export default function Careers() {
               </div>
             </div>
           ))}
-        </div>
-      </section>
+      </Section>
     </div>
   );
 }

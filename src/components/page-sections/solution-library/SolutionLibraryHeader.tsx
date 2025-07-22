@@ -14,7 +14,7 @@ export function SolutionLibraryHeader() {
 
 
       {/* Content */}
-      <div className="relative z-10 pt-32 pb-16 px-4 mt-12">
+      <div className="relative z-10 navbar-offset pb-16 px-4 mt-12">
         <div className="max-w-5xl mx-auto text-center">
           <div className="mb-6">
             <h1 className="text-4xl lg:text-6xl font-extralight pb-6 text-[#B8D8D0]">

@@ -1,5 +1,9 @@
 # Embedding Models and When to Use Them
 
+## Table of Contents
+- [Embedding Models: The Smart Alternative for Decision Logic](#embedding-models-the-smart-alternative-for-decision-logic)
+- [The Future of AI: Smarter Chaining with Embeddings](#the-future-of-ai-smarter-chaining-with-embeddings)
+
 There's a severely underrated capability that embedding models offer in supporting reasoning — one that almost everyone seems to overlook. In today's AI landscape, LLMs (large language models) dominate the conversation, but many are overusing them and chaining them in ways that increase both the probability of failure and the overall cost, while also slowing down response times.
 
 LLMs operate by reading text, converting it into numerical representations, and then translating those numbers back into text. This works well for generating human-readable outputs like code, natural language responses, or search results. However, for many intermediate reasoning steps, you don't need a natural language response at all — and that's where embedding models shine.
