@@ -111,12 +111,17 @@ export default {
         slideUp: {
           '0%': { opacity: '0', transform: 'translateY(10px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        pulseFast: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.5' },
         }
       },
       animation: {
         fadeIn: 'fadeIn 0.3s ease-out forwards',
         slideDown: 'slideDown 0.3s ease-out forwards',
         slideUp: 'slideUp 0.3s ease-out forwards',
+        'pulse-fast': 'pulseFast 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       // Common typography scales
       fontSize: {
