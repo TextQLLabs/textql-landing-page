@@ -18,3 +18,6 @@ export * from './Section';
 
 // Image Components
 export { default as ImageProxy } from './ImageProxy';
+
+// Video Components
+export * from './VideoModal';

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Badge, DemoRequestForm, Carousel, MobileCarousel, Button} from "../../ui";
 import { Section, sectionPresets } from "../../ui/Section";
 import { WaveBackground } from "../../animations";
@@ -10,7 +10,8 @@ import { useGlobalTheme } from '../../GlobalThemeProvider';
 import { getThemeClasses } from '../../../utils/theme-utils';
 import { COLORS } from '../../../styles/constants';
 import { useNavigate } from 'react-router-dom';
-import { Rocket } from 'lucide-react';
+import { Rocket, Play } from 'lucide-react';
+import { VideoModal } from '../../ui/VideoModal';
 
 
 // const logos = [
@@ -124,6 +125,7 @@ export function HomeHero({}: HomeHeroProps = {}) {
   // Always use global theme - no fallback
   const { isLightMode, toggleTheme } = useGlobalTheme();
   const navigate = useNavigate();
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   
   const navbarHeight = useNavbarHeight(); // Use shared hook
   const { debugMode } = useDebug(); // Use unified debug system
@@ -207,9 +209,29 @@ export function HomeHero({}: HomeHeroProps = {}) {
               </div>
             </div>
       
-            {/* Right Content - Insights Feed */}
+            {/* Right Content - Video Preview */}
             <div className="hidden lg:flex lg:min-h-0 justify-center lg:justify-start items-center h-full">
-              <InsightsFeed theme={isLightMode ? 'light' : 'dark'} minimal={true} />
+              <div 
+                className="relative cursor-pointer group rounded-lg overflow-hidden shadow-2xl"
+                onClick={() => setIsVideoModalOpen(true)}
+                style={{ aspectRatio: '1728/1080' }}
+              >
+                <video
+                  src="/videos/preview.mp4"
+                  poster="/images/demo_preview.jpg"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover rounded-lg"
+                  style={{ maxWidth: 'min(600px, 100%)' }}
+                />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/20 transition-colors duration-300">
+                  <div className="bg-white/90 group-hover:bg-white group-hover:scale-110 transition-all duration-300 rounded-full p-4 shadow-lg">
+                    <Play className="w-8 h-8 text-gray-900" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -279,6 +301,13 @@ export function HomeHero({}: HomeHeroProps = {}) {
           </div>
         </div>
       </div>
+      
+      {/* Video Modal */}
+      <VideoModal 
+        isOpen={isVideoModalOpen}
+        onClose={() => setIsVideoModalOpen(false)}
+        videoSrc="/videos/demo.mp4"
+      />
     </Section>
   );
 }
