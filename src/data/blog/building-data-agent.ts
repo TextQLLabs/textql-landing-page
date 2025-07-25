@@ -7,8 +7,8 @@ export const post: BlogPost = {
   image: '/images/blog/building-data-agent/header.png',
   useLocalImage: true,
   author: {
-    name: 'Ethan James',
-    role: 'CTO',
+    name: 'Ethan Ding',
+    role: 'CEO',
     company: 'TextQL'
   },
   date: 'October 15, 2023',
