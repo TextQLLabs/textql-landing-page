@@ -7,13 +7,31 @@ declare global {
       people: {
         set: (properties: Record<string, any>) => void;
       };
+      debug: () => void;
     };
   }
 }
 
+// Helper to check if PostHog is loaded
+const isPostHogReady = (): boolean => {
+  return typeof window !== 'undefined' && window.posthog !== undefined;
+};
+
 export const trackEvent = (eventName: string, properties?: Record<string, any>) => {
-  if (window.posthog) {
-    window.posthog.capture(eventName, properties);
+  if (!isPostHogReady()) {
+    console.warn('[Analytics] PostHog not loaded yet, event not tracked:', eventName);
+    return;
+  }
+  
+  try {
+    window.posthog!.capture(eventName, properties);
+    
+    // Debug logging in development
+    if (import.meta.env.DEV) {
+      console.log('[Analytics] Event tracked:', eventName, properties);
+    }
+  } catch (error) {
+    console.error('[Analytics] Error tracking event:', error);
   }
 };
 
@@ -21,25 +39,49 @@ export const trackButtonClick = (buttonName: string, location: string, propertie
   trackEvent('button_clicked', {
     button_name: buttonName,
     location,
-    ...properties,
-  });
-};
-
-export const trackPageView = (pageName: string, properties?: Record<string, any>) => {
-  trackEvent('page_viewed', {
-    page_name: pageName,
+    timestamp: new Date().toISOString(),
     ...properties,
   });
 };
 
 export const identifyUser = (userId: string, properties?: Record<string, any>) => {
-  if (window.posthog) {
-    window.posthog.identify(userId, properties);
+  if (!isPostHogReady()) {
+    console.warn('[Analytics] PostHog not loaded yet, user not identified');
+    return;
+  }
+  
+  try {
+    window.posthog!.identify(userId, properties);
+    
+    if (import.meta.env.DEV) {
+      console.log('[Analytics] User identified:', userId, properties);
+    }
+  } catch (error) {
+    console.error('[Analytics] Error identifying user:', error);
   }
 };
 
 export const resetUser = () => {
-  if (window.posthog) {
-    window.posthog.reset();
+  if (!isPostHogReady()) {
+    console.warn('[Analytics] PostHog not loaded yet, user not reset');
+    return;
+  }
+  
+  try {
+    window.posthog!.reset();
+    
+    if (import.meta.env.DEV) {
+      console.log('[Analytics] User reset');
+    }
+  } catch (error) {
+    console.error('[Analytics] Error resetting user:', error);
+  }
+};
+
+// Enable PostHog debug mode in development
+export const enableDebugMode = () => {
+  if (isPostHogReady() && window.posthog!.debug) {
+    window.posthog!.debug();
+    console.log('[Analytics] PostHog debug mode enabled');
   }
 };
