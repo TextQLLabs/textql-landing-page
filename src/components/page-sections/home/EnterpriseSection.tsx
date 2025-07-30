@@ -3,7 +3,6 @@ import { Button, Text } from '../../ui';
 import { Section } from '../../ui/Section';
 import { useComponentTheme } from '../../../hooks/useComponentTheme';
 import { themeBackgroundSecondary, themeText } from '../../../utils/theme-utils';
-import { trackButtonClick } from '../../../utils/analytics';
 
 const features = [
   {
@@ -77,7 +76,6 @@ export function EnterpriseSection() {
                   theme="dark"
                   size="md"
                   className="group"
-                  onClick={() => trackButtonClick('Learn More About Enterprise', 'home_enterprise_section', { destination: 'enterprise' })}
                 >
                   Learn More About Enterprise
                   <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />

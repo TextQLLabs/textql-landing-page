@@ -94,29 +94,21 @@ export default function Navbar() {
               </Link>
             )}
             */}
-            <Button 
-              variant="secondary" 
-              size="sm"
-              theme={!isLightMode ? "dark" : "light"}
-              onClick={onDemoRequest}
-              className="!border !border-[#2A3B35]/30"
-            >
-              Request a Demo
-            </Button>
             <a 
               href="https://app.textql.com" 
               target="_blank" 
               rel="noopener noreferrer"
             >
-              <Button 
-                variant="primary" 
-                size="sm" 
-                theme={!isLightMode ? "dark" : "light"}
-                className="border-2 border-[#2A3B35]/40"
-              >
-                Get Started
-              </Button>
+              <Button variant="ghost" size="sm" theme={!isLightMode ? "dark" : "light"}>Sign In</Button>
             </a>
+            <Button 
+              variant="primary" 
+              size="sm"
+              theme={!isLightMode ? "dark" : "light"}
+              onClick={onDemoRequest}
+            >
+              Request a Demo
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -229,23 +221,23 @@ export default function Navbar() {
                 </Link>
               )}
               */}
+              <a 
+                href="https://app.textql.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className={`block transition-colors duration-300 ${themeClasses.textSecondary} ${themeClasses.textHover}`}
+              >
+                Sign In
+              </a>
               <button
                 onClick={(e) => {
                   onDemoRequest(e);
                   setIsMenuOpen(false);
                 }}
-                className={`block transition-colors duration-300 ${themeClasses.textSecondary} ${themeClasses.textHover}`}
-              >
-                Request a Demo
-              </button>
-              <a 
-                href="https://app.textql.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
                 className={`block transition-colors duration-300 font-medium ${themeClasses.textSecondary} ${themeClasses.textHover}`}
               >
-                Get Started →
-              </a>
+                Request a Demo →
+              </button>
             </div>
           </div>
         </div>

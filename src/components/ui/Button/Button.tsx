@@ -6,7 +6,7 @@ import styles from './Button.module.css';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  variant?: 'primary' | 'secondary' | 'ghost' | 'dark';
+  variant?: 'primary' | 'secondary' | 'ghost';
   size?: 'sm' | 'md';
   theme?: 'dark' | 'light';
   fullWidth?: boolean;
@@ -26,8 +26,7 @@ const buttonVariants = cva(
       variant: {
         primary: 'text-black hover:text-black/90',
         secondary: 'text-[#2A3B35] hover:text-[#2A3B35] border-2 border-[#2A3B35] hover:border-[#2A3B35]/90',
-        ghost: 'text-[#2A3B35] hover:text-[#2A3B35]/90 border border-[#2A3B35]/30 hover:border-[#2A3B35]/50',
-        dark: 'text-white hover:text-white border-2 border-[#0a0a0a] hover:border-[#666666]'
+        ghost: 'text-[#2A3B35] hover:text-[#2A3B35]/90 border border-[#2A3B35]/30 hover:border-[#2A3B35]/50'
       },
       size: {
         sm: 'h-11 px-8 text-sm',
@@ -102,9 +101,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         return styles.cornerLight;
       }
       // dark theme corners
-      if (variant === 'primary') return styles.cornerDark;
-      if (variant === 'dark') return styles.cornerDark;
-      return styles.cornerDarkSecondary;
+      return variant === 'primary' ? styles.cornerDark : styles.cornerDarkSecondary;
     };
 
     //
@@ -118,11 +115,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={`
           group ${styles.button}
           ${buttonVariants({ variant, size, theme: effectiveTheme, fullWidth, className })}
-          before:absolute before:inset-[2px] before:transition-colors before:duration-200
+          before:absolute before:inset-0 before:transition-colors before:duration-200
           ${variant === 'primary' ? 'before:bg-primary-300 hover:before:bg-primary-500' : ''}
           ${variant === 'secondary' ? 'before:bg-transparent hover:before:bg-light-50/5' : ''}
           ${variant === 'ghost' ? 'before:bg-transparent hover:before:bg-light-50/10' : ''}
-          ${variant === 'dark' ? 'before:bg-gradient-to-r before:from-[#0a0a0a] before:to-[#3a4a3a] hover:before:from-[#1a1a1a] hover:before:to-[#4a5a4a]' : ''}
         `}
         data-icon-position={iconPosition}
         data-variant={variant}

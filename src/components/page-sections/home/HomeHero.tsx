@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Badge, DemoRequestForm, Carousel, MobileCarousel, Button} from "../../ui";
+import { Badge, DemoRequestForm, Carousel, MobileCarousel} from "../../ui";
 import { Section, sectionPresets } from "../../ui/Section";
 import { WaveBackground } from "../../animations";
 import { InsightsFeed } from "../../InsightsFeed/InsightsFeed";
@@ -9,9 +9,6 @@ import { useDebug } from '../../../contexts/DebugContext';
 import { useGlobalTheme } from '../../GlobalThemeProvider';
 import { getThemeClasses } from '../../../utils/theme-utils';
 import { COLORS } from '../../../styles/constants';
-import { useNavigate } from 'react-router-dom';
-import { Rocket } from 'lucide-react';
-import { trackButtonClick } from '../../../utils/analytics';
 
 
 // const logos = [
@@ -124,7 +121,6 @@ interface HomeHeroProps {
 export function HomeHero({}: HomeHeroProps = {}) {
   // Always use global theme - no fallback
   const { isLightMode, toggleTheme } = useGlobalTheme();
-  const navigate = useNavigate();
   
   const navbarHeight = useNavbarHeight(); // Use shared hook
   const { debugMode } = useDebug(); // Use unified debug system
@@ -168,7 +164,7 @@ export function HomeHero({}: HomeHeroProps = {}) {
             <Badge
               variant="default"
               className={`inline-flex items-center ${themeClasses.badgeBg} px-2 py-1 mb-6 backdrop-blur-sm border ${themeClasses.badgeBorder} animate-slide-up animation-delay-100 text-sm`}>
-              <div className={`text-center h-1.5 w-1.5 ${themeClasses.badgeDot} animate-pulse-fast mr-2`} />
+              <div className={`text-center h-1.5 w-1.5 ${themeClasses.badgeDot} animate-pulse mr-2`} />
               <span className={themeClasses.textPrimary}>Ana is now generally available</span>
             </Badge>
           </div>
@@ -187,30 +183,8 @@ export function HomeHero({}: HomeHeroProps = {}) {
           <p className={`mb-6 lg:mb-8 text-base md:text-lg lg:text-xl xl:text-2xl font-light ${themeClasses.textSecondary} animate-slide-up animation-delay-300 text-center lg:text-left`}>
             Deploy Agents designed for enterprise complexity and security
           </p>
-              <div className="hidden lg:flex justify-center lg:justify-start animate-slide-up animation-delay-400 gap-4">
-                <Button 
-                  variant="dark"
-                  theme={isLightMode ? 'light' : 'dark'}
-                  onClick={() => {
-                    trackButtonClick('Get Started', 'home_hero', { destination: 'app' });
-                    window.location.href = 'https://app.textql.com';
-                  }}
-                  icon={Rocket}
-                  iconPosition="left"
-                >
-                  Get Started
-                </Button>
-                <Button 
-                  variant="secondary"
-                  theme={isLightMode ? 'light' : 'dark'}
-                  onClick={() => {
-                    trackButtonClick('Request Demo', 'home_hero', { destination: 'demo' });
-                    navigate('/demo');
-                  }}
-                  className="!bg-white hover:!bg-gray-50"
-                >
-                  Request Demo
-                </Button>
+              <div className="hidden lg:flex justify-center lg:justify-start animate-slide-up animation-delay-400 max-w-md">
+                <DemoRequestForm theme={isLightMode ? 'light' : 'dark'} />
               </div>
             </div>
       
@@ -244,7 +218,7 @@ export function HomeHero({}: HomeHeroProps = {}) {
               variant="default"
               className={`inline-flex ${themeClasses.badgeBg} px-3 py-1 mb-6 backdrop-blur-sm border ${themeClasses.badgeBorder} animate-slide-up animation-delay-100`}
             >
-              <div className={` h-2 w-2 ${themeClasses.badgeDot} animate-pulse-fast mr-2`} />
+              <div className={` h-2 w-2 ${themeClasses.badgeDot} animate-pulse mr-2`} />
               <span className={`animate-fade-in animation-delay-200 ${themeClasses.textPrimary}`}>Ana is now generally available</span>
             </Badge>
 
