@@ -153,7 +153,7 @@ export function HomeHero({}: HomeHeroProps = {}) {
       </div>
       
       {/* Desktop Hero Content */}
-      <div className="hidden lg:flex w-full h-full relative z-10 flex-col pt-[var(--navbar-height,80px)]">
+      <div className="hidden lg:flex w-full h-[calc(100vh-var(--navbar-height,80px))] relative z-10 flex-col pt-[var(--navbar-height,40px)]">
         {/* Main content container - centered in available space */}
         <div className={`flex-1 w-full flex items-center justify-center ${debugMode ? 'border-2 border-green-500' : ''}`}>
           <div className={`grid grid-cols-1 lg:gap-8 xl:gap-16 lg:grid-cols-[1fr,clamp(400px,50vw,600px)] w-full items-center px-6 max-w-7xl ${debugMode ? 'border-2 border-yellow-500' : ''}`}>

@@ -57,7 +57,11 @@ export const getThemeClasses = (isLight: boolean) => ({
   buttonBg: isLight ? 'bg-light-50' : 'bg-dark-50',
   buttonText: isLight ? 'text-white' : 'text-black',
   buttonHover: isLight ? 'hover:bg-light-50/90' : 'hover:bg-dark-50/90',
-  
+
+  badgeBg: isLight ? 'bg-[#2A3B35]/10' : 'bg-[#B8D8D0]/10',
+  badgeBorder: isLight ? 'border-[#2A3B35]/20' : 'border-[#B8D8D0]/20',
+  badgeDot: isLight ? 'bg-[#2A3B35]' : 'bg-[#B8D8D0]',
+   
   inputBg: isLight ? 'bg-white' : 'bg-dark-200',
   inputBorder: isLight ? 'border-light-100/20' : 'border-dark-100/20',
   inputFocus: isLight ? 'focus:border-primary-500' : 'focus:border-primary-400',
