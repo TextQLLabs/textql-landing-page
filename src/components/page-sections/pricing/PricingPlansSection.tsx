@@ -170,14 +170,6 @@ export function PricingPlansSection() {
                   ))}
                 </ul>
 
-                {/* View Features Link */}
-                <a 
-                  href={plan.viewFeaturesLink} 
-                  className="text-[#2A3B35]/80 hover:text-[#2A3B35] text-xs lg:text-sm mb-6 inline-block transition-colors"
-                >
-                  View All Features →
-                </a>
-
                 {/* CTA */}
                 <Button
                   variant={plan.name === 'White Label' ? 'secondary' : 'primary'}
