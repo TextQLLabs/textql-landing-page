@@ -12,7 +12,6 @@ import { COLORS } from '../../../styles/constants';
 import { useNavigate } from 'react-router-dom';
 import { Rocket, Play } from 'lucide-react';
 import { VideoModal } from '../../ui/VideoModal';
-import { trackButtonClick } from '../../../utils/analytics';
 
 
 // const logos = [
@@ -193,10 +192,7 @@ export function HomeHero({}: HomeHeroProps = {}) {
                 <Button 
                   variant="dark"
                   theme={isLightMode ? 'light' : 'dark'}
-                  onClick={() => {
-                    trackButtonClick('Get Started', 'home_hero', { destination: 'app' });
-                    window.location.href = 'https://app.textql.com';
-                  }}
+                  onClick={() => window.location.href = 'https://app.textql.com'}
                   icon={Rocket}
                   iconPosition="left"
                 >
@@ -205,10 +201,7 @@ export function HomeHero({}: HomeHeroProps = {}) {
                 <Button 
                   variant="secondary"
                   theme={isLightMode ? 'light' : 'dark'}
-                  onClick={() => {
-                    trackButtonClick('Request Demo', 'home_hero', { destination: 'demo' });
-                    navigate('/demo');
-                  }}
+                  onClick={() => navigate('/demo')}
                   className="!bg-white hover:!bg-gray-50"
                 >
                   Request Demo
@@ -220,10 +213,7 @@ export function HomeHero({}: HomeHeroProps = {}) {
             <div className="hidden lg:flex lg:min-h-0 justify-center lg:justify-start items-center h-full">
               <div 
                 className="relative cursor-pointer group rounded-lg overflow-hidden shadow-2xl"
-                onClick={() => {
-                  trackButtonClick('Play Video', 'home_hero', { action: 'open_video_modal' });
-                  setIsVideoModalOpen(true);
-                }}
+                onClick={() => setIsVideoModalOpen(true)}
                 style={{ aspectRatio: '1728/1080' }}
               >
                 <video

@@ -2,7 +2,6 @@ import { ArrowRight } from 'lucide-react';
 import { OntologyPolyhedron } from '../../animations/ontology';
 import { Button } from '../../ui';
 import { Section } from '../../ui/Section';
-import { trackButtonClick } from '../../../utils/analytics';
 
 export function OntologySection() {
   
@@ -31,7 +30,6 @@ export function OntologySection() {
                   variant="primary" 
                   size="md"
                   className="group"
-                  onClick={() => trackButtonClick('Learn How It Works', 'home_ontology_section', { destination: 'ontology' })}
                 >
                   Learn How It Works
                   <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />

@@ -5,7 +5,6 @@ import type { DemoRequestFormProps } from './types';
 import { useComponentTheme } from '../../../hooks/useComponentTheme';
 import { getThemeClasses } from '../../../utils/theme-utils';
 import { COLORS } from '../../../styles/constants';
-import { trackButtonClick } from '../../../utils/analytics';
 
 export function DemoRequestForm({ 
   theme,
@@ -63,7 +62,6 @@ export function DemoRequestForm({
     try {
       sessionStorage.setItem('demo_email', email);
       onSubmit?.(email);
-      trackButtonClick('Demo Form Submit', 'demo_request_form', { email_domain: email.split('@')[1], destination: 'demo' });
       navigate('/demo');
     } catch (err) {
       console.error('Error submitting form:', err);
