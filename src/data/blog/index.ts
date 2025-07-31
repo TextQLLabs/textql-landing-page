@@ -16,10 +16,12 @@ import { post as whyOntology } from './why-ontology';
 import { post as sqlProcess } from './sql-process';
 import { post as anaSmall } from './ana-small';
 import { post as fermiEstimation } from './fermi-estimation';
+import { post as supabaseIntegration } from './supabase-integration';
 
 // Export all blog posts
 // most recent at top
 export const blogPosts: BlogPost[] = [
+  supabaseIntegration,
   aiAnalyticsAdoption,
   fermiEstimation,
   twitterBenchmark,
@@ -41,6 +43,8 @@ export const blogPosts: BlogPost[] = [
 export function getPostContent(id: string): string {
   try {
     switch (id) {
+      case 'supabase-integration':
+        return getSupabaseIntegrationContent();
       case 'ai-analytics-adoption':
         return getAIAnalyticsAdoptionContent();
       case 'fermi-estimation':
@@ -79,6 +83,16 @@ export function getPostContent(id: string): string {
     return '';
   }
 }
+
+
+export function getSupabaseIntegrationContent(): string {
+  return import.meta.glob('./supabase-integration/content.md', {
+    query: '?raw',
+    import: 'default',
+    eager: true,
+  })['./supabase-integration/content.md'] as string;
+}
+
 
 export function getFermiEstimationContent(): string {
   return import.meta.glob('./fermi-estimation/content.md', {
