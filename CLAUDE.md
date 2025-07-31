@@ -149,6 +149,9 @@ See [Testing Guide](./docs/testing.md) for complete testing procedures.
 
 ## Context Notes for Claude
 
+### CRITICAL: README Synchronization
+**IMPORTANT**: After making ANY changes to the project structure, components, or functionality, you MUST update the README.md to match. Always refer to the README for the current structure and details about the app. The README should be the single source of truth for project information.
+
 ### Component Architecture
 This project follows the **reusable vs page-specific component** pattern established in the main CLAUDE.md context:
 - Create reusable components when used in 2+ places
