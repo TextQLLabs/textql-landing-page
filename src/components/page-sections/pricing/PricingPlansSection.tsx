@@ -59,7 +59,7 @@ const plans = [
     icon: Palette,
     tagline: 'Fully embedded solution with custom branding',
     description: 'Deploy TextQL\'s powerful capabilities with your own branding in an isolated environment.',
-    price: 'Starts at $5.00',
+    price: 'Starting at $5',
     unit: 'per 1000 ACUs',
     location: '', // No location for this plan
     features: [
