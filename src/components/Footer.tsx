@@ -50,7 +50,8 @@ const footerLinks = {
       { label: 'Team', href: '/team' },
       { label: 'Pricing', href: '/pricing' },
       { label: 'Terms & conditions', href: '/terms' },
-      { label: 'Privacy policy', href: '/privacy' }
+      { label: 'Privacy policy', href: '/privacy' },
+      { label: 'Cookie policy', href: '/cookies' }
     ]
   },
   contact: {
