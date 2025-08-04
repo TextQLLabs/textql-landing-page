@@ -18,6 +18,7 @@ import About from '../pages/About';
 import Agents from '../pages/Agents';
 import Terms from '../pages/Terms';
 import Privacy from '../pages/Privacy';
+import Cookies from '../pages/Cookies';
 import Ontology from '../pages/Ontology';
 import Blog from '../pages/blog';
 import BlogPost from '../pages/blog/[id]';
@@ -101,6 +102,7 @@ export function AppWithGlobalTheme() {
         <Route path="/integrations/snowflake" element={<SnowflakeMcpIntegration />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="/cookies" element={<Cookies />} />
         <Route path="/whitepaper" element={<Whitepaper />} />
         <Route path="/team" element={<Team />} />
         <Route path="/snowflake-2025" element={<Snowflake2025 />} />

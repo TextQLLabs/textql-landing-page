@@ -15,6 +15,7 @@ export default {
       "/ontology",
       "/terms",
       "/privacy",
+      "/cookies",
       "/blog",
       "/demo",
       "/whitepaper",
