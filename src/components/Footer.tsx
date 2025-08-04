@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { TextLogo, IconLogo } from './Logo';
+import { TermlyConsentPreferences } from './index';
 import { useComponentTheme } from '../hooks/useComponentTheme';
 import { themeBackgroundSecondary, themeText, themeTextSecondary } from '../utils/theme-utils';
 
@@ -136,6 +137,11 @@ export default function Footer() {
                 <span className={`text-sm ${themeTextSecondary(theme)}`}>
                   © Copyright {new Date().getFullYear()}
                 </span>
+              </div>
+              <div className="flex items-center gap-4">
+                <TermlyConsentPreferences 
+                  className={`text-sm ${themeTextSecondary(theme)} ${theme === 'light' ? 'hover:text-black/80' : 'hover:text-white/80'} transition-colors underline`}
+                />
               </div>
             </div>
           </div>
