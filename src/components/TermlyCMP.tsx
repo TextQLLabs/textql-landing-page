@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom'; // Removed since we're not re-initializing on route changes
 
 const SCRIPT_SRC_BASE = 'https://app.termly.io';
 
@@ -35,7 +35,7 @@ export default function TermlyCMP({
   }, [autoBlock, masterConsentsOrigin, websiteUUID]);
 
   const isScriptAdded = useRef(false);
-  const location = useLocation();
+  // const location = useLocation(); // Removed since we're not re-initializing on route changes
 
   useEffect(() => {
     if (isScriptAdded.current) return;
@@ -55,12 +55,13 @@ export default function TermlyCMP({
     };
   }, [scriptSrc]);
 
-  // Re-initialize Termly when route changes (similar to Next.js pathname/searchParams)
-  useEffect(() => {
-    if (window.Termly?.initialize) {
-      window.Termly.initialize();
-    }
-  }, [location.pathname, location.search]);
+  // Only initialize once when component mounts, not on route changes
+  // Re-initializing on route changes resets consent preferences
+  // useEffect(() => {
+  //   if (window.Termly?.initialize) {
+  //     window.Termly.initialize();
+  //   }
+  // }, [location.pathname, location.search]);
 
   return null;
 }
