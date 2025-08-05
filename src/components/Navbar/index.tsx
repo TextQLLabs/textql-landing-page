@@ -95,28 +95,13 @@ export default function Navbar() {
             )}
             */}
             <Button 
-              variant="secondary" 
+              variant="primary" 
               size="sm"
               theme={!isLightMode ? "dark" : "light"}
               onClick={onDemoRequest}
-              className="!border !border-[#2A3B35]/30"
             >
               Request a Demo
             </Button>
-            <a 
-              href="https://app.textql.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
-              <Button 
-                variant="primary" 
-                size="sm" 
-                theme={!isLightMode ? "dark" : "light"}
-                className="border-2 border-[#2A3B35]/40"
-              >
-                Get Started
-              </Button>
-            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -238,14 +223,6 @@ export default function Navbar() {
               >
                 Request a Demo
               </button>
-              <a 
-                href="https://app.textql.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className={`block transition-colors duration-300 font-medium ${themeClasses.textSecondary} ${themeClasses.textHover}`}
-              >
-                Get Started →
-              </a>
             </div>
           </div>
         </div>
