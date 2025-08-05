@@ -1,16 +1,12 @@
 import React, { useEffect, useRef } from 'react';
-import { Badge, DemoRequestForm, Carousel, MobileCarousel, Button} from "../../ui";
+import { Badge, DemoRequestForm, Carousel, MobileCarousel, Button, InlineEmailInput} from "../../ui";
 import { Section, sectionPresets } from "../../ui/Section";
 import { WaveBackground } from "../../animations";
 import { InsightsFeed } from "../../InsightsFeed/InsightsFeed";
-import { DemoRequestButton } from "../../ui/Button/DemoRequestButton";
-import { useNavbarHeight } from '../../../hooks/useNavbarHeight';
 import { useDebug } from '../../../contexts/DebugContext';
 import { useGlobalTheme } from '../../GlobalThemeProvider';
 import { getThemeClasses } from '../../../utils/theme-utils';
-import { COLORS } from '../../../styles/constants';
 import { useNavigate } from 'react-router-dom';
-import { Rocket } from 'lucide-react';
 import { trackButtonClick } from '../../../utils/analytics';
 
 
@@ -123,19 +119,13 @@ interface HomeHeroProps {
 
 export function HomeHero({}: HomeHeroProps = {}) {
   // Always use global theme - no fallback
-  const { isLightMode, toggleTheme } = useGlobalTheme();
+  const { isLightMode } = useGlobalTheme();
   const navigate = useNavigate();
   
-  const navbarHeight = useNavbarHeight(); // Use shared hook
   const { debugMode } = useDebug(); // Use unified debug system
 
-  // Note: navbar height is now handled by the shared useNavbarHeight hook
-
   // Theme-based styling using theme utilities
-  const theme = isLightMode ? 'light' : 'dark';
   const themeClasses = getThemeClasses(isLightMode);
-  const accentColor = isLightMode ? COLORS.brand.deepForest : COLORS.brand.mint;
-  const accentColorSecondary = isLightMode ? COLORS.brand.sage : COLORS.brand.sage;
   
   // Dynamic logos based on theme
   const logos = logoData.map(logo => ({
@@ -187,30 +177,12 @@ export function HomeHero({}: HomeHeroProps = {}) {
           <p className={`mb-6 lg:mb-8 text-base md:text-lg lg:text-xl xl:text-2xl font-light ${themeClasses.textSecondary} animate-slide-up animation-delay-300 text-center lg:text-left`}>
             Deploy Agents designed for enterprise complexity and security
           </p>
-              <div className="hidden lg:flex justify-center lg:justify-start animate-slide-up animation-delay-400 gap-4">
-                <Button 
-                  variant="dark"
+              <div className="hidden lg:flex justify-center lg:justify-start animate-slide-up animation-delay-400">
+                <InlineEmailInput
                   theme={isLightMode ? 'light' : 'dark'}
-                  onClick={() => {
-                    trackButtonClick('Get Started', 'home_hero', { destination: 'app' });
-                    window.location.href = 'https://app.textql.com';
-                  }}
-                  icon={Rocket}
-                  iconPosition="left"
-                >
-                  Get Started
-                </Button>
-                <Button 
-                  variant="secondary"
-                  theme={isLightMode ? 'light' : 'dark'}
-                  onClick={() => {
-                    trackButtonClick('Request Demo', 'home_hero', { destination: 'demo' });
-                    navigate('/demo');
-                  }}
-                  className="!bg-white hover:!bg-gray-50"
-                >
-                  Request Demo
-                </Button>
+                  placeholder="Enter your email"
+                  buttonText="Request a Demo"
+                />
               </div>
             </div>
       
@@ -259,9 +231,10 @@ export function HomeHero({}: HomeHeroProps = {}) {
               Deploy agents across all of your databases & systems of record
             </p>
             <div className="flex justify-center w-full animate-slide-up animation-delay-500 mb-8">
-              <DemoRequestButton
+              <InlineEmailInput
                 theme={isLightMode ? 'light' : 'dark'}
-                buttonText="Get a demo"
+                placeholder="Enter your email"
+                buttonText="Request a Demo"
               />
             </div>
           </div>
