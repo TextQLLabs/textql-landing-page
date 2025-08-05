@@ -1,4 +1,5 @@
 import { Text } from '../../ui';
+import { InlineEmailInput } from '../../ui/EmailInput/InlineEmailInput';
 import { FunnelFlow } from '../../animations/FunnelFlow';
 
 export function SolutionLibraryHeader() {
@@ -20,9 +21,18 @@ export function SolutionLibraryHeader() {
             <h1 className="text-4xl lg:text-6xl font-extralight pb-6 text-[#B8D8D0]">
               Solution Library
             </h1>
-            <p className="text-base lg:text-2xl text-[#729E8C] font-light max-w-3xl mx-auto">
+            <p className="text-base lg:text-2xl text-[#729E8C] font-light max-w-3xl mx-auto mb-8">
               Pre-built solutions to help you get started with TextQL. Each solution is designed to solve specific business problems and can be customized to your needs.
             </p>
+          </div>
+          
+          {/* Demo Request Form */}
+          <div className="max-w-lg mx-auto">
+            <InlineEmailInput 
+              theme="dark" 
+              placeholder="Enter your work email"
+              buttonText="Request Demo"
+            />
           </div>
         </div>
       </div>
