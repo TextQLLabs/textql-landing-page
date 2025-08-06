@@ -12,7 +12,7 @@ export const post: BlogPost = {
     company: 'TextQL'
   },
   date: 'August 6, 2025',
-  readTime: '5-10 min read',
+  readTime: '5 min read',
   category: 'announcements',
   featured: true
 };
