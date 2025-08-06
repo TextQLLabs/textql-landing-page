@@ -24,7 +24,59 @@ export function SEO({
   twitterCard = 'summary_large_image',
   noIndex = false,
 }: SEOProps) {
-  // Update only page-specific meta tags
+  // Update meta tags dynamically
+  useEffect(() => {
+    // Update document title
+    if (title) {
+      document.title = title;
+    }
+
+    // Update meta tags by selector
+    const updateMetaTag = (selector: string, content: string) => {
+      let metaTag = document.querySelector(selector);
+      if (metaTag) {
+        metaTag.setAttribute('content', content);
+      } else {
+        // Create meta tag if it doesn't exist
+        metaTag = document.createElement('meta');
+        if (selector.includes('property=')) {
+          const property = selector.match(/property="([^"]+)"/)?.[1];
+          if (property) metaTag.setAttribute('property', property);
+        } else if (selector.includes('name=')) {
+          const name = selector.match(/name="([^"]+)"/)?.[1];
+          if (name) metaTag.setAttribute('name', name);
+        }
+        metaTag.setAttribute('content', content);
+        document.head.appendChild(metaTag);
+      }
+    };
+
+    if (title) {
+      updateMetaTag('meta[property="og:title"]', title);
+      updateMetaTag('meta[name="twitter:title"]', title);
+    }
+
+    updateMetaTag('meta[name="description"]', description);
+    updateMetaTag('meta[property="og:description"]', description);
+    updateMetaTag('meta[name="twitter:description"]', description);
+    updateMetaTag('meta[property="og:image"]', ogImage);
+    updateMetaTag('meta[name="twitter:image"]', ogImage);
+    updateMetaTag('meta[name="twitter:card"]', twitterCard);
+    updateMetaTag('meta[property="og:type"]', ogType);
+
+    // Update canonical link
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (canonicalLink) {
+      canonicalLink.setAttribute('href', canonical);
+    } else {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      canonicalLink.setAttribute('href', canonical);
+      document.head.appendChild(canonicalLink);
+    }
+  }, [title, description, canonical, ogImage, ogType, twitterCard]);
+
+  // Return static meta tags as fallback (but useEffect above will override them)
   return (
     <>
       <title>{title}</title>
