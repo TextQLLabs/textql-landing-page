@@ -26,19 +26,19 @@ export function BlogGrid({ posts }: BlogGridProps) {
 
   return (
     <div className="space-y-8">
-      {/* Search and Filters */}
-      <div className="space-y-6">
+      {/* Search and Filters - Single Row */}
+      <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6">
         {/* Search Bar */}
-        <div className="relative max-w-md">
+        <div className="relative flex-shrink-0 w-full lg:w-80">
           <Input
             type="text"
-            placeholder="Search posts by title or content..."
+            placeholder="Search posts..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 pr-4 py-3 text-base rounded-xl border-2 transition-all focus:border-[#B8D8D0] focus:ring-2 focus:ring-[#B8D8D0]/20"
+            className="pl-10 pr-4 text-base rounded-xl border-2 transition-all focus:border-[#B8D8D0] focus:ring-2 focus:ring-[#B8D8D0]/20"
             theme="light"
           />
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#2A3B35]/50" />
+          <Search className="absolute left-3 top-[16px] w-5 h-5 text-[#2A3B35]/50" />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
@@ -49,47 +49,44 @@ export function BlogGrid({ posts }: BlogGridProps) {
           )}
         </div>
 
-        {/* Results Counter and Tags */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          {/* Results Counter */}
-          <div className="text-sm text-[#4A665C]">
-            {searchQuery || selectedTag ? (
-              <span>
-                Showing {filteredPosts.length} of {posts.length} posts
-                {selectedTag && <span> in <strong>{selectedTag}</strong></span>}
-                {searchQuery && <span> matching "<strong>{searchQuery}</strong>"</span>}
-              </span>
-            ) : (
-              <span>{posts.length} posts total</span>
-            )}
-          </div>
+        {/* Results Counter */}
+        <div className="text-sm text-[#4A665C] flex-shrink-0 lg:min-w-[120px]">
+          {searchQuery || selectedTag ? (
+            <span>
+              Showing {filteredPosts.length} of {posts.length} posts
+              {selectedTag && <span> in <strong>{selectedTag}</strong></span>}
+              {searchQuery && <span> matching "<strong>{searchQuery}</strong>"</span>}
+            </span>
+          ) : (
+            <span>{posts.length} posts total</span>
+          )}
+        </div>
 
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2">
-            {TAGS.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
-                className={`
-                  px-4 py-2 rounded-full text-sm font-medium transition-all border-2 capitalize
-                  ${selectedTag === tag
-                    ? 'bg-[#2A3B35] text-white border-[#2A3B35] shadow-md'
-                    : 'bg-white text-[#2A3B35] border-[#2A3B35]/20 hover:border-[#2A3B35]/40 hover:bg-[#2A3B35]/5 hover:shadow-sm'
-                  }
-                `}
-              >
-                {tag}
-              </button>
-            ))}
-            {selectedTag && (
-              <button
-                onClick={() => setSelectedTag(null)}
-                className="px-3 py-2 rounded-full text-sm text-[#2A3B35]/60 hover:text-[#2A3B35] transition-colors"
-              >
-                Clear filter
-              </button>
-            )}
-          </div>
+        {/* Tags */}
+        <div className="flex flex-wrap gap-2 lg:justify-end flex-1">
+          {TAGS.map((tag) => (
+            <button
+              key={tag}
+              onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
+              className={`
+                px-4 py-2 rounded-full text-sm font-medium transition-all border-2 capitalize
+                ${selectedTag === tag
+                  ? 'bg-[#2A3B35] text-white border-[#2A3B35] shadow-md'
+                  : 'bg-white text-[#2A3B35] border-[#2A3B35]/20 hover:border-[#2A3B35]/40 hover:bg-[#2A3B35]/5 hover:shadow-sm'
+                }
+              `}
+            >
+              {tag}
+            </button>
+          ))}
+          {selectedTag && (
+            <button
+              onClick={() => setSelectedTag(null)}
+              className="px-3 py-2 rounded-full text-sm text-[#2A3B35]/60 hover:text-[#2A3B35] transition-colors"
+            >
+              Clear filter
+            </button>
+          )}
         </div>
       </div>
 

@@ -17,10 +17,12 @@ import { post as sqlProcess } from './sql-process';
 import { post as anaSmall } from './ana-small';
 import { post as fermiEstimation } from './fermi-estimation';
 import { post as supabaseIntegration } from './supabase-integration';
+import { post as bigData } from './big-data';
 
 // Export all blog posts
 // most recent at top
 export const blogPosts: BlogPost[] = [
+  bigData,
   supabaseIntegration,
   aiAnalyticsAdoption,
   fermiEstimation,
@@ -43,6 +45,8 @@ export const blogPosts: BlogPost[] = [
 export function getPostContent(id: string): string {
   try {
     switch (id) {
+      case 'big-data':
+        return getBigDataContent();
       case 'supabase-integration':
         return getSupabaseIntegrationContent();
       case 'ai-analytics-adoption':
@@ -84,6 +88,13 @@ export function getPostContent(id: string): string {
   }
 }
 
+export function getBigDataContent(): string {
+  return import.meta.glob('./big-data/content.md', {
+    query: '?raw',
+    import: 'default',
+    eager: true,
+  })['./big-data/content.md'] as string;
+}
 
 export function getSupabaseIntegrationContent(): string {
   return import.meta.glob('./supabase-integration/content.md', {
