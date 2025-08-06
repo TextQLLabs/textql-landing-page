@@ -67,7 +67,7 @@ export function BlogHeader({ featuredPost }: BlogHeaderProps) {
               <div className="absolute inset-0 z-20 flex flex-col justify-center items-left px-12">
                 <Badge 
                   variant="outline" 
-                  className="hidden sm:block mb-4 w-fit bg-[#B8D8D0]/10 backdrop-blur-sm"
+                  className="hidden sm:block mb-4 w-fit bg-[#B8D8D0] text-[#2A3B35] border-[#B8D8D0] font-semibold shadow-lg"
                 >
                   Featured Post
                 </Badge>
