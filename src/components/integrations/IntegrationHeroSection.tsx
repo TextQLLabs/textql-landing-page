@@ -74,7 +74,9 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
         {/* Demo Request Form - Now outside the grid as a separate block */}
         {/* Show form on desktop/tablet, button on mobile */}
         <div className="flex justify-center hidden md:flex">
-          <DemoRequestForm />
+          <div className="max-w-lg w-full">
+            <DemoRequestForm />
+          </div>
         </div>
         <div className="flex justify-center md:hidden">
           <DemoRequestButton theme="dark" buttonText="Get a demo" />
