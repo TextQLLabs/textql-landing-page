@@ -12,7 +12,7 @@ Everyone's selling you the same dream: Point AI at your data! Get insights! Disr
 <iframe src="https://www.youtube.com/embed/_X1PnXMIAEs?si=ae558lm54SBy49wT" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-## **The 1GB Lie**
+## The 1GB Lie
 
 Here's the dirty secret every AI vendor hopes you don't notice: their demos run on data that would fit on a USB stick from 2005.
 
@@ -33,7 +33,7 @@ The math doesn't work. You're trying to understand Netflix by watching one frame
 
 The average AI sandbox handles 1-10GB. The average enterprise has 1-10 petabytes of operational data. That's a 1,000,000x gap between what AI can see and what you actually have. 99% of your data is invisible to AI right now.
 
-## **The Execution Environment Nobody Wants to Talk About**
+## The Execution Environment Nobody Wants to Talk About
 
 Here's what every vendor conveniently forgets to mention about AI agents: they need somewhere to run. Not just compute—everyone has compute. They need an execution environment that can actually see your data. All of it. At once.
 
@@ -41,7 +41,7 @@ Modal built one. So did E2B. Neat little sandboxes where your AI can play with a
 
 You can't fit an elephant in a shoebox. You can't analyze enterprise data in a Jupyter notebook. And you definitely can't get real insights when your AI can only see 0.0001% of your data at a time.
 
-## **What 10,000 PhD Data Scientists Would Actually Do**
+## What 10,000 PhD Data Scientists Would Actually Do
 
 Your board wants AI-driven insights. Your vendors sold you AI that can only see 0.0001% of your data.
 
@@ -61,7 +61,7 @@ Then they'd need to understand that "renewal rate" means different things in dif
 
 Your data is scattered across the digital equivalent of 68 Empire State Buildings. Good luck solving that with a chatbot.
 
-## **The Bigger Box**
+## The Bigger Box
 
 For three years at TextQL, we've been building something everyone said was impossible: an execution environment that can hold all your data. Not samples. Not subsets. Not "connectivity" that makes you wait 45 minutes for a query to timeout. Everything, in one place, where AI can actually work with it.
 
