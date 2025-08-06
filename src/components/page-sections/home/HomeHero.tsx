@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Badge, DemoRequestForm, Carousel, MobileCarousel, Button, InlineEmailInput} from "../../ui";
+import { Badge, DemoRequestForm, Carousel, MobileCarousel, Button} from "../../ui";
 import { Section, sectionPresets } from "../../ui/Section";
 import { WaveBackground } from "../../animations";
 import { InsightsFeed } from "../../InsightsFeed/InsightsFeed";
@@ -177,11 +177,9 @@ export function HomeHero({}: HomeHeroProps = {}) {
           <p className={`mb-6 lg:mb-8 text-base md:text-lg lg:text-xl xl:text-2xl font-light ${themeClasses.textSecondary} animate-slide-up animation-delay-300 text-center lg:text-left`}>
             Deploy Agents designed for enterprise complexity and security
           </p>
-              <div className="hidden lg:flex justify-center lg:justify-start animate-slide-up animation-delay-400">
-                <InlineEmailInput
+              <div className="hidden lg:flex justify-center lg:justify-start animate-slide-up animation-delay-400 max-w-lg">
+                <DemoRequestForm
                   theme={isLightMode ? 'light' : 'dark'}
-                  placeholder="Enter your email"
-                  buttonText="Request a Demo"
                 />
               </div>
             </div>
@@ -230,11 +228,9 @@ export function HomeHero({}: HomeHeroProps = {}) {
             <p className={`mb-12 text-lg sm:text-xl md:text-2xl font-light ${themeClasses.textSecondary} animate-slide-up animation-delay-400 w-full text-center`}>
               Deploy agents across all of your databases & systems of record
             </p>
-            <div className="flex justify-center w-full animate-slide-up animation-delay-500 mb-8">
-              <InlineEmailInput
+            <div className="flex justify-center w-full animate-slide-up animation-delay-500 mb-8 max-w-lg mx-auto">
+              <DemoRequestForm
                 theme={isLightMode ? 'light' : 'dark'}
-                placeholder="Enter your email"
-                buttonText="Request a Demo"
               />
             </div>
           </div>

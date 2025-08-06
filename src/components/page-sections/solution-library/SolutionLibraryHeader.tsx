@@ -1,5 +1,5 @@
 import { Text } from '../../ui';
-import { InlineEmailInput } from '../../ui/EmailInput/InlineEmailInput';
+import { DemoRequestForm } from '../../ui/DemoRequestForm/DemoRequestForm';
 import { FunnelFlow } from '../../animations/FunnelFlow';
 
 export function SolutionLibraryHeader() {
@@ -28,11 +28,7 @@ export function SolutionLibraryHeader() {
           
           {/* Demo Request Form */}
           <div className="max-w-lg mx-auto">
-            <InlineEmailInput 
-              theme="dark" 
-              placeholder="Enter your work email"
-              buttonText="Request Demo"
-            />
+            <DemoRequestForm theme="dark" />
           </div>
         </div>
       </div>

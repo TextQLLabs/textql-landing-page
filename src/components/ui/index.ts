@@ -5,7 +5,6 @@ export * from './Select';
 export * from './Badge';
 export * from './Card';
 export * from './DemoRequestForm';
-export * from './EmailInput';
 
 // Typography
 export * from './Typography';
