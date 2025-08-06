@@ -44,6 +44,7 @@ const footerLinks = {
     links: [
       { label: 'About', href: '/about' },
       { label: 'Blog', href: '/blog' },
+      { label: 'Data Assessment', href: '/data-assessment' },
       { label: 'Whitepaper', href: '/whitepaper' },
       { label: 'Documentation', href: 'https://docs.textql.com', external: true },
       { label: 'Careers', href: '/careers' },

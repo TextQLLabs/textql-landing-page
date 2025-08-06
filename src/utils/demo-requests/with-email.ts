@@ -1,7 +1,7 @@
 import { DEMO_CONFIG } from '../constants';
 import type { DemoRequestOptions, DemoRequestResult } from './types';
 
-export const handleEmailDemoRequest = async ({ email, pathname }: DemoRequestOptions): Promise<DemoRequestResult> => {
+export const handleEmailDemoRequest = async ({ email, pathname, requestType }: DemoRequestOptions): Promise<DemoRequestResult> => {
   if (!email) {
     throw new Error('Email is required for email demo requests');
   }
@@ -13,7 +13,8 @@ export const handleEmailDemoRequest = async ({ email, pathname }: DemoRequestOpt
     const payload = {
       "page-name": fullUrl,
       "email": email,
-      "url": fullUrl
+      "url": fullUrl,
+      "request-type": requestType || "demo"
     };
 
     // Send webhook with email

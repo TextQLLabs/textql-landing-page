@@ -205,6 +205,12 @@ export const navigation: NavItem[] = [
               icon: 'BookOpen'
             },
             {
+              label: 'Data Assessment',
+              description: 'Free enterprise data analysis',
+              href: '/data-assessment',
+              icon: 'BarChart3'
+            },
+            {
               label: 'Whitepaper',
               description: 'Technical documentation',
               href: '/whitepaper',

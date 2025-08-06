@@ -10,7 +10,8 @@ import { trackButtonClick } from '../../../utils/analytics';
 export function DemoRequestForm({ 
   theme,
   onSubmit,
-  className = ''
+  className = '',
+  buttonText = 'Request Demo'
 }: DemoRequestFormProps) {
   const globalTheme = useComponentTheme();
   const effectiveTheme = theme || globalTheme;
@@ -62,6 +63,7 @@ export function DemoRequestForm({
     
     try {
       sessionStorage.setItem('demo_email', email);
+      sessionStorage.setItem('demo_source', window.location.pathname);
       onSubmit?.(email);
       trackButtonClick('Demo Form Submit', 'demo_request_form', { email_domain: email.split('@')[1], destination: 'demo' });
       navigate('/demo');
@@ -113,7 +115,7 @@ export function DemoRequestForm({
               disabled={isSubmitting}
               theme={effectiveTheme}
             >
-              Request Demo
+              {buttonText}
             </Button>
           </div>
         </div>

@@ -18,8 +18,7 @@ export function OntologyPolyhedron({ config }: OntologyPolyhedronProps) {
     zoomLevelRef,
     handleMouseDown,
     handleMouseMove,
-    handleMouseUp,
-    handleWheel
+    handleMouseUp
   } = useRotationControls();
 
   useAnimationLoop(sceneRef, rotationSpeedRef, isDraggingRef, zoomLevelRef);
@@ -39,22 +38,8 @@ export function OntologyPolyhedron({ config }: OntologyPolyhedronProps) {
     }
   };
 
-  // Prevent wheel event from propagating and handle zoom
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container || config?.interactive === false) return;
-
-    const wheelHandler = (event: WheelEvent) => {
-      event.preventDefault();
-      handleWheel(event);
-    };
-
-    container.addEventListener('wheel', wheelHandler, { passive: false });
-
-    return () => {
-      container.removeEventListener('wheel', wheelHandler);
-    };
-  }, [config?.interactive]);
+  // Note: Wheel/scroll events removed to allow normal page scrolling
+  // Only mouse drag panning is supported
 
   return (
     <div

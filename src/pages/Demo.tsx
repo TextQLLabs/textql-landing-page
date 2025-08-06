@@ -19,10 +19,15 @@ export default function Demo() {
           // Clear the email from storage
           sessionStorage.removeItem('demo_email');
           
+          // Check if user came from data assessment page
+          const referrer = sessionStorage.getItem('demo_source') || document.referrer;
+          const isFromDataAssessment = referrer.includes('/data-assessment');
+          
           // Use email-based demo request
           const result = await handleEmailDemoRequest({
             email,
-            pathname: '/demo'
+            pathname: '/demo',
+            requestType: isFromDataAssessment ? 'consultation' : 'demo'
           });
           window.location.href = result.formUrl;
         } else {

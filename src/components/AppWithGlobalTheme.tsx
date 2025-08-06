@@ -38,6 +38,7 @@ import Databricks2025 from '../pages/Databricks2025';
 import Test from '../pages/Test';
 import ThemeTest from '../pages/ThemeTest';
 import Customers from '../pages/Customers';
+import DataAssessment from '../pages/DataAssessment';
 
 export function AppWithGlobalTheme() {
   const location = useLocation();
@@ -104,6 +105,7 @@ export function AppWithGlobalTheme() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/cookies" element={<Cookies />} />
         <Route path="/whitepaper" element={<Whitepaper />} />
+        <Route path="/data-assessment" element={<DataAssessment />} />
         <Route path="/team" element={<Team />} />
         <Route path="/snowflake-2025" element={<Snowflake2025 />} />
         <Route path="/databricks-2025" element={<Databricks2025 />} />
