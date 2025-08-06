@@ -22,7 +22,7 @@ Watch any AI product launch:
 - Single source? Check
 - Under 1GB? Always
 
-Your reality:
+Your reality: 
 
 - 50TB in Snowflake
 - 100TB in your ERP
