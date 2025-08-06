@@ -100,7 +100,7 @@ export default function Navbar() {
               theme={!isLightMode ? "dark" : "light"}
               onClick={onDemoRequest}
             >
-              Request a Demo
+              Request Demo
             </Button>
           </div>
 
@@ -221,7 +221,7 @@ export default function Navbar() {
                 }}
                 className={`block transition-colors duration-300 ${themeClasses.textSecondary} ${themeClasses.textHover}`}
               >
-                Request a Demo
+                Request Demo
               </button>
             </div>
           </div>

@@ -107,9 +107,6 @@ export function TableOfContents() {
         >
           Book a Demo
         </Button>
-        <p className="text-xs text-[#4A665C] text-center mt-3">
-          See TextQL in action
-        </p>
       </div>
     </div>
   );

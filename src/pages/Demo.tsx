@@ -53,7 +53,7 @@ export default function Demo() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-[#0A1F1C]">
       <SEO 
-        title="Request a Demo | TextQL AI Data Analysis Platform"
+        title="Request Demo | TextQL AI Data Analysis Platform"
         description="Get a personalized demo of TextQL's AI-powered data analysis platform. See how our AI agents can help your enterprise discover valuable insights across all your data."
         canonical="https://textql.com/demo/"
       />
