@@ -8,7 +8,7 @@ Every vendor demos their AI on a tidy CSV file while you're sitting on a petabyt
 
 Everyone's selling you the same dream: Point AI at your data! Get insights! Disrupt! Transform! But they're building better fishing rods when you need to drain the ocean.
 
-![NBA Data Analytics](/images/blog/big-data/meme.png)
+![Big Data](/images/blog/big-data/header.png)
 
 ## **The 1GB Lie**
 

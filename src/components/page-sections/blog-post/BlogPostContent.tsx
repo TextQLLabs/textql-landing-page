@@ -28,8 +28,8 @@ export function BlogPostContent({ content, post }: BlogPostContentProps) {
                   return <Text theme="light" className="text-base leading-relaxed mb-4 text-black" {...props}>{children}</Text>;
                 },
                 h1: ({node, ...props}) => <h1 className="text-5xl font-light tracking-tight text-black mb-6 mt-8" {...props} />,
-                h2: ({node, ...props}) => <h2 className="text-4xl font-light text-black mt-8 mb-4" {...props} />,
-                h3: ({node, ...props}) => <h3 className="text-3xl font-light text-black mt-6 mb-3" {...props} />,
+                h2: ({node, ...props}) => <h2 className="text-4xl font-light tracking-tight text-black mt-8 mb-4" {...props} />,
+                h3: ({node, ...props}) => <h3 className="text-3xl font-light tracking-tight text-black mt-6 mb-3" {...props} />,
                 ul: ({node, ...props}) => <ul className="list-disc pl-6 mb-4 text-black leading-relaxed" {...props} />,
                 ol: ({node, ...props}) => <ol className="list-decimal pl-6 mb-4 text-black leading-relaxed" {...props} />,
                 li: ({node, ...props}) => <li className="mb-2 text-black" {...props} />,
