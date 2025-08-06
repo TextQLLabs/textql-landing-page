@@ -30,23 +30,24 @@ export function BlogGrid({ posts }: BlogGridProps) {
       <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6">
         {/* Search Bar */}
         <div className="relative flex-shrink-0 w-full lg:w-80">
-          <Input
-            type="text"
-            placeholder="Search posts..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 pr-4 text-base rounded-xl border-2 transition-all focus:border-[#B8D8D0] focus:ring-2 focus:ring-[#B8D8D0]/20"
-            theme="light"
-          />
-          <Search className="absolute left-3 top-[16px] w-5 h-5 text-[#2A3B35]/50" />
-          {searchQuery && (
-            <button
-              onClick={() => setSearchQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#2A3B35]/50 hover:text-[#2A3B35] transition-colors"
-            >
-              ✕
-            </button>
-          )}
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search posts..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-white border-2 border-[#2A3B35]/40 text-[#2A3B35] text-base font-light placeholder:text-[#2A3B35]/40 pl-10 pr-4 py-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#B8D8D0]/20 focus:border-[#B8D8D0] backdrop-blur-md transition-all"
+            />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#2A3B35]/50" />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#2A3B35]/50 hover:text-[#2A3B35] transition-colors"
+              >
+                ✕
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Results Counter */}
