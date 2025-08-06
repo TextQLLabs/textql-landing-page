@@ -38,6 +38,12 @@ export function SEO({
       <meta property="og:description" content={description} />
       <meta name="twitter:description" content={description} />
 
+      {/* Open Graph and Twitter image tags */}
+      <meta property="og:image" content={ogImage} />
+      <meta name="twitter:image" content={ogImage} />
+      <meta name="twitter:card" content={twitterCard} />
+      <meta property="og:type" content={ogType} />
+
       {/* Indexing control */}
       {noIndex && <meta name="robots" content="noindex, nofollow" />}
       
