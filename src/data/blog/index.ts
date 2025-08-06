@@ -19,6 +19,11 @@ import { post as fermiEstimation } from './fermi-estimation';
 import { post as supabaseIntegration } from './supabase-integration';
 import { post as bigData } from './big-data';
 
+// Get the most recent featured blog post
+export function getMostRecentFeaturedPost(): BlogPost | null {
+  return blogPosts.find(post => post.featured) || null;
+}
+
 // Export all blog posts
 // most recent at top
 export const blogPosts: BlogPost[] = [

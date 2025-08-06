@@ -245,11 +245,11 @@ export const navigation: NavItem[] = [
       ],
       featuredImage: {
         sectionTitle: 'FEATURED',
-        src: '/images/navbar/ana-small.png',
-        alt: 'Building Data Agent',
-        title: 'Ana Small',
-        description: 'Open-sourcing state of the art Text-to-SQL',
-        href: '/blog/ana-small',
+        src: '/images/blog/big-data/header.png',
+        alt: 'Making AI That Can Process 1,000,000x More Data',
+        title: 'Making AI That Can Process 1,000,000x More Data',
+        description: 'Your AI can analyze 1GB of data. Your enterprise has 1,000,000 times that.',
+        href: '/blog/big-data',
         external: false
       }
     }
