@@ -1,16 +1,14 @@
 import { useState, useMemo, useEffect } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
-import { Industry, industries } from '../../data/industries';
+import { useSearchParams } from 'react-router-dom';
+import { industries } from '../../data/industries';
 import { SolutionLibraryHeader, SolutionGrid } from '../../components/page-sections/solution-library';
 import { CTA } from '../../components/sections';
-import { Text } from '../../components/ui';
 import { Section } from '../../components/ui/Section';
 import { solutions } from '../../data/solutions';
 import { SEO } from '../../components/SEO';
 
 export default function SolutionLibrary() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
   const [selectedIndustry, setSelectedIndustry] = useState<string | null>(null);
 
   // Initialize selectedIndustry from URL parameter
@@ -48,6 +46,12 @@ export default function SolutionLibrary() {
     return industries.filter(industry => industryMatches[industry.id] > 0);
   }, [industryMatches]);
 
+  // Get selected industry data
+  const selectedIndustryData = useMemo(() => {
+    if (!selectedIndustry) return null;
+    return industries.find(industry => industry.id === selectedIndustry);
+  }, [selectedIndustry]);
+
   return (
     <div className="min-h-screen">
       <SEO 
@@ -58,7 +62,10 @@ export default function SolutionLibrary() {
       />
       
       {/* Hero Section */}
-      <SolutionLibraryHeader />
+      <SolutionLibraryHeader 
+        headline={selectedIndustryData?.customHeadline}
+        description={selectedIndustryData?.customDescription}
+      />
 
       {/* Main Content - Light Mode */}
       <div className="bg-[#F5F9F8]">
