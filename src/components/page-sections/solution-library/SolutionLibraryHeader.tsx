@@ -2,7 +2,12 @@ import { Text } from '../../ui';
 import { DemoRequestForm } from '../../ui/DemoRequestForm/DemoRequestForm';
 import { FunnelFlow } from '../../animations/FunnelFlow';
 
-export function SolutionLibraryHeader() {
+interface SolutionLibraryHeaderProps {
+  headline?: string;
+  description?: string;
+}
+
+export function SolutionLibraryHeader({ headline, description }: SolutionLibraryHeaderProps) {
   return (
     <div className="relative overflow-hidden min-h-[500px]" style={{ backgroundColor: '#000000' }}>
       {/* Background with gradient */}
@@ -19,10 +24,10 @@ export function SolutionLibraryHeader() {
         <div className="max-w-5xl mx-auto text-center">
           <div className="mb-6">
             <h1 className="text-4xl lg:text-6xl font-extralight pb-6 text-[#B8D8D0]">
-              Solution Library
+              {headline || 'Solution Library'}
             </h1>
             <p className="text-base lg:text-2xl text-[#729E8C] font-light max-w-3xl mx-auto mb-8">
-              Pre-built solutions to help you get started with TextQL. Each solution is designed to solve specific business problems and can be customized to your needs.
+              {description || 'Pre-built solutions to help you get started with TextQL. Each solution is designed to solve specific business problems and can be customized to your needs.'}
             </p>
           </div>
           
