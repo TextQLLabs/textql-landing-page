@@ -84,7 +84,7 @@ export function OntologyExplanation() {
               </a>
               
               <a 
-                href="https://textql.com/blog/ontology"
+                href="https://textql.com/blog/sql-process"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center justify-center gap-2 px-6 py-3 border border-[#2A3B35] text-[#2A3B35] hover:bg-[#F0F5F3] transition-colors rounded-lg"
