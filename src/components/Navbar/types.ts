@@ -240,12 +240,6 @@ export const navigation: NavItem[] = [
               href: '/about',
               icon: 'Target'
             },
-            {
-              label: 'Team',
-              description: 'Meet the engineers and researchers behind TextQL',
-              href: '/team',
-              icon: 'Users'
-            }
           ]
         }
       ],

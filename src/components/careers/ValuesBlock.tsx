@@ -13,9 +13,9 @@ export function ValuesBlock() {
         <h2 className={`text-xl font-extralight mb-4 uppercase tracking-wider ${theme === 'light' ? 'text-[#2A3B35]' : 'text-[#B8D8D0]'}`}>Real Values</h2>
         
         <div className={`font-light mb-10 ${theme === 'light' ? 'text-[#4A665C]' : 'text-[#729E8C]'}`}>
-          <p className="mb-4">We believe values don't mean anything if they don't have clear tradeoffs. If you try to have your cake and eat it too—you're just laying out a platitude.</p>
-          <p className="mb-4">In other words, <span className={`font-normal italic ${theme === 'light' ? 'text-[#2A3B35]' : 'text-[#B8D8D0]'}`}>move fast and break things</span> is a good value, because it acknowledges that when in doubt, you should err on the side of speed.</p>
-          <p className="mb-4">On the other hand, <span className={`font-normal italic ${theme === 'light' ? 'text-[#2A3B35]' : 'text-[#B8D8D0]'}`}>we work hard but maintain good work-life balance</span> is a terrible value because it doesn't acknowledge that an emphasis on work-life balance comes at the cost of brutal and hard work.</p>
+          <p className="mb-4">We believe meaningful values require honest trade-offs. Effective values acknowledge what you're choosing to prioritize and what you're willing to sacrifice for it.</p>
+          <p className="mb-4">For example, <span className={`font-normal italic ${theme === 'light' ? 'text-[#2A3B35]' : 'text-[#B8D8D0]'}`}>move fast and break things</span> is a clear value because it explicitly chooses speed over perfection when decisions need to be made.</p>
+          <p className="mb-4">In contrast, <span className={`font-normal italic ${theme === 'light' ? 'text-[#2A3B35]' : 'text-[#B8D8D0]'}`}>we work hard but maintain good work-life balance</span> lacks clarity because it doesn't acknowledge the inherent tension between intense commitment and personal time boundaries.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
@@ -28,7 +28,7 @@ export function ValuesBlock() {
               <li className="mb-2">Get revenue share in the work you do</li>
             </ul>
             <p className={`font-light italic text-sm ${theme === 'light' ? 'text-[#4A665C]/80' : 'text-[#729E8C]/80'}`}>
-              Tradeoff: Ownership comes with accountability, when we win, we win big. When we lose, everyone will feel it. You're not insulated from the lows - and if we get punched in the face we won't tell you "it's all going to be alright"
+              Tradeoff: With ownership comes shared accountability. Success and challenges affect everyone. We believe in transparent communication about both wins and setbacks, rather than shielding team members from business realities.
             </p>
           </div>
 
@@ -40,7 +40,7 @@ export function ValuesBlock() {
               <li className="mb-2">Understand when someone else is better suited for a given task, and delegate it to someone else</li>
             </ul>
             <p className={`font-light italic text-sm ${theme === 'light' ? 'text-[#4A665C]/80' : 'text-[#729E8C]/80'}`}>
-              Tradeoff: We don't tell everyone "we're all equally effective at everything", which is considered impolite in most places. We acknowledge that facing our weaknesses will hurt feelings
+              Tradeoff: We prioritize honest feedback and role optimization over avoiding difficult conversations. This means acknowledging individual strengths and growth areas, which can feel uncomfortable but drives better outcomes.
             </p>
           </div>
 
@@ -52,7 +52,7 @@ export function ValuesBlock() {
               <li className="mb-2">Prioritizing getting it right over getting it scalable</li>
             </ul>
             <p className={`font-light italic text-sm ${theme === 'light' ? 'text-[#4A665C]/80' : 'text-[#729E8C]/80'}`}>
-              Tradeoff: When we build something for the first time - we expect duct tape on it. We acknowledge the debt we take on
+              Tradeoff: Speed of execution sometimes means accepting technical debt and iterative improvements. We prioritize learning and validation over perfect initial implementations.
             </p>
           </div>
 
@@ -64,7 +64,7 @@ export function ValuesBlock() {
               <li className="mb-2">We don't have admin policies to stop you from rent-seeking our HR policies</li>
             </ul>
             <p className={`font-light italic text-sm ${theme === 'light' ? 'text-[#4A665C]/80' : 'text-[#729E8C]/80'}`}>
-              Tradeoff: We won't be able to maintain strong controls, if we start losing trust in each other, it all comes toppling down. Don't be the person who makes HR necessary.
+              Tradeoff: A high-trust environment relies on individual responsibility and mutual respect. This approach creates more autonomy but requires everyone to consistently act with integrity and good judgment.
             </p>
           </div>
 
@@ -76,7 +76,7 @@ export function ValuesBlock() {
               <li className="mb-2">Always push for the extra mile, always looking at the next highest peak</li>
             </ul>
             <p className={`font-light italic text-sm ${theme === 'light' ? 'text-[#4A665C]/80' : 'text-[#729E8C]/80'}`}>
-              Tradeoff: We acknowledge it might cause someone to inflate their achievements, and it comes at the cost of comfort
+              Tradeoff: High ambition means accepting that comfort zones will be challenged regularly. This drive creates opportunities for exceptional growth but requires resilience and adaptability.
             </p>
           </div>
         </div>
