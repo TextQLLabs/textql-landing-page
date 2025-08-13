@@ -46,7 +46,31 @@ export const navigation: NavItem[] = [
         {
           title: 'Product',
           items: [
-
+            {
+              label: 'Agents',
+              description: 'Deep research on your structured data.',
+              href: '/agents',
+              icon: 'Bot'
+            },
+            {
+              label: 'Ontology',
+              description: 'Best-in-class semantic layer.',
+              href: '/ontology',
+              icon: 'Network'
+            },
+            {
+              label: 'Enterprise',
+              description: 'Resilience, scalability, and security',
+              href: '/enterprise',
+              icon: 'Building'
+            },
+            {
+              label: 'Ana Small',
+              description: 'Free, open-source text-to-SQL',
+              href: 'https://small.textql.com/',
+              external: true,
+              icon: 'Zap'
+            }
           ]
         },
         {
@@ -174,7 +198,12 @@ export const navigation: NavItem[] = [
         {
           title: 'Learn',
           items: [
-
+            {
+              label: 'Blog',
+              description: 'Latest news and updates',
+              href: '/blog',
+              icon: 'BookOpen'
+            },
             {
               label: 'Data Assessment',
               description: 'Free enterprise data analysis',
@@ -210,7 +239,7 @@ export const navigation: NavItem[] = [
               description: 'Our vision to democratize data through natural language',
               href: '/about',
               icon: 'Target'
-            }
+            },
           ]
         }
       ],
