@@ -48,7 +48,6 @@ const footerLinks = {
       { label: 'Whitepaper', href: '/whitepaper' },
       { label: 'Documentation', href: 'https://docs.textql.com', external: true },
       { label: 'Careers', href: '/careers' },
-      { label: 'Team', href: '/team' },
       { label: 'Pricing', href: '/pricing' },
       { label: 'Terms & conditions', href: '/terms' },
       { label: 'Privacy policy', href: '/privacy' },
