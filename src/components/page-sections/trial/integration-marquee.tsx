@@ -34,12 +34,12 @@ export function IntegrationMarquee({
         {integrations.map((integration, index) => (
           <div
             key={`${integration.name}-${index}`}
-            className="flex items-center justify-center p-4 bg-white rounded-lg shadow-sm min-w-[120px] h-16 transition-transform duration-300 hover:scale-105 flex-shrink-0 mx-2"
+            className="flex items-center justify-center p-2 md:p-4 bg-white rounded-lg shadow-sm min-w-[80px] md:min-w-[120px] h-12 md:h-16 transition-transform duration-300 hover:scale-105 flex-shrink-0 mx-1 md:mx-2"
           >
             <img
               src={integration.logo}
               alt={`${integration.name} integration`}
-              className="object-contain max-h-10 max-w-20"
+              className="object-contain max-h-6 md:max-h-10 max-w-12 md:max-w-20"
             />
           </div>
         ))}
