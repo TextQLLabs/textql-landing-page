@@ -27,7 +27,7 @@ export function FeatureSection({
   className = "",
 }: FeatureSectionProps) {
   const contentSection = (
-    <div className="flex-1 max-w-lg">
+    <div className="w-full text-center lg:text-left">
       <div className="mb-3">
         <span className="text-sm font-medium uppercase tracking-wide" style={{color: 'var(--theme-accent)'}}>
           {badge}
@@ -42,8 +42,8 @@ export function FeatureSection({
 
       <div className="space-y-3 mb-5">
         {features.map((feature, index) => (
-          <div key={index} className="flex items-start space-x-3">
-            <div className="w-2 h-2 rounded-full mt-2" style={{backgroundColor: 'var(--theme-accent)'}}></div>
+          <div key={index} className="flex items-start space-x-3 text-left">
+            <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{backgroundColor: 'var(--theme-accent)'}}></div>
             <div>
               <h3 className="text-base font-semibold" style={{color: 'var(--theme-text-primary)'}}>
                 {feature.title}
@@ -59,11 +59,11 @@ export function FeatureSection({
   );
 
   const imageSection = (
-    <div className="flex-1 max-w-xl">
+    <div className="w-full">
       <img
         src={imageSrc}
         alt={imageAlt}
-        className="w-full h-auto rounded-lg"
+        className="w-full h-auto rounded-lg mx-auto max-w-md lg:max-w-none"
       />
     </div>
   );
@@ -71,17 +71,17 @@ export function FeatureSection({
   return (
     <section className={`py-8 ${className}`}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           {layout === "text-left" ? (
-            <>
-              <div className="mr-8">{contentSection}</div>
-              {imageSection}
-            </>
+            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-32 xl:gap-48 2xl:gap-56">
+              <div className="flex-1 w-full lg:max-w-lg">{contentSection}</div>
+              <div className="flex-1 w-full lg:max-w-xl">{imageSection}</div>
+            </div>
           ) : (
-            <>
-              {imageSection}
-              <div className="ml-8">{contentSection}</div>
-            </>
+            <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-32 xl:gap-48 2xl:gap-56">
+              <div className="flex-1 w-full lg:max-w-xl order-2 lg:order-1">{imageSection}</div>
+              <div className="flex-1 w-full lg:max-w-lg order-1 lg:order-2">{contentSection}</div>
+            </div>
           )}
         </div>
       </div>

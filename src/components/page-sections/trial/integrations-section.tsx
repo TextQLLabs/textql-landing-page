@@ -88,9 +88,37 @@ export function IntegrationsSection() {
       style={{ backgroundColor: "var(--theme-bg-secondary)" }}
     >
       <div className="container mx-auto px-4 overflow-x-hidden">
-        <div className="flex items-center justify-between max-w-7xl mx-auto overflow-x-hidden">
-          {/* Left side - Marquees */}
-          <div className="flex-1 max-w-2xl overflow-x-hidden">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between max-w-7xl mx-auto overflow-x-hidden gap-8">
+          {/* Content - Top on mobile, Right on desktop */}
+          <div className="flex-1 max-w-xl lg:order-2 lg:ml-16 text-center lg:text-left">
+            <div className="mb-4">
+              <span
+                className="text-sm font-medium uppercase tracking-wide"
+                style={{ color: "var(--theme-accent)" }}
+              >
+                Integrations
+              </span>
+            </div>
+            <h2
+              className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-6 leading-tight"
+              style={{ color: "var(--theme-text-primary)" }}
+            >
+              Integrate your data stack
+            </h2>
+            <p
+              className="text-base md:text-lg mb-8 leading-relaxed"
+              style={{ color: "var(--theme-text-secondary)" }}
+            >
+              Integrate TextQL with your team's stack and create a single source
+              of truth for every piece of data and insight.
+            </p>
+            <Button variant="primary" theme="light" onClick={onDemoRequest} className="w-full sm:w-auto">
+              Try Now
+            </Button>
+          </div>
+
+          {/* Marquees - Bottom on mobile, Left on desktop */}
+          <div className="flex-1 max-w-2xl overflow-x-hidden lg:order-1">
             <IntegrationMarquee integrations={integrationRows[0]} />
             <IntegrationMarquee
               integrations={integrationRows[1]}
@@ -101,34 +129,6 @@ export function IntegrationsSection() {
               integrations={integrationRows[3]}
               direction="right"
             />
-          </div>
-
-          {/* Right side - Content */}
-          <div className="flex-1 max-w-xl ml-16">
-            <div className="mb-4">
-              <span
-                className="text-sm font-medium uppercase tracking-wide"
-                style={{ color: "var(--theme-accent)" }}
-              >
-                Integrations
-              </span>
-            </div>
-            <h2
-              className="text-5xl font-semibold mb-6 leading-tight"
-              style={{ color: "var(--theme-text-primary)" }}
-            >
-              Integrate your data stack
-            </h2>
-            <p
-              className="text-lg mb-8 leading-relaxed"
-              style={{ color: "var(--theme-text-secondary)" }}
-            >
-              Integrate TextQL with your team's stack and create a single source
-              of truth for every piece of data and insight.
-            </p>
-            <Button variant="primary" theme="light" onClick={onDemoRequest}>
-              Try Now
-            </Button>
           </div>
         </div>
       </div>
