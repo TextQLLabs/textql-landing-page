@@ -64,7 +64,6 @@ function TrialNavbar({
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
   const { isLightMode } = useGlobalTheme();
   const location = useLocation();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -338,6 +337,15 @@ export default function Trial() {
           style={{ display: "none" }}
           alt=""
           src="https://px.ads.linkedin.com/collect/?pid=6937250&fmt=gif"
+        />
+      </noscript>
+      <noscript>
+        <img
+          height="1"
+          width="1"
+          style={{ display: "none" }}
+          alt=""
+          src="https://px.ads.linkedin.com/collect/?pid=6937250&conversionId=22637842&fmt=gif"
         />
       </noscript>
 
