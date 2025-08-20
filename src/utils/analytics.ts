@@ -8,7 +8,14 @@ declare global {
         set: (properties: Record<string, any>) => void;
       };
       debug: () => void;
+      // Feature flag methods
+      getFeatureFlag: (key: string) => string | boolean | undefined;
+      getFeatureFlags: () => Record<string, string | boolean>;
+      onFeatureFlags: (callback: () => void) => void;
+      isFeatureEnabled: (key: string) => boolean;
     };
+    // Meta Pixel
+    fbq?: (action: string, event: string, parameters?: Record<string, any>) => void;
   }
 }
 
@@ -80,8 +87,51 @@ export const resetUser = () => {
 
 // Enable PostHog debug mode in development
 export const enableDebugMode = () => {
-  if (isPostHogReady() && window.posthog!.debug) {
+  if (isPostHogReady()) {
     window.posthog!.debug();
     console.log('[Analytics] PostHog debug mode enabled');
+  }
+};
+
+// Helper to check if Meta Pixel is loaded
+const isMetaPixelReady = (): boolean => {
+  return typeof window !== 'undefined' && window.fbq !== undefined;
+};
+
+// Track Meta Pixel events
+export const trackMetaPixelEvent = (event: string, parameters?: Record<string, any>) => {
+  if (!isMetaPixelReady()) {
+    console.warn('[Analytics] Meta Pixel not loaded yet, event not tracked:', event);
+    return;
+  }
+  
+  try {
+    window.fbq!('track', event, parameters);
+    
+    // Debug logging in development
+    if (import.meta.env.DEV) {
+      console.log('[Analytics] Meta Pixel event tracked:', event, parameters);
+    }
+  } catch (error) {
+    console.error('[Analytics] Error tracking Meta Pixel event:', error);
+  }
+};
+
+// Track Meta Pixel custom events
+export const trackMetaPixelCustomEvent = (event: string, parameters?: Record<string, any>) => {
+  if (!isMetaPixelReady()) {
+    console.warn('[Analytics] Meta Pixel not loaded yet, custom event not tracked:', event);
+    return;
+  }
+  
+  try {
+    window.fbq!('trackCustom', event, parameters);
+    
+    // Debug logging in development
+    if (import.meta.env.DEV) {
+      console.log('[Analytics] Meta Pixel custom event tracked:', event, parameters);
+    }
+  } catch (error) {
+    console.error('[Analytics] Error tracking Meta Pixel custom event:', error);
   }
 };
