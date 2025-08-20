@@ -1,0 +1,139 @@
+import { IntegrationMarquee } from "./integration-marquee";
+import { Button } from "../../ui/Button";
+
+// All available integrations from the /public/images/integrations/all/ directory
+const allIntegrations = [
+  { name: "Snowflake", logo: "/images/integrations/all/snowflake.png" },
+  { name: "Databricks", logo: "/images/integrations/all/databricks.png" },
+  { name: "BigQuery", logo: "/images/integrations/all/bigquery.svg" },
+  { name: "Tableau", logo: "/images/integrations/all/tableau.png" },
+  { name: "PowerBI", logo: "/images/integrations/all/PowerBI.png" },
+  { name: "Looker", logo: "/images/integrations/all/looker.png" },
+  { name: "Redshift", logo: "/images/integrations/all/redshift.png" },
+  { name: "Metabase", logo: "/images/integrations/all/metabase.png" },
+  { name: "Jupyter", logo: "/images/integrations/all/jupyter.png" },
+  { name: "Salesforce", logo: "/images/integrations/all/salesforce.png" },
+  { name: "Slack", logo: "/images/integrations/all/slack.webp" },
+  { name: "Excel", logo: "/images/integrations/all/excel.png" },
+  { name: "AWS RDS", logo: "/images/integrations/all/AWS RDS.svg" },
+  { name: "Cube", logo: "/images/integrations/all/Cube.png" },
+  { name: "DataHub", logo: "/images/integrations/all/DataHub.png" },
+  { name: "IBM Cognos", logo: "/images/integrations/all/IBM Cognos.png" },
+  { name: "Informatica", logo: "/images/integrations/all/Informatica.png" },
+  { name: "Lightdash", logo: "/images/integrations/all/Lightdash.png" },
+  { name: "Quicksight", logo: "/images/integrations/all/Quicksight.png" },
+  { name: "Secoda", logo: "/images/integrations/all/Secoda.png" },
+  { name: "Select Star", logo: "/images/integrations/all/Select Star.png" },
+  { name: "Sigma", logo: "/images/integrations/all/Sigma.png" },
+  { name: "Airflow", logo: "/images/integrations/all/airflow.png" },
+  { name: "Alation", logo: "/images/integrations/all/alation.png" },
+  { name: "Atlan", logo: "/images/integrations/all/atlan.png" },
+  { name: "Azure Synapse", logo: "/images/integrations/all/azure-synapse.png" },
+  { name: "Azure", logo: "/images/integrations/all/azure.png" },
+  { name: "Collibra", logo: "/images/integrations/all/collibra.png" },
+  { name: "Confluence", logo: "/images/integrations/all/confluence.png" },
+  { name: "dbt", logo: "/images/integrations/all/dbt.png" },
+  { name: "Email", logo: "/images/integrations/all/email.png" },
+  { name: "Firebolt", logo: "/images/integrations/all/firebolt.svg" },
+  { name: "Google Drive", logo: "/images/integrations/all/google drive.png" },
+  { name: "Google Sheets", logo: "/images/integrations/all/google sheets.png" },
+  { name: "Google Docs", logo: "/images/integrations/all/google-docs.png" },
+  { name: "Hex", logo: "/images/integrations/all/hex.png" },
+  { name: "IBM DB2", logo: "/images/integrations/all/ibm-db2.png" },
+  { name: "LookML", logo: "/images/integrations/all/lookML.png" },
+  {
+    name: "Microsoft Office",
+    logo: "/images/integrations/all/microsoft-office.png",
+  },
+  { name: "Mode", logo: "/images/integrations/all/mode.png" },
+  { name: "MotherDuck", logo: "/images/integrations/all/motherduck.png" },
+  { name: "Notion", logo: "/images/integrations/all/notion.png" },
+  { name: "Oracle", logo: "/images/integrations/all/oracle png.png" },
+  {
+    name: "SAP Business One",
+    logo: "/images/integrations/all/sap-business-one.png",
+  },
+  { name: "SAP HANA", logo: "/images/integrations/all/saphana.png" },
+  { name: "Sisense", logo: "/images/integrations/all/sisense.png" },
+  { name: "SQL Mesh", logo: "/images/integrations/all/sql-mesh.png" },
+  { name: "Superset", logo: "/images/integrations/all/superset.png" },
+  { name: "Teams", logo: "/images/integrations/all/teams.png" },
+  { name: "Linear", logo: "/images/integrations/all/linear.svg" },
+  { name: "Notion", logo: "/images/integrations/all/notion.svg" },
+  { name: "Supabase", logo: "/images/integrations/all/supabase.svg" },
+  { name: "Browserase", logo: "/images/integrations/all/browserbase.svg" },
+  { name: "Metabase", logo: "/images/integrations/all/metabase.svg" },
+  { name: "Github", logo: "/images/integrations/all/github.svg" },
+];
+
+const totalIntegrations = allIntegrations.length;
+const integrationsPerRow = Math.ceil(totalIntegrations / 4);
+
+const integrationRows = [
+  allIntegrations.slice(0, integrationsPerRow),
+  allIntegrations.slice(integrationsPerRow, integrationsPerRow * 2),
+  allIntegrations.slice(integrationsPerRow * 2, integrationsPerRow * 3),
+  allIntegrations.slice(integrationsPerRow * 3),
+];
+
+const onDemoRequest = (e: React.MouseEvent) => {
+  e.preventDefault();
+  window.location.href = "https://buy.stripe.com/eVq14n4q7gpH5M1gcfcEw03";
+};
+
+export function IntegrationsSection() {
+  return (
+    <section
+      className="py-16 overflow-x-hidden"
+      style={{ backgroundColor: "var(--theme-bg-secondary)" }}
+    >
+      <div className="container mx-auto px-4 overflow-x-hidden">
+        <div className="flex items-center justify-between max-w-7xl mx-auto overflow-x-hidden">
+          {/* Left side - Marquees */}
+          <div className="flex-1 max-w-2xl overflow-x-hidden">
+            <IntegrationMarquee integrations={integrationRows[0]} />
+            <IntegrationMarquee
+              integrations={integrationRows[1]}
+              direction="right"
+            />
+            <IntegrationMarquee integrations={integrationRows[2]} />
+            <IntegrationMarquee
+              integrations={integrationRows[3]}
+              direction="right"
+            />
+          </div>
+
+          {/* Right side - Content */}
+          <div className="flex-1 max-w-xl ml-16">
+            <div className="mb-4">
+              <span
+                className="text-sm font-medium uppercase tracking-wide"
+                style={{ color: "var(--theme-accent)" }}
+              >
+                Integrations
+              </span>
+            </div>
+            <h2
+              className="text-5xl font-semibold mb-6 leading-tight"
+              style={{ color: "var(--theme-text-primary)" }}
+            >
+              Integrate your data stack
+            </h2>
+            <p
+              className="text-lg mb-8 leading-relaxed"
+              style={{ color: "var(--theme-text-secondary)" }}
+            >
+              Integrate TextQL with your team's stack and create a single source
+              of truth for every piece of data and insight.
+            </p>
+            <Button variant="primary" theme="light" onClick={onDemoRequest}>
+              Try Now
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default IntegrationsSection;

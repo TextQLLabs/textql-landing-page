@@ -39,6 +39,7 @@ import Test from '../pages/Test';
 import ThemeTest from '../pages/ThemeTest';
 import Customers from '../pages/Customers';
 import DataAssessment from '../pages/DataAssessment';
+import Trial from '../pages/Trial';
 
 export function AppWithGlobalTheme() {
   const location = useLocation();
@@ -57,12 +58,12 @@ export function AppWithGlobalTheme() {
   // Get current page metadata
   const currentPath = location.pathname;
   const baseUrl = 'https://textql.com';
-  const canonical = `${baseUrl}${currentPath}`;
 
   return (
     <Routes>
       <Route path="/test" element={<Test />} />
       {isDevelopment && <Route path="/theme-test" element={<ThemeTest />} />}
+      <Route path="/trial" element={<Trial />} />
       <Route element={<Layout />}>
         {/* Main Routes */}
         <Route

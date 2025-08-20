@@ -1,4 +1,3 @@
-import React from 'react';
 import { Text } from './ui';
 
 interface TestimonialProps {
@@ -13,40 +12,42 @@ export function Testimonial({ quote, author, title, ctaText = "Read the case stu
   return (
     <section className="bg-transparent py-12 lg:py-24 relative overflow-hidden">
       <div className="mx-auto max-w-4xl px-12 md:px-12 relative">
-        <div className="bg-black border border-[#729E8C]/20 rounded-xl p-12 relative opacity-0 animate-slide-up animation-delay-800">
-          <div className="text-[#729E8C] text-[150px] font-bold leading-none absolute -top-10 -left-6">
+        <div className="bg-black border border-[#729E8C]/20 rounded-xl p-12 relative opacity-0 animate-slideUp [animation-delay:200ms] [animation-fill-mode:forwards]">
+          <div className="text-[#729E8C] text-[150px] font-bold leading-none absolute -top-10 -left-6 opacity-0 animate-slideUp [animation-delay:400ms] [animation-fill-mode:forwards] transition-all duration-300">
             "
           </div>
-          <div className="text-[#729E8C] text-[150px] font-bold leading-none absolute -bottom-[15%] -right-6 rotate-180">
-          "
+          <div className="text-[#729E8C] text-[150px] font-bold leading-none absolute -bottom-[15%] -right-6 rotate-180 opacity-0 animate-slideUp [animation-delay:600ms] [animation-fill-mode:forwards] transition-all duration-300">
+            "
           </div>
           <div className="space-y-8">
             <div className="space-y-6">
-              <h2 className="text-2xl font-extralight text-[#B8D8D0] tracking-tight uppercase">
+              <h2 className="text-2xl font-extralight text-[#B8D8D0] tracking-tight uppercase opacity-0 animate-slideUp [animation-delay:800ms] [animation-fill-mode:forwards]">
                 {/* TESTIMONIALS */}
               </h2>
-              <Text color="primary" className="text-2xl md:text-3xl italic font-light leading-relaxed italics opacity-0 animate-slide-up animation-delay-800">
+              <Text color="primary" className="text-2xl md:text-3xl italic font-light leading-relaxed opacity-0 animate-slideUp [animation-delay:1000ms] [animation-fill-mode:forwards] transition-all duration-500 ease-out">
                 {quote}
               </Text>
             </div>
             
-            <div className="space-y-2 opacity-0 animate-slide-up animation-delay-800">
-              <Text color="primary" className="font-medium italic">
+            <div className="space-y-2 opacity-0 animate-slideUp [animation-delay:1200ms] [animation-fill-mode:forwards]">
+              <Text color="primary" className="font-medium italic transition-all duration-300 ease-out">
                 {author !== "" && <>— {author}</>}
               </Text>
-              <Text color="muted" className="font-light">
+              <Text color="muted" className="font-light transition-all duration-300 ease-out">
                 {title}
               </Text>
             </div>
 
-            {/* {ctaText && ctaHref && (
-              <a
-                href={ctaHref}
-                className="inline-flex px-6 py-3 bg-[#FF4D8D] hover:bg-[#FF4D8D]/90 text-white rounded-full font-medium transition-colors duration-200"
-              >
-                {ctaText}
-              </a>
-            )} */}
+            {ctaText && ctaHref && (
+              <div className="opacity-0 animate-slideUp [animation-delay:1400ms] [animation-fill-mode:forwards]">
+                <a
+                  href={ctaHref}
+                  className="inline-flex px-6 py-3 bg-[#FF4D8D] hover:bg-[#FF4D8D]/90 text-white rounded-full font-medium transition-all duration-300 ease-out transform hover:scale-105 hover:shadow-lg"
+                >
+                  {ctaText}
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -90,13 +90,15 @@ export default function FAQ({
       {/* FAQs */}
       <div className="max-w-3xl mx-auto space-y-4">
         {filteredFaqs.map(faq => (
-          <div
+          <motion.div
             key={faq.id}
+            layout
             className="
               border border-[#B8D8D0]/20
               bg-[#004D40]/10 backdrop-blur-sm
-              transition-colors duration-200
+              transition-all duration-300 ease-out
               hover:border-[#B8D8D0]/40
+              hover:bg-[#004D40]/15
             "
           >
             <button
@@ -106,33 +108,48 @@ export default function FAQ({
               <Text className="text-left font-light">
                 {faq.question}
               </Text>
-              <ChevronDown
-                className={`
-                  w-5 h-5 text-[#B8D8D0]/60 flex-shrink-0
-                  transition-transform duration-200
-                  ${expandedId === faq.id ? 'rotate-180' : ''}
-                `}
-              />
+              <motion.div
+                animate={{ rotate: expandedId === faq.id ? 180 : 0 }}
+                transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
+                className="flex-shrink-0"
+              >
+                <ChevronDown className="w-5 h-5 text-[#B8D8D0]/60" />
+              </motion.div>
             </button>
             
-            <AnimatePresence>
+            <AnimatePresence initial={false}>
               {expandedId === faq.id && (
                 <motion.div
+                  key="content"
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: 'auto', opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
+                  transition={{
+                    duration: 0.3,
+                    ease: [0.04, 0.62, 0.23, 0.98],
+                    opacity: { duration: 0.25 }
+                  }}
                   className="overflow-hidden"
                 >
-                  <div className="px-6 pb-4">
+                  <motion.div
+                    initial={{ y: -10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -10, opacity: 0 }}
+                    transition={{
+                      duration: 0.2,
+                      delay: 0.1,
+                      ease: "easeOut"
+                    }}
+                    className="px-6 pb-4"
+                  >
                     <Text color="muted" className="font-light">
                       {faq.answer}
                     </Text>
-                  </div>
+                  </motion.div>
                 </motion.div>
               )}
             </AnimatePresence>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>
