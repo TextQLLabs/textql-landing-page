@@ -2,7 +2,6 @@
 
 import Marquee from "react-fast-marquee";
 
-
 interface Logo {
   id: string;
   description: string;
@@ -59,10 +58,24 @@ const Logos3 = ({
         </h2>
       </div>
       <div className="relative mx-auto flex items-center justify-center max-w-6xl">
-        <Marquee autoFill={true} pauseOnHover={false} speed={30}>
+        <Marquee
+          autoFill={true}
+          pauseOnHover={false}
+          speed={30}
+          gradient={true}
+          gradientColor="white"
+          gradientWidth={80}
+        >
           {logos.map((logo) => (
-            <div key={logo.id} className="mx-16 flex items-center justify-center">
-              <img src={logo.image} alt={logo.description} className={logo.className} />
+            <div
+              key={logo.id}
+              className="mx-16 flex items-center justify-center"
+            >
+              <img
+                src={logo.image}
+                alt={logo.description}
+                className={logo.className}
+              />
             </div>
           ))}
         </Marquee>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface FAQItem {
   question: string;
@@ -58,8 +59,15 @@ export default function FAQ() {
 
         <div className="space-y-0 px-8">
           {faqData.map((item, index) => (
-            <div
+            <motion.div
               key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.4, 
+                delay: index * 0.1,
+                ease: [0.04, 0.62, 0.23, 0.98]
+              }}
               className="border-b last:border-b-0"
               style={{borderColor: 'var(--theme-text-secondary)'}}
             >
@@ -70,22 +78,51 @@ export default function FAQ() {
                 <span className="text-base font-normal pr-4" style={{color: 'var(--theme-text-primary)'}}>
                   {item.question}
                 </span>
-                <ChevronDown 
-                  className={`w-5 h-5 transition-transform flex-shrink-0 ${
-                    openItems.includes(index) ? 'rotate-180' : ''
-                  }`}
-                  style={{color: 'var(--theme-text-secondary)'}}
-                />
+                <motion.div
+                  animate={{ rotate: openItems.includes(index) ? 180 : 0 }}
+                  transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
+                  className="flex-shrink-0"
+                >
+                  <ChevronDown 
+                    className="w-5 h-5"
+                    style={{color: 'var(--theme-text-secondary)'}}
+                  />
+                </motion.div>
               </button>
               
-              {openItems.includes(index) && (
-                <div className="pb-6">
-                  <p className="text-base leading-relaxed font-normal" style={{color: 'var(--theme-text-primary)'}}>
-                    {item.answer}
-                  </p>
-                </div>
-              )}
-            </div>
+              <AnimatePresence initial={false}>
+                {openItems.includes(index) && (
+                  <motion.div
+                    key="content"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{
+                      duration: 0.3,
+                      ease: [0.04, 0.62, 0.23, 0.98],
+                      opacity: { duration: 0.25 }
+                    }}
+                    className="overflow-hidden"
+                  >
+                    <motion.div
+                      initial={{ y: -10, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -10, opacity: 0 }}
+                      transition={{
+                        duration: 0.2,
+                        delay: 0.1,
+                        ease: "easeOut"
+                      }}
+                      className="pb-6"
+                    >
+                      <p className="text-base leading-relaxed font-normal" style={{color: 'var(--theme-text-primary)'}}>
+                        {item.answer}
+                      </p>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
           ))}
         </div>
       </div>

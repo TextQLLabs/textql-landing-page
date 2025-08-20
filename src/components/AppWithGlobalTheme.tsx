@@ -63,6 +63,7 @@ export function AppWithGlobalTheme() {
     <Routes>
       <Route path="/test" element={<Test />} />
       {isDevelopment && <Route path="/theme-test" element={<ThemeTest />} />}
+      <Route path="/trial" element={<Trial />} />
       <Route element={<Layout />}>
         {/* Main Routes */}
         <Route
@@ -106,7 +107,6 @@ export function AppWithGlobalTheme() {
         <Route path="/cookies" element={<Cookies />} />
         <Route path="/whitepaper" element={<Whitepaper />} />
         <Route path="/data-assessment" element={<DataAssessment />} />
-        <Route path="/trial" element={<Trial />} />
         <Route path="/team" element={<Team />} />
         <Route path="/snowflake-2025" element={<Snowflake2025 />} />
         <Route path="/databricks-2025" element={<Databricks2025 />} />

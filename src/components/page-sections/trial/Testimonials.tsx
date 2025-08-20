@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Testimonial {
   quote: string;
@@ -96,47 +97,97 @@ export default function Testimonials() {
         </div>
 
         {/* Full Width Testimonial Card */}
-        <div className="relative">
-          <div className="p-8 flex items-start gap-12 h-[400px] border" style={{backgroundColor: 'var(--theme-bg-secondary)', borderColor: 'var(--theme-accent-secondary)'}}>
-            {/* Left: Person Image */}
-            <div className="flex-shrink-0 w-80 h-full">
-              <img
-                src={testimonials[currentIndex].image}
-                alt={testimonials[currentIndex].name}
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            {/* Right: Content */}
-            <div className="flex-1 flex flex-col justify-between h-full py-2">
-              {/* Company Logo */}
-              <img
-                src={testimonials[currentIndex].logo}
-                alt={`${testimonials[currentIndex].company} logo`}
-                className="w-16 h-16 object-contain"
-              />
-
-              
-              {/* Quote */}
-              <blockquote className="text-2xl font-display leading-relaxed mb-4 flex-1" style={{color: 'var(--theme-text-primary)'}}>
-                "{testimonials[currentIndex].quote}"
-              </blockquote>
-              
-              {/* Author */}
-              <div>
-                <div className="font-semibold text-lg" style={{color: 'var(--theme-text-primary)'}}>
-                  {testimonials[currentIndex].name}
+        <motion.div 
+          className="relative"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.04, 0.62, 0.23, 0.98] }}
+        >
+          <div className="p-8 flex items-start gap-12 h-[400px] border overflow-hidden" style={{backgroundColor: 'var(--theme-bg-secondary)', borderColor: 'var(--theme-accent-secondary)'}}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ 
+                  duration: 0.5, 
+                  ease: [0.04, 0.62, 0.23, 0.98] 
+                }}
+                className="flex items-start gap-12 w-full h-full"
+              >
+                {/* Left: Person Image */}
+                <div className="flex-shrink-0 w-80 h-full">
+                  <motion.img
+                    src={testimonials[currentIndex].image}
+                    alt={testimonials[currentIndex].name}
+                    className="w-full h-full object-cover"
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ 
+                      duration: 0.6, 
+                      delay: 0.1,
+                      ease: [0.04, 0.62, 0.23, 0.98] 
+                    }}
+                  />
                 </div>
-                <div className="text-base" style={{color: 'var(--theme-text-secondary)'}}>
-                  {testimonials[currentIndex].title}, {testimonials[currentIndex].company}
+
+                {/* Right: Content */}
+                <div className="flex-1 flex flex-col justify-between h-full py-2">
+                  {/* Company Logo */}
+                  <motion.img
+                    src={testimonials[currentIndex].logo}
+                    alt={`${testimonials[currentIndex].company} logo`}
+                    className="w-16 h-16 object-contain"
+                    initial={{ y: -20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ 
+                      duration: 0.4, 
+                      delay: 0.2,
+                      ease: "easeOut" 
+                    }}
+                  />
+
+                  {/* Quote */}
+                  <motion.blockquote 
+                    className="text-2xl font-display leading-relaxed mb-4 flex-1" 
+                    style={{color: 'var(--theme-text-primary)'}}
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ 
+                      duration: 0.5, 
+                      delay: 0.3,
+                      ease: [0.04, 0.62, 0.23, 0.98] 
+                    }}
+                  >
+                    "{testimonials[currentIndex].quote}"
+                  </motion.blockquote>
+                  
+                  {/* Author */}
+                  <motion.div
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ 
+                      duration: 0.4, 
+                      delay: 0.4,
+                      ease: "easeOut" 
+                    }}
+                  >
+                    <div className="font-semibold text-lg" style={{color: 'var(--theme-text-primary)'}}>
+                      {testimonials[currentIndex].name}
+                    </div>
+                    <div className="text-base" style={{color: 'var(--theme-text-secondary)'}}>
+                      {testimonials[currentIndex].title}, {testimonials[currentIndex].company}
+                    </div>
+                    {testimonials[currentIndex].valuation && (
+                      <div className="text-sm mt-1" style={{color: 'var(--theme-text-secondary)'}}>
+                        {testimonials[currentIndex].valuation}
+                      </div>
+                    )}
+                  </motion.div>
                 </div>
-                {testimonials[currentIndex].valuation && (
-                  <div className="text-sm mt-1" style={{color: 'var(--theme-text-secondary)'}}>
-                    {testimonials[currentIndex].valuation}
-                  </div>
-                )}
-              </div>
-            </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           {/* Progress Dashes */}
@@ -153,8 +204,8 @@ export default function Testimonials() {
                 aria-label={`Go to testimonial ${index + 1}`}
               />
             ))}
-          </div>
-        </div>
+           </div>
+        </motion.div>
       </div>
     </section>
   );
