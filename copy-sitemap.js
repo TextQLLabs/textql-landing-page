@@ -17,6 +17,7 @@ const routes = [
   { url: '/enterprise/', changefreq: 'weekly', priority: 0.8 },
   { url: '/pricing/', changefreq: 'weekly', priority: 0.8 },
   { url: '/workflows/', changefreq: 'weekly', priority: 0.8 },
+  { url: '/trial/', changefreq: 'weekly', priority: 0.8 },
   { url: '/about/', changefreq: 'monthly', priority: 0.7 },
   { url: '/terms/', changefreq: 'yearly', priority: 0.2 },
   { url: '/privacy/', changefreq: 'yearly', priority: 0.2 },

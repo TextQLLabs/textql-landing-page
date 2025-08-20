@@ -37,6 +37,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://textql.com/trial/</loc>
+    <lastmod>2025-03-06T17:11:29.201Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://textql.com/workflows/</loc>
     <lastmod>2025-03-06T17:11:29.201Z</lastmod>
     <changefreq>weekly</changefreq>

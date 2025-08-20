@@ -39,6 +39,7 @@ import Test from '../pages/Test';
 import ThemeTest from '../pages/ThemeTest';
 import Customers from '../pages/Customers';
 import DataAssessment from '../pages/DataAssessment';
+import Trial from '../pages/Trial';
 
 export function AppWithGlobalTheme() {
   const location = useLocation();
@@ -57,7 +58,6 @@ export function AppWithGlobalTheme() {
   // Get current page metadata
   const currentPath = location.pathname;
   const baseUrl = 'https://textql.com';
-  const canonical = `${baseUrl}${currentPath}`;
 
   return (
     <Routes>
@@ -106,6 +106,7 @@ export function AppWithGlobalTheme() {
         <Route path="/cookies" element={<Cookies />} />
         <Route path="/whitepaper" element={<Whitepaper />} />
         <Route path="/data-assessment" element={<DataAssessment />} />
+        <Route path="/trial" element={<Trial />} />
         <Route path="/team" element={<Team />} />
         <Route path="/snowflake-2025" element={<Snowflake2025 />} />
         <Route path="/databricks-2025" element={<Databricks2025 />} />

@@ -69,6 +69,12 @@ const buttonVariants = cva(
         theme: 'light',
         className: '!text-[#2A3B35] !hover:text-[#2A3B35] !border-2 !border-[#2A3B35] !hover:border-[#2A3B35]/90'
       }
+      ,
+      {
+        variant: 'secondary',
+        theme: 'dark',
+        className: '!text-[#B8D8D0] !hover:text-[#B8D8D0] !border-2 !border-[#B8D8D0]/80 !hover:border-[#B8D8D0]'
+      }
     ]
   }
 );
