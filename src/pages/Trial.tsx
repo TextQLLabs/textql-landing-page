@@ -339,6 +339,7 @@ export default function Trial() {
           src="https://px.ads.linkedin.com/collect/?pid=6937250&fmt=gif"
         />
       </noscript>
+      
       <noscript>
         <img
           height="1"
@@ -348,6 +349,7 @@ export default function Trial() {
           src="https://px.ads.linkedin.com/collect/?pid=6937250&conversionId=22637842&fmt=gif"
         />
       </noscript>
+
 
       <ReusableHero
         title='200 Queries And 50 Visualizations For <span class="">$5</span>'
