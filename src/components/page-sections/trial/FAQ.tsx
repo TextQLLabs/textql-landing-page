@@ -14,23 +14,23 @@ const faqData: FAQItem[] = [
   },
   {
     question: "Will TextQL spike my warehouse costs?",
-    answer: "TextQL is designed to be efficient with your data warehouse resources. We optimize queries to minimize compute costs and provide query cost estimates before execution."
+    answer: "No—our guardrails prevent excessive spend. Historically, every $1.00 of TextQL work costs approximately $0.0001 in warehouse compute, making it extremely cost-effective."
   },
   {
     question: "Which tools does TextQL work with?",
-    answer: "TextQL integrates with major data warehouses including Snowflake, BigQuery, Redshift, Databricks, and more. We also work with popular BI tools and databases."
+    answer: "TextQL integrates with warehouses (Snowflake, BigQuery, Redshift, Databricks), BI tools (Looker, Power BI, Tableau), and semantic layers (dbt, LookML). We are able to connect 100x more data sources than any other solution, helping you get insights regardless of how many databases your data lives in."
   },
   {
     question: "Is it secure and compliant?",
-    answer: "Yes, TextQL follows enterprise-grade security standards with SOC 2 compliance, encryption at rest and in transit, and role-based access controls to keep your data secure."
+    answer: "Yes. Enterprise-grade security with configurable LLMs, anonymization guardrails, and compliance features. Deployed in your environment with full control over data access."
   },
   {
     question: "Can I keep the queries and dashboards?",
-    answer: "Absolutely! All queries, code, and dashboards you create during the trial are yours to keep. You can export them and continue using them even after the trial ends."
+    answer: "Yes, you can export all generated SQL, Python code, and visualizations."
   },
   {
     question: "What if I need help?",
-    answer: "Our support team is available throughout your trial to help you get the most out of TextQL. We provide documentation, tutorials, and direct assistance to ensure your success."
+    answer: "Request a demo with our team or reach out at hello@textql.com."
   }
 ];
 

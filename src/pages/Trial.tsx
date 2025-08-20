@@ -17,6 +17,37 @@ import { useGlobalTheme } from "../components/GlobalThemeProvider";
 import { getThemeClasses } from "../utils/theme-utils";
 import { COLORS } from "../styles/constants";
 import Footer from "../components/Footer";
+import { useABTest } from "../utils/ab-testing";
+
+// A/B Test: Trial Page Headlines
+// Test name: "trial_headline_test"
+// Variants: variant_a, variant_b, variant_c, variant_d
+// 
+// SETUP INSTRUCTIONS:
+// 1. In PostHog, create a new feature flag called "trial_headline_test"
+// 2. Set it to "Release condition" type with these variants:
+//    - variant_a (25% traffic)
+//    - variant_b (25% traffic) 
+//    - variant_c (25% traffic)
+//    - variant_d (25% traffic)
+// 
+// ANALYTICS:
+// - Exposure events: "ab_test_exposure" with test_name: "trial_headline_test"
+// - Conversion events: "ab_test_conversion" with conversion_type: "trial_signup_click" or "meeting_booking_click"
+const HEADLINE_VARIANTS = {
+  variant_a: {
+    title: '200 Queries And 50 Visualizations For <span class="">$5</span>',
+    subtitle: "Get $500 worth of queries and visualizations for $5. Connect your data source and try it now."
+  },
+  variant_b: {
+    title: 'Never Write SQL Again.',
+    subtitle: "Connect your data source to try it out and get $500 worth of queries and visualizations for $5."
+  },
+  variant_c: {
+    title: 'AI Chat With Your Data',
+    subtitle: "Connect your data source to try it out and get $500 worth of queries and visualizations for $5."
+  },
+} as const;
 
 const transformFeatures = [
   {
@@ -64,7 +95,7 @@ function TrialNavbar({
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
   const { isLightMode } = useGlobalTheme();
   const location = useLocation();
-  const navigate = useNavigate();
+  const _navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -284,13 +315,32 @@ function TrialNavbar({
 
 export default function Trial() {
   const navigate = useNavigate();
+  
+  // A/B Test for headlines
+  const { variant, trackConversion } = useABTest('trial_headline_test', 'variant_a');
+  
+  // Get the headline content based on the A/B test variant
+  const headlineContent = HEADLINE_VARIANTS[variant as keyof typeof HEADLINE_VARIANTS] || HEADLINE_VARIANTS.variant_a;
 
   const onDemoRequest = (e?: React.MouseEvent) => {
     e?.preventDefault();
+    
+    // Track conversion for A/B test
+    trackConversion('trial_signup_click', {
+      button_text: 'Try Now',
+      location: 'hero_section'
+    });
+    
     window.location.href = "https://buy.stripe.com/eVq14n4q7gpH5M1gcfcEw03";
   };
 
   const onBookMeeting = () => {
+    // Track conversion for A/B test
+    trackConversion('meeting_booking_click', {
+      button_text: 'Book a Meeting',
+      location: 'hero_section'
+    });
+    
     navigate("/demo");
   };
 
@@ -342,9 +392,8 @@ export default function Trial() {
       </noscript>
 
       <ReusableHero
-        title='200 Queries And 50 Visualizations For <span class="">$5</span>'
-        subtitle="Get $500 worth of queries and visualizations for $5."
-        description="Connect your data source and try it now."
+        title={headlineContent.title}
+        subtitle={headlineContent.subtitle}
         videoEmbedUrl="https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/tql-demo.mp4"
         theme="light"
         layout="text-left"

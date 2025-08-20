@@ -1,5 +1,6 @@
 import { IntegrationMarquee } from "./integration-marquee";
 import { Button } from "../../ui/Button";
+import { abTestManager } from "../../../utils/ab-testing";
 
 // All available integrations from the /public/images/integrations/all/ directory
 const allIntegrations = [
@@ -78,6 +79,14 @@ const integrationRows = [
 
 const onDemoRequest = (e: React.MouseEvent) => {
   e.preventDefault();
+  
+  // Track A/B test conversion for integrations section
+  const currentVariant = abTestManager.getVariant('trial_headline_test', 'variant_a');
+  abTestManager.trackConversion('trial_headline_test', currentVariant, 'trial_signup_click', {
+    button_text: 'Try Now',
+    location: 'integrations_section'
+  });
+  
   window.location.href = "https://buy.stripe.com/eVq14n4q7gpH5M1gcfcEw03";
 };
 

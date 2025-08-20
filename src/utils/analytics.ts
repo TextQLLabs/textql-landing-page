@@ -8,6 +8,11 @@ declare global {
         set: (properties: Record<string, any>) => void;
       };
       debug: () => void;
+      // Feature flag methods
+      getFeatureFlag: (key: string) => string | boolean | undefined;
+      getFeatureFlags: () => Record<string, string | boolean>;
+      onFeatureFlags: (callback: () => void) => void;
+      isFeatureEnabled: (key: string) => boolean;
     };
   }
 }
@@ -80,7 +85,7 @@ export const resetUser = () => {
 
 // Enable PostHog debug mode in development
 export const enableDebugMode = () => {
-  if (isPostHogReady() && window.posthog!.debug) {
+  if (isPostHogReady()) {
     window.posthog!.debug();
     console.log('[Analytics] PostHog debug mode enabled');
   }

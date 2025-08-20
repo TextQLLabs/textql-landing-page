@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../../ui/Button";
 import { useGlobalTheme } from "../../GlobalThemeProvider";
 import { getThemeClasses } from "../../../utils/theme-utils";
+import { abTestManager } from "../../../utils/ab-testing";
 
 export default function FooterCTA() {
   const { isLightMode } = useGlobalTheme();
@@ -14,6 +15,14 @@ export default function FooterCTA() {
 
   const onDemoRequest = (e: React.MouseEvent) => {
     e.preventDefault();
+    
+    // Track A/B test conversion for footer CTA section
+    const currentVariant = abTestManager.getVariant('trial_headline_test', 'variant_a');
+    abTestManager.trackConversion('trial_headline_test', currentVariant, 'trial_signup_click', {
+      button_text: 'Try now',
+      location: 'footer_cta_section'
+    });
+    
     window.location.href = "https://buy.stripe.com/eVq14n4q7gpH5M1gcfcEw03";
   };
 
