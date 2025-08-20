@@ -1,5 +1,5 @@
 import React from 'react';
-import { trackEvent } from './analytics';
+import { trackEvent, trackMetaPixelEvent, trackMetaPixelCustomEvent } from './analytics';
 
 // A/B Testing utility for PostHog feature flags
 export class ABTestManager {
@@ -107,6 +107,7 @@ export class ABTestManager {
    * @param properties - Additional properties to track
    */
   public trackConversion(testName: string, variant: string, conversionType: string, properties?: Record<string, any>) {
+    // Track in PostHog
     trackEvent('ab_test_conversion', {
       test_name: testName,
       variant,
@@ -114,6 +115,28 @@ export class ABTestManager {
       timestamp: new Date().toISOString(),
       ...properties,
     });
+
+    // Track in Meta Pixel
+    if (conversionType === 'trial_signup_click') {
+      // Track standard Lead event for Meta Pixel
+      trackMetaPixelEvent('Lead', {
+        content_name: `Trial Signup - ${variant}`,
+        content_category: 'trial',
+        value: 5.00, // $5 trial value
+        currency: 'USD',
+        custom_variant: variant,
+        custom_test_name: testName,
+        ...properties,
+      });
+
+      // Also track custom event for A/B test analysis
+      trackMetaPixelCustomEvent('TrialSignupClick', {
+        test_name: testName,
+        variant,
+        button_location: properties?.location || 'unknown',
+        timestamp: new Date().toISOString(),
+      });
+    }
 
     // Also track in development for debugging
     if (import.meta.env.DEV) {
