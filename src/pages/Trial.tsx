@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { SEO } from "../components/SEO";
-import { ReusableHero } from "../components/ui/ReusableHero";
-import { default as Logos3 } from "../components/page-sections/trial/logos3";
 import { default as IntegrationsSection } from "../components/page-sections/trial/integrations-section";
-import { FeatureSection } from "../components/page-sections/trial/feature-section";
+import { FeatureSection } from "../components/page-sections/trial/feature-section.tsx";
 import { default as Testimonials } from "../components/page-sections/trial/Testimonials";
-import { default as FAQ } from "../components/page-sections/trial/FAQ";
-import { default as FooterCTA } from "../components/page-sections/trial/FooterCTA";
+
+import FaqSection from "../components/integrations/FaqSection";
+import { CTA } from "../components/sections";
 import { Button } from "../components/ui";
+import { Carousel } from "../components/ui";
+import { Section } from "../components/ui/Section";
+import { WaveBackground } from "../components/animations";
 import { TextLogo } from "../components/Logo";
 import { NavItem } from "../components/Navbar/NavItem";
 import { navigation } from "../components/Navbar/types";
@@ -52,36 +54,218 @@ const HEADLINE_VARIANTS = {
 const transformFeatures = [
   {
     title: "Intelligent Analysis",
-    description:
-      "Advanced algorithms process your data to identify key patterns and opportunities",
+    description: "Advanced algorithms process your data to identify key patterns and opportunities",
+    details: [
+      "Machine learning models analyze data patterns",
+      "Identifies hidden correlations and trends",
+      "Provides actionable business insights"
+    ],
+    learnMoreHref: "#intelligent-analysis",
+    imageSrc: "https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/transform2.svg"
   },
   {
     title: "Contextual Insights",
-    description:
-      "Get specific, actionable recommendations tailored to your business goals",
+    description: "Get specific, actionable recommendations tailored to your business goals",
+    details: [
+      "Business context-aware recommendations",
+      "Industry-specific insights",
+      "Goal-oriented analytics"
+    ],
+    learnMoreHref: "#contextual-insights",
+    imageSrc: "https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/transform.svg"
   },
   {
     title: "Automated Actions",
-    description:
-      "Implement suggestions seamlessly with one-click execution and tracking",
+    description: "Implement suggestions seamlessly with one-click execution and tracking",
+    details: [
+      "One-click implementation",
+      "Automated workflow execution",
+      "Real-time progress tracking"
+    ],
+    learnMoreHref: "#automated-actions",
+    imageSrc: "https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/transform2.svg"
   },
 ];
 
 const analyticsFeatures = [
   {
     title: "Scalable Processing",
-    description:
-      "Handle massive datasets with enterprise-grade processing power",
+    description: "Handle massive datasets with enterprise-grade processing power",
+    details: [
+      "Processes petabytes of data efficiently",
+      "Auto-scaling infrastructure",
+      "Enterprise-grade performance"
+    ],
+    learnMoreHref: "#scalable-processing",
+    imageSrc: "https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/transform.svg"
   },
   {
     title: "Real-time Analysis",
     description: "Get instant insights as your data changes and evolves",
+    details: [
+      "Live data streaming",
+      "Instant insight generation",
+      "Real-time dashboard updates"
+    ],
+    learnMoreHref: "#realtime-analysis",
+    imageSrc: "https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/transform2.svg"
   },
   {
     title: "Smart Recommendations",
-    description:
-      "Receive intelligent suggestions based on comprehensive data analysis",
+    description: "Receive intelligent suggestions based on comprehensive data analysis",
+    details: [
+      "AI-powered recommendations",
+      "Context-aware suggestions",
+      "Predictive analytics"
+    ],
+    learnMoreHref: "#smart-recommendations",
+    imageSrc: "https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/transform.svg"
   },
+];
+
+// Testimonials data
+const trialTestimonials = [
+  {
+    quote:
+      "TextQL is a lifesaver. It created these graphs and pulled stats instantly from our Snowflake warehouse right before an All Hands meeting.",
+    name: "Dillon Woods",
+    title: "Founder and CTO",
+    company: "Tackle.io",
+    valuation: "$1.25B Valuation",
+    image: "/images/testimonial_logos/tackle_person.png",
+    logo: "/images/testimonial_logos/TackleLogo.png",
+  },
+  {
+    quote:
+      "Shout out to this team and product. We use Ana as a de facto database engineer to help speed up development.",
+    name: "Corbin Klett",
+    title: "CTO",
+    company: "Artifact",
+    image: "/images/testimonial_logos/artifact_person.png",
+    logo: "/images/testimonial_logos/ArtifactLogo.png",
+  },
+  {
+    quote:
+      "The value add of TextQL has been unquantifiable. But I had Ana quantify it. And It's a lot.",
+    name: "Andy Jiang",
+    title: "Product Manager",
+    company: "Slash",
+    valuation: "$370m Valuation",
+    image: "/images/testimonial_logos/slash_person.png",
+    logo: "/images/testimonial_logos/SlashLogo.png",
+  }
+];
+
+// FAQ data for the FaqSection component
+const trialFaqItems = [
+  {
+    question: "What happens during the $5 trial?",
+    answer: "Connect your data warehouse, ask questions in plain English, and get verified SQL/Python code and visualizations. Generate insights, export results, and share dashboards—all with no long-term commitment."
+  },
+  {
+    question: "Will TextQL spike my warehouse costs?",
+    answer: "No—our guardrails prevent excessive spend. Historically, every $1.00 of TextQL work costs approximately $0.0001 in warehouse compute, making it extremely cost-effective."
+  },
+  {
+    question: "Which tools does TextQL work with?",
+    answer: "TextQL integrates with warehouses (Snowflake, BigQuery, Redshift, Databricks), BI tools (Looker, Power BI, Tableau), and semantic layers (dbt, LookML). We are able to connect 100x more data sources than any other solution, helping you get insights regardless of how many databases your data lives in."
+  },
+  {
+    question: "Is it secure and compliant?",
+    answer: "Yes. Enterprise-grade security with configurable LLMs, anonymization guardrails, and compliance features. Deployed in your environment with full control over data access."
+  },
+  {
+    question: "Can I keep the queries and dashboards?",
+    answer: "Yes, you can export all generated SQL, Python code, and visualizations."
+  },
+  {
+    question: "What if I need help?",
+    answer: "Request a demo with our team or reach out at hello@textql.com."
+  }
+];
+
+// Logo definitions with theme variants (copied from HomeHero)
+const logoData = [
+  { 
+    dark: '/images/logos/reshift-nobg.png', 
+    light: '/images/logos/reshift-nobg.png',
+    alt: 'Redshift' 
+  },
+  { 
+    dark: '/images/logos/snowflake-white.png', 
+    light: '/images/logos/snowflake-white.png',
+    alt: 'Snowflake' 
+  },
+  { 
+    dark: '/images/logos/databricks-nobg.png', 
+    light: '/images/logos/databricks-nobg.png',
+    alt: 'Databricks' 
+  },
+  { 
+    dark: '/images/logos/looker-white.png', 
+    light: '/images/logos/looker-white.png',
+    alt: 'Looker' 
+  },
+  { 
+    dark: '/images/logos/powerbi-white.png', 
+    light: '/images/logos/powerbi-white.png',
+    alt: 'Power BI' 
+  },
+  { 
+    dark: '/images/logos/Tableau White.png', 
+    light: '/images/logos/Tableau White.png',
+    alt: 'Tableau' 
+  },
+  { 
+    dark: '/images/logos/dbt-nobg.png', 
+    light: '/images/logos/dbt-nobg.png',
+    alt: 'dbt' 
+  },
+  { 
+    dark: '/images/logos/azure-white.png', 
+    light: '/images/logos/azure-white.png',
+    alt: 'Azure' 
+  },
+  { 
+    dark: '/images/logos/aws-white.png', 
+    light: '/images/logos/aws-white.png',
+    alt: 'AWS' 
+  },
+  { 
+    dark: '/images/logos/salesforce-white.png', 
+    light: '/images/logos/salesforce-white.png',
+    alt: 'Salesforce' 
+  },
+  { 
+    dark: '/images/logos/gcp-white.png', 
+    light: '/images/logos/gcp-white.png',
+    alt: 'Google Cloud' 
+  },
+  { 
+    dark: '/images/logos/teams-white.png', 
+    light: '/images/logos/teams-white.png',
+    alt: 'Teams' 
+  },
+  { 
+    dark: '/images/logos/slack-white.png', 
+    light: '/images/logos/slack-white.png',
+    alt: 'Slack' 
+  },
+  { 
+    dark: '/images/logos/alation-white.png', 
+    light: '/images/logos/alation-white.png',
+    alt: 'Alation' 
+  },
+  { 
+    dark: '/images/logos/sap-white.png', 
+    light: '/images/logos/sap-white.png',
+    alt: 'SAP' 
+  },
+  { 
+    dark: '/images/logos/oracle.png', 
+    light: '/images/logos/oracle.png',
+    alt: 'Oracle' 
+  }
 ];
 
 function TrialNavbar({
@@ -314,6 +498,14 @@ function TrialNavbar({
 
 export default function Trial() {
   const navigate = useNavigate();
+  const { isLightMode } = useGlobalTheme();
+  const themeClasses = getThemeClasses(isLightMode);
+  
+  // Dynamic logos based on theme
+  const logos = logoData.map(logo => ({
+    src: isLightMode ? logo.light : logo.dark,
+    alt: logo.alt
+  }));
   
   // A/B Test for headlines
   const { variant, trackConversion } = useABTest('trial_headline_test', 'variant_a');
@@ -419,23 +611,139 @@ export default function Trial() {
       </noscript>
 
 
-      <ReusableHero
-        title={headlineContent.title}
-        subtitle={headlineContent.subtitle}
-        videoEmbedUrl="https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/tql-demo.mp4"
-        theme="light"
-        layout="text-left"
-        buttons={[
-          { text: "Try Now", variant: "primary", onClick: onDemoRequest },
-          {
-            text: "Book a Meeting",
-            variant: "secondary",
-            onClick: onBookMeeting,
-          },
-        ]}
-      />
+      {/* Custom Trial Hero with HomeHero styling */}
+      <Section
+        padding="md"
+        background="primary"
+        overflow="hidden"
+        className="relative animate-fade-in animation-delay-400 min-h-[500px] lg:min-h-[600px]"
+      >
+        {/* Background Animation - Same as HomeHero */}
 
-      <Logos3 />
+          <WaveBackground theme={isLightMode ? 'light' : 'dark'} coverage={1.5} />
+      
+        
+        {/* Desktop Hero Content */}
+        <div className="hidden lg:flex w-full relative z-10 flex-col">
+          {/* Main content container */}
+          <div className="w-full flex items-center justify-center">
+            <div className="grid grid-cols-1 lg:gap-8 xl:gap-16 lg:grid-cols-[1fr,clamp(400px,50vw,600px)] w-full items-center px-6 max-w-7xl">
+              {/* Left Content - Trial Content */}
+              <div className="space-y-8">
+                <div className="space-y-4">
+                  <h1 
+                    className={`text-4xl md:text-5xl lg:text-6xl font-light leading-tight ${themeClasses.textPrimary} animate-slide-up animation-delay-100`}
+                    dangerouslySetInnerHTML={{ __html: headlineContent.title }}
+                  />
+                  <p className={`text-xl leading-relaxed ${themeClasses.textSecondary} animate-slide-up animation-delay-200`}>
+                    {headlineContent.subtitle}
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4 animate-slide-up animation-delay-300">
+                  <Button
+                    variant="primary"
+                    theme={isLightMode ? 'light' : 'dark'}
+                    onClick={onDemoRequest}
+                  >
+                    Try Now
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    theme={isLightMode ? 'light' : 'dark'}
+                    onClick={onBookMeeting}
+                    className="bg-white border-2 border-[#2A3B35]  hover:text-white"
+                  >
+                    Book a Meeting
+                  </Button>
+                </div>
+              </div>
+        
+              {/* Right Content - Video */}
+              <div className="animate-slide-up animation-delay-400">
+                <div className="aspect-video overflow-hidden shadow-2xl">
+                  <video
+                    className="w-full h-full object-cover"
+                    controls
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  >
+                    <source src="https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/tql.mov" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+
+        {/* Mobile Content */}
+        <div className="lg:hidden flex flex-col relative z-10 py-12">
+          <div className="flex flex-col justify-center px-6">
+            <div className="text-center space-y-8">
+              <div className="space-y-4">
+                <h1 
+                  className={`text-4xl md:text-5xl font-light leading-tight ${themeClasses.textPrimary} animate-slide-up animation-delay-100`}
+                  dangerouslySetInnerHTML={{ __html: headlineContent.title }}
+                />
+                <p className={`text-lg leading-relaxed ${themeClasses.textSecondary} animate-slide-up animation-delay-200`}>
+                  {headlineContent.subtitle}
+                </p>
+              </div>
+              <div className="space-y-4 animate-slide-up animation-delay-300">
+                <Button
+                  variant="primary"
+                  theme={isLightMode ? 'light' : 'dark'}
+                  onClick={onDemoRequest}
+                  fullWidth
+                >
+                  Try Now
+                </Button>
+
+                <Button
+                  variant="secondary"
+                  theme={isLightMode ? 'light' : 'dark'}
+                  onClick={onBookMeeting}
+                  fullWidth
+                  className="bg-white text-[#2A3B35] border-2 border-[#2A3B35] hover:bg-[#2A3B35] hover:text-white"
+                >
+                  Book a Meeting
+                </Button>
+   
+              </div>
+            </div>
+            
+            {/* Video for mobile */}
+            <div className="mt-8 animate-slide-up animation-delay-400">
+              <div className="aspect-video overflow-hidden shadow-2xl">
+                <video
+                  className="w-full h-full object-cover"
+                  controls
+                  muted
+                  playsInline
+                >
+                  <source src="https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/tql.mov" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* Logo Carousel Section - No background */}
+      <div className="w-full pb-8 pt-4">
+        <div className="mx-auto max-w-7xl px-6">
+          <p className="text-sm font-medium text-[#2A3B35] mb-6">
+            Ana finds insights in your existing data stack
+          </p>
+          <div className="logo-carousel">
+            <Carousel items={logos} gradientColor={isLightMode ? '#F7F7F7' : '#000000'} theme={isLightMode ? 'light' : 'dark'} />
+          </div>
+        </div>
+      </div>
 
       <div className="h-px w-full bg-gradient-to-r from-transparent via-neutral-200 to-transparent" />
       <IntegrationsSection />
@@ -447,26 +755,45 @@ export default function Trial() {
         title="Deep insights at scale"
         description="Unlock powerful analytics capabilities that scale with your data. Our advanced algorithms provide comprehensive analysis and actionable recommendations."
         features={analyticsFeatures}
-        imageSrc="https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/transform.svg"
-        imageAlt="TextQL Advanced Analytics Process"
+        defaultImageSrc="https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/transform.svg"
+        defaultImageAlt="TextQL Advanced Analytics Process"
         layout="text-left"
+        onTryNow={onDemoRequest}
       />
 
-      <FeatureSection
+      {/*       <FeatureSection
         badge="How it Works"
         title="Transform insights into action"
         description="TextQL analyzes your data patterns and automatically generates actionable insights. Our AI understands context and delivers personalized recommendations that drive real results."
         features={transformFeatures}
-        imageSrc="https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/transform2.svg"
-        imageAlt="TextQL Transform Process"
+        defaultImageSrc="https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/transform2.svg"
+        defaultImageAlt="TextQL Transform Process"
         layout="text-right"
+        onTryNow={onDemoRequest}
+      /> */}
+
+<div className="h-px w-full bg-gradient-to-r from-transparent via-neutral-200 to-transparent" />
+      <Testimonials 
+        testimonials={trialTestimonials}
+        title="Here's What Our Users Say"
+        autoAdvanceInterval={6000}
+        pauseDuration={8000}
       />
 
-      <Testimonials />
 
-      <FAQ />
+      <FaqSection 
+        name="the $5 Trial"
+        faqItems={trialFaqItems}
+      />
 
-      <FooterCTA />
+      <CTA
+        theme="dark"
+        showWave={true}
+        variant="wide"
+        heading="Ready to try TextQL with your data?"
+        subheader="Get $500 worth of queries and visualizations for just $5"
+        useSimpleButton={false}
+      />
 
       <Footer />
     </div>

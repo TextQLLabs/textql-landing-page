@@ -198,7 +198,7 @@ export function HomeHero({}: HomeHeroProps = {}) {
               Ana finds insights in your existing data stack
             </p>
             <div className={`logo-carousel ${debugMode ? 'border-2 border-orange-500' : ''}`}>
-              <Carousel items={logos} gradientColor={isLightMode ? '#F7F7F7' : 'black'} theme={isLightMode ? 'light' : 'dark'} />
+              <Carousel items={logos} gradientColor={isLightMode ? '#F7F7F7' : '#000000'} theme={isLightMode ? 'light' : 'dark'} />
             </div>
           </div>
         </div>
@@ -250,7 +250,7 @@ export function HomeHero({}: HomeHeroProps = {}) {
               Ana finds insights in your existing data stack
             </p>
             <div className="overflow-hidden logo-carousel">
-              <MobileCarousel items={logos} speed={30} gradientColor={isLightMode ? '#F7F7F7' : 'black'} theme={isLightMode ? 'light' : 'dark'} />
+              <MobileCarousel items={logos} speed={30} gradientColor={isLightMode ? '#F7F7F7' : '#000000'} theme={isLightMode ? 'light' : 'dark'} />
             </div>
           </div>
         </div>
