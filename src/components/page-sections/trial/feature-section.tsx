@@ -3,6 +3,7 @@ import { LucideIcon, CheckCircle, Zap, Target, ArrowRight } from 'lucide-react';
 import { Text, Heading } from '../../ui';
 import { useComponentTheme } from '../../../hooks/useComponentTheme';
 import { motion, AnimatePresence } from 'framer-motion';
+import { trackButtonClick } from '../../../utils/analytics';
 
 interface FeatureItem {
   title: string;
@@ -155,7 +156,15 @@ export function FeatureSection({
                           </a>
                         ) : onTryNow ? (
                           <button
-                            onClick={onTryNow}
+                            onClick={(e) => {
+                              // Track PostHog click
+                              trackButtonClick('Try Now', `feature_${feature.title.toLowerCase().replace(/\s+/g, '_')}`, {
+                                page: 'trial',
+                                button_type: 'feature_cta',
+                                feature_name: feature.title
+                              });
+                              onTryNow(e);
+                            }}
                             className={`inline-flex items-center gap-2 text-sm font-medium transition-colors ${
                               theme === 'light' 
                                 ? 'text-[#2A3B35] hover:text-[#4A665C]' 
@@ -180,23 +189,16 @@ export function FeatureSection({
 
   const imageSection = (
     <div className="w-full">
-      <AnimatePresence mode="wait">
-        <motion.img
-          key={currentImageSrc}
-          src={currentImageSrc}
-          alt={selectedFeature !== null ? features[selectedFeature]?.title : defaultImageAlt}
-          className="w-full h-auto mx-auto max-w-md lg:max-w-none rounded-lg"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.15, ease: [0.04, 0.62, 0.23, 0.98] }}
-        />
-      </AnimatePresence>
+      <img
+        src={currentImageSrc}
+        alt={selectedFeature !== null ? features[selectedFeature]?.title : defaultImageAlt}
+        className="w-full h-auto mx-auto max-w-md lg:max-w-none rounded-lg"
+      />
     </div>
   );
 
   return (
-    <section className={`py-12 md:py-16 ${className}`} style={{backgroundColor: 'var(--theme-bg-primary)'}}>
+    <section className={`py-12 md:py-16 ${className}`} style={{backgroundColor: 'var(--theme-bg-secondary)'}}>
       <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
           {layout === "text-left" ? (
