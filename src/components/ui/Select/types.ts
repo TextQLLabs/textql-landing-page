@@ -3,5 +3,6 @@ export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElemen
   error?: string;
   hint?: string;
   fullWidth?: boolean;
+  theme?: 'light' | 'dark';
   options: Array<{ value: string; label: string }>;
 }

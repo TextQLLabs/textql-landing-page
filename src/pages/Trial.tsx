@@ -20,6 +20,7 @@ import { getThemeClasses } from "../utils/theme-utils";
 import { COLORS } from "../styles/constants";
 import Footer from "../components/Footer";
 import { useABTest } from "../utils/ab-testing";
+import { trackButtonClick } from "../utils/analytics";
 
 // A/B Test: Trial Page Headlines
 // Test name: "trial_headline_test"
@@ -89,36 +90,24 @@ const transformFeatures = [
 
 const analyticsFeatures = [
   {
-    title: "Scalable Processing",
-    description: "Handle massive datasets with enterprise-grade processing power",
-    details: [
-      "Processes petabytes of data efficiently",
-      "Auto-scaling infrastructure",
-      "Enterprise-grade performance"
-    ],
-    learnMoreHref: "#scalable-processing",
+    title: "Connect your warehouse, BI, and semantic layer",
+    description: "Works with Snowflake, BigQuery, Redshift, Looker, Power BI, dbt, and LookML",
     imageSrc: "https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/transform.svg"
   },
   {
-    title: "Real-time Analysis",
-    description: "Get instant insights as your data changes and evolves",
+    title: "Ask in plain English",
+    description: "Get verified SQL/Python & charts. TextQL agent is fluent in SQL and Python, generating production-ready code that you can trust and deploy immediately.",
     details: [
-      "Live data streaming",
-      "Instant insight generation",
-      "Real-time dashboard updates"
+      "Natural language to SQL translation",
+      "Automatic chart generation",
+      "Production-ready code output",
+      "Multi-language support (SQL, Python, R)"
     ],
-    learnMoreHref: "#realtime-analysis",
     imageSrc: "https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/transform2.svg"
   },
   {
-    title: "Smart Recommendations",
-    description: "Receive intelligent suggestions based on comprehensive data analysis",
-    details: [
-      "AI-powered recommendations",
-      "Context-aware suggestions",
-      "Predictive analytics"
-    ],
-    learnMoreHref: "#smart-recommendations",
+    title: "Ship insights safely with guardrails",
+    description: "Low warehouse overhead cost. Typically, every $1.00 of TextQL work ≈ ~$0.0001 in warehouse compute.",
     imageSrc: "https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/transform.svg"
   },
 ];
@@ -513,23 +502,35 @@ export default function Trial() {
   // Get the headline content based on the A/B test variant
   const headlineContent = HEADLINE_VARIANTS[variant as keyof typeof HEADLINE_VARIANTS] || HEADLINE_VARIANTS.variant_a;
 
-  const onDemoRequest = (e?: React.MouseEvent) => {
+  const onDemoRequest = (e?: React.MouseEvent, location: string = 'hero_section') => {
     e?.preventDefault();
+    
+    // Track PostHog button click
+    trackButtonClick('Try Now', location, {
+      page: 'trial',
+      button_type: 'primary_cta'
+    });
     
     // Track conversion for A/B test
     trackConversion('trial_signup_click', {
       button_text: 'Try Now',
-      location: 'hero_section'
+      location
     });
     
     window.location.href = "https://buy.stripe.com/eVq14n4q7gpH5M1gcfcEw03";
   };
 
-  const onBookMeeting = () => {
+  const onBookMeeting = (location: string = 'hero_section') => {
+    // Track PostHog button click
+    trackButtonClick('Book a Meeting', location, {
+      page: 'trial',
+      button_type: 'secondary_cta'
+    });
+    
     // Track conversion for A/B test
     trackConversion('meeting_booking_click', {
       button_text: 'Book a Meeting',
-      location: 'hero_section'
+      location
     });
     
     navigate("/demo");
@@ -643,14 +644,14 @@ export default function Trial() {
                   <Button
                     variant="primary"
                     theme={isLightMode ? 'light' : 'dark'}
-                    onClick={onDemoRequest}
+                    onClick={(e) => onDemoRequest(e, 'hero_desktop')}
                   >
                     Try Now
                   </Button>
                   <Button
                     variant="secondary"
                     theme={isLightMode ? 'light' : 'dark'}
-                    onClick={onBookMeeting}
+                    onClick={() => onBookMeeting('hero_desktop')}
                     className="bg-white border-2 border-[#2A3B35]  hover:text-white"
                   >
                     Book a Meeting
@@ -696,7 +697,7 @@ export default function Trial() {
                 <Button
                   variant="primary"
                   theme={isLightMode ? 'light' : 'dark'}
-                  onClick={onDemoRequest}
+                  onClick={(e) => onDemoRequest(e, 'hero_mobile')}
                   fullWidth
                 >
                   Try Now
@@ -705,7 +706,7 @@ export default function Trial() {
                 <Button
                   variant="secondary"
                   theme={isLightMode ? 'light' : 'dark'}
-                  onClick={onBookMeeting}
+                  onClick={() => onBookMeeting('hero_mobile')}
                   fullWidth
                   className="bg-white text-[#2A3B35] border-2 border-[#2A3B35] hover:bg-[#2A3B35] hover:text-white"
                 >
@@ -746,19 +747,20 @@ export default function Trial() {
       </div>
 
       <div className="h-px w-full bg-gradient-to-r from-transparent via-neutral-200 to-transparent" />
-      <IntegrationsSection />
+      {/* <IntegrationsSection /> */}
 
       <div className="h-px w-full bg-gradient-to-r from-transparent via-neutral-200 to-transparent" />
 
+
       <FeatureSection
-        badge="Advanced Analytics"
-        title="Deep insights at scale"
+        badge="How It Works"
+        title="Three simple steps to AI-powered insights"
         description="Unlock powerful analytics capabilities that scale with your data. Our advanced algorithms provide comprehensive analysis and actionable recommendations."
         features={analyticsFeatures}
         defaultImageSrc="https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/transform.svg"
-        defaultImageAlt="TextQL Advanced Analytics Process"
+        defaultImageAlt="TextQL How It Works Process"
         layout="text-left"
-        onTryNow={onDemoRequest}
+        onTryNow={(e) => onDemoRequest(e, 'feature_section_how_it_works')}
       />
 
       {/*       <FeatureSection
@@ -772,7 +774,7 @@ export default function Trial() {
         onTryNow={onDemoRequest}
       /> */}
 
-<div className="h-px w-full bg-gradient-to-r from-transparent via-neutral-200 to-transparent" />
+{/* <div className="h-px w-full bg-gradient-to-r from-transparent via-neutral-200 to-transparent" /> */}
       <Testimonials 
         testimonials={trialTestimonials}
         title="Here's What Our Users Say"

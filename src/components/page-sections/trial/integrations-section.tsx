@@ -3,6 +3,7 @@ import { Button } from "../../ui/Button";
 import { Text, Heading } from "../../ui";
 import { useComponentTheme } from "../../../hooks/useComponentTheme";
 import { abTestManager } from "../../../utils/ab-testing";
+import { trackButtonClick } from "../../../utils/analytics";
 
 // All available integrations from the /public/images/integrations/all/ directory
 const allIntegrations = [
@@ -81,6 +82,12 @@ const integrationRows = [
 
 const onDemoRequest = (e: React.MouseEvent) => {
   e.preventDefault();
+  
+  // Track PostHog button click
+  trackButtonClick('Try Now', 'integrations_section', {
+    page: 'trial',
+    button_type: 'section_cta'
+  });
   
   // Track A/B test conversion for integrations section
   const currentVariant = abTestManager.getVariant('trial_headline_test', 'variant_a');
