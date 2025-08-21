@@ -40,6 +40,7 @@ import ThemeTest from '../pages/ThemeTest';
 import Customers from '../pages/Customers';
 import DataAssessment from '../pages/DataAssessment';
 import Trial from '../pages/Trial';
+import RequestDemo from '../pages/RequestDemo';
 
 export function AppWithGlobalTheme() {
   const location = useLocation();
@@ -94,6 +95,7 @@ export function AppWithGlobalTheme() {
         <Route path="/solutions/:id" element={<SolutionTemplate />} />
         <Route path="/workflows/:id" element={<Navigate to={`/solutions/${location.pathname.split('/').pop()}`} replace />} />
         <Route path="/about" element={<About />} />
+        <Route path="/request-demo" element={<RequestDemo />} />
         <Route path="/agents" element={<Agents />} />
         <Route path="/ontology" element={<Ontology />} />
         <Route path="/careers" element={<Careers />} />
