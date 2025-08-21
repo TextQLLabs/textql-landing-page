@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "./ui";
+import { Button } from "../../ui/Button";
 
 interface HeroProps {
   videoEmbedUrl?: string;
@@ -28,16 +28,17 @@ const Hero = ({
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
-                size="lg"
-                className="text-lg px-8 py-3 rounded-none bg-primary-800 hover:bg-primary-900"
+                variant="primary"
+                size="md"
+                className="text-lg px-8 py-3"
               >
                 Try Now
               </Button>
 
               <Button
-                variant="outline"
-                size="lg"
-                className="text-lg px-8 py-3 rounded-none"
+                variant="secondary"
+                size="md"
+                className="text-lg px-8 py-3"
               >
                 Book a Meeting
               </Button>

@@ -8,12 +8,9 @@
 
 // Main trial components
 export { Hero } from './hero';
-export { default as FAQ } from './FAQ';
-export { FeatureSection } from './feature-section';
+export { FeatureSection } from './feature-section.tsx';
 export { default as Footer } from './Footer';
-export { default as FooterCTA } from './FooterCTA';
 export { default as Testimonials } from './Testimonials';
-export { default as Logos3 } from './logos3';
 export { default as IntegrationsSection } from './integrations-section';
 export { IntegrationMarquee } from './integration-marquee';
 

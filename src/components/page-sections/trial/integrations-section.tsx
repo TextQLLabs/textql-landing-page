@@ -1,5 +1,7 @@
 import { IntegrationMarquee } from "./integration-marquee";
 import { Button } from "../../ui/Button";
+import { Text, Heading } from "../../ui";
+import { useComponentTheme } from "../../../hooks/useComponentTheme";
 import { abTestManager } from "../../../utils/ab-testing";
 
 // All available integrations from the /public/images/integrations/all/ directory
@@ -91,39 +93,34 @@ const onDemoRequest = (e: React.MouseEvent) => {
 };
 
 export function IntegrationsSection() {
+  const theme = useComponentTheme();
+  
   return (
     <section
-      className="py-16 overflow-x-hidden"
+      className="py-12 md:py-16 overflow-x-hidden"
       style={{ backgroundColor: "var(--theme-bg-secondary)" }}
     >
       <div className="container mx-auto px-4 overflow-x-hidden">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between max-w-7xl mx-auto overflow-x-hidden gap-8">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between max-w-7xl mx-auto overflow-x-hidden gap-8 lg:gap-12">
           {/* Content - Top on mobile, Right on desktop */}
           <div className="flex-1 max-w-xl lg:order-2 lg:ml-16 text-center lg:text-left">
             <div className="mb-4">
-              <span
-                className="text-sm font-medium uppercase tracking-wide"
-                style={{ color: "var(--theme-accent)" }}
-              >
+              <Text color="secondary" theme={theme} className="text-sm font-medium uppercase tracking-wide">
                 Integrations
-              </span>
+              </Text>
             </div>
-            <h2
-              className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-6 leading-tight"
-              style={{ color: "var(--theme-text-primary)" }}
-            >
+            <Heading level={2} theme={theme} className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-6 leading-tight">
               Integrate your data stack
-            </h2>
-            <p
-              className="text-base md:text-lg mb-8 leading-relaxed"
-              style={{ color: "var(--theme-text-secondary)" }}
-            >
+            </Heading>
+            <Text color="muted" theme={theme} className="text-base md:text-lg mb-8 leading-relaxed">
               Integrate TextQL with your team's stack and create a single source
               of truth for every piece of data and insight.
-            </p>
-            <Button variant="primary" theme="light" onClick={onDemoRequest} className="w-full sm:w-auto">
-              Try Now
-            </Button>
+            </Text>
+            <div className="flex justify-center lg:justify-start">
+              <Button variant="primary" theme={theme} onClick={onDemoRequest} className="w-full sm:w-auto">
+                Try Now
+              </Button>
+            </div>
           </div>
 
           {/* Marquees - Bottom on mobile, Left on desktop */}

@@ -4,9 +4,11 @@ import { isWebGLAvailable } from '../../utils/webgl';
 
 interface WaveBackgroundProps {
   theme?: 'light' | 'dark';
+  scale?: number; // Scale factor for the wave size (stretches the patterns)
+  coverage?: number; // Coverage factor (more area but same pattern size)
 }
 
-export function WaveBackground({ theme = 'dark' }: WaveBackgroundProps) {
+export function WaveBackground({ theme = 'dark', scale = 1, coverage = 1 }: WaveBackgroundProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -53,10 +55,17 @@ export function WaveBackground({ theme = 'dark' }: WaveBackgroundProps) {
       
       clock = new THREE.Clock();
       
-      const planeWidth = 120;
-      const planeHeight = 80;
-      const widthSegments = 150;
-      const heightSegments = 100;
+      // Coverage increases the plane size and segments proportionally
+      // This gives more wave area without stretching the patterns
+      const basePlaneWidth = 120;
+      const basePlaneHeight = 80;
+      const baseWidthSegments = 150;
+      const baseHeightSegments = 100;
+      
+      const planeWidth = basePlaneWidth * coverage * scale;
+      const planeHeight = basePlaneHeight * coverage * scale;
+      const widthSegments = Math.floor(baseWidthSegments * coverage);
+      const heightSegments = Math.floor(baseHeightSegments * coverage);
       
       geometry = new THREE.PlaneGeometry(
         planeWidth,
@@ -146,7 +155,7 @@ export function WaveBackground({ theme = 'dark' }: WaveBackgroundProps) {
         containerRef.current.removeChild(renderer.domElement);
       }
     };
-  }, [theme]);
+  }, [theme, scale, coverage]); // Added coverage to dependency array
 
   return <div ref={containerRef} style={{ 
     position: 'absolute',
