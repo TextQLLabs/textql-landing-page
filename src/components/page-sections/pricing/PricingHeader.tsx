@@ -9,7 +9,7 @@ export function PricingHeader() {
 
   const onDemoRequest = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigate('/demo');
+    navigate('/request-demo');
   };
 
   return (

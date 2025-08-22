@@ -14,8 +14,19 @@ export default function RequestDemo() {
   const theme = useComponentTheme();
   const [searchParams] = useSearchParams();
   
-  // Get email from URL params if provided
+  // Get email and demo_id from URL params if provided
   const emailFromUrl = searchParams.get('email') || '';
+  const demoIdFromUrl = searchParams.get('demo_id') || '';
+  
+  // Fallback: try to get demo_id from sessionStorage if not in URL
+  const [demoIdFromSession] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('demo_request_id') || '';
+    }
+    return '';
+  });
+  
+  const effectiveDemoId = demoIdFromUrl || demoIdFromSession;
   
   const [formData, setFormData] = useState({
     email: emailFromUrl,
@@ -48,9 +59,11 @@ export default function RequestDemo() {
     trackEvent('page_viewed', {
       page: 'request_demo',
       source: emailFromUrl ? 'demo_form_redirect' : 'direct_navigation',
-      prefilled_email: !!emailFromUrl
+      prefilled_email: !!emailFromUrl,
+      has_partial_demo_id: !!effectiveDemoId,
+      flow_type: effectiveDemoId ? 'partial_completion' : 'direct_entry'
     });
-  }, [emailFromUrl]);
+  }, [emailFromUrl, demoIdFromUrl]);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({
@@ -89,26 +102,54 @@ export default function RequestDemo() {
       if (!distinctId) {
         throw new Error('Missing PostHog distinct id');
       }
-      const clientDemoRequestId = (window.crypto as any)?.randomUUID?.();
-      if (!clientDemoRequestId) {
-        throw new Error('Secure UUID generation unavailable');
-      }
-      
-      // Insert demo request (RLS-safe: no RETURNING required)
-      const { error: demoError } = await supabase
-        .from('demo_requests')
-        .insert({
-          demo_request_id: clientDemoRequestId,
-          posthog_distinct_id: distinctId,
-          email: formData.email.toLowerCase().trim(),
-          first_name: formData.firstName.trim(),
-          phone_number: formData.phoneNumber?.trim() || null,
-          how_did_you_hear: formData.howDidYouHear || null,
-          source: emailFromUrl ? 'home_page_redirect' : 'direct_request_demo'
-        });
-      
-      if (demoError) {
-        throw new Error(`Demo request failed: ${demoError.message}`);
+      // Keep the origin (from partial)
+      const originDemoRequestId = effectiveDemoId || null;
+
+      // Determine source based on flow type
+      const source = originDemoRequestId 
+        ? 'email_form_completed' 
+        : (emailFromUrl ? 'home_page_redirect' : 'direct_request_demo');
+
+      // Complete the request: UPDATE existing partial if present, otherwise INSERT new
+      let clientDemoRequestId = originDemoRequestId;
+      if (originDemoRequestId) {
+        const { error: updateError } = await supabase
+          .from('demo_requests')
+          .update({
+            posthog_distinct_id: distinctId,
+            email: formData.email.toLowerCase().trim(),
+            first_name: formData.firstName.trim(),
+            phone_number: formData.phoneNumber?.trim() || null,
+            how_did_you_hear: formData.howDidYouHear || null,
+            source,
+            updated_at: new Date().toISOString()
+          })
+          .eq('demo_request_id', originDemoRequestId);
+        if (updateError) {
+          throw new Error(`Demo request update failed: ${updateError.message}`);
+        }
+        if (typeof window !== 'undefined') {
+          sessionStorage.removeItem('demo_request_id');
+        }
+      } else {
+        clientDemoRequestId = (window.crypto as any)?.randomUUID?.();
+        if (!clientDemoRequestId) {
+          throw new Error('Secure UUID generation unavailable');
+        }
+        const { error: insertError } = await supabase
+          .from('demo_requests')
+          .insert({
+            demo_request_id: clientDemoRequestId,
+            posthog_distinct_id: distinctId,
+            email: formData.email.toLowerCase().trim(),
+            first_name: formData.firstName.trim(),
+            phone_number: formData.phoneNumber?.trim() || null,
+            how_did_you_hear: formData.howDidYouHear || null,
+            source
+          });
+        if (insertError) {
+          throw new Error(`Demo request failed: ${insertError.message}`);
+        }
       }
       
       // Insert analytics with the SAME demo_request_id
@@ -124,7 +165,11 @@ export default function RequestDemo() {
           current_url: window.location.href,
           referrer: document.referrer || null,
           user_agent: navigator.userAgent || null,
-          full_session_data: posthogData || null
+          full_session_data: {
+            ...(posthogData || {}),
+            came_from_partial: !!originDemoRequestId,
+            origin_demo_request_id: originDemoRequestId
+          }
         });
       
       if (analyticsError) {
@@ -136,8 +181,10 @@ export default function RequestDemo() {
       trackButtonClick('Request Demo', 'demo_form', {
         page: 'request_demo',
         button_type: 'form_submit',
-        form_source: emailFromUrl ? 'home_page_redirect' : 'direct_request_demo',
-        how_did_you_hear: formData.howDidYouHear || 'not_specified'
+        form_source: originDemoRequestId ? 'email_form_completion' : (emailFromUrl ? 'home_page_redirect' : 'direct_request_demo'),
+        how_did_you_hear: formData.howDidYouHear || 'not_specified',
+        flow_type: originDemoRequestId ? 'partial_completion' : 'direct_submission',
+        is_update: !!originDemoRequestId
       });
       
       setIsSuccess(true);

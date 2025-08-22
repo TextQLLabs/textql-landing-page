@@ -122,7 +122,7 @@ export function AppWithGlobalTheme() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:id" element={<BlogPost />} />
 
-        <Route path="/demo" element={<Demo />} />
+        <Route path="/demo" element={<Navigate to="/request-demo" replace />} />
       </Route>
     </Routes>
   );

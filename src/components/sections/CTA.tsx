@@ -35,7 +35,7 @@ export function CTA({
     const navigate = useNavigate();
 
   const handleDemoRequest = () => {
-    navigate('/demo');
+    navigate('/request-demo');
   };
 
   return (

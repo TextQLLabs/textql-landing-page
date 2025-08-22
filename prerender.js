@@ -19,7 +19,8 @@ const routes = [
   '/terms',
   '/privacy',
   '/blog',
-  '/demo'
+  '/trial',
+  '/request-demo'
 ];
 
 async function prerender() {

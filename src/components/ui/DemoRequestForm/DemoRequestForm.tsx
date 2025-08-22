@@ -6,6 +6,7 @@ import { useComponentTheme } from '../../../hooks/useComponentTheme';
 import { getThemeClasses } from '../../../utils/theme-utils';
 import { COLORS } from '../../../styles/constants';
 import { trackButtonClick } from '../../../utils/analytics';
+import { supabase } from '../../../lib/supabase';
 
 export function DemoRequestForm({ 
   theme,
@@ -62,14 +63,64 @@ export function DemoRequestForm({
     setIsSubmitting(true);
     
     try {
+      // Get PostHog data for analytics
+      const ph: any = (typeof window !== 'undefined' && (window as any).posthog) ? (window as any).posthog : null;
+      const distinctId = ph?.get_distinct_id?.();
+      
+      if (!distinctId) {
+        console.warn('Missing PostHog distinct id, proceeding without database entry');
+        // Still allow navigation even without PostHog
+        sessionStorage.setItem('demo_email', email);
+        sessionStorage.setItem('demo_source', window.location.pathname);
+        onSubmit?.(email);
+        trackButtonClick('Demo Form Submit', 'demo_request_form', { email_domain: email.split('@')[1], destination: 'request-demo' });
+        navigate(`/request-demo?email=${encodeURIComponent(email)}`);
+        return;
+      }
+
+      // Generate unique demo request ID
+      const clientDemoRequestId = (window.crypto as any)?.randomUUID?.();
+      if (!clientDemoRequestId) {
+        throw new Error('Secure UUID generation unavailable');
+      }
+
+      // Create partial demo request entry
+      const { error: demoError } = await supabase
+        .from('demo_requests')
+        .insert({
+          demo_request_id: clientDemoRequestId,
+          posthog_distinct_id: distinctId,
+          email: email.toLowerCase().trim(),
+          first_name: 'PARTIAL_ENTRY', // Placeholder to satisfy NOT NULL constraint
+          source: 'email_form_partial'
+        });
+
+      if (demoError) {
+        console.error('Failed to create partial demo request:', demoError);
+        // Continue with navigation even if DB insert fails
+      }
+
+      // Store for session continuity
       sessionStorage.setItem('demo_email', email);
       sessionStorage.setItem('demo_source', window.location.pathname);
-      onSubmit?.(email);
-      trackButtonClick('Demo Form Submit', 'demo_request_form', { email_domain: email.split('@')[1], destination: 'demo' });
+      if (!demoError) {
+        sessionStorage.setItem('demo_request_id', clientDemoRequestId);
+      }
       
-      // TODO: Re-enable /request-demo redirect flow after testing
-      // navigate(`/request-demo?email=${encodeURIComponent(email)}`);
-      navigate('/demo');
+      onSubmit?.(email);
+      trackButtonClick('Demo Form Submit', 'demo_request_form', { 
+        email_domain: email.split('@')[1], 
+        destination: 'request-demo',
+        has_partial_entry: !demoError
+      });
+      
+      // Navigate with both email and demo_id parameters
+      const params = new URLSearchParams({
+        email: email,
+        ...((!demoError && clientDemoRequestId) && { demo_id: clientDemoRequestId })
+      });
+      navigate(`/request-demo?${params.toString()}`);
+      
     } catch (err) {
       console.error('Error submitting form:', err);
       setError('Something went wrong. Please try again.');
