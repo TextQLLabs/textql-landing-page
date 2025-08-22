@@ -11,7 +11,7 @@ export default function DataAssessment() {
   const navigate = useNavigate();
 
   const onRequestDemo = () => {
-    navigate('/demo');
+    navigate('/request-demo');
   };
 
   return (

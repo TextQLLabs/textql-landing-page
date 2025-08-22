@@ -65,7 +65,7 @@ export function TableOfContents() {
   };
 
   const onDemoRequest = () => {
-    navigate('/demo');
+    navigate('/request-demo');
   };
 
   return (

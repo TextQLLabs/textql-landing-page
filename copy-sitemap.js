@@ -21,7 +21,7 @@ const routes = [
   { url: '/about/', changefreq: 'monthly', priority: 0.7 },
   { url: '/terms/', changefreq: 'yearly', priority: 0.2 },
   { url: '/privacy/', changefreq: 'yearly', priority: 0.2 },
-  { url: '/demo/', changefreq: 'weekly', priority: 0.8 },
+  { url: '/request-demo/', changefreq: 'weekly', priority: 0.8 },
   // Blog posts
   ...['building-data-agent', 'embedding-models', 'fundraising', 'future-of-data',
       'haskell-in-production', 'nba-launchpad', 'soc2-report', 'sql-model',

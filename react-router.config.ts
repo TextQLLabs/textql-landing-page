@@ -18,7 +18,7 @@ export default {
       "/trial",
       "/cookies",
       "/blog",
-      "/demo",
+      "/request-demo",
       "/whitepaper",
       "/snowflake-2025"
     ];

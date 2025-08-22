@@ -64,4 +64,4 @@ The foundation models are clearly getting extremely capable, to the point of bei
 
 This is where I have to give Amazon, Databricks, Hex, and Snowflake some leeway. This is a difficult problem and deploying at their scale compounds its difficulty. These organizations probably prioritize reliability over scoring well on a benchmark like this.
 
-Similarly to how I trust AI to write TextQL's code more and more, I trust it to write SQL more. Obviously most enterprise data can't simply be hooked up to a sketchy website like Ana Small. If you're interested in bringing enterprise Ana to your team, [**book a meeting with our sales team**](https://textql.com/demo).
+Similarly to how I trust AI to write TextQL's code more and more, I trust it to write SQL more. Obviously most enterprise data can't simply be hooked up to a sketchy website like Ana Small. If you're interested in bringing enterprise Ana to your team, [**book a meeting with our sales team**](https://textql.com/request-demo).

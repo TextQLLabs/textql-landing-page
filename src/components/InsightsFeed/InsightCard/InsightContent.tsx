@@ -22,7 +22,7 @@ export const InsightContent: React.FC<InsightContentProps> = ({ insight, onExpan
   const textColor = theme === 'dark' ? 'text-[#729E8C]' : 'text-[#4A665C]';
 
   const handleTryNow = () => {
-    navigate('/demo');
+    navigate('/request-demo');
   };
   
   // Generate timestamp if not provided

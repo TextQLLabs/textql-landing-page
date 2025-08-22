@@ -17,7 +17,7 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
   const navigate = useNavigate();
   
   const handleDemoClick = () => {
-    navigate('/demo');
+    navigate('/request-demo');
   };
   
   return (

@@ -13,8 +13,8 @@ export function DemoRequestButton({
   const navigate = useNavigate();
 
   const handleDemoRequest = () => {
-    trackButtonClick(buttonText, 'demo_request_button', { destination: 'demo' });
-    navigate('/demo');
+    trackButtonClick(buttonText, 'demo_request_button', { destination: 'request-demo' });
+    navigate('/request-demo');
   };
 
   return (

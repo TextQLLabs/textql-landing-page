@@ -78,7 +78,7 @@ export function PricingPlansSection() {
 
   const onDemoRequest = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigate('/demo');
+    navigate('/request-demo');
   };
 
   return (

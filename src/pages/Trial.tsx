@@ -533,7 +533,7 @@ export default function Trial() {
       location
     });
     
-    navigate("/demo");
+    navigate("/request-demo");
   };
 
   return (
