@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { SEO } from "../components/SEO";
 import { Text, Heading, Button, Input, Select } from "../components/ui";
+import { Modal } from "../components/ui/Modal";
 import { Section } from "../components/ui/Section";
 import { WaveBackground } from "../components/animations";
 import { useComponentTheme } from "../hooks/useComponentTheme";
@@ -26,6 +27,21 @@ export default function RequestDemo() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [showCalendlyModal, setShowCalendlyModal] = useState(false);
+
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (showCalendlyModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [showCalendlyModal]);
   
   // Track page visit
   useEffect(() => {
@@ -126,10 +142,15 @@ export default function RequestDemo() {
       
       setIsSuccess(true);
       
-      // Redirect to thank you page or show success message
-    //   setTimeout(() => {
-    //     window.location.href = '/demo';
-    //   }, 2000);
+      // Show Calendly modal after brief delay
+      setTimeout(() => {
+        setShowCalendlyModal(true);
+      }, 500);
+      
+      // Hide success component after 5 seconds
+      setTimeout(() => {
+        setIsSuccess(false);
+      }, 1000);
       
     } catch (error) {
       console.error('Form submission error:', error);
@@ -326,9 +347,7 @@ export default function RequestDemo() {
                     <Heading level={3} theme={theme} className="text-xl font-medium">
                       Thank you for your request!
                     </Heading>
-                    <Text color="muted" theme={theme} className="text-base">
-                      We'll be in touch soon to schedule your demo.
-                    </Text>
+    
                   </div>
                 </div>
               )}
@@ -337,6 +356,44 @@ export default function RequestDemo() {
           </div>
         </div>
       </Section>
+
+      {/* Calendly Modal */}
+      <div className={`fixed inset-0 z-[9999] transition-opacity duration-300 ${showCalendlyModal ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <div className="fixed inset-0 backdrop-blur-sm z-[9998] bg-black/50 transition-opacity duration-300" onClick={() => setShowCalendlyModal(false)} />
+        <div className={`fixed inset-0 lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 w-full lg:max-w-6xl h-full lg:h-[90vh] z-[9999] shadow-xl overflow-hidden transition-all duration-300 ${
+          showCalendlyModal ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+        } ${theme === 'light' ? 'bg-white lg:border border-[#2A3B35]/20' : 'bg-[#0A1F1C] lg:border border-[#B8D8D0]/20'}`}>
+          <div className={`flex items-center justify-between p-4 ${
+            theme === 'light' ? 'border-b border-[#2A3B35]/20 bg-white' : 'border-b border-[#B8D8D0]/20 bg-[#0A1F1C]'
+          }`}>
+            <Heading level={3} theme={theme} className="text-lg sm:text-xl lg:text-3xl font-extralight">
+              Schedule Your Demo
+            </Heading>
+            <button 
+              onClick={() => setShowCalendlyModal(false)}
+              className={`p-2 transition-colors ${
+                theme === 'light' 
+                  ? 'text-[#2A3B35] hover:text-[#2A3B35]/80' 
+                  : 'text-[#B8D8D0] hover:text-[#B8D8D0]/80'
+              }`}
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <div className="h-[calc(100%-73px)] overflow-hidden">
+            <iframe
+              src="https://calendly.com/ethanding/25min"
+              width="100%"
+              height="100%"
+              frameBorder="0"
+              title="Schedule Demo"
+              style={{ overflow: 'hidden' }}
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
