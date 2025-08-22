@@ -161,7 +161,7 @@ export default function RequestDemo() {
   };
 
   return (
-    <div className={`min-h-screen ${theme === 'light' ? 'bg-[#F7F7F7]' : 'bg-[#0F1712]'}`}>
+    <div>
       <SEO
         title="Request Demo | TextQL"
         description="Request a personalized demo of TextQL. See how our AI-powered analytics platform can transform your data into actionable insights."
@@ -175,7 +175,7 @@ export default function RequestDemo() {
         paddingTop="navbar"
         background="primary"
         overflow="hidden"
-        className="relative"
+        className="relative min-h-[calc(100vh-8rem)]"
       >
         {/* Wave Background */}
         <div className="absolute inset-0 z-0 ">
