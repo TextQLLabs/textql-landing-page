@@ -1,28 +1,40 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { SEO } from "../components/SEO";
 import { Text, Heading, Button, Input, Select } from "../components/ui";
 import { Section } from "../components/ui/Section";
 import { WaveBackground } from "../components/animations";
 import { useComponentTheme } from "../hooks/useComponentTheme";
 import { trackEvent, trackButtonClick } from "../utils/analytics";
+import { supabase } from "../lib/supabase";
 import { Check } from "lucide-react";
 
 export default function RequestDemo() {
   const theme = useComponentTheme();
+  const [searchParams] = useSearchParams();
+  
+  // Get email from URL params if provided
+  const emailFromUrl = searchParams.get('email') || '';
+  
   const [formData, setFormData] = useState({
-    email: '',
+    email: emailFromUrl,
     firstName: '',
     phoneNumber: '',
     howDidYouHear: ''
   });
   
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
+  
   // Track page visit
   useEffect(() => {
     trackEvent('page_viewed', {
       page: 'request_demo',
-      source: 'direct_navigation'
+      source: emailFromUrl ? 'demo_form_redirect' : 'direct_navigation',
+      prefilled_email: !!emailFromUrl
     });
-  }, []);
+  }, [emailFromUrl]);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({
@@ -31,21 +43,102 @@ export default function RequestDemo() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError(null);
+    setIsSubmitting(true);
     
-    // Track form submission
-    trackButtonClick('Request Demo', 'demo_form', {
-      page: 'request_demo',
-      button_type: 'form_submit',
-      form_source: 'request_demo_page'
-    });
+    try {
+      // Basic validation
+      if (!formData.email || !formData.firstName) {
+        throw new Error('Email and first name are required');
+      }
+      
+      // Capture full PostHog session data for analytics
+      const ph: any = (typeof window !== 'undefined' && (window as any).posthog) ? (window as any).posthog : null;
+      const posthogData = ph ? {
+        distinct_id: ph.get_distinct_id?.() ?? null,
+        session_id: ph.get_session_id?.() ?? null,
+        feature_flags: ph.getFeatureFlags?.() ?? null,
+        session_replay_url: ph.get_session_replay_url?.() ?? null,
+        user_properties: ph.people ?? null,
+        page_view_id: ph.getPageViewId?.() ?? null,
+        current_url: window.location.href,
+        referrer: document.referrer || null,
+        user_agent: navigator.userAgent || null,
+        timestamp: new Date().toISOString()
+      } : null;
+      
+      const distinctId = posthogData?.distinct_id;
+      if (!distinctId) {
+        throw new Error('Missing PostHog distinct id');
+      }
+      const clientDemoRequestId = (window.crypto as any)?.randomUUID?.();
+      if (!clientDemoRequestId) {
+        throw new Error('Secure UUID generation unavailable');
+      }
+      
+      // Insert demo request (RLS-safe: no RETURNING required)
+      const { error: demoError } = await supabase
+        .from('demo_requests')
+        .insert({
+          demo_request_id: clientDemoRequestId,
+          posthog_distinct_id: distinctId,
+          email: formData.email.toLowerCase().trim(),
+          first_name: formData.firstName.trim(),
+          phone_number: formData.phoneNumber?.trim() || null,
+          how_did_you_hear: formData.howDidYouHear || null,
+          source: emailFromUrl ? 'home_page_redirect' : 'direct_request_demo'
+        });
+      
+      if (demoError) {
+        throw new Error(`Demo request failed: ${demoError.message}`);
+      }
+      
+      // Insert analytics with the SAME demo_request_id
+      const { error: analyticsError } = await supabase
+        .from('demo_request_analytics')
+        .insert({
+          demo_request_id: clientDemoRequestId, // SAME demo_request_id
+          posthog_distinct_id: distinctId,
+          posthog_session_id: posthogData?.session_id || null,
+          page_view_id: posthogData?.page_view_id || null,
+          session_replay_url: posthogData?.session_replay_url || null,
+          feature_flags: posthogData?.feature_flags || null,
+          current_url: window.location.href,
+          referrer: document.referrer || null,
+          user_agent: navigator.userAgent || null,
+          full_session_data: posthogData || null
+        });
+      
+      if (analyticsError) {
+        console.error('Analytics insert failed:', analyticsError);
+        // Don't fail the form for analytics errors
+      }
+      
 
-    // Here you would typically send the form data to your backend
-    console.log('Form submitted:', formData);
-    
-    // For now, redirect to the existing demo page or show success message
-    window.location.href = '/demo';
+      
+      // Track successful submission
+      trackButtonClick('Request Demo', 'demo_form', {
+        page: 'request_demo',
+        button_type: 'form_submit',
+        form_source: emailFromUrl ? 'home_page_redirect' : 'direct_request_demo',
+        how_did_you_hear: formData.howDidYouHear || 'not_specified'
+      });
+      
+      setIsSuccess(true);
+      
+      // Redirect to thank you page or show success message
+      setTimeout(() => {
+        window.location.href = '/demo';
+      }, 2000);
+      
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitError(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -202,6 +295,13 @@ export default function RequestDemo() {
                  
                  
                  
+                 {/* Error Message */}
+                 {submitError && (
+                   <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-sm mb-4">
+                     {submitError}
+                   </div>
+                 )}
+                 
                  {/* Submit Button */}
                  <div className="pt-8">
                   <Button
@@ -210,11 +310,30 @@ export default function RequestDemo() {
                     size="md"
                     fullWidth
                     type="submit"
+                    loading={isSubmitting}
+                    disabled={isSubmitting}
                   >
-                    Request Demo
+                    {isSubmitting ? 'Submitting...' : 'Request Demo'}
                   </Button>
                 </div>
               </form>
+              
+              {/* Success State */}
+              {isSuccess && (
+                <div className="absolute inset-0 bg-white flex items-center justify-center">
+                  <div className="text-center space-y-4">
+                    <div className={`w-16 h-16 mx-auto flex items-center justify-center ${theme === 'light' ? 'bg-[#2A3B35]' : 'bg-[#B8D8D0]'}`}>
+                      <Check className={`w-8 h-8 ${theme === 'light' ? 'text-white' : 'text-[#0F1712]'}`} />
+                    </div>
+                    <Heading level={3} theme={theme} className="text-xl font-medium">
+                      Thank you for your request!
+                    </Heading>
+                    <Text color="muted" theme={theme} className="text-base">
+                      We'll be in touch soon to schedule your demo.
+                    </Text>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           </div>
