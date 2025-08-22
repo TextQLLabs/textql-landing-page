@@ -172,14 +172,13 @@ export default function RequestDemo() {
       <Section
         variant="content"
         padding="lg"
-        paddingTop="navbar"
         background="primary"
         overflow="hidden"
         className="relative min-h-[calc(100vh-8rem)]"
       >
         {/* Wave Background */}
-        <div className="absolute inset-0 z-0 ">
-          <WaveBackground theme={theme} scale={1} coverage={1.2}   />
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <WaveBackground theme={theme} scale={1} coverage={1.6}   />
         </div>
         
         <div className="relative z-10">
