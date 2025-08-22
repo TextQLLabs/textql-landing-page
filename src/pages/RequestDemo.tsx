@@ -89,7 +89,7 @@ export default function RequestDemo() {
           phone_number: formData.phoneNumber?.trim() || null,
           how_did_you_hear: formData.howDidYouHear || null,
           source: emailFromUrl ? 'home_page_redirect' : 'direct_request_demo'
-        }, { returning: 'minimal' });
+        });
       
       if (demoError) {
         throw new Error(`Demo request failed: ${demoError.message}`);
@@ -109,7 +109,7 @@ export default function RequestDemo() {
           referrer: document.referrer || null,
           user_agent: navigator.userAgent || null,
           full_session_data: posthogData || null
-        }, { returning: 'minimal' });
+        });
       
       if (analyticsError) {
         console.error('Analytics insert failed:', analyticsError);
@@ -127,9 +127,9 @@ export default function RequestDemo() {
       setIsSuccess(true);
       
       // Redirect to thank you page or show success message
-      setTimeout(() => {
-        window.location.href = '/demo';
-      }, 2000);
+    //   setTimeout(() => {
+    //     window.location.href = '/demo';
+    //   }, 2000);
       
     } catch (error) {
       console.error('Form submission error:', error);
@@ -157,15 +157,15 @@ export default function RequestDemo() {
         className="relative"
       >
         {/* Wave Background */}
-        <div className="absolute inset-0 z-0">
-          <WaveBackground theme={theme} />
+        <div className="absolute inset-0 z-0 ">
+          <WaveBackground theme={theme} scale={1} coverage={1.2}   />
         </div>
         
         <div className="relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr,500px] gap-6 lg:gap-12 items-start">
             
             {/* Left Content */}
-            <div className="space-y-6 lg:space-y-8 bg-white p-4 sm:p-6 lg:p-8 border border-[#2A3B35]/20 animate-slide-up animation-delay-100">
+            <div className="order-2 lg:order-1 mb-6 lg:mb-0 space-y-6 lg:space-y-8 bg-white p-4 sm:p-6 lg:p-8 border border-[#2A3B35]/20 animate-slide-up animation-delay-100">
               {/* Header */}
               <div className="space-y-4">
                 <div>
@@ -229,7 +229,7 @@ export default function RequestDemo() {
             </div>
 
           {/* Right Form */}
-          <div className="w-full mb-6 sm:mb-0 animate-slide-up animation-delay-400">
+          <div className="order-1 lg:order-2 w-full animate-slide-up animation-delay-400">
             <div className={`border p-4 sm:p-6 lg:p-8 ${
               theme === 'light' ? 'border-[#2A3B35]/20 bg-white' : 'border-[#B8D8D0]/20 bg-[#000000]'
             }`}>

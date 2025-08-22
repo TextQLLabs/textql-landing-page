@@ -6,9 +6,10 @@ interface WaveBackgroundProps {
   theme?: 'light' | 'dark';
   scale?: number; // Scale factor for the wave size (stretches the patterns)
   coverage?: number; // Coverage factor (more area but same pattern size)
+  cameraDistance?: number; // Distance of camera from waves (lower = closer)
 }
 
-export function WaveBackground({ theme = 'dark', scale = 1, coverage = 1 }: WaveBackgroundProps) {
+export function WaveBackground({ theme = 'dark', scale = 1, coverage = 1, cameraDistance = 70 }: WaveBackgroundProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -36,7 +37,7 @@ export function WaveBackground({ theme = 'dark', scale = 1, coverage = 1 }: Wave
         0.1,
         1000
       );
-      camera.position.set(0, 20, 70);
+      camera.position.set(0, 20, cameraDistance);
       camera.lookAt(0, 0, 0);
       
       renderer = new THREE.WebGLRenderer({ 
