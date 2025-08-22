@@ -145,12 +145,12 @@ export default function RequestDemo() {
       // Show Calendly modal after brief delay
       setTimeout(() => {
         setShowCalendlyModal(true);
-      }, 1000);
+      }, 500);
       
       // Hide success component after 5 seconds
       setTimeout(() => {
         setIsSuccess(false);
-      }, 5000);
+      }, 1000);
       
     } catch (error) {
       console.error('Form submission error:', error);
