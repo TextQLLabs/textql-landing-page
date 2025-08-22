@@ -164,20 +164,20 @@ export default function RequestDemo() {
         </div>
         
         <div className="relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr,500px] gap-8 lg:gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr,500px] gap-6 lg:gap-12 items-start">
             
             {/* Left Content */}
-            <div className="space-y-8 bg-white p-8 border border-[#2A3B35]/20 animate-slide-up animation-delay-100">
+            <div className="space-y-6 lg:space-y-8 bg-white p-4 sm:p-6 lg:p-8 border border-[#2A3B35]/20 animate-slide-up animation-delay-100">
               {/* Header */}
               <div className="space-y-4">
                 <div>
                   <Text color="secondary" theme={theme} className="text-sm font-medium uppercase tracking-wide mb-4 animate-slide-up animation-delay-200">
                     CONTACT SALES
                   </Text>
-                  <Heading level={1} theme={theme} className="text-4xl md:text-5xl font-extralight mb-6 animate-slide-up animation-delay-200">
+                  <Heading level={1} theme={theme} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extralight mb-4 lg:mb-6 animate-slide-up animation-delay-200">
                     Talk to our Sales team
                   </Heading>
-                  <Text color="muted" theme={theme} className="text-lg font-light leading-relaxed max-w-md animate-slide-up animation-delay-300">
+                  <Text color="muted" theme={theme} className="text-base sm:text-lg font-light leading-relaxed max-w-md animate-slide-up animation-delay-300">
                     Connect with our sales team to explore how we can support your use case.
                   </Text>
                 </div>
@@ -204,8 +204,8 @@ export default function RequestDemo() {
               </div>
 
               {/* Testimonial */}
-              <div className="flex items-start gap-6 animate-slide-up animation-delay-500">
-                                <div className={`w-24 h-24 md:w-36 md:h-36 overflow-hidden border ${
+              <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 animate-slide-up animation-delay-500">
+                                <div className={`hidden sm:block w-24 h-24 md:w-36 md:h-36 overflow-hidden border flex-shrink-0 ${
                   theme === 'light' ? 'border-[#2A3B35]/20' : 'border-[#B8D8D0]/20'
                 }`}>
                   <img
@@ -214,8 +214,8 @@ export default function RequestDemo() {
                     className="w-full h-full object-cover scale-100"
                   />
                 </div>
-                <div className="space-y-3">
-                  <Text color="primary" theme={theme} className="text-2xl md:text-xl font-light italic leading-relaxed max-w-md">
+                <div className="space-y-3 text-center sm:text-left">
+                  <Text color="primary" theme={theme} className="text-lg sm:text-xl md:text-xl font-light italic leading-relaxed">
                     "TextQL is a lifesaver. It created these graphs and pulled stats instantly from our Snowflake warehouse right before an All Hands meeting."
                   </Text>
                   <div>
@@ -231,11 +231,11 @@ export default function RequestDemo() {
             </div>
 
           {/* Right Form */}
-          <div className="w-full animate-slide-up animation-delay-400">
-            <div className={`border p-6 md:p-8 ${
+          <div className="w-full mb-6 sm:mb-0 animate-slide-up animation-delay-400">
+            <div className={`border p-4 sm:p-6 lg:p-8 ${
               theme === 'light' ? 'border-[#2A3B35]/20 bg-white' : 'border-[#B8D8D0]/20 bg-[#000000]'
             }`}>
-              <Heading level={2} theme={theme} className="text-xl md:text-2xl font-medium mb-6">
+              <Heading level={2} theme={theme} className="text-lg sm:text-xl lg:text-2xl font-medium mb-4 lg:mb-6">
                 Request a Demo
               </Heading>
               

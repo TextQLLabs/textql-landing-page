@@ -65,8 +65,11 @@ export function DemoRequestForm({
       sessionStorage.setItem('demo_email', email);
       sessionStorage.setItem('demo_source', window.location.pathname);
       onSubmit?.(email);
-      trackButtonClick('Demo Form Submit', 'demo_request_form', { email_domain: email.split('@')[1], destination: 'request_demo' });
-      navigate(`/request-demo?email=${encodeURIComponent(email)}`);
+      trackButtonClick('Demo Form Submit', 'demo_request_form', { email_domain: email.split('@')[1], destination: 'demo' });
+      
+      // TODO: Re-enable /request-demo redirect flow after testing
+      // navigate(`/request-demo?email=${encodeURIComponent(email)}`);
+      navigate('/demo');
     } catch (err) {
       console.error('Error submitting form:', err);
       setError('Something went wrong. Please try again.');
