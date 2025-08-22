@@ -167,24 +167,24 @@ export default function RequestDemo() {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr,500px] gap-8 lg:gap-12 items-start">
             
             {/* Left Content */}
-            <div className="space-y-8 bg-white p-8 border border-[#2A3B35]/20">
+            <div className="space-y-8 bg-white p-8 border border-[#2A3B35]/20 animate-slide-up animation-delay-100">
               {/* Header */}
               <div className="space-y-4">
                 <div>
-                  <Text color="secondary" theme={theme} className="text-sm font-medium uppercase tracking-wide mb-4">
+                  <Text color="secondary" theme={theme} className="text-sm font-medium uppercase tracking-wide mb-4 animate-slide-up animation-delay-200">
                     CONTACT SALES
                   </Text>
-                  <Heading level={1} theme={theme} className="text-4xl md:text-5xl font-extralight mb-6">
+                  <Heading level={1} theme={theme} className="text-4xl md:text-5xl font-extralight mb-6 animate-slide-up animation-delay-200">
                     Talk to our Sales team
                   </Heading>
-                  <Text color="muted" theme={theme} className="text-lg font-light leading-relaxed max-w-lg">
+                  <Text color="muted" theme={theme} className="text-lg font-light leading-relaxed max-w-md animate-slide-up animation-delay-300">
                     Connect with our sales team to explore how we can support your use case.
                   </Text>
                 </div>
               </div>
 
               {/* Benefits List */}
-              <div className="space-y-4">
+              <div className="space-y-4 animate-slide-up animation-delay-400">
                 <div className="flex items-start gap-3">
                   <div className={`p-1 mt-1 ${theme === 'light' ? 'bg-[#2A3B35]' : 'bg-[#B8D8D0]'} flex-shrink-0`}>
                     <Check className={`w-4 h-4 ${theme === 'light' ? 'text-white' : 'text-[#0F1712]'}`} />
@@ -204,18 +204,20 @@ export default function RequestDemo() {
               </div>
 
               {/* Testimonial */}
-              <div className="space-y-4">
-                <Text color="primary" theme={theme} className="text-2xl md:text-xl font-light italic leading-relaxed max-w-md">
-                  "TextQL is a lifesaver. It created these graphs and pulled stats instantly from our Snowflake warehouse right before an All Hands meeting."
-                </Text>
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 overflow-hidden">
-                    <img 
-                      src="/images/testimonial_logos/tackle_person.png"
-                      alt="Dillon Woods"
-                      className="w-full h-full object-cover scale-350 object-top"
-                    />
-                  </div>
+              <div className="flex items-start gap-6 animate-slide-up animation-delay-500">
+                                <div className={`w-24 h-24 md:w-36 md:h-36 overflow-hidden border ${
+                  theme === 'light' ? 'border-[#2A3B35]/20' : 'border-[#B8D8D0]/20'
+                }`}>
+                  <img
+                    src="/images/testimonial_logos/tackle_person.png"
+                    alt="Dillon Woods"
+                    className="w-full h-full object-cover scale-100"
+                  />
+                </div>
+                <div className="space-y-3">
+                  <Text color="primary" theme={theme} className="text-2xl md:text-xl font-light italic leading-relaxed max-w-md">
+                    "TextQL is a lifesaver. It created these graphs and pulled stats instantly from our Snowflake warehouse right before an All Hands meeting."
+                  </Text>
                   <div>
                     <Text theme={theme} className="text-sm font-medium">
                       Dillon Woods
@@ -229,7 +231,7 @@ export default function RequestDemo() {
             </div>
 
           {/* Right Form */}
-          <div className="w-full">
+          <div className="w-full animate-slide-up animation-delay-400">
             <div className={`border p-6 md:p-8 ${
               theme === 'light' ? 'border-[#2A3B35]/20 bg-white' : 'border-[#B8D8D0]/20 bg-[#000000]'
             }`}>
