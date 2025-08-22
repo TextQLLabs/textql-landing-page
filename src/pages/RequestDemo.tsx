@@ -89,7 +89,7 @@ export default function RequestDemo() {
           phone_number: formData.phoneNumber?.trim() || null,
           how_did_you_hear: formData.howDidYouHear || null,
           source: emailFromUrl ? 'home_page_redirect' : 'direct_request_demo'
-        });
+        }, { returning: 'minimal' });
       
       if (demoError) {
         throw new Error(`Demo request failed: ${demoError.message}`);
@@ -109,14 +109,12 @@ export default function RequestDemo() {
           referrer: document.referrer || null,
           user_agent: navigator.userAgent || null,
           full_session_data: posthogData || null
-        });
+        }, { returning: 'minimal' });
       
       if (analyticsError) {
         console.error('Analytics insert failed:', analyticsError);
         // Don't fail the form for analytics errors
       }
-      
-
       
       // Track successful submission
       trackButtonClick('Request Demo', 'demo_form', {
@@ -205,7 +203,7 @@ export default function RequestDemo() {
 
               {/* Testimonial */}
               <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 animate-slide-up animation-delay-500">
-                                <div className={`hidden sm:block w-24 h-24 md:w-36 md:h-36 overflow-hidden border flex-shrink-0 ${
+                <div className={`hidden sm:block w-24 h-24 md:w-36 md:h-36 overflow-hidden border flex-shrink-0 ${
                   theme === 'light' ? 'border-[#2A3B35]/20' : 'border-[#B8D8D0]/20'
                 }`}>
                   <img
@@ -239,8 +237,8 @@ export default function RequestDemo() {
                 Request a Demo
               </Heading>
               
-                              <form onSubmit={handleSubmit} className="space-y-0">
-                                                  <Input
+              <form onSubmit={handleSubmit} className="space-y-0">
+                <Input
                    label="Work Email*"
                    type="email"
                    placeholder="john.doe@company.com"
@@ -293,9 +291,7 @@ export default function RequestDemo() {
                      { value: 'podcast', label: 'Podcast' },
                      { value: 'other', label: 'Other' }
                    ]}
-                                  />
-                 
-                 
+                 />
                  
                  {/* Error Message */}
                  {submitError && (
@@ -339,21 +335,6 @@ export default function RequestDemo() {
             </div>
           </div>
           </div>
-
-          {/* Contact Info */}
-          {/* <div className="mt-8 text-center lg:text-left">
-          <Text color="muted" theme={theme} className="text-sm">
-            Questions? Email us at{' '}
-            <a 
-              href="mailto:hello@textql.com" 
-              className={`underline hover:no-underline transition-colors ${
-                theme === 'light' ? 'text-[#2A3B35] hover:text-[#4A665C]' : 'text-[#B8D8D0] hover:text-[#729E8C]'
-              }`}
-            >
-              hello@textql.com
-            </a>
-          </Text>
-          </div> */}
         </div>
       </Section>
     </div>
