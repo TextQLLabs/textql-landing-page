@@ -143,7 +143,7 @@ export function HomeHero({}: HomeHeroProps = {}) {
     >
       {/* Background Animation */}
       <div className={`absolute inset-0 z-0 ${debugMode ? 'border-4 border-purple-500' : ''}`}>
-        <WaveBackground theme={isLightMode ? 'light' : 'dark'} />
+        <WaveBackground theme={isLightMode ? 'light' : 'dark'} scale={1} />
       </div>
       
       {/* Desktop Hero Content */}
@@ -192,7 +192,7 @@ export function HomeHero({}: HomeHeroProps = {}) {
         </div>
         
         {/* Logo Carousel - DESKTOP - Fixed at bottom */}
-        <div className={`hidden lg:block z-10 pb-6 ${debugMode ? 'border-2 border-blue-500' : ''}`}>
+        <div className={`hidden lg:block z-10 ${debugMode ? 'border-2 border-blue-500' : ''}`}>
           <div className={`mx-auto max-w-7xl px-6 w-full ${debugMode ? 'border-2 border-purple-500' : ''}`}>
             <p className={`text-sm font-medium ${themeClasses.textPrimary} mb-2`}>
               Ana finds insights in your existing data stack
