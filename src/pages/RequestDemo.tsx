@@ -89,7 +89,7 @@ export default function RequestDemo() {
           phone_number: formData.phoneNumber?.trim() || null,
           how_did_you_hear: formData.howDidYouHear || null,
           source: emailFromUrl ? 'home_page_redirect' : 'direct_request_demo'
-        }, { returning: 'minimal' });
+        });
       
       if (demoError) {
         throw new Error(`Demo request failed: ${demoError.message}`);
@@ -109,7 +109,7 @@ export default function RequestDemo() {
           referrer: document.referrer || null,
           user_agent: navigator.userAgent || null,
           full_session_data: posthogData || null
-        }, { returning: 'minimal' });
+        });
       
       if (analyticsError) {
         console.error('Analytics insert failed:', analyticsError);
