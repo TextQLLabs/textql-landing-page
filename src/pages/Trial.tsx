@@ -784,7 +784,7 @@ export default function Trial() {
 
 
       <FaqSection 
-        name="the $5 Trial"
+        rawText="FAQ"
         faqItems={trialFaqItems}
       />
 
@@ -793,7 +793,7 @@ export default function Trial() {
         showWave={true}
         variant="wide"
         heading="Ready to try TextQL with your data?"
-        subheader="Get $500 worth of queries and visualizations for just $5"
+        subheader="Try unlimited queries and visualizations for free"
         useSimpleButton={false}
       />
 
