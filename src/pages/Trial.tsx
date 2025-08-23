@@ -40,15 +40,15 @@ import { trackButtonClick } from "../utils/analytics";
 const HEADLINE_VARIANTS = {
   variant_a: {
     title: '200 Queries And 50 Visualizations For <span class="">$5</span>',
-    subtitle: "Get $500 worth of queries and visualizations for $5. Connect your data source and try it now."
+    subtitle: "Connect your data source to trial a month of unlimited queries and visualizations."
   },
   variant_b: {
     title: 'Never Write SQL Again.',
-    subtitle: "Connect your data source to try it out and get $500 worth of queries and visualizations for $5."
+    subtitle: "Connect your data source to trial a month of unlimited queries and visualizations."
   },
   variant_c: {
     title: 'AI Chat With Your Data',
-    subtitle: "Connect your data source to try it out and get $500 worth of queries and visualizations for $5."
+    subtitle: "Connect your data source to trial a month of unlimited queries and visualizations."
   },
 } as const;
 
@@ -517,7 +517,7 @@ export default function Trial() {
       location
     });
     
-    window.location.href = "https://buy.stripe.com/eVq14n4q7gpH5M1gcfcEw03";
+    window.location.href = "https://app.textql.com";
   };
 
   const onBookMeeting = (location: string = 'hero_section') => {
@@ -784,7 +784,7 @@ export default function Trial() {
 
 
       <FaqSection 
-        name="the $5 Trial"
+        rawText="FAQ"
         faqItems={trialFaqItems}
       />
 
@@ -793,7 +793,7 @@ export default function Trial() {
         showWave={true}
         variant="wide"
         heading="Ready to try TextQL with your data?"
-        subheader="Get $500 worth of queries and visualizations for just $5"
+        subheader="Try unlimited queries and visualizations for free"
         useSimpleButton={false}
       />
 

@@ -240,10 +240,10 @@ export default function RequestDemo() {
                     CONTACT SALES
                   </Text>
                   <Heading level={1} theme={theme} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extralight mb-4 lg:mb-6 animate-slide-up animation-delay-200">
-                    Talk to our Sales team
+                    See how TextQL can help
                   </Heading>
                   <Text color="muted" theme={theme} className="text-base sm:text-lg font-light leading-relaxed max-w-md animate-slide-up animation-delay-300">
-                    Connect with our sales team to explore how we can support your use case.
+                  and why hundreds of data teams have stopped writing SQL
                   </Text>
                 </div>
               </div>
@@ -263,7 +263,7 @@ export default function RequestDemo() {
                     <Check className={`w-4 h-4 ${theme === 'light' ? 'text-white' : 'text-[#0F1712]'}`} />
                   </div>
                   <Text theme={theme} className="text-base font-medium">
-                    Connect your live data in 10 mins
+                    Connect your live data in less than10 minutes
                   </Text>
                 </div>
               </div>
