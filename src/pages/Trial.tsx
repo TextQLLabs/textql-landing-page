@@ -517,7 +517,7 @@ export default function Trial() {
       location
     });
     
-    window.location.href = "https://buy.stripe.com/eVq14n4q7gpH5M1gcfcEw03";
+    window.location.href = "https://app.textql.com";
   };
 
   const onBookMeeting = (location: string = 'hero_section') => {
