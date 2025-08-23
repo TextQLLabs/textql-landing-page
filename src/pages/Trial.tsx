@@ -40,15 +40,15 @@ import { trackButtonClick } from "../utils/analytics";
 const HEADLINE_VARIANTS = {
   variant_a: {
     title: '200 Queries And 50 Visualizations For <span class="">$5</span>',
-    subtitle: "Get $500 worth of queries and visualizations for $5. Connect your data source and try it now."
+    subtitle: "Connect your data source to trial a month of unlimited queries and visualizations."
   },
   variant_b: {
     title: 'Never Write SQL Again.',
-    subtitle: "Connect your data source to try it out and get $500 worth of queries and visualizations for $5."
+    subtitle: "Connect your data source to trial a month of unlimited queries and visualizations."
   },
   variant_c: {
     title: 'AI Chat With Your Data',
-    subtitle: "Connect your data source to try it out and get $500 worth of queries and visualizations for $5."
+    subtitle: "Connect your data source to trial a month of unlimited queries and visualizations."
   },
 } as const;
 
