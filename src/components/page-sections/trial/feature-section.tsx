@@ -161,7 +161,9 @@ export function FeatureSection({
                               trackButtonClick('Try Now', `feature_${feature.title.toLowerCase().replace(/\s+/g, '_')}`, {
                                 page: 'trial',
                                 button_type: 'feature_cta',
-                                feature_name: feature.title
+                                feature_name: feature.title,
+                                destination: 'app.textql.com',
+                                destination_type: 'external_app'
                               });
                               onTryNow(e);
                             }}

@@ -508,7 +508,9 @@ export default function Trial() {
     // Track PostHog button click
     trackButtonClick('Try Now', location, {
       page: 'trial',
-      button_type: 'primary_cta'
+      button_type: 'primary_cta',
+      destination: 'app.textql.com',
+      destination_type: 'external_app'
     });
     
     // Track conversion for A/B test
@@ -524,7 +526,9 @@ export default function Trial() {
     // Track PostHog button click
     trackButtonClick('Book a Meeting', location, {
       page: 'trial',
-      button_type: 'secondary_cta'
+      button_type: 'secondary_cta',
+      destination: '/request-demo',
+      destination_type: 'internal_page'
     });
     
     // Track conversion for A/B test

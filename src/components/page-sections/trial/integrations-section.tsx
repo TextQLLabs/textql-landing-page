@@ -86,7 +86,9 @@ const onDemoRequest = (e: React.MouseEvent) => {
   // Track PostHog button click
   trackButtonClick('Try Now', 'integrations_section', {
     page: 'trial',
-    button_type: 'section_cta'
+    button_type: 'section_cta',
+    destination: 'app.textql.com',
+    destination_type: 'external_app'
   });
   
   // Track A/B test conversion for integrations section
