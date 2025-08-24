@@ -84,6 +84,20 @@ export function DemoRequestForm({
         throw new Error('Secure UUID generation unavailable');
       }
 
+      // Capture full PostHog session data for analytics (same as RequestDemo.tsx)
+      const posthogData = ph ? {
+        distinct_id: ph.get_distinct_id?.() ?? null,
+        session_id: ph.get_session_id?.() ?? null,
+        feature_flags: ph.getFeatureFlags?.() ?? null,
+        session_replay_url: ph.get_session_replay_url?.() ?? null,
+        user_properties: ph.people ?? null,
+        page_view_id: ph.getPageViewId?.() ?? null,
+        current_url: window.location.href,
+        referrer: document.referrer || null,
+        user_agent: navigator.userAgent || null,
+        timestamp: new Date().toISOString()
+      } : null;
+
       // Create partial demo request entry
       const { error: demoError } = await supabase
         .from('demo_requests')
@@ -100,6 +114,28 @@ export function DemoRequestForm({
         // Continue with navigation even if DB insert fails
       }
 
+      // Create analytics entry for partial submission (same structure as full form)
+      if (!demoError && posthogData) {
+        const { error: analyticsError } = await supabase
+          .from('demo_request_analytics')
+          .insert({
+            demo_request_id: clientDemoRequestId,
+            posthog_distinct_id: posthogData.distinct_id,
+            posthog_session_id: posthogData.session_id,
+            page_view_id: posthogData.page_view_id,
+            session_replay_url: posthogData.session_replay_url,
+            feature_flags: posthogData.feature_flags,
+            current_url: posthogData.current_url,
+            referrer: posthogData.referrer,
+            user_agent: posthogData.user_agent,
+            full_session_data: posthogData
+          });
+
+        if (analyticsError) {
+          console.error('Failed to create partial demo analytics:', analyticsError);
+        }
+      }
+
       // Store for session continuity
       sessionStorage.setItem('demo_email', email);
       sessionStorage.setItem('demo_source', window.location.pathname);
@@ -108,11 +144,25 @@ export function DemoRequestForm({
       }
       
       onSubmit?.(email);
+      
+      // Track PostHog event for partial submission
       trackButtonClick('Demo Form Submit', 'demo_request_form', { 
         email_domain: email.split('@')[1], 
         destination: 'request-demo',
-        has_partial_entry: !demoError
+        has_partial_entry: !demoError,
+        submission_type: 'email_partial'
       });
+
+      // Also send a specific PostHog event for partial demo request
+      if (ph && !demoError) {
+        ph.capture('demo_request_partial', {
+          email_domain: email.split('@')[1],
+          source: 'email_form_partial',
+          demo_request_id: clientDemoRequestId,
+          current_url: window.location.href,
+          referrer: document.referrer || null
+        });
+      }
       
       // Navigate with both email and demo_id parameters
       const params = new URLSearchParams({
