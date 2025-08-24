@@ -186,6 +186,19 @@ export default function RequestDemo() {
         flow_type: originDemoRequestId ? 'partial_completion' : 'direct_submission',
         is_update: !!originDemoRequestId
       });
+
+      // Send specific PostHog event for full demo request (matches partial event)
+      if (ph) {
+        ph.capture('demo_request_completed', {
+          email_domain: formData.email.split('@')[1],
+          source: source,
+          demo_request_id: clientDemoRequestId,
+          how_did_you_hear: formData.howDidYouHear || 'not_specified',
+          is_partial_completion: !!originDemoRequestId,
+          current_url: window.location.href,
+          referrer: document.referrer || null
+        });
+      }
       
       setIsSuccess(true);
       
