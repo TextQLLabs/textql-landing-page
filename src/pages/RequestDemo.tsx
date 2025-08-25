@@ -117,6 +117,15 @@ export default function RequestDemo() {
             console.error('Failed to log Calendly event:', snapshotError);
           }
 
+          // DEBUG: Log all Calendly events to see which ones we get
+          console.log('🔍 CALENDLY EVENT DEBUG:', {
+            event: e.data.event,
+            hasPayload: !!e.data.payload,
+            payload: e.data.payload
+          });
+
+          // Note: Calendly booking info is tracked via posthog_snapshot above
+
           // Also send to PostHog for immediate tracking
           if (ph) {
             ph.capture(triggerType, {
@@ -556,7 +565,7 @@ export default function RequestDemo() {
           </div>
           <div className="h-[calc(100%-73px)] overflow-hidden">
             <iframe
-              src={`https://calendly.com/ethanding/25min?${
+              src={`https://calendly.com/matt-abate-textql/30min?${
                 new URLSearchParams({
                   ...(formData.email && { prefill_email: formData.email }),
                   ...(formData.firstName && { prefill_name: formData.firstName }),
