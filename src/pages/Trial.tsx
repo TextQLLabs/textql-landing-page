@@ -148,10 +148,6 @@ const trialTestimonials = [
 // FAQ data for the FaqSection component
 const trialFaqItems = [
   {
-    question: "What happens during the $5 trial?",
-    answer: "Connect your data warehouse, ask questions in plain English, and get verified SQL/Python code and visualizations. Generate insights, export results, and share dashboards—all with no long-term commitment."
-  },
-  {
     question: "Will TextQL spike my warehouse costs?",
     answer: "No—our guardrails prevent excessive spend. Historically, every $1.00 of TextQL work costs approximately $0.0001 in warehouse compute, making it extremely cost-effective."
   },
