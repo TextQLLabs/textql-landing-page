@@ -565,7 +565,7 @@ export default function RequestDemo() {
           </div>
           <div className="h-[calc(100%-73px)] overflow-hidden">
             <iframe
-              src={`https://calendly.com/matt-abate-textql/30min?${
+              src={`${import.meta.env.VITE_CALENDLY_WIDGET_URL || 'https://calendly.com/matt-abate-textql/30min'}?${
                 new URLSearchParams({
                   ...(formData.email && { prefill_email: formData.email }),
                   ...(formData.firstName && { prefill_name: formData.firstName }),

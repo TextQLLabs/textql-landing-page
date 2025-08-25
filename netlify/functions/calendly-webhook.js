@@ -16,7 +16,8 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    console.log('📅 Calendly webhook received:', event.body);
+    const environment = process.env.CALENDLY_ENVIRONMENT || 'development';
+    console.log(`📅 Calendly webhook received (${environment}):`, event.body);
 
     const webhookData = JSON.parse(event.body || '{}');
     const eventType = webhookData.event;
@@ -62,6 +63,7 @@ exports.handler = async (event, context) => {
           event_type: eventType,
           payload: payload,
           webhook_timestamp: new Date().toISOString(),
+          environment: environment,
           raw_webhook_data: webhookData
         }
       })
