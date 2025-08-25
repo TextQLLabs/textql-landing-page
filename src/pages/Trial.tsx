@@ -19,38 +19,9 @@ import { useGlobalTheme } from "../components/GlobalThemeProvider";
 import { getThemeClasses } from "../utils/theme-utils";
 import { COLORS } from "../styles/constants";
 import Footer from "../components/Footer";
-import { useABTest } from "../utils/ab-testing";
 import { trackButtonClick } from "../utils/analytics";
 
-// A/B Test: Trial Page Headlines
-// Test name: "trial_headline_test"
-// Variants: variant_a, variant_b, variant_c, variant_d
-// 
-// SETUP INSTRUCTIONS:
-// 1. In PostHog, create a new feature flag called "trial_headline_test"
-// 2. Set it to "Release condition" type with these variants:
-//    - variant_a (25% traffic)
-//    - variant_b (25% traffic) 
-//    - variant_c (25% traffic)
-//    - variant_d (25% traffic)
-// 
-// ANALYTICS:
-// - Exposure events: "ab_test_exposure" with test_name: "trial_headline_test"
-// - Conversion events: "ab_test_conversion" with conversion_type: "trial_signup_click" or "meeting_booking_click"
-const HEADLINE_VARIANTS = {
-  variant_a: {
-    title: '200 Queries And 50 Visualizations For <span class="">$5</span>',
-    subtitle: "Connect your data source to trial a month of unlimited queries and visualizations."
-  },
-  variant_b: {
-    title: 'Never Write SQL Again.',
-    subtitle: "Connect your data source to trial a month of unlimited queries and visualizations."
-  },
-  variant_c: {
-    title: 'AI Chat With Your Data',
-    subtitle: "Connect your data source to trial a month of unlimited queries and visualizations."
-  },
-} as const;
+// Trial page with fixed headline copy
 
 const transformFeatures = [
   {
@@ -492,11 +463,17 @@ export default function Trial() {
     alt: logo.alt
   }));
   
-  // A/B Test for headlines
-  const { variant, trackConversion } = useABTest('trial_headline_test', 'variant_a');
+  // Use fixed headline content - removed A/B test
+  const headlineContent = {
+    title: 'Unlimited queries and visualizations for free',
+    subtitle: "Connect your data source to trial a month of unlimited queries and visualizations."
+  };
   
-  // Get the headline content based on the A/B test variant
-  const headlineContent = HEADLINE_VARIANTS[variant as keyof typeof HEADLINE_VARIANTS] || HEADLINE_VARIANTS.variant_a;
+  // Dummy trackConversion function for any existing tracking calls
+  const trackConversion = (conversionType: string, data: any) => {
+    // A/B test removed - conversion tracking disabled
+    console.log('A/B test conversion would have tracked:', conversionType, data);
+  };
 
   const onDemoRequest = (e?: React.MouseEvent, location: string = 'hero_section') => {
     e?.preventDefault();
@@ -540,8 +517,8 @@ export default function Trial() {
     <div className="">
       <TrialNavbar onDemoRequest={onDemoRequest} />
       <SEO
-        title="TextQL Trial - 200 Queries And 50 Visualizations For $5"
-        description="Get $500 worth of queries and visualizations for $5. Connect your data source and try TextQL now."
+        title="TextQL Trial - Unlimited queries and visualizations for free"
+        description="Unlimited queries and visualizations for free. Connect your data source and try TextQL now."
         canonical="https://textql.com/trial"
         ogImage="https://textql.com/social-preview.png"
       />

@@ -16,11 +16,10 @@ const Hero = ({
           <div className="space-y-8">
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-light leading-tight" style={{color: 'var(--theme-text-primary)'}}>
-                200 Queries And 50 Visualizations For{" "}
-                <span className="">$5</span>
+                Unlimited queries and visualizations for free
               </h1>
               <p className="text-xl leading-relaxed" style={{color: 'var(--theme-text-secondary)'}}>
-                Get $500 worth of queries and visualizations for $5.
+                Get unlimited queries and visualizations for free.
               </p>
               <p style={{color: 'var(--theme-text-secondary)'}}>Connect your data source and try it now.</p>
             </div>
