@@ -38,6 +38,11 @@ export default function Team() {
       image: "https://cdn.prod.website-files.com/65233261a2e59a440d833232/653fdc5f4fa18f1eceadcdb6_DSCF0671-2-p-800.jpg"
     },
     {
+      name: "Matthew Abate",
+      title: "Member of Technical Staff",
+      image: "https://cdn.prod.website-files.com/65233261a2e59a440d833232/677eff605b45bceb25f60b36_Screenshot%202025-01-08%20at%205.42.32%E2%80%AFPM-p-800.png"
+    },
+    {
       name: "Armaan Kapoor",
       title: "Member of Technical Staff",
       image: "https://cdn.prod.website-files.com/65233261a2e59a440d833232/679abaa2ff53477a0271627e_pic_720.png"
@@ -47,14 +52,9 @@ export default function Team() {
       title: "Member of Technical Staff",
       image: "https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/fe713f70-e45f-4e47-f24d-92e93ed16500/public"
     },
-      {
-      name: "Matthew Abate",
-      title: "Member of Technical Staff",
-      image: "https://cdn.prod.website-files.com/65233261a2e59a440d833232/677eff605b45bceb25f60b36_Screenshot%202025-01-08%20at%205.42.32%E2%80%AFPM-p-800.png"
-    },
     {
       name: "Arman Rayatsanaati",
-      title: "Member of Technical Staff",
+      title: "Machine Learning Scientist",
       image: "https://cdn.prod.website-files.com/65233261a2e59a440d833232/677f00a559a3058be44d4eef_Screenshot%202025-01-08%20at%205.47.43%E2%80%AFPM-p-500.png"
     },
       {
