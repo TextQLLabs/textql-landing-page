@@ -157,34 +157,32 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // Create calendly_bookings entry (simplified - same pattern as posthog_snapshot)
+    // ALSO create calendly_bookings entry for invitee.created events (same pattern as posthog_snapshot)
     let bookingData = null;
-    if (triggerType === 'calendly_meeting_booked') {
-      console.log('🔄 Creating calendly_bookings entry...');
-      
+    if (eventType === 'invitee.created') {
       const { data: bookingResult, error: bookingError } = await supabase
         .from('calendly_bookings')
         .insert({
-          form_response_id: formResponseId || null,
+          form_response_id: formResponseId,
           invitee_uri: payload.uri || `webhook-${Date.now()}`,
-          invitee_name: payload.name || null,
-          invitee_email: payload.email || null,
-          invitee_status: payload.status || 'active',
+          invitee_name: payload.name,
+          invitee_email: payload.email,
+          invitee_status: payload.status,
           calendly_status: 'booked',
           calendly_payload: payload,
-          webhook_event_type: eventType,
-          webhook_timestamp: new Date().toISOString()
+          webhook_event_type: eventType
         })
         .select()
         .single();
 
       if (bookingError) {
-        console.error('❌ CALENDLY_BOOKINGS INSERT FAILED:', bookingError);
+        console.error('CALENDLY_BOOKINGS INSERT ERROR:', bookingError);
       } else {
         bookingData = bookingResult;
-        console.log('✅ CALENDLY_BOOKINGS INSERT SUCCESS:', bookingData?.id);
+        console.log('CALENDLY_BOOKINGS INSERT SUCCESS:', bookingData?.id);
       }
     }
+
     
     // Handle cancellations
     if (triggerType === 'calendly_meeting_canceled' && formResponseId) {
