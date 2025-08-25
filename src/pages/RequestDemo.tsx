@@ -117,6 +117,39 @@ export default function RequestDemo() {
             console.error('Failed to log Calendly event:', snapshotError);
           }
 
+          // Also create calendly_bookings entry if it's a meeting scheduled event
+          if (e.data.event === 'calendly.event_scheduled' && e.data.payload) {
+            const payload = e.data.payload;
+            const { error: bookingError } = await supabase
+              .from('calendly_bookings')
+              .insert({
+                form_response_id: finalFormResponseId || effectiveFormResponseId,
+                invitee_uri: payload.invitee?.uri || `frontend-${Date.now()}`,
+                invitee_name: payload.invitee?.name || null,
+                invitee_email: payload.invitee?.email || null,
+                invitee_timezone: payload.invitee?.timezone || null,
+                invitee_status: 'active',
+                scheduled_event_uri: payload.event?.uri || null,
+                scheduled_event_name: payload.event_type?.name || 'Meeting',
+                event_start_time: payload.event?.start_time || null,
+                event_end_time: payload.event?.end_time || null,
+                event_status: 'active',
+                calendly_status: 'booked',
+                utm_source: 'textql_demo_form',
+                utm_medium: 'modal',
+                utm_campaign: effectiveFormResponseId ? 'partial_completion' : 'direct_booking',
+                calendly_payload: payload,
+                webhook_event_type: 'frontend_event_scheduled',
+                webhook_timestamp: new Date().toISOString()
+              });
+
+            if (bookingError) {
+              console.error('Failed to create calendly_bookings entry from frontend:', bookingError);
+            } else {
+              console.log('✅ Created calendly_bookings entry from frontend');
+            }
+          }
+
           // Also send to PostHog for immediate tracking
           if (ph) {
             ph.capture(triggerType, {
