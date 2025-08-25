@@ -38,13 +38,10 @@ exports.handler = async (event, context) => {
     const scheduledEvent = invitee.scheduled_event || {};
     const location = scheduledEvent.location || {};
     
-    // Store extracted data in calendly_events table with simplified columns
+    // Store extracted data in calendly_events table with further simplified columns
     const { data: eventData, error: eventError } = await supabase
       .from('calendly_events')
       .insert({
-        // Event info
-        event_type: eventType,
-        
         // Invitee details
         invitee_name: invitee.name || null,
         invitee_email: invitee.email || null,
@@ -52,7 +49,6 @@ exports.handler = async (event, context) => {
         invitee_status: invitee.status || null,
         
         // Meeting details
-        scheduled_event_uri: scheduledEvent.uri || null,
         event_name: scheduledEvent.name || null,
         event_start_time: scheduledEvent.start_time || null,
         event_end_time: scheduledEvent.end_time || null,
