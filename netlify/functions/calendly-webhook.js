@@ -157,107 +157,32 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // Create calendly_bookings entry with structured data
+    // Create calendly_bookings entry (simplified - same pattern as posthog_snapshot)
     let bookingData = null;
     if (triggerType === 'calendly_meeting_booked') {
-      const scheduledEvent = payload.scheduled_event || {};
-      const location = scheduledEvent.location || {};
-      const tracking = payload.tracking || {};
-      const inviteesCounter = scheduledEvent.invitees_counter || {};
-      const eventMembership = (scheduledEvent.event_memberships || [])[0] || {};
+      console.log('🔄 Creating calendly_bookings entry...');
       
-      let bookingDataResult = null;
-      let bookingError = null;
-      
-      try {
-        console.log('🔄 Attempting to insert into calendly_bookings...');
-        const result = await supabase
-          .from('calendly_bookings')
-          .insert({
-          // Link to form
+      const { data: bookingResult, error: bookingError } = await supabase
+        .from('calendly_bookings')
+        .insert({
           form_response_id: formResponseId || null,
-          
-          // Invitee info  
-          invitee_uri: payload.uri || 'unknown-' + Date.now(),
+          invitee_uri: payload.uri || `webhook-${Date.now()}`,
           invitee_name: payload.name || null,
           invitee_email: payload.email || null,
-          invitee_timezone: payload.timezone || null,
-          invitee_status: payload.status || null,
-          
-          // Scheduled event info
-          scheduled_event_uri: scheduledEvent.uri || null,
-          scheduled_event_name: scheduledEvent.name || null,
-          event_start_time: scheduledEvent.start_time || null,
-          event_end_time: scheduledEvent.end_time || null,
-          event_status: scheduledEvent.status || null,
-          event_type_uri: scheduledEvent.event_type || null,
-          
-          // Location
-          location_type: location.type || null,
-          location_status: location.status || null,
-          location_join_url: location.join_url || null,
-          
-          // Tracking
-          utm_source: tracking.utm_source || null,
-          utm_medium: tracking.utm_medium || null,
-          utm_campaign: tracking.utm_campaign || null,
-          utm_term: tracking.utm_term || null,
-          utm_content: tracking.utm_content || null,
-          
-          // URLs
-          cancel_url: payload.cancel_url || null,
-          reschedule_url: payload.reschedule_url || null,
-          
-          // Status
+          invitee_status: payload.status || 'active',
           calendly_status: 'booked',
-          is_rescheduled: payload.rescheduled || false,
-          is_no_show: payload.no_show || false,
-          
-          // Host info
-          host_user_uri: eventMembership.user || null,
-          host_name: eventMembership.user_name || null,
-          host_email: eventMembership.user_email || null,
-          
-          // Counters
-          invitees_limit: inviteesCounter.limit || null,
-          invitees_total: inviteesCounter.total || null,
-          invitees_active: inviteesCounter.active || null,
-          
-          // Full payload
           calendly_payload: payload,
           webhook_event_type: eventType,
           webhook_timestamp: new Date().toISOString()
         })
         .select()
         .single();
-        
-        bookingDataResult = result.data;
-        bookingError = result.error;
-        console.log('✅ Insert attempted, result:', result.error ? 'ERROR' : 'SUCCESS');
-        
-      } catch (insertError) {
-        console.error('💥 Exception during calendly_bookings insert:', insertError);
-        bookingError = insertError;
-      }
 
       if (bookingError) {
-        console.error('❌ Failed to create calendly_bookings entry:', bookingError);
-        console.error('Error details:', JSON.stringify(bookingError, null, 2));
-        console.error('Attempted to insert:', {
-          invitee_uri: payload.uri,
-          invitee_name: payload.name,
-          invitee_email: payload.email,
-          scheduled_event_uri: scheduledEvent.uri,
-          event_start_time: scheduledEvent.start_time
-        });
-        console.error('Full payload:', JSON.stringify(payload, null, 2));
+        console.error('❌ CALENDLY_BOOKINGS INSERT FAILED:', bookingError);
       } else {
-        bookingData = bookingDataResult;
-        console.log('✅ Successfully created calendly_bookings entry:', bookingData?.id);
-        console.log('📧 Invitee:', payload.email);
-        console.log('📅 Meeting Time:', scheduledEvent.start_time);
-        console.log('🔗 Form Response ID:', formResponseId);
-        console.log('📍 Location:', location.type, location.join_url);
+        bookingData = bookingResult;
+        console.log('✅ CALENDLY_BOOKINGS INSERT SUCCESS:', bookingData?.id);
       }
     }
     
