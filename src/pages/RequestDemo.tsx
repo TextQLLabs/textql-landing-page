@@ -117,9 +117,20 @@ export default function RequestDemo() {
             console.error('Failed to log Calendly event:', snapshotError);
           }
 
-          // Also create calendly_bookings entry if it's a meeting scheduled event
-          if (e.data.event === 'calendly.event_scheduled' && e.data.payload) {
+          // DEBUG: Log all Calendly events to see which ones we get
+          console.log('🔍 CALENDLY EVENT DEBUG:', {
+            event: e.data.event,
+            hasPayload: !!e.data.payload,
+            payload: e.data.payload
+          });
+
+          // Also create calendly_bookings entry for any booking-related event
+          if ((e.data.event === 'calendly.event_scheduled' || 
+               e.data.event === 'calendly.date_and_time_selected') && e.data.payload) {
+            console.log('✅ CALENDLY BOOKING DETECTED - attempting insert');
+            
             const payload = e.data.payload;
+            console.log('📋 PAYLOAD DATA:', payload);
             const { error: bookingError } = await supabase
               .from('calendly_bookings')
               .insert({
@@ -144,9 +155,10 @@ export default function RequestDemo() {
               });
 
             if (bookingError) {
-              console.error('Failed to create calendly_bookings entry from frontend:', bookingError);
+              console.error('❌ CALENDLY BOOKINGS INSERT FAILED:', bookingError);
+              console.error('❌ ERROR DETAILS:', JSON.stringify(bookingError, null, 2));
             } else {
-              console.log('✅ Created calendly_bookings entry from frontend');
+              console.log('✅ CALENDLY BOOKINGS INSERT SUCCESS!');
             }
           }
 
