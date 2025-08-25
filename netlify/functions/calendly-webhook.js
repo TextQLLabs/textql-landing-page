@@ -1,37 +1,14 @@
-// Netlify Functions version of Calendly webhook
+// BRAND NEW Calendly webhook - fresh start
 const { createClient } = require('@supabase/supabase-js');
 
 const supabaseUrl = 'https://pqayifagqzuysqwlyaqr.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBxYXlpZmFncXp1eXNxd2x5YXFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU4MzE3MTYsImV4cCI6MjA3MTQwNzcxNn0.RH8fRO7vnPqxvTEryoUOxN3jyvIRZYG_ub71QwNbSwI';
-const calendlyPAT = process.env.CALENDLY_PAT;
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Helper function to fetch additional data from Calendly API
-async function fetchCalendlyDetails(uri) {
-  if (!calendlyPAT || !uri) return null;
-  
-  try {
-    const response = await fetch(`https://api.calendly.com/${uri}`, {
-      headers: {
-        'Authorization': `Bearer ${calendlyPAT}`,
-        'Content-Type': 'application/json'
-      }
-    });
-    
-    if (!response.ok) {
-      console.warn('Calendly API request failed:', response.status);
-      return null;
-    }
-    
-    return await response.json();
-  } catch (error) {
-    console.error('Error fetching Calendly details:', error);
-    return null;
-  }
-}
-
 exports.handler = async (event, context) => {
+  console.log('🆕 NEW WEBHOOK RUNNING - FRESH START!');
+  
   // Only accept POST requests
   if (event.httpMethod !== 'POST') {
     return {
@@ -41,7 +18,7 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    console.log('Received Calendly webhook:', event.body);
+    console.log('📨 Received webhook:', event.body);
 
     const webhookData = JSON.parse(event.body || '{}');
     const eventType = webhookData.event;
@@ -54,120 +31,54 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // Map Calendly webhook events to our trigger types
-    let triggerType = 'calendly_webhook_unknown';
-    switch (eventType) {
-      case 'invitee.created':
-        triggerType = 'calendly_meeting_booked';
-        break;
-      case 'invitee.canceled':
-        triggerType = 'calendly_meeting_canceled';
-        break;
-      case 'invitee.rescheduled':
-        triggerType = 'calendly_meeting_rescheduled';
-        break;
-      case 'invitee.paid':
-        triggerType = 'calendly_payment_completed';
-        break;
-      default:
-        triggerType = 'calendly_webhook_' + eventType.replace('.', '_');
-    }
+    console.log('🎯 Event type:', eventType);
+    console.log('📧 Invitee email:', payload.email);
 
-    // Extract relevant data
-    const invitee = payload.invitee || {};
-    const eventDetails = payload.event || {};
-    const questions = payload.questions_and_answers || [];
-    
-    // Fetch additional details from Calendly API if we have a PAT
-    let inviteeDetails = null;
-    let eventTypeDetails = null;
-    
-    if (calendlyPAT) {
-      // Fetch detailed invitee information
-      if (invitee.uri) {
-        inviteeDetails = await fetchCalendlyDetails(invitee.uri.replace('https://api.calendly.com/', ''));
-      }
-      
-      // Fetch event type details  
-      if (eventDetails.event_type?.uri) {
-        eventTypeDetails = await fetchCalendlyDetails(eventDetails.event_type.uri.replace('https://api.calendly.com/', ''));
-      }
-    }
-    
-    // Try to extract form_response_id from custom questions or UTM parameters
-    let formResponseId = null;
-    
-    // Look for form_response_id in questions
-    const formResponseQuestion = questions.find(q => 
-      q.question && q.question.toLowerCase().includes('form_response_id')
-    );
-    if (formResponseQuestion) {
-      formResponseId = formResponseQuestion.answer;
-    }
-    
-    // Look in UTM parameters if available
-    if (!formResponseId && payload.tracking) {
-      formResponseId = payload.tracking.utm_content || payload.tracking.custom_a1;
-    }
-    
-    // Also try to extract from invitee details if available
-    if (!formResponseId && inviteeDetails?.resource?.tracking) {
-      const tracking = inviteeDetails.resource.tracking;
-      formResponseId = tracking.utm_content || tracking.utm_term;
-    }
-
-    // Create posthog_snapshot entry
+    // 1. FIRST: Create posthog_snapshot (we know this works)
+    console.log('📊 Creating posthog_snapshot...');
     const { data: snapshotData, error: snapshotError } = await supabase
       .from('posthog_snapshot')
       .insert({
-        trigger: triggerType,
-        posthog_distinct_id: invitee.email || 'webhook_user',
+        trigger: 'calendly_meeting_booked',
+        posthog_distinct_id: payload.email || 'webhook_user',
         posthog_session_id: null,
         page_view_id: null,
         session_replay_url: null,
         feature_flags: null,
-        current_url: eventDetails.location?.join_url || null,
+        current_url: null,
         referrer: null,
         user_agent: null,
         full_session_data: {
           calendly_webhook_event: eventType,
           calendly_payload: payload,
-          invitee_email: invitee.email,
-          invitee_name: invitee.name,
-          event_start_time: eventDetails.start_time,
-          event_end_time: eventDetails.end_time,
-          event_location: eventDetails.location,
-          questions_and_answers: questions,
-          form_response_id: formResponseId,
-          webhook_timestamp: new Date().toISOString(),
-          // Enhanced data from Calendly API
-          invitee_details: inviteeDetails?.resource || null,
-          event_type_details: eventTypeDetails?.resource || null,
-          calendly_api_enhanced: !!calendlyPAT
+          webhook_timestamp: new Date().toISOString()
         }
       })
       .select()
       .single();
 
     if (snapshotError) {
-      console.error('Failed to create posthog_snapshot:', snapshotError);
+      console.error('❌ posthog_snapshot failed:', snapshotError);
       return {
         statusCode: 500,
         body: JSON.stringify({ error: 'Database error', details: snapshotError })
       };
     }
 
-    // ALSO create calendly_bookings entry for invitee.created events (same pattern as posthog_snapshot)
+    console.log('✅ posthog_snapshot created:', snapshotData?.id);
+
+    // 2. SECOND: Create calendly_bookings (same exact pattern)
     let bookingData = null;
     if (eventType === 'invitee.created') {
+      console.log('📅 Creating calendly_bookings...');
+      
       const { data: bookingResult, error: bookingError } = await supabase
         .from('calendly_bookings')
         .insert({
-          form_response_id: formResponseId,
           invitee_uri: payload.uri || `webhook-${Date.now()}`,
-          invitee_name: payload.name,
-          invitee_email: payload.email,
-          invitee_status: payload.status,
+          invitee_name: payload.name || 'Unknown',
+          invitee_email: payload.email || 'unknown@test.com',
+          invitee_status: payload.status || 'active',
           calendly_status: 'booked',
           calendly_payload: payload,
           webhook_event_type: eventType
@@ -176,47 +87,31 @@ exports.handler = async (event, context) => {
         .single();
 
       if (bookingError) {
-        console.error('CALENDLY_BOOKINGS INSERT ERROR:', bookingError);
+        console.error('❌ calendly_bookings failed:', bookingError);
+        console.error('❌ Error details:', JSON.stringify(bookingError, null, 2));
       } else {
         bookingData = bookingResult;
-        console.log('CALENDLY_BOOKINGS INSERT SUCCESS:', bookingData?.id);
+        console.log('✅ calendly_bookings created:', bookingData?.id);
       }
+    } else {
+      console.log('ℹ️  Skipping calendly_bookings - event type is:', eventType);
     }
 
-    
-    // Handle cancellations
-    if (triggerType === 'calendly_meeting_canceled' && formResponseId) {
-      const { error: cancelError } = await supabase
-        .from('calendly_bookings')
-        .update({
-          calendly_status: 'canceled',
-          updated_at: new Date().toISOString()
-        })
-        .eq('form_response_id', formResponseId)
-        .eq('calendly_event_uri', eventDetails.uri || payload.event?.uri);
-
-      if (cancelError) {
-        console.error('Failed to update canceled booking:', cancelError);
-      } else {
-        console.log('✅ Updated booking status to canceled for form_response_id:', formResponseId);
-      }
-    }
-
-    console.log('Successfully processed Calendly webhook:', triggerType, snapshotData?.id);
+    console.log('🎉 Webhook complete!');
 
     return {
       statusCode: 200,
       body: JSON.stringify({ 
-        success: true, 
-        trigger: triggerType,
+        success: true,
+        webhook: 'NEW_FRESH_VERSION',
         snapshot_id: snapshotData?.id,
         booking_id: bookingData?.id || null,
-        form_response_id: formResponseId
+        event_type: eventType
       })
     };
 
   } catch (error) {
-    console.error('Webhook processing error:', error);
+    console.error('💥 Webhook error:', error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'Internal server error', details: error.message })
