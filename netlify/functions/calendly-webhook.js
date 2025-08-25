@@ -81,12 +81,40 @@ exports.handler = async (event, context) => {
 
     console.log('✅ Successfully stored calendly event:', eventData.id);
 
+    // Now link this calendly event to the form_response record by email
+    if (invitee.email) {
+      console.log('🔗 Attempting to link calendly event to form_response for email:', invitee.email);
+      
+      const { data: updateData, error: updateError } = await supabase
+        .from('form_response')
+        .update({ 
+          calendly_event_id: eventData.id 
+        })
+        .eq('email', invitee.email.toLowerCase().trim())
+        .is('calendly_event_id', null) // Only update if no calendly event is already linked
+        .select()
+        .order('created_at', { ascending: false }) // Get the most recent form response
+        .limit(1);
+
+      if (updateError) {
+        console.error('❌ Failed to link form_response:', updateError);
+        // Don't fail the whole webhook, just log the error
+      } else if (updateData && updateData.length > 0) {
+        console.log('✅ Successfully linked calendly event to form_response:', updateData[0].id);
+      } else {
+        console.log('ℹ️ No matching form_response found for email:', invitee.email);
+      }
+    } else {
+      console.log('ℹ️ No email in calendly payload - skipping form_response linking');
+    }
+
     return {
       statusCode: 200,
       body: JSON.stringify({ 
         success: true, 
         event_id: eventData.id,
-        event_type: eventType
+        event_type: eventType,
+        linked_form_response: !!invitee.email
       })
     };
 
