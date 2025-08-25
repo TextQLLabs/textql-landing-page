@@ -160,11 +160,6 @@ exports.handler = async (event, context) => {
     // ALSO create calendly_bookings entry for invitee.created events (same pattern as posthog_snapshot)
     let bookingData = null;
     if (eventType === 'invitee.created') {
-      console.log('🔥 ATTEMPTING CALENDLY_BOOKINGS INSERT for invitee.created');
-      console.log('🔥 payload.uri:', payload.uri);
-      console.log('🔥 payload.name:', payload.name);
-      console.log('🔥 payload.email:', payload.email);
-      
       const { data: bookingResult, error: bookingError } = await supabase
         .from('calendly_bookings')
         .insert({
@@ -181,14 +176,11 @@ exports.handler = async (event, context) => {
         .single();
 
       if (bookingError) {
-        console.error('🔥 CALENDLY_BOOKINGS INSERT ERROR:', bookingError);
-        console.error('🔥 ERROR DETAILS:', JSON.stringify(bookingError, null, 2));
+        console.error('CALENDLY_BOOKINGS INSERT ERROR:', bookingError);
       } else {
         bookingData = bookingResult;
-        console.log('🔥 CALENDLY_BOOKINGS INSERT SUCCESS:', bookingData?.id);
+        console.log('CALENDLY_BOOKINGS INSERT SUCCESS:', bookingData?.id);
       }
-    } else {
-      console.log('🔥 SKIPPING calendly_bookings - eventType is:', eventType);
     }
 
     
