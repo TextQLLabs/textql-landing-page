@@ -21,32 +21,8 @@ export function DemoRequestForm({
   const [error, setError] = useState<string | undefined>(undefined);
   const navigate = useNavigate();
 
-  // Common personal email domains to block
-  const PERSONAL_EMAIL_DOMAINS = [
-    'gmail.com',
-    'yahoo.com',
-    'hotmail.com',
-    'outlook.com',
-    'aol.com',
-    'icloud.com',
-    'protonmail.com',
-    'mail.com',
-    'zoho.com',
-    'yandex.com',
-    'gmx.com',
-    'live.com',
-    'me.com',
-    'inbox.com'
-  ];
-
-  const isWorkEmail = (email: string): boolean => {
-    const domain = email.split('@')[1]?.toLowerCase();
-    if (!domain) return false;
-    
-    if (PERSONAL_EMAIL_DOMAINS.includes(domain)) {
-      return false;
-    }
-
+  // Basic email validation function
+  const isValidEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     return emailRegex.test(email);
   };
@@ -55,8 +31,8 @@ export function DemoRequestForm({
     e.preventDefault();
     setError(undefined);
 
-    if (!isWorkEmail(email)) {
-      setError('Please enter a valid work email address');
+    if (!isValidEmail(email)) {
+      setError('Please enter a valid email address');
       return;
     }
 
