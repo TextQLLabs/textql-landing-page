@@ -39,6 +39,7 @@ export default function RequestDemo() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const [showCalendlyModal, setShowCalendlyModal] = useState(false);
+  const [finalFormResponseId, setFinalFormResponseId] = useState<string | null>(null);
 
   // Prevent body scroll when modal is open
   useEffect(() => {
@@ -53,6 +54,90 @@ export default function RequestDemo() {
       document.body.style.overflow = 'unset';
     };
   }, [showCalendlyModal]);
+
+  // Listen for Calendly events (webhook will handle actual data in production)
+  useEffect(() => {
+    const handleCalendlyEvent = async (e: MessageEvent) => {
+      if (e.data.event && e.data.event.indexOf('calendly') === 0) {
+        try {
+          const ph: any = (typeof window !== 'undefined' && (window as any).posthog) ? (window as any).posthog : null;
+          const posthogData = ph ? {
+            distinct_id: ph.get_distinct_id?.() ?? null,
+            session_id: ph.get_session_id?.() ?? null,
+            feature_flags: ph.getFeatureFlags?.() ?? null,
+            session_replay_url: ph.get_session_replay_url?.() ?? null,
+            user_properties: ph.people ?? null,
+            page_view_id: ph.getPageViewId?.() ?? null,
+            current_url: window.location.href,
+            referrer: document.referrer || null,
+            user_agent: navigator.userAgent || null,
+            timestamp: new Date().toISOString()
+          } : null;
+
+          let triggerType = 'calendly_unknown';
+          switch (e.data.event) {
+            case 'calendly.event_scheduled':
+              triggerType = 'calendly_meeting_scheduled';
+              break;
+            case 'calendly.profile_page_viewed':
+              triggerType = 'calendly_profile_viewed';
+              break;
+            case 'calendly.event_type_viewed':
+              triggerType = 'calendly_event_type_viewed';
+              break;
+            case 'calendly.date_and_time_selected':
+              triggerType = 'calendly_time_selected';
+              break;
+            default:
+              triggerType = 'calendly_' + e.data.event.replace('calendly.', '');
+          }
+
+          // Create posthog_snapshot entry for Calendly event
+          const { error: snapshotError } = await supabase
+            .from('posthog_snapshot')
+            .insert({
+              trigger: triggerType,
+              posthog_distinct_id: posthogData?.distinct_id || 'unknown',
+              posthog_session_id: posthogData?.session_id || null,
+              page_view_id: posthogData?.page_view_id || null,
+              session_replay_url: posthogData?.session_replay_url || null,
+              feature_flags: posthogData?.feature_flags || null,
+              current_url: window.location.href,
+              referrer: document.referrer || null,
+              user_agent: navigator.userAgent || null,
+              full_session_data: {
+                ...posthogData,
+                calendly_event: e.data,
+                form_response_id: finalFormResponseId || effectiveFormResponseId,
+                calendly_payload: e.data.payload || null
+              }
+            });
+
+          if (snapshotError) {
+            console.error('Failed to log Calendly event:', snapshotError);
+          }
+
+          // Also send to PostHog for immediate tracking
+          if (ph) {
+            ph.capture(triggerType, {
+              calendly_event_type: e.data.event,
+              form_response_id: finalFormResponseId || effectiveFormResponseId,
+              calendly_payload: e.data.payload || null,
+              current_url: window.location.href
+            });
+          }
+        } catch (error) {
+          console.error('Error handling Calendly event:', error);
+        }
+      }
+    };
+
+    window.addEventListener('message', handleCalendlyEvent);
+    
+    return () => {
+      window.removeEventListener('message', handleCalendlyEvent);
+    };
+  }, [finalFormResponseId, effectiveFormResponseId]);
   
   // Track page visit
   useEffect(() => {
@@ -195,6 +280,7 @@ export default function RequestDemo() {
       }
       
       setIsSuccess(true);
+      setFinalFormResponseId(finalFormResponseId);
       
       // Show Calendly modal after brief delay
       setTimeout(() => {
@@ -270,7 +356,7 @@ export default function RequestDemo() {
                     <Check className={`w-4 h-4 ${theme === 'light' ? 'text-white' : 'text-[#0F1712]'}`} />
                   </div>
                   <Text theme={theme} className="text-base font-medium">
-                    Connect your live data in less than10 minutes
+                    Connect your live data in less than 10 minutes
                   </Text>
                 </div>
               </div>
@@ -470,7 +556,18 @@ export default function RequestDemo() {
           </div>
           <div className="h-[calc(100%-73px)] overflow-hidden">
             <iframe
-              src="https://calendly.com/ethanding/25min"
+              src={`https://calendly.com/ethanding/25min?${
+                new URLSearchParams({
+                  ...(formData.email && { prefill_email: formData.email }),
+                  ...(formData.firstName && { prefill_name: formData.firstName }),
+                  ...(finalFormResponseId || effectiveFormResponseId) && { 
+                    custom_a1: finalFormResponseId || effectiveFormResponseId // Pass form_response_id as custom field
+                  },
+                  utm_source: 'textql_demo_form',
+                  utm_medium: 'modal',
+                  utm_campaign: effectiveFormResponseId ? 'partial_completion' : 'direct_booking'
+                }).toString()
+              }`}
               width="100%"
               height="100%"
               style={{ border: 'none', overflow: 'hidden' }}
