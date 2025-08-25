@@ -14,19 +14,19 @@ export default function RequestDemo() {
   const theme = useComponentTheme();
   const [searchParams] = useSearchParams();
   
-  // Get email and demo_id from URL params if provided
+  // Get email and form_response_id from URL params if provided
   const emailFromUrl = searchParams.get('email') || '';
-  const demoIdFromUrl = searchParams.get('demo_id') || '';
+  const formResponseIdFromUrl = searchParams.get('form_response_id') || '';
   
-  // Fallback: try to get demo_id from sessionStorage if not in URL
-  const [demoIdFromSession] = useState(() => {
+  // Fallback: try to get form_response_id from sessionStorage if not in URL
+  const [formResponseIdFromSession] = useState(() => {
     if (typeof window !== 'undefined') {
-      return sessionStorage.getItem('demo_request_id') || '';
+      return sessionStorage.getItem('form_response_id') || '';
     }
     return '';
   });
   
-  const effectiveDemoId = demoIdFromUrl || demoIdFromSession;
+  const effectiveFormResponseId = formResponseIdFromUrl || formResponseIdFromSession;
   
   const [formData, setFormData] = useState({
     email: emailFromUrl,
@@ -60,10 +60,10 @@ export default function RequestDemo() {
       page: 'request_demo',
       source: emailFromUrl ? 'demo_form_redirect' : 'direct_navigation',
       prefilled_email: !!emailFromUrl,
-      has_partial_demo_id: !!effectiveDemoId,
-      flow_type: effectiveDemoId ? 'partial_completion' : 'direct_entry'
+      has_form_response_id: !!effectiveFormResponseId,
+      flow_type: effectiveFormResponseId ? 'partial_completion' : 'direct_entry'
     });
-  }, [emailFromUrl, demoIdFromUrl]);
+  }, [emailFromUrl, formResponseIdFromUrl]);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({
@@ -102,61 +102,12 @@ export default function RequestDemo() {
       if (!distinctId) {
         throw new Error('Missing PostHog distinct id');
       }
-      // Keep the origin (from partial)
-      const originDemoRequestId = effectiveDemoId || null;
 
-      // Determine source based on flow type
-      const source = originDemoRequestId 
-        ? 'email_form_completed' 
-        : (emailFromUrl ? 'home_page_redirect' : 'direct_request_demo');
-
-      // Complete the request: UPDATE existing partial if present, otherwise INSERT new
-      let clientDemoRequestId = originDemoRequestId;
-      if (originDemoRequestId) {
-        const { error: updateError } = await supabase
-          .from('demo_requests')
-          .update({
-            posthog_distinct_id: distinctId,
-            email: formData.email.toLowerCase().trim(),
-            first_name: formData.firstName.trim(),
-            phone_number: formData.phoneNumber?.trim() || null,
-            how_did_you_hear: formData.howDidYouHear || null,
-            source,
-            updated_at: new Date().toISOString()
-          })
-          .eq('demo_request_id', originDemoRequestId);
-        if (updateError) {
-          throw new Error(`Demo request update failed: ${updateError.message}`);
-        }
-        if (typeof window !== 'undefined') {
-          sessionStorage.removeItem('demo_request_id');
-        }
-      } else {
-        clientDemoRequestId = (window.crypto as any)?.randomUUID?.();
-        if (!clientDemoRequestId) {
-          throw new Error('Secure UUID generation unavailable');
-        }
-        const { error: insertError } = await supabase
-          .from('demo_requests')
-          .insert({
-            demo_request_id: clientDemoRequestId,
-            posthog_distinct_id: distinctId,
-            email: formData.email.toLowerCase().trim(),
-            first_name: formData.firstName.trim(),
-            phone_number: formData.phoneNumber?.trim() || null,
-            how_did_you_hear: formData.howDidYouHear || null,
-            source
-          });
-        if (insertError) {
-          throw new Error(`Demo request failed: ${insertError.message}`);
-        }
-      }
-      
-      // Insert analytics with the SAME demo_request_id
-      const { error: analyticsError } = await supabase
-        .from('demo_request_analytics')
+      // Create posthog_snapshot entry for form submission
+      const { data: snapshotData, error: snapshotError } = await supabase
+        .from('posthog_snapshot')
         .insert({
-          demo_request_id: clientDemoRequestId, // SAME demo_request_id
+          trigger: 'form_submission_complete',
           posthog_distinct_id: distinctId,
           posthog_session_id: posthogData?.session_id || null,
           page_view_id: posthogData?.page_view_id || null,
@@ -165,36 +116,79 @@ export default function RequestDemo() {
           current_url: window.location.href,
           referrer: document.referrer || null,
           user_agent: navigator.userAgent || null,
-          full_session_data: {
-            ...(posthogData || {}),
-            came_from_partial: !!originDemoRequestId,
-            origin_demo_request_id: originDemoRequestId
-          }
-        });
-      
-      if (analyticsError) {
-        console.error('Analytics insert failed:', analyticsError);
-        // Don't fail the form for analytics errors
+          full_session_data: posthogData
+        })
+        .select()
+        .single();
+
+      if (snapshotError) {
+        throw new Error(`PostHog snapshot failed: ${snapshotError.message}`);
       }
+
+      let finalFormResponseId = effectiveFormResponseId;
+      
+      // UPDATE existing form_response if we have an ID, otherwise CREATE new one
+      if (effectiveFormResponseId) {
+        const { error: updateError } = await supabase
+          .from('form_response')
+          .update({
+            email: formData.email.toLowerCase().trim(),
+            first_name: formData.firstName.trim(),
+            phone_number: formData.phoneNumber?.trim() || null,
+            how_did_you_hear: formData.howDidYouHear || null,
+            updated_at: new Date().toISOString(),
+            posthog_snapshot_id: snapshotData.id // Link to the completion snapshot
+          })
+          .eq('id', effectiveFormResponseId);
+        
+        if (updateError) {
+          throw new Error(`Form response update failed: ${updateError.message}`);
+        }
+        
+        if (typeof window !== 'undefined') {
+          sessionStorage.removeItem('form_response_id');
+        }
+      } else {
+        // Create new form response for users who came directly to this page
+        const { data: newFormData, error: insertError } = await supabase
+          .from('form_response')
+          .insert({
+            email: formData.email.toLowerCase().trim(),
+            first_name: formData.firstName.trim(),
+            phone_number: formData.phoneNumber?.trim() || null,
+            how_did_you_hear: formData.howDidYouHear || null,
+            posthog_snapshot_id: snapshotData.id
+          })
+          .select()
+          .single();
+        
+        if (insertError) {
+          throw new Error(`Form response creation failed: ${insertError.message}`);
+        }
+        
+        finalFormResponseId = newFormData.id;
+      }
+      
+      // Analytics entry is already created via the posthog_snapshot above
       
       // Track successful submission
       trackButtonClick('Request Demo', 'demo_form', {
         page: 'request_demo',
         button_type: 'form_submit',
-        form_source: originDemoRequestId ? 'email_form_completion' : (emailFromUrl ? 'home_page_redirect' : 'direct_request_demo'),
+        form_source: effectiveFormResponseId ? 'email_form_completion' : (emailFromUrl ? 'home_page_redirect' : 'direct_request_demo'),
         how_did_you_hear: formData.howDidYouHear || 'not_specified',
-        flow_type: originDemoRequestId ? 'partial_completion' : 'direct_submission',
-        is_update: !!originDemoRequestId
+        flow_type: effectiveFormResponseId ? 'partial_completion' : 'direct_submission',
+        is_update: !!effectiveFormResponseId
       });
 
       // Send specific PostHog event for full demo request (matches partial event)
       if (ph) {
         ph.capture('demo_request_completed', {
           email_domain: formData.email.split('@')[1],
-          source: source,
-          demo_request_id: clientDemoRequestId,
+          source: effectiveFormResponseId ? 'email_form_completed' : (emailFromUrl ? 'home_page_redirect' : 'direct_request_demo'),
+          form_response_id: finalFormResponseId,
           how_did_you_hear: formData.howDidYouHear || 'not_specified',
-          is_partial_completion: !!originDemoRequestId,
+          is_partial_completion: !!effectiveFormResponseId,
           current_url: window.location.href,
           referrer: document.referrer || null
         });
@@ -479,9 +473,8 @@ export default function RequestDemo() {
               src="https://calendly.com/ethanding/25min"
               width="100%"
               height="100%"
-              frameBorder="0"
+              style={{ border: 'none', overflow: 'hidden' }}
               title="Schedule Demo"
-              style={{ overflow: 'hidden' }}
             />
           </div>
         </div>
