@@ -158,6 +158,7 @@ exports.handler = async (event, context) => {
     }
 
     // Create calendly_bookings entry with structured data
+    let bookingData = null;
     if (triggerType === 'calendly_meeting_booked') {
       const scheduledEvent = payload.scheduled_event || {};
       const location = scheduledEvent.location || {};
@@ -165,7 +166,7 @@ exports.handler = async (event, context) => {
       const inviteesCounter = scheduledEvent.invitees_counter || {};
       const eventMembership = (scheduledEvent.event_memberships || [])[0] || {};
       
-      const { data: bookingData, error: bookingError } = await supabase
+      const { data: bookingDataResult, error: bookingError } = await supabase
         .from('calendly_bookings')
         .insert({
           // Link to form
@@ -227,8 +228,17 @@ exports.handler = async (event, context) => {
 
       if (bookingError) {
         console.error('❌ Failed to create calendly_bookings entry:', bookingError);
-        console.error('Payload structure:', JSON.stringify(payload, null, 2));
+        console.error('Error details:', JSON.stringify(bookingError, null, 2));
+        console.error('Attempted to insert:', {
+          invitee_uri: payload.uri,
+          invitee_name: payload.name,
+          invitee_email: payload.email,
+          scheduled_event_uri: scheduledEvent.uri,
+          event_start_time: scheduledEvent.start_time
+        });
+        console.error('Full payload:', JSON.stringify(payload, null, 2));
       } else {
+        bookingData = bookingDataResult;
         console.log('✅ Successfully created calendly_bookings entry:', bookingData?.id);
         console.log('📧 Invitee:', payload.email);
         console.log('📅 Meeting Time:', scheduledEvent.start_time);
@@ -263,6 +273,7 @@ exports.handler = async (event, context) => {
         success: true, 
         trigger: triggerType,
         snapshot_id: snapshotData?.id,
+        booking_id: bookingData?.id || null,
         form_response_id: formResponseId
       })
     };
