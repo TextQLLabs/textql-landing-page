@@ -53,7 +53,7 @@ export default function Team() {
       image: "https://imagedelivery.net/3jS8EJceRTKI24-1Uc_BDg/fe713f70-e45f-4e47-f24d-92e93ed16500/public"
     },
     {
-      name: "Arman Rayatsanaati",
+      name: "Arman Raayatsanati",
       title: "Machine Learning Scientist",
       image: "https://cdn.prod.website-files.com/65233261a2e59a440d833232/677f00a559a3058be44d4eef_Screenshot%202025-01-08%20at%205.47.43%E2%80%AFPM-p-500.png"
     },
