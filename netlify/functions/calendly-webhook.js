@@ -157,17 +157,52 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // If we have a form_response_id, update that record
-    if (formResponseId && triggerType === 'calendly_meeting_booked') {
-      const { error: updateError } = await supabase
-        .from('form_response')
+    // Create calendly_bookings entry for testing (safe - doesn't modify existing tables)
+    if (triggerType === 'calendly_meeting_booked') {
+      const { data: bookingData, error: bookingError } = await supabase
+        .from('calendly_bookings')
+        .insert({
+          form_response_id: formResponseId || null,
+          calendly_event_uri: eventDetails.uri || payload.event?.uri || 'unknown',
+          calendly_event_type: eventType,
+          calendly_invitee_email: invitee.email || null,
+          calendly_invitee_name: invitee.name || null,
+          calendly_start_time: eventDetails.start_time || null,
+          calendly_end_time: eventDetails.end_time || null,
+          calendly_location: eventDetails.location || null,
+          calendly_status: 'booked',
+          calendly_payload: payload,
+          invitee_details: inviteeDetails?.resource || null,
+          event_type_details: eventTypeDetails?.resource || null
+        })
+        .select()
+        .single();
+
+      if (bookingError) {
+        console.error('Failed to create calendly_bookings entry:', bookingError);
+      } else {
+        console.log('✅ Successfully created calendly_bookings entry:', bookingData?.id);
+        console.log('📧 Invitee:', invitee.email);
+        console.log('📅 Meeting Time:', eventDetails.start_time);
+        console.log('🔗 Form Response ID:', formResponseId);
+      }
+    }
+    
+    // Handle cancellations
+    if (triggerType === 'calendly_meeting_canceled' && formResponseId) {
+      const { error: cancelError } = await supabase
+        .from('calendly_bookings')
         .update({
+          calendly_status: 'canceled',
           updated_at: new Date().toISOString()
         })
-        .eq('id', formResponseId);
+        .eq('form_response_id', formResponseId)
+        .eq('calendly_event_uri', eventDetails.uri || payload.event?.uri);
 
-      if (updateError) {
-        console.error('Failed to update form_response:', updateError);
+      if (cancelError) {
+        console.error('Failed to update canceled booking:', cancelError);
+      } else {
+        console.log('✅ Updated booking status to canceled for form_response_id:', formResponseId);
       }
     }
 
