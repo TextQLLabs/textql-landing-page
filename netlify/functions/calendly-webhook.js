@@ -33,10 +33,50 @@ exports.handler = async (event, context) => {
     // Log the event type we received
     console.log('📋 Event type:', eventType);
 
-    // Store the complete webhook data in calendly_events table
+    // Extract key fields from webhook payload
+    const invitee = payload || {};
+    const scheduledEvent = invitee.scheduled_event || {};
+    const tracking = invitee.tracking || {};
+    const location = scheduledEvent.location || {};
+    
+    // Store extracted data in calendly_events table with proper columns
     const { data: eventData, error: eventError } = await supabase
       .from('calendly_events')
       .insert({
+        // Event info
+        event_type: eventType,
+        webhook_timestamp: new Date().toISOString(),
+        
+        // Invitee details
+        invitee_uri: invitee.uri || null,
+        invitee_name: invitee.name || null,
+        invitee_email: invitee.email || null,
+        invitee_timezone: invitee.timezone || null,
+        invitee_status: invitee.status || null,
+        
+        // Meeting details
+        scheduled_event_uri: scheduledEvent.uri || null,
+        event_name: scheduledEvent.name || null,
+        event_start_time: scheduledEvent.start_time || null,
+        event_end_time: scheduledEvent.end_time || null,
+        event_status: scheduledEvent.status || null,
+        
+        // Location/Meeting info
+        meeting_type: location.type || null,
+        join_url: location.join_url || null,
+        
+        // UTM tracking
+        utm_source: tracking.utm_source || null,
+        utm_medium: tracking.utm_medium || null,
+        utm_campaign: tracking.utm_campaign || null,
+        utm_term: tracking.utm_term || null,
+        utm_content: tracking.utm_content || null,
+        
+        // Action URLs
+        cancel_url: invitee.cancel_url || null,
+        reschedule_url: invitee.reschedule_url || null,
+        
+        // Keep full JSON for anything else
         full_session_data: {
           event_type: eventType,
           payload: payload,
