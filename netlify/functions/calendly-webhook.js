@@ -157,34 +157,83 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // Create calendly_bookings entry for testing (safe - doesn't modify existing tables)
+    // Create calendly_bookings entry with structured data
     if (triggerType === 'calendly_meeting_booked') {
+      const scheduledEvent = payload.scheduled_event || {};
+      const location = scheduledEvent.location || {};
+      const tracking = payload.tracking || {};
+      const inviteesCounter = scheduledEvent.invitees_counter || {};
+      const eventMembership = (scheduledEvent.event_memberships || [])[0] || {};
+      
       const { data: bookingData, error: bookingError } = await supabase
         .from('calendly_bookings')
         .insert({
+          // Link to form
           form_response_id: formResponseId || null,
-          calendly_event_uri: eventDetails.uri || payload.event?.uri || 'unknown',
-          calendly_event_type: eventType,
-          calendly_invitee_email: invitee.email || null,
-          calendly_invitee_name: invitee.name || null,
-          calendly_start_time: eventDetails.start_time || null,
-          calendly_end_time: eventDetails.end_time || null,
-          calendly_location: eventDetails.location || null,
+          
+          // Invitee info
+          invitee_uri: payload.uri || null,
+          invitee_name: payload.name || null,
+          invitee_email: payload.email || null,
+          invitee_timezone: payload.timezone || null,
+          invitee_status: payload.status || null,
+          
+          // Scheduled event info
+          scheduled_event_uri: scheduledEvent.uri || null,
+          scheduled_event_name: scheduledEvent.name || null,
+          event_start_time: scheduledEvent.start_time || null,
+          event_end_time: scheduledEvent.end_time || null,
+          event_status: scheduledEvent.status || null,
+          event_type_uri: scheduledEvent.event_type || null,
+          
+          // Location
+          location_type: location.type || null,
+          location_status: location.status || null,
+          location_join_url: location.join_url || null,
+          
+          // Tracking
+          utm_source: tracking.utm_source || null,
+          utm_medium: tracking.utm_medium || null,
+          utm_campaign: tracking.utm_campaign || null,
+          utm_term: tracking.utm_term || null,
+          utm_content: tracking.utm_content || null,
+          
+          // URLs
+          cancel_url: payload.cancel_url || null,
+          reschedule_url: payload.reschedule_url || null,
+          
+          // Status
           calendly_status: 'booked',
+          is_rescheduled: payload.rescheduled || false,
+          is_no_show: payload.no_show || false,
+          
+          // Host info
+          host_user_uri: eventMembership.user || null,
+          host_name: eventMembership.user_name || null,
+          host_email: eventMembership.user_email || null,
+          
+          // Counters
+          invitees_limit: inviteesCounter.limit || null,
+          invitees_total: inviteesCounter.total || null,
+          invitees_active: inviteesCounter.active || null,
+          
+          // Full payload
           calendly_payload: payload,
-          invitee_details: inviteeDetails?.resource || null,
-          event_type_details: eventTypeDetails?.resource || null
+          webhook_event_type: eventType,
+          webhook_timestamp: new Date().toISOString()
         })
         .select()
         .single();
 
       if (bookingError) {
-        console.error('Failed to create calendly_bookings entry:', bookingError);
+        console.error('❌ Failed to create calendly_bookings entry:', bookingError);
+        console.error('Payload structure:', JSON.stringify(payload, null, 2));
       } else {
         console.log('✅ Successfully created calendly_bookings entry:', bookingData?.id);
-        console.log('📧 Invitee:', invitee.email);
-        console.log('📅 Meeting Time:', eventDetails.start_time);
+        console.log('📧 Invitee:', payload.email);
+        console.log('📅 Meeting Time:', scheduledEvent.start_time);
         console.log('🔗 Form Response ID:', formResponseId);
+        console.log('📍 Location:', location.type, location.join_url);
       }
     }
     
