@@ -166,14 +166,19 @@ exports.handler = async (event, context) => {
       const inviteesCounter = scheduledEvent.invitees_counter || {};
       const eventMembership = (scheduledEvent.event_memberships || [])[0] || {};
       
-      const { data: bookingDataResult, error: bookingError } = await supabase
-        .from('calendly_bookings')
-        .insert({
+      let bookingDataResult = null;
+      let bookingError = null;
+      
+      try {
+        console.log('🔄 Attempting to insert into calendly_bookings...');
+        const result = await supabase
+          .from('calendly_bookings')
+          .insert({
           // Link to form
           form_response_id: formResponseId || null,
           
-          // Invitee info
-          invitee_uri: payload.uri || null,
+          // Invitee info  
+          invitee_uri: payload.uri || 'unknown-' + Date.now(),
           invitee_name: payload.name || null,
           invitee_email: payload.email || null,
           invitee_timezone: payload.timezone || null,
@@ -225,6 +230,15 @@ exports.handler = async (event, context) => {
         })
         .select()
         .single();
+        
+        bookingDataResult = result.data;
+        bookingError = result.error;
+        console.log('✅ Insert attempted, result:', result.error ? 'ERROR' : 'SUCCESS');
+        
+      } catch (insertError) {
+        console.error('💥 Exception during calendly_bookings insert:', insertError);
+        bookingError = insertError;
+      }
 
       if (bookingError) {
         console.error('❌ Failed to create calendly_bookings entry:', bookingError);
