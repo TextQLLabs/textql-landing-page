@@ -1,14 +1,45 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { SEO } from "../components/SEO";
-import { Text, Heading, Button, Input, Select, Carousel } from "../components/ui";
-import { Modal } from "../components/ui/Modal";
-import { Section } from "../components/ui/Section";
-import { WaveBackground } from "../components/animations";
+import { Text, Heading, Button, Input, Select, HeroSection } from "../components/ui";
 import { useComponentTheme } from "../hooks/useComponentTheme";
 import { trackEvent, trackButtonClick } from "../utils/analytics";
 import { supabase } from "../lib/supabase";
 import { Check } from "lucide-react";
+import { default as Testimonials } from "../components/page-sections/trial/Testimonials";
+
+// Testimonials data (copied from trial page)
+const trialTestimonials = [
+  {
+    quote:
+      "TextQL is a lifesaver. It created these graphs and pulled stats instantly from our Snowflake warehouse right before an All Hands meeting.",
+    name: "Dillon Woods",
+    title: "Founder and CTO",
+    company: "Tackle.io",
+    valuation: "$1.25B Valuation",
+    image: "/images/testimonial_logos/tackle_person.png",
+    logo: "/images/testimonial_logos/TackleLogo.png",
+  },
+  {
+    quote:
+      "Shout out to this team and product. We use Ana as a de facto database engineer to help speed up development.",
+    name: "Corbin Klett",
+    title: "CTO",
+    company: "Artifact",
+    image: "/images/testimonial_logos/artifact_person.png",
+    logo: "/images/testimonial_logos/ArtifactLogo.png",
+  },
+  {
+    quote:
+      "The value add of TextQL has been unquantifiable. But I had Ana quantify it. And It's a lot.",
+    name: "Andy Jiang",
+    title: "Product Manager",
+    company: "Slash",
+    valuation: "$370m Valuation",
+    image: "/images/testimonial_logos/slash_person.png",
+    logo: "/images/testimonial_logos/SlashLogo.png",
+  }
+];
 
 export default function RequestDemo() {
   const theme = useComponentTheme();
@@ -318,33 +349,47 @@ export default function RequestDemo() {
         ogImage="https://textql.com/social-preview.png"
       />
 
-      <Section
-        variant="content"
-        padding="md"
-        background="primary"
-        overflow="hidden"
-        className="relative "
-      >
-        {/* Wave Background */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <WaveBackground theme={theme} scale={1} coverage={1.2}   />
-        </div>
-        
-        <div className="relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr,500px] gap-6 lg:gap-12 items-start">
-            
-            {/* Left Content */}
-            <div className="order-2 lg:order-1 mb-6 lg:mb-0 space-y-6 lg:space-y-8 bg-white p-4 sm:p-6 lg:p-8 border border-[#2A3B35]/20 animate-slide-up animation-delay-100">
+      <HeroSection
+        layout="content-left-wide"
+        minHeight="screen"
+        showWaveBackground={true}
+        waveScale={0.8}
+        waveCoverage={1.2}
+        showLogoCarousel={true}
+        logoCarouselTitle="Ana finds insights in your existing data stack"
+        mobileStackOrder="right-top"
+        mobileHideLeft={true}
+        mobileHideRight={true}
+        logoItems={[
+          { src: '/images/logos/reshift-nobg.png', alt: 'Redshift' },
+          { src: '/images/logos/snowflake-white.png', alt: 'Snowflake' },
+          { src: '/images/logos/databricks-nobg.png', alt: 'Databricks' },
+          { src: '/images/logos/looker-white.png', alt: 'Looker' },
+          { src: '/images/logos/powerbi-white.png', alt: 'Power BI' },
+          { src: '/images/logos/Tableau White.png', alt: 'Tableau' },
+          { src: '/images/logos/dbt-nobg.png', alt: 'dbt' },
+          { src: '/images/logos/azure-white.png', alt: 'Azure' },
+          { src: '/images/logos/aws-white.png', alt: 'AWS' },
+          { src: '/images/logos/salesforce-white.png', alt: 'Salesforce' },
+          { src: '/images/logos/gcp-white.png', alt: 'Google Cloud' },
+          { src: '/images/logos/teams-white.png', alt: 'Teams' },
+          { src: '/images/logos/slack-white.png', alt: 'Slack' },
+          { src: '/images/logos/alation-white.png', alt: 'Alation' },
+          { src: '/images/logos/sap-white.png', alt: 'SAP' },
+          { src: '/images/logos/oracle.png', alt: 'Oracle' }
+        ]}
+        leftContent={
+          <div className="space-y-4 lg:space-y-8 bg-white p-3 sm:p-4 lg:p-8 border border-[#2A3B35]/20 animate-slide-up animation-delay-100">
               {/* Header */}
               <div className="space-y-4">
                 <div>
                   <Text color="secondary" theme={theme} className="text-sm font-medium uppercase tracking-wide mb-4 animate-slide-up animation-delay-200">
                     CONTACT SALES
                   </Text>
-                  <Heading level={1} theme={theme} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extralight mb-4 lg:mb-6 animate-slide-up animation-delay-200">
+                  <Heading level={1} theme={theme} className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extralight mb-3 lg:mb-6 animate-slide-up animation-delay-200">
                     See how TextQL can help
                   </Heading>
-                  <Text color="muted" theme={theme} className="text-base sm:text-lg font-light leading-relaxed max-w-md animate-slide-up animation-delay-300">
+                  <Text color="muted" theme={theme} className="text-sm sm:text-base lg:text-lg font-light leading-relaxed max-w-md animate-slide-up animation-delay-300">
                   and why hundreds of data teams have stopped writing SQL
                   </Text>
                 </div>
@@ -356,7 +401,7 @@ export default function RequestDemo() {
                   <div className={`p-1 mt-1 ${theme === 'light' ? 'bg-[#2A3B35]' : 'bg-[#B8D8D0]'} flex-shrink-0`}>
                     <Check className={`w-4 h-4 ${theme === 'light' ? 'text-white' : 'text-[#0F1712]'}`} />
                   </div>
-                  <Text theme={theme} className="text-base font-medium">
+                  <Text theme={theme} className="text-sm sm:text-base font-medium">
                     Demo of the TextQL platform
                   </Text>
                 </div>
@@ -364,7 +409,7 @@ export default function RequestDemo() {
                   <div className={`p-1 mt-1 ${theme === 'light' ? 'bg-[#2A3B35]' : 'bg-[#B8D8D0]'} flex-shrink-0`}>
                     <Check className={`w-4 h-4 ${theme === 'light' ? 'text-white' : 'text-[#0F1712]'}`} />
                   </div>
-                  <Text theme={theme} className="text-base font-medium">
+                  <Text theme={theme} className="text-sm sm:text-base font-medium">
                     Connect your live data in less than 10 minutes
                   </Text>
                 </div>
@@ -396,13 +441,13 @@ export default function RequestDemo() {
                 </div>
               </div>
             </div>
-
-          {/* Right Form */}
-          <div className="order-1 lg:order-2 w-full animate-slide-up animation-delay-400">
-            <div className={`border p-4 sm:p-6 lg:p-8 ${
+        }
+        rightContent={
+          <div className="w-full animate-slide-up animation-delay-400">
+            <div className={`border p-3 sm:p-4 lg:p-8 text-left ${
               theme === 'light' ? 'border-[#2A3B35]/20 bg-white' : 'border-[#B8D8D0]/20 bg-[#000000]'
             }`}>
-              <Heading level={2} theme={theme} className="text-lg sm:text-xl lg:text-2xl font-medium mb-4 lg:mb-6">
+              <Heading level={2} theme={theme} className="text-base sm:text-lg lg:text-xl xl:text-2xl font-medium mb-3 lg:mb-6">
                 Request a Demo
               </Heading>
               
@@ -495,48 +540,128 @@ export default function RequestDemo() {
                     <Heading level={3} theme={theme} className="text-xl font-medium">
                       Thank you for your request!
                     </Heading>
-    
                   </div>
                 </div>
               )}
             </div>
           </div>
-          </div>
-          
-          {/* Logo Carousel - MOVED UP inside section for visibility */}
-          <div className="w-full relative z-10">
-            <div className="mx-auto max-w-7xl">
-              <p className="text-sm font-medium text-[#2A3B35] mb-4">
-                Ana finds insights in your existing data stack
-              </p>
-              <div className="logo-carousel">
-                <Carousel
-                  items={[
-                    { src: '/images/logos/reshift-nobg.png', alt: 'Redshift' },
-                    { src: '/images/logos/snowflake-white.png', alt: 'Snowflake' },
-                    { src: '/images/logos/databricks-nobg.png', alt: 'Databricks' },
-                    { src: '/images/logos/looker-white.png', alt: 'Looker' },
-                    { src: '/images/logos/powerbi-white.png', alt: 'Power BI' },
-                    { src: '/images/logos/Tableau White.png', alt: 'Tableau' },
-                    { src: '/images/logos/dbt-nobg.png', alt: 'dbt' },
-                    { src: '/images/logos/azure-white.png', alt: 'Azure' },
-                    { src: '/images/logos/aws-white.png', alt: 'AWS' },
-                    { src: '/images/logos/salesforce-white.png', alt: 'Salesforce' },
-                    { src: '/images/logos/gcp-white.png', alt: 'Google Cloud' },
-                    { src: '/images/logos/teams-white.png', alt: 'Teams' },
-                    { src: '/images/logos/slack-white.png', alt: 'Slack' },
-                    { src: '/images/logos/alation-white.png', alt: 'Alation' },
-                    { src: '/images/logos/sap-white.png', alt: 'SAP' },
-                    { src: '/images/logos/oracle.png', alt: 'Oracle' }
-                  ]}
-                  gradientColor={'#F7F7F7'}
-                  theme={'light'}
-                />
+        }
+      >
+        {/* Mobile form - vertically centered between content and carousel */}
+        <div className="lg:hidden w-full">
+          <div className={`border p-3 sm:p-4 lg:p-8 text-left ${
+            theme === 'light' ? 'border-[#2A3B35]/20 bg-white' : 'border-[#B8D8D0]/20 bg-[#000000]'
+          }`}>
+            <Heading level={2} theme={theme} className="text-base sm:text-lg lg:text-xl xl:text-2xl font-medium mb-3 lg:mb-6">
+              Request a Demo
+            </Heading>
+            
+            <form onSubmit={handleSubmit} className="space-y-0">
+              <Input
+                 label="Work Email*"
+                 type="email"
+                 placeholder="john.doe@company.com"
+                 value={formData.email}
+                 onChange={(e) => handleInputChange('email', e.target.value)}
+                 required
+                 theme={theme}
+                 fullWidth
+                 className="[&>div:last-child]:hidden [&>input]:py-2.5"
+               />
+               
+               <Input
+                 label="First name*"
+                 placeholder="John"
+                 value={formData.firstName}
+                 onChange={(e) => handleInputChange('firstName', e.target.value)}
+                 required
+                 theme={theme}
+                 fullWidth
+                 className="[&>div:last-child]:hidden [&>input]:py-2.5"
+               />
+               
+               <Input
+                 label="Phone number"
+                 type="tel"
+                 placeholder="+1 (555) 123-4567"
+                 value={formData.phoneNumber}
+                 onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
+                 theme={theme}
+                 fullWidth
+                 className="[&>div:last-child]:hidden [&>input]:py-2.5"
+               />
+               
+               <Select
+                 label="How did you hear about us?"
+                 value={formData.howDidYouHear}
+                 onChange={(value) => handleInputChange('howDidYouHear', value as any)}
+                 options={[
+                   { value: '', label: 'Select an option' },
+                   { value: 'search', label: 'Search Engine' },
+                   { value: 'social_media', label: 'Social Media' },
+                   { value: 'referral', label: 'Referral' },
+                   { value: 'advertisement', label: 'Advertisement' },
+                   { value: 'conference', label: 'Conference/Event' },
+                   { value: 'other', label: 'Other' }
+                 ]}
+                 theme={theme}
+                 fullWidth
+                 className="[&>div:last-child]:hidden"
+               />
+               
+               {/* Error Message */}
+               {submitError && (
+                 <div className={`p-3 border ${
+                   theme === 'light' 
+                     ? 'border-red-200 bg-red-50 text-red-700' 
+                     : 'border-red-800 bg-red-900/20 text-red-400'
+                 }`}>
+                   {submitError}
+                 </div>
+               )}
+               
+               {/* Submit Button */}
+               <div className="pt-8">
+                <Button
+                  variant="primary"
+                  theme={theme}
+                  size="md"
+                  fullWidth
+                  type="submit"
+                  loading={isSubmitting}
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Submitting...' : 'Request Demo'}
+                </Button>
               </div>
-            </div>
+            </form>
+            
+            {/* Success State */}
+            {isSuccess && (
+              <div className="absolute inset-0 bg-white flex items-center justify-center">
+                <div className="text-center space-y-4">
+                  <div className={`w-16 h-16 mx-auto flex items-center justify-center ${theme === 'light' ? 'bg-[#2A3B35]' : 'bg-[#B8D8D0]'}`}>
+                    <Check className={`w-8 h-8 ${theme === 'light' ? 'text-white' : 'text-[#0F1712]'}`} />
+                  </div>
+                  <Heading level={3} theme={theme} className="text-xl font-medium">
+                    Thank you for your request!
+                  </Heading>
+                </div>
+              </div>
+            )}
           </div>
         </div>
-      </Section>
+      </HeroSection>
+
+      {/* Mobile Testimonials - Only show on mobile */}
+      <div className="lg:hidden">
+        <Testimonials 
+          testimonials={trialTestimonials}
+          title="Here's What Our Users Say"
+          autoAdvanceInterval={6000}
+          pauseDuration={8000}
+        />
+      </div>
 
       {/* Calendly Modal */}
       <div className={`fixed inset-0 z-[9999] transition-opacity duration-300 ${showCalendlyModal ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>

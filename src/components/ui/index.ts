@@ -15,6 +15,7 @@ export * from './Carousel';
 export * from './MobileCarousel';
 export * from '../LogoCarousel';
 export * from './Section';
+export * from './HeroSection';
 
 // Image Components
 export { default as ImageProxy } from './ImageProxy';
