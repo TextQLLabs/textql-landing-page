@@ -1,16 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { SEO } from "../components/SEO";
-import { default as IntegrationsSection } from "../components/page-sections/trial/integrations-section";
 import { FeatureSection } from "../components/page-sections/trial/feature-section.tsx";
 import { default as Testimonials } from "../components/page-sections/trial/Testimonials";
 
 import FaqSection from "../components/integrations/FaqSection";
 import { CTA } from "../components/sections";
-import { Button } from "../components/ui";
-import { Carousel } from "../components/ui";
-import { Section } from "../components/ui/Section";
-import { WaveBackground } from "../components/animations";
+import { Button, HeroSection } from "../components/ui";
 import { TextLogo } from "../components/Logo";
 import { NavItem } from "../components/Navbar/NavItem";
 import { navigation } from "../components/Navbar/types";
@@ -23,41 +19,7 @@ import { trackButtonClick } from "../utils/analytics";
 
 // Trial page with fixed headline copy
 
-const transformFeatures = [
-  {
-    title: "Intelligent Analysis",
-    description: "Advanced algorithms process your data to identify key patterns and opportunities",
-    details: [
-      "Machine learning models analyze data patterns",
-      "Identifies hidden correlations and trends",
-      "Provides actionable business insights"
-    ],
-    learnMoreHref: "#intelligent-analysis",
-    imageSrc: "https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/transform2.svg"
-  },
-  {
-    title: "Contextual Insights",
-    description: "Get specific, actionable recommendations tailored to your business goals",
-    details: [
-      "Business context-aware recommendations",
-      "Industry-specific insights",
-      "Goal-oriented analytics"
-    ],
-    learnMoreHref: "#contextual-insights",
-    imageSrc: "https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/transform.svg"
-  },
-  {
-    title: "Automated Actions",
-    description: "Implement suggestions seamlessly with one-click execution and tracking",
-    details: [
-      "One-click implementation",
-      "Automated workflow execution",
-      "Real-time progress tracking"
-    ],
-    learnMoreHref: "#automated-actions",
-    imageSrc: "https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/transform2.svg"
-  },
-];
+// Removed unused transformFeatures array
 
 const analyticsFeatures = [
   {
@@ -589,139 +551,83 @@ export default function Trial() {
       </noscript>
 
 
-      {/* Custom Trial Hero with HomeHero styling */}
-      <Section
-        padding="md"
-        background="primary"
-        overflow="hidden"
-        className="relative animate-fade-in animation-delay-400 min-h-[500px] lg:min-h-[600px]"
+      {/* Standardized Trial Hero */}
+      <HeroSection
+        layout="content-right"
+        minHeight="screen"
+        showWaveBackground={true}
+        waveScale={0.8}
+        waveCoverage={1.2}
+        className="animate-fade-in animation-delay-400"
+        showLogoCarousel={true}
+        logoCarouselTitle="Ana finds insights in your existing data stack"
+        logoItems={logos}
+        mobileHideRight={true}
+        leftContent={
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <h1 
+                className={`text-4xl md:text-5xl lg:text-6xl font-light leading-tight ${themeClasses.textPrimary} animate-slide-up animation-delay-100`}
+                dangerouslySetInnerHTML={{ __html: headlineContent.title }}
+              />
+              <p className={`text-xl leading-relaxed ${themeClasses.textSecondary} animate-slide-up animation-delay-200`}>
+                {headlineContent.subtitle}
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 animate-slide-up animation-delay-300">
+              <Button
+                variant="primary"
+                theme={isLightMode ? 'light' : 'dark'}
+                onClick={(e) => onDemoRequest(e, 'hero_desktop')}
+              >
+                Try Now
+              </Button>
+              <Button
+                variant="secondary"
+                theme={isLightMode ? 'light' : 'dark'}
+                onClick={() => onBookMeeting('hero_desktop')}
+                className="bg-white border-2 border-[#2A3B35] hover:text-white"
+              >
+                Book a Meeting
+              </Button>
+            </div>
+          </div>
+        }
+        rightContent={
+          <div className="animate-slide-up animation-delay-400 flex items-center justify-center py-8">
+            <div className="aspect-video overflow-hidden shadow-2xl">
+              <video
+                className="w-full h-full object-cover"
+                controls
+                autoPlay
+                muted
+                loop
+                playsInline
+              >
+                <source src="https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/tql.mov" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        }
       >
-        {/* Background Animation - Same as HomeHero */}
-
-          <WaveBackground theme={isLightMode ? 'light' : 'dark'} coverage={1.5} />
-      
-        
-        {/* Desktop Hero Content */}
-        <div className="hidden lg:flex w-full relative z-10 flex-col">
-          {/* Main content container */}
-          <div className="w-full flex items-center justify-center">
-            <div className="grid grid-cols-1 lg:gap-8 xl:gap-16 lg:grid-cols-[1fr,clamp(400px,50vw,600px)] w-full items-center px-6 max-w-7xl">
-              {/* Left Content - Trial Content */}
-              <div className="space-y-8">
-                <div className="space-y-4">
-                  <h1 
-                    className={`text-4xl md:text-5xl lg:text-6xl font-light leading-tight ${themeClasses.textPrimary} animate-slide-up animation-delay-100`}
-                    dangerouslySetInnerHTML={{ __html: headlineContent.title }}
-                  />
-                  <p className={`text-xl leading-relaxed ${themeClasses.textSecondary} animate-slide-up animation-delay-200`}>
-                    {headlineContent.subtitle}
-                  </p>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-4 animate-slide-up animation-delay-300">
-                  <Button
-                    variant="primary"
-                    theme={isLightMode ? 'light' : 'dark'}
-                    onClick={(e) => onDemoRequest(e, 'hero_desktop')}
-                  >
-                    Try Now
-                  </Button>
-                  <Button
-                    variant="secondary"
-                    theme={isLightMode ? 'light' : 'dark'}
-                    onClick={() => onBookMeeting('hero_desktop')}
-                    className="bg-white border-2 border-[#2A3B35]  hover:text-white"
-                  >
-                    Book a Meeting
-                  </Button>
-                </div>
-              </div>
-        
-              {/* Right Content - Video */}
-              <div className="animate-slide-up animation-delay-400">
-                <div className="aspect-video overflow-hidden shadow-2xl">
-                  <video
-                    className="w-full h-full object-cover"
-                    controls
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                  >
-                    <source src="https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/tql.mov" type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-        </div>
-
-        {/* Mobile Content */}
-        <div className="lg:hidden flex flex-col relative z-10 py-12">
-          <div className="flex flex-col justify-center px-6">
-            <div className="text-center space-y-8">
-              <div className="space-y-4">
-                <h1 
-                  className={`text-4xl md:text-5xl font-light leading-tight ${themeClasses.textPrimary} animate-slide-up animation-delay-100`}
-                  dangerouslySetInnerHTML={{ __html: headlineContent.title }}
-                />
-                <p className={`text-lg leading-relaxed ${themeClasses.textSecondary} animate-slide-up animation-delay-200`}>
-                  {headlineContent.subtitle}
-                </p>
-              </div>
-              <div className="space-y-4 animate-slide-up animation-delay-300">
-                <Button
-                  variant="primary"
-                  theme={isLightMode ? 'light' : 'dark'}
-                  onClick={(e) => onDemoRequest(e, 'hero_mobile')}
-                  fullWidth
-                >
-                  Try Now
-                </Button>
-
-                <Button
-                  variant="secondary"
-                  theme={isLightMode ? 'light' : 'dark'}
-                  onClick={() => onBookMeeting('hero_mobile')}
-                  fullWidth
-                  className="bg-white text-[#2A3B35] border-2 border-[#2A3B35] hover:bg-[#2A3B35] hover:text-white"
-                >
-                  Book a Meeting
-                </Button>
-   
-              </div>
-            </div>
-            
-            {/* Video for mobile */}
-            <div className="mt-8 animate-slide-up animation-delay-400">
-              <div className="aspect-video overflow-hidden shadow-2xl">
-                <video
-                  className="w-full h-full object-cover"
-                  controls
-                  muted
-                  playsInline
-                >
-                  <source src="https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/tql.mov" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            </div>
+        {/* Mobile video - vertically centered between content and carousel */}
+        <div className="lg:hidden w-full">
+          <div className="aspect-video overflow-hidden shadow-2xl rounded-lg">
+            <video
+              className="w-full h-full object-cover"
+              controls
+              autoPlay
+              muted
+              loop
+              playsInline
+            >
+              <source src="https://pub-8699413992d644f2b85a9b4cb11b2bc5.r2.dev/tql.mov" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
-      </Section>
-
-      {/* Logo Carousel Section - No background */}
-      <div className="w-full pb-8 pt-4">
-        <div className="mx-auto max-w-7xl px-6">
-          <p className="text-sm font-medium text-[#2A3B35] mb-6">
-            Ana finds insights in your existing data stack
-          </p>
-          <div className="logo-carousel">
-            <Carousel items={logos} gradientColor={isLightMode ? '#F7F7F7' : '#000000'} theme={isLightMode ? 'light' : 'dark'} />
-          </div>
-        </div>
-      </div>
+      </HeroSection>
 
       <div className="h-px w-full bg-gradient-to-r from-transparent via-neutral-200 to-transparent" />
       {/* <IntegrationsSection /> */}

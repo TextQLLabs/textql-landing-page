@@ -80,7 +80,7 @@ export function EnterpriseSection() {
                   onClick={() => trackButtonClick('Learn More About Enterprise', 'home_enterprise_section', { destination: 'enterprise' })}
                 >
                   Learn More About Enterprise
-                  <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1 text-current" />
                 </Button>
               </a>
             </div>
