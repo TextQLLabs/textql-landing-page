@@ -2,8 +2,8 @@ import type { BlogPost } from '../../components/page-sections/blog/types';
 
 export const post: BlogPost = {
   id: 'introducing-ana',
-  title: "Introducing Ana: TextQL's Agentic Data Scientist",
-  description: 'The best kept secret in enterprise AI',
+  title: "Ana Launch",
+  description: 'The End of your Three-Week Data Request',
   image: '/images/blog/introducing-ana/header.png',
   useLocalImage: true,
   author: {
