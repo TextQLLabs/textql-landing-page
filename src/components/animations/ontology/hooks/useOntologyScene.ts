@@ -35,8 +35,13 @@ export function useOntologyScene(
     camera.position.set(0, 0, 12); // Moved camera further back
     camera.lookAt(0, 0, 0);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = new THREE.WebGLRenderer({ 
+      antialias: true, 
+      alpha: true,
+      powerPreference: "high-performance"
+    });
     renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limit to 2x for performance
     containerRef.current.appendChild(renderer.domElement);
 
     const clock = new THREE.Clock();
@@ -106,6 +111,7 @@ export function useOntologyScene(
       camera.aspect = containerRef.current.clientWidth / containerRef.current.clientHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Maintain pixel ratio on resize
     };
 
     window.addEventListener('resize', handleResize);
