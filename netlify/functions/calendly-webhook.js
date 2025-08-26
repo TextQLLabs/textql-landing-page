@@ -2,7 +2,7 @@
 const { createClient } = require('@supabase/supabase-js');
 
 const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_ANON_KEY;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
@@ -16,7 +16,8 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    console.log('📅 Calendly webhook received:', event.body);
+    const environment = process.env.CALENDLY_ENVIRONMENT || 'development';
+    console.log(`📅 Calendly webhook received (${environment}):`, event.body);
 
     const webhookData = JSON.parse(event.body || '{}');
     const eventType = webhookData.event;
@@ -38,6 +39,34 @@ exports.handler = async (event, context) => {
     const scheduledEvent = invitee.scheduled_event || {};
     const location = scheduledEvent.location || {};
     
+    // Extract host email from event memberships (with fallbacks for different payload structures)
+    const eventMemberships = scheduledEvent.event_memberships || [];
+    let hostEmail = null;
+    
+    // Primary method: Find host in event_memberships
+    const hostMembership = eventMemberships.find(membership => membership.user_email);
+    if (hostMembership) {
+      hostEmail = hostMembership.user_email;
+    }
+    
+    // Fallback 1: Check if event_type has event owner info
+    if (!hostEmail && scheduledEvent.event_type && scheduledEvent.event_type.owner) {
+      hostEmail = scheduledEvent.event_type.owner.email || scheduledEvent.event_type.owner.user_email;
+    }
+    
+    // Fallback 2: Check direct owner field in scheduled_event
+    if (!hostEmail && scheduledEvent.owner) {
+      hostEmail = scheduledEvent.owner.email || scheduledEvent.owner.user_email;
+    }
+    
+    // Log host email extraction for debugging
+    if (hostEmail) {
+      console.log('👤 Host email extracted:', hostEmail);
+    } else {
+      console.log('⚠️ No host email found in webhook payload');
+      console.log('📋 Event memberships:', JSON.stringify(eventMemberships, null, 2));
+    }
+    
     // Store extracted data in calendly_events table with further simplified columns
     const { data: eventData, error: eventError } = await supabase
       .from('calendly_events')
@@ -53,6 +82,9 @@ exports.handler = async (event, context) => {
         event_start_time: scheduledEvent.start_time || null,
         event_end_time: scheduledEvent.end_time || null,
         
+        // Host details
+        host_email: hostEmail,
+        
         // Location/Meeting info
         meeting_type: location.type || null,
         join_url: location.join_url || null,
@@ -62,6 +94,7 @@ exports.handler = async (event, context) => {
           event_type: eventType,
           payload: payload,
           webhook_timestamp: new Date().toISOString(),
+          environment: environment,
           raw_webhook_data: webhookData
         }
       })
