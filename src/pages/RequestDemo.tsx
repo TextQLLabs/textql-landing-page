@@ -505,7 +505,7 @@ export default function RequestDemo() {
           
           {/* Logo Carousel - MOVED UP inside section for visibility */}
           <div className="w-full relative z-10">
-            <div className="mx-auto max-w-7xl px-6">
+            <div className="mx-auto max-w-7xl">
               <p className="text-sm font-medium text-[#2A3B35] mb-4">
                 Ana finds insights in your existing data stack
               </p>

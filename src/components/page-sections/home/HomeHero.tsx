@@ -143,7 +143,7 @@ export function HomeHero({}: HomeHeroProps = {}) {
     >
       {/* Background Animation */}
       <div className={`absolute inset-0 z-0 ${debugMode ? 'border-4 border-purple-500' : ''}`}>
-        <WaveBackground theme={isLightMode ? 'light' : 'dark'} scale={1} />
+        <WaveBackground theme={isLightMode ? 'light' : 'dark'} scale={0.8} coverage={1.2} />
       </div>
       
       {/* Desktop Hero Content */}
