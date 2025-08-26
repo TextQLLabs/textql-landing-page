@@ -320,14 +320,14 @@ export default function RequestDemo() {
 
       <Section
         variant="content"
-        padding="lg"
+        padding="md"
         background="primary"
         overflow="hidden"
-        className="relative min-h-[calc(100vh-8rem)]"
+        className="relative "
       >
         {/* Wave Background */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-          <WaveBackground theme={theme} scale={1} coverage={1.6}   />
+          <WaveBackground theme={theme} scale={1} coverage={1.2}   />
         </div>
         
         <div className="relative z-10">
@@ -502,41 +502,41 @@ export default function RequestDemo() {
             </div>
           </div>
           </div>
-        </div>
-      </Section>
-
-      {/* Logo Carousel Section - matches Trial styling */}
-      <div className="w-full pb-8 pt-4">
-        <div className="mx-auto max-w-7xl px-6">
-          <p className="text-sm font-medium text-[#2A3B35] mb-6">
-            Ana finds insights in your existing data stack
-          </p>
-          <div className="logo-carousel">
-            <Carousel
-              items={[
-                { src: '/images/logos/reshift-nobg.png', alt: 'Redshift' },
-                { src: '/images/logos/snowflake-white.png', alt: 'Snowflake' },
-                { src: '/images/logos/databricks-nobg.png', alt: 'Databricks' },
-                { src: '/images/logos/looker-white.png', alt: 'Looker' },
-                { src: '/images/logos/powerbi-white.png', alt: 'Power BI' },
-                { src: '/images/logos/Tableau White.png', alt: 'Tableau' },
-                { src: '/images/logos/dbt-nobg.png', alt: 'dbt' },
-                { src: '/images/logos/azure-white.png', alt: 'Azure' },
-                { src: '/images/logos/aws-white.png', alt: 'AWS' },
-                { src: '/images/logos/salesforce-white.png', alt: 'Salesforce' },
-                { src: '/images/logos/gcp-white.png', alt: 'Google Cloud' },
-                { src: '/images/logos/teams-white.png', alt: 'Teams' },
-                { src: '/images/logos/slack-white.png', alt: 'Slack' },
-                { src: '/images/logos/alation-white.png', alt: 'Alation' },
-                { src: '/images/logos/sap-white.png', alt: 'SAP' },
-                { src: '/images/logos/oracle.png', alt: 'Oracle' }
-              ]}
-              gradientColor={'#F7F7F7'}
-              theme={'light'}
-            />
+          
+          {/* Logo Carousel - MOVED UP inside section for visibility */}
+          <div className="w-full relative z-10">
+            <div className="mx-auto max-w-7xl px-6">
+              <p className="text-sm font-medium text-[#2A3B35] mb-4">
+                Ana finds insights in your existing data stack
+              </p>
+              <div className="logo-carousel">
+                <Carousel
+                  items={[
+                    { src: '/images/logos/reshift-nobg.png', alt: 'Redshift' },
+                    { src: '/images/logos/snowflake-white.png', alt: 'Snowflake' },
+                    { src: '/images/logos/databricks-nobg.png', alt: 'Databricks' },
+                    { src: '/images/logos/looker-white.png', alt: 'Looker' },
+                    { src: '/images/logos/powerbi-white.png', alt: 'Power BI' },
+                    { src: '/images/logos/Tableau White.png', alt: 'Tableau' },
+                    { src: '/images/logos/dbt-nobg.png', alt: 'dbt' },
+                    { src: '/images/logos/azure-white.png', alt: 'Azure' },
+                    { src: '/images/logos/aws-white.png', alt: 'AWS' },
+                    { src: '/images/logos/salesforce-white.png', alt: 'Salesforce' },
+                    { src: '/images/logos/gcp-white.png', alt: 'Google Cloud' },
+                    { src: '/images/logos/teams-white.png', alt: 'Teams' },
+                    { src: '/images/logos/slack-white.png', alt: 'Slack' },
+                    { src: '/images/logos/alation-white.png', alt: 'Alation' },
+                    { src: '/images/logos/sap-white.png', alt: 'SAP' },
+                    { src: '/images/logos/oracle.png', alt: 'Oracle' }
+                  ]}
+                  gradientColor={'#F7F7F7'}
+                  theme={'light'}
+                />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </Section>
 
       {/* Calendly Modal */}
       <div className={`fixed inset-0 z-[9999] transition-opacity duration-300 ${showCalendlyModal ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
