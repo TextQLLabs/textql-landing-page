@@ -144,7 +144,10 @@ export const InsightsLayout: React.FC<InsightsLayoutProps> = ({
   
   return (
     <div 
-      className={`w-full flex flex-col relative ${showDebugBorders ? 'border-2 border-purple-500' : ''} ${className}`} 
+      className={`w-full flex flex-col relative ${
+        // When search is centered, use justify-center for vertical centering
+        isSearchCentered ? 'justify-center' : ''
+      } ${showDebugBorders ? 'border-2 border-purple-500' : ''} ${className}`} 
       style={{ 
         contain: 'layout',
         /* InsightsFeed height constraint for desktop only */
