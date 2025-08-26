@@ -18,6 +18,7 @@ import { post as anaSmall } from './ana-small';
 import { post as fermiEstimation } from './fermi-estimation';
 import { post as supabaseIntegration } from './supabase-integration';
 import { post as bigData } from './big-data';
+import { post as introducingAna } from './introducing-ana';
 
 // Get the most recent featured blog post
 export function getMostRecentFeaturedPost(): BlogPost | null {
@@ -27,6 +28,7 @@ export function getMostRecentFeaturedPost(): BlogPost | null {
 // Export all blog posts
 // most recent at top
 export const blogPosts: BlogPost[] = [
+  introducingAna,
   bigData,
   supabaseIntegration,
   aiAnalyticsAdoption,
@@ -43,13 +45,15 @@ export const blogPosts: BlogPost[] = [
   fundraising,
   buildingDataAgent,
   tenYearThesis,
-  sqlModel,
+  sqlModel
 ];
 
 // Function to get post content
 export function getPostContent(id: string): string {
   try {
     switch (id) {
+      case 'introducing-ana':
+        return getIntroducingAna();
       case 'big-data':
         return getBigDataContent();
       case 'supabase-integration':
@@ -230,3 +234,12 @@ export function getAIAnalyticsAdoptionContent(): string {
     eager: true,
   })['./ai-analytics-adoption/content.md'] as string;
 }
+
+export function getIntroducingAna(): string {
+  return import.meta.glob('./introducing-ana/content.md', {
+    query: '?raw',
+    import: 'default',
+    eager: true,
+  })['./introducing-ana/content.md'] as string;
+}
+
