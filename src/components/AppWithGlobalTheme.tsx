@@ -159,7 +159,7 @@ export function AppWithGlobalTheme() {
                 }
               >
                 {/* Mobile video - vertically centered between content and carousel */}
-                <div className="lg:hidden w-full">
+                <div className="lg:hidden w-full animate-slide-up animation-delay-500">
                   <div className="aspect-video overflow-hidden shadow-2xl rounded-lg">
                     <video
                       className="w-full h-full object-cover"

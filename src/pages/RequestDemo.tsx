@@ -548,7 +548,7 @@ export default function RequestDemo() {
         }
       >
         {/* Mobile form - vertically centered between content and carousel */}
-        <div className="lg:hidden w-full">
+        <div className="lg:hidden w-full animate-slide-up animation-delay-400">
           <div className={`border p-3 sm:p-4 lg:p-8 text-left ${
             theme === 'light' ? 'border-[#2A3B35]/20 bg-white' : 'border-[#B8D8D0]/20 bg-[#000000]'
           }`}>
