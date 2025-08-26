@@ -17,6 +17,9 @@ temp
 TODOs.md
 .eslintcache
 
+# Sensitive Calendly credentials
+calendly_pats.json
+
 # React Router SSR build files
 build/
 .react-router/
