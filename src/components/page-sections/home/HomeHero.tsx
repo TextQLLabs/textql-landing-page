@@ -143,14 +143,14 @@ export function HomeHero({}: HomeHeroProps = {}) {
     >
       {/* Background Animation */}
       <div className={`absolute inset-0 z-0 ${debugMode ? 'border-4 border-purple-500' : ''}`}>
-        <WaveBackground theme={isLightMode ? 'light' : 'dark'} scale={1} />
+        <WaveBackground theme={isLightMode ? 'light' : 'dark'} scale={0.8} coverage={1.2} />
       </div>
       
       {/* Desktop Hero Content */}
       <div className="hidden lg:flex w-full h-[calc(100vh-var(--navbar-height,80px))] relative z-10 flex-col pt-[var(--navbar-height,40px)]">
         {/* Main content container - centered in available space */}
-        <div className={`flex-1 w-full flex items-center justify-center ${debugMode ? 'border-2 border-green-500' : ''}`}>
-          <div className={`grid grid-cols-1 lg:gap-8 xl:gap-16 lg:grid-cols-[1fr,clamp(400px,50vw,600px)] w-full items-center px-6 max-w-7xl ${debugMode ? 'border-2 border-yellow-500' : ''}`}>
+        <div className={`flex-1 w-full flex flex-col justify-center ${debugMode ? 'border-2 border-green-500' : ''}`}>
+          <div className={`grid grid-cols-1 lg:gap-8 xl:gap-16 lg:grid-cols-[1fr,clamp(400px,50vw,600px)] w-full items-center px-6 max-w-7xl mx-auto ${debugMode ? 'border-2 border-yellow-500' : ''}`}>
             {/* Left Content */}
             <div className="flex flex-col justify-center">
           {/* Badge */}
@@ -189,16 +189,16 @@ export function HomeHero({}: HomeHeroProps = {}) {
               <InsightsFeed theme={isLightMode ? 'light' : 'dark'} minimal={true} />
             </div>
           </div>
-        </div>
-        
-        {/* Logo Carousel - DESKTOP - Fixed at bottom */}
-        <div className={`hidden lg:block z-10 ${debugMode ? 'border-2 border-blue-500' : ''}`}>
-          <div className={`mx-auto max-w-7xl px-6 w-full ${debugMode ? 'border-2 border-purple-500' : ''}`}>
-            <p className={`text-sm font-medium ${themeClasses.textPrimary} mb-2`}>
-              Ana finds insights in your existing data stack
-            </p>
-            <div className={`logo-carousel ${debugMode ? 'border-2 border-orange-500' : ''}`}>
-              <Carousel items={logos} gradientColor={isLightMode ? '#F7F7F7' : '#000000'} theme={isLightMode ? 'light' : 'dark'} />
+          
+          {/* Logo Carousel - DESKTOP - Moved up, integrated with main content */}
+          <div className={`w-full mt-12 ${debugMode ? 'border-2 border-blue-500' : ''}`}>
+            <div className={`mx-auto max-w-7xl px-6 w-full ${debugMode ? 'border-2 border-purple-500' : ''}`}>
+              <p className={`text-sm font-medium ${themeClasses.textPrimary} mb-4`}>
+                Ana finds insights in your existing data stack
+              </p>
+              <div className={`logo-carousel ${debugMode ? 'border-2 border-orange-500' : ''}`}>
+                <Carousel items={logos} gradientColor={isLightMode ? '#F7F7F7' : '#000000'} theme={isLightMode ? 'light' : 'dark'} />
+              </div>
             </div>
           </div>
         </div>
