@@ -34,44 +34,46 @@ exports.handler = async (event, context) => {
 
     console.log('📋 Profile data received:', JSON.stringify(profileData, null, 2));
 
-    // Extract data with flexible field mapping (RB2B might use different field names)
+    // Extract data with RB2B's actual field names (from real webhook data)
     const extractedData = {
-      // Company details
-      company_name: profileData.company?.name || profileData.companyName || profileData.company_name || null,
-      company_domain: profileData.company?.domain || profileData.companyDomain || profileData.company_domain || null,
-      company_size: profileData.company?.size || profileData.companySize || profileData.company_size || null,
-      company_industry: profileData.company?.industry || profileData.companyIndustry || profileData.company_industry || null,
-      company_linkedin_url: profileData.company?.linkedin || profileData.company?.linkedinUrl || profileData.company_linkedin || null,
+      // Company details - RB2B uses "Company Name", "Website", etc.
+      company_name: profileData['Company Name'] || profileData.company?.name || profileData.companyName || null,
+      company_domain: profileData['Website'] || profileData.company?.domain || profileData.companyDomain || null,
+      company_size: profileData['Employee Count'] || profileData.company?.size || profileData.companySize || null,
+      company_industry: profileData['Industry'] || profileData.company?.industry || profileData.companyIndustry || null,
+      company_linkedin_url: profileData['LinkedIn URL'] || profileData.company?.linkedin || profileData.company_linkedin || null,
       
-      // Person details
-      person_name: profileData.person?.name || profileData.personName || profileData.name || null,
-      person_email: profileData.person?.email || profileData.personEmail || profileData.email || null,
-      person_title: profileData.person?.title || profileData.personTitle || profileData.title || profileData.job_title || profileData.person?.job_title || null,
-      person_linkedin_url: profileData.person?.linkedin || profileData.person?.linkedinUrl || profileData.linkedin || profileData.linkedinProfile || profileData.person?.linkedinProfile || null,
+      // Person details - RB2B uses "First Name", "Last Name", "Business Email", etc.
+      person_name: (profileData['First Name'] && profileData['Last Name']) 
+        ? `${profileData['First Name']} ${profileData['Last Name']}` 
+        : profileData.person?.name || profileData.personName || profileData.name || null,
+      person_email: profileData['Business Email'] || profileData.person?.email || profileData.personEmail || profileData.email || null,
+      person_title: profileData['Title'] || profileData.person?.title || profileData.personTitle || profileData.title || null,
+      person_linkedin_url: profileData['LinkedIn URL'] || profileData.person?.linkedin || profileData.linkedin || null,
       person_linkedin_profile_id: profileData.person?.linkedinId || profileData.linkedinId || null,
       
-      // Visitor tracking
+      // Visitor tracking - might not be in RB2B payload
       visitor_id: profileData.visitor_id || profileData.visitorId || null,
       session_id: profileData.session_id || profileData.sessionId || null,
       
-      // Location
-      country: profileData.location?.country || profileData.country || null,
-      city: profileData.location?.city || profileData.city || null,
-      region: profileData.location?.region || profileData.region || profileData.state || null,
+      // Location - RB2B uses "City", "State", "Zipcode"
+      country: profileData['Country'] || profileData.location?.country || profileData.country || null,
+      city: profileData['City'] || profileData.location?.city || profileData.city || null,
+      region: profileData['State'] || profileData.location?.region || profileData.region || profileData.state || null,
       
       // Technical
       ip_address: profileData.ip || profileData.ipAddress || profileData.ip_address || null,
       user_agent: profileData.user_agent || profileData.userAgent || null,
       
-      // Session info
-      page_url: profileData.page_url || profileData.pageUrl || profileData.url || null,
-      referrer: profileData.referrer || profileData.referring_url || null,
+      // Session info - RB2B uses "Captured URL", "Referrer"
+      page_url: profileData['Captured URL'] || profileData.page_url || profileData.pageUrl || profileData.url || null,
+      referrer: profileData['Referrer'] || profileData.referrer || profileData.referring_url || null,
       
-      // RB2B specific
+      // RB2B specific - extract from Tags or other fields
       rb2b_profile_id: profileData.profile_id || profileData.profileId || profileData.rb2b_id || null,
       rb2b_company_id: profileData.company_id || profileData.companyId || null,
       confidence_score: profileData.confidence || profileData.confidence_score || profileData.score || null,
-      identification_type: profileData.type || profileData.identification_type || 'unknown',
+      identification_type: profileData.type || profileData.identification_type || (profileData['Tags'] ? 'tagged_lead' : 'unknown'),
       
       // Store full payload
       full_webhook_data: {
