@@ -175,7 +175,7 @@ export function HeroSection({
           {/* Mobile Layout */}
           <div className="lg:hidden flex flex-col flex-1 relative z-10 px-4 py-4 min-h-0">
             <div className={cn(
-              'flex flex-col justify-between flex-1 text-center items-center w-full min-h-0',
+              'flex flex-col flex-1 text-center items-center w-full min-h-0 gap-8 py-8',
               debug && 'border-2 border-orange-500',
               contentClassName
             )}>
@@ -222,9 +222,6 @@ export function HeroSection({
                   {children}
                 </div>
               )}
-              
-              {/* Bottom spacer to push logo carousel down */}
-              <div className="w-full"></div>
             </div>
           </div>
         </div>

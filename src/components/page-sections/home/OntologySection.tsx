@@ -29,12 +29,13 @@ export function OntologySection() {
               <a href="/ontology">
                 <Button 
                   variant="primary" 
+                  theme="dark"
                   size="md"
                   className="group"
                   onClick={() => trackButtonClick('Learn How It Works', 'home_ontology_section', { destination: 'ontology' })}
                 >
                   Learn How It Works
-                  <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1 text-current" />
                 </Button>
               </a>
             </div>
