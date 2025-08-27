@@ -25,7 +25,7 @@ export function WaveBackground({ theme = 'dark', scale = 1, coverage = 1, camera
     // Track initial dimensions to avoid unnecessary resizes
     let lastWidth = window.innerWidth;
     let lastHeight = window.innerHeight;
-    let resizeTimeout: number;
+    let resizeTimeout: NodeJS.Timeout | null = null;
 
     const init = () => {
       scene = new THREE.Scene();
@@ -97,6 +97,7 @@ export function WaveBackground({ theme = 'dark', scale = 1, coverage = 1, camera
       // Clear any pending resize timeout
       if (resizeTimeout) {
         clearTimeout(resizeTimeout);
+        resizeTimeout = null;
       }
       
       // Debounce resize events and only resize for significant changes
@@ -123,18 +124,26 @@ export function WaveBackground({ theme = 'dark', scale = 1, coverage = 1, camera
       if (!geometry || !renderer || !scene || !camera) return;
       requestAnimationFrame(animate);
       const time = clock.getElapsedTime() * 0.5;
-      const positions = geometry.attributes.position.array;
+      const positions = geometry.attributes.position.array as Float32Array;
+      
+      // Cache commonly used values to reduce calculations
+      const t1 = time * 0.25;
+      const t2 = time * 0.35;
+      const t3 = time * 0.5;
+      const t4 = time * 0.1;
+      const t5 = time * 0.15;
+      const baseWave = 1.2 * Math.sin(t4);
       
       for (let i = 0; i < positions.length; i += 3) {
         const x = positions[i];
         const z = positions[i + 2];
         
         positions[i + 1] = 
-          1.0 * Math.sin(time * 0.25 + z * 0.2) +
-          0.8 * Math.sin(x * 0.3 + time * 0.35) +
-          0.4 * Math.sin(z * 0.5 + x * 0.5 + time * 0.5) +
-          1.2 * Math.sin(time * 0.1) +
-          0.5 * Math.cos(x * 0.2 + z * 0.2 + time * 0.15);
+          1.0 * Math.sin(t1 + z * 0.2) +
+          0.8 * Math.sin(x * 0.3 + t2) +
+          0.4 * Math.sin(z * 0.5 + x * 0.5 + t3) +
+          baseWave +
+          0.5 * Math.cos(x * 0.2 + z * 0.2 + t5);
       }
       
       geometry.attributes.position.needsUpdate = true;
@@ -148,6 +157,7 @@ export function WaveBackground({ theme = 'dark', scale = 1, coverage = 1, camera
     return () => {
       if (resizeTimeout) {
         clearTimeout(resizeTimeout);
+        resizeTimeout = null;
       }
       window.removeEventListener('resize', onWindowResize);
       renderer?.dispose();

@@ -37,8 +37,8 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Left Column - Hero Content */}
           <div className="text-left">
-            <h1 className="text-5xl md:text-6xl font-extralight text-[#B8D8D0] mb-6 opacity-0 animate-slide-up animation-delay-100">{headline}</h1>
-            <p className="text-[#729E8C] font-light text-lg mb-6 opacity-0 animate-slide-up animation-delay-200">{description}</p>
+                    <h1 className="text-5xl md:text-6xl font-extralight text-[#B8D8D0] mb-6 animate-slide-up animation-delay-100">{headline}</h1>
+        <p className="text-[#729E8C] font-light text-lg mb-6 animate-slide-up animation-delay-200">{description}</p>
             {/* <button 
               className="bg-[#0A1F1C] hover:bg-[#0A1F1C]/80 text-[#B8D8D0] font-light py-3 mt-2 px-6 rounded-md transition-colors duration-200"
               onClick={handleDemoClick}
@@ -48,7 +48,7 @@ export default function HeroSection({ headline, description, videoUrl }: HeroSec
           </div>
           
           {/* Right Column - Video */}
-          <div className="overflow-hidden h-[400px] w-full opacity-0 animate-slide-up animation-delay-300">
+          <div className="overflow-hidden h-[400px] w-full animate-slide-up animation-delay-300">
             {videoUrl ? (
               <video 
                 autoPlay 

@@ -558,7 +558,6 @@ export default function Trial() {
         showWaveBackground={true}
         waveScale={0.8}
         waveCoverage={1.2}
-        className="animate-fade-in animation-delay-400"
         showLogoCarousel={true}
         logoCarouselTitle="Ana finds insights in your existing data stack"
         logoItems={logos}
@@ -594,7 +593,7 @@ export default function Trial() {
           </div>
         }
         rightContent={
-          <div className="animate-slide-up animation-delay-400 flex items-center justify-center py-8">
+          <div className="animate-slide-up animation-delay-500 flex items-center justify-center py-8">
             <div className="aspect-video overflow-hidden shadow-2xl">
               <video
                 className="w-full h-full object-cover"
@@ -632,7 +631,7 @@ export default function Trial() {
       <div className="h-px w-full bg-gradient-to-r from-transparent via-neutral-200 to-transparent" />
       {/* <IntegrationsSection /> */}
 
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-neutral-200 to-transparent" />
+      {/* <div className="h-px w-full bg-gradient-to-r from-transparent via-neutral-200 to-transparent" /> */}
 
 
       <FeatureSection

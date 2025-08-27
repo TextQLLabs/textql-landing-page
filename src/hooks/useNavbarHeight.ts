@@ -5,30 +5,34 @@ import { useState, useEffect } from 'react';
  * Returns the current navbar height in pixels
  */
 export function useNavbarHeight() {
-  const [navbarHeight, setNavbarHeight] = useState(80); // reasonable fallback
+  const [navbarHeight, setNavbarHeight] = useState(72); // more accurate fallback based on typical navbar
+  const [isStable, setIsStable] = useState(false);
 
   useEffect(() => {
     const measureNavbarHeight = () => {
       const navbar = document.querySelector('nav');
       if (navbar) {
-        setNavbarHeight(navbar.offsetHeight);
+        const newHeight = navbar.offsetHeight;
+        setNavbarHeight(newHeight);
       }
     };
 
-    // Measure on mount
-    measureNavbarHeight();
+    // Wait for navbar animation to complete before measuring
+    // Navbar animates in after 200ms with 500ms duration = 700ms total
+    const initialTimer = setTimeout(() => {
+      measureNavbarHeight();
+      // Mark as stable after navbar animation is complete
+      setTimeout(() => setIsStable(true), 100);
+    }, 750); // Wait for navbar animation to fully complete
     
     // Measure on window resize (navbar height might change on mobile/desktop)
     window.addEventListener('resize', measureNavbarHeight);
     
-    // Optional: remeasure if fonts load late
-    const timer = setTimeout(measureNavbarHeight, 100);
-    
     return () => {
       window.removeEventListener('resize', measureNavbarHeight);
-      clearTimeout(timer);
+      clearTimeout(initialTimer);
     };
   }, []);
 
-  return navbarHeight;
+  return { navbarHeight, isStable };
 }

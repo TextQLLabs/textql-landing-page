@@ -60,7 +60,7 @@ export function HeroSection({
   debug = false,
 }: HeroSectionProps) {
   const { isLightMode } = useGlobalTheme();
-  const navbarHeight = useNavbarHeight();
+  const { navbarHeight, isStable } = useNavbarHeight();
   
 
 
@@ -111,7 +111,7 @@ export function HeroSection({
   return (
     <section
       className={cn(
-        'relative overflow-hidden bg-transparent',
+        'relative overflow-hidden bg-transparent transition-all duration-300 ease-out',
         debug && 'border-4 border-yellow-500',
         className
       )}
@@ -230,6 +230,7 @@ export function HeroSection({
         {showLogoCarousel && logoItems.length > 0 && (
           <div className={cn(
             'w-full mt-auto pb-4 pt-4 lg:pb-8 lg:pt-8',
+            isStable ? 'animate-slide-up animation-delay-600' : 'opacity-0',
             debug && 'border-2 border-orange-500'
           )}>
             <div className="mx-auto max-w-7xl px-4 md:px-6">
