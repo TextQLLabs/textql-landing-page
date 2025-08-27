@@ -95,8 +95,19 @@
   </head>
   <body>
     <script>
-      // Apply hero-light-mode class immediately to prevent dark navbar flash
-      document.body.classList.add('hero-light-mode');
+      // Prevent theme flash by applying correct theme class immediately
+      try {
+        const savedTheme = localStorage.getItem('globalThemeMode');
+        const isLightMode = savedTheme ? savedTheme === 'light' : true; // default to light
+        if (isLightMode) {
+          document.body.classList.add('global-light-mode');
+        } else {
+          document.body.classList.add('global-dark-mode');
+        }
+      } catch (e) {
+        // Fallback to light mode if localStorage fails
+        document.body.classList.add('global-light-mode');
+      }
     </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>

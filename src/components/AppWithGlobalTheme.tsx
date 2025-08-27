@@ -151,16 +151,16 @@ export function AppWithGlobalTheme() {
                 }
                 rightContent={
                   <div className="flex justify-start lg:justify-start items-start lg:items-center lg:h-full lg:min-h-0">
-                    {/* Desktop: Show InsightsFeed */}
-                    <div className="w-full">
+                    {/* Desktop only: Show InsightsFeed */}
+                    <div className="hidden lg:block w-full">
                       <InsightsFeed theme={isLightMode ? 'light' : 'dark'} minimal={true} />
                     </div>
                   </div>
                 }
               >
-                {/* Mobile video - vertically centered between content and carousel */}
+                {/* Video appears when hero stacks - starts small, grows gradually */}
                 <div className="lg:hidden w-full animate-slide-up animation-delay-500">
-                  <div className="aspect-video overflow-hidden shadow-2xl rounded-lg">
+                  <div className="aspect-video overflow-hidden shadow-2xl rounded-lg w-full mx-auto" style={{ maxWidth: 'clamp(400px, 50vw, 600px)' }}>
                     <video
                       className="w-full h-full object-cover"
                       controls
