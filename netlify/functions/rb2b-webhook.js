@@ -106,6 +106,30 @@ exports.handler = async (event, context) => {
 
     console.log('✅ Successfully stored RB2B profile:', profileRecord.id);
 
+    // Add to identity table if email exists
+    if (extractedData.person_email) {
+      console.log('👤 Adding email to identity table:', extractedData.person_email);
+      
+      const { data: identityData, error: identityError } = await supabase
+        .from('identity')
+        .insert({
+          email: extractedData.person_email.toLowerCase().trim()
+        })
+        .select()
+        .single();
+
+      if (identityError) {
+        // If it's a unique constraint error, that's expected (email already exists)
+        if (identityError.code === '23505') {
+          console.log('ℹ️ Email already exists in identity table:', extractedData.person_email);
+        } else {
+          console.error('❌ Failed to insert into identity table:', identityError);
+        }
+      } else {
+        console.log('✅ Successfully added new identity:', identityData.id);
+      }
+    }
+
     // Try to link to existing form_response by email if available
     if (extractedData.person_email) {
       console.log('🔗 Attempting to find related form_response for email:', extractedData.person_email);

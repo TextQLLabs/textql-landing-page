@@ -293,6 +293,26 @@ export default function RequestDemo() {
         
         finalFormResponseId = newFormData.id;
       }
+
+      // Add to identity table
+      const { data: identityData, error: identityError } = await supabase
+        .from('identity')
+        .insert({
+          email: formData.email.toLowerCase().trim()
+        })
+        .select()
+        .single();
+
+      if (identityError) {
+        // If it's a unique constraint error, that's expected (email already exists)
+        if (identityError.code === '23505') {
+          console.log('Email already exists in identity table:', formData.email);
+        } else {
+          console.error('Failed to insert into identity table:', identityError);
+        }
+      } else {
+        console.log('Successfully added new identity:', identityData.id);
+      }
       
       // Analytics entry is already created via the posthog_snapshot above
       

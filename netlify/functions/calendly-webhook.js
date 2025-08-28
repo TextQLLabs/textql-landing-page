@@ -114,6 +114,30 @@ exports.handler = async (event, context) => {
 
     console.log('✅ Successfully stored calendly event:', eventData.id);
 
+    // Add to identity table if email exists
+    if (invitee.email) {
+      console.log('👤 Adding email to identity table:', invitee.email);
+      
+      const { data: identityData, error: identityError } = await supabase
+        .from('identity')
+        .insert({
+          email: invitee.email.toLowerCase().trim()
+        })
+        .select()
+        .single();
+
+      if (identityError) {
+        // If it's a unique constraint error, that's expected (email already exists)
+        if (identityError.code === '23505') {
+          console.log('ℹ️ Email already exists in identity table:', invitee.email);
+        } else {
+          console.error('❌ Failed to insert into identity table:', identityError);
+        }
+      } else {
+        console.log('✅ Successfully added new identity:', identityData.id);
+      }
+    }
+
     // Now link this calendly event to the form_response record by email
     if (invitee.email) {
       console.log('🔗 Attempting to link calendly event to form_response for email:', invitee.email);

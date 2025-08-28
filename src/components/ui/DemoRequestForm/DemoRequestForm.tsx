@@ -110,6 +110,26 @@ export function DemoRequestForm({
         }
       }
 
+      // Add to identity table
+      const { data: identityData, error: identityError } = await supabase
+        .from('identity')
+        .insert({
+          email: email.toLowerCase().trim()
+        })
+        .select()
+        .single();
+
+      if (identityError) {
+        // If it's a unique constraint error, that's expected (email already exists)
+        if (identityError.code === '23505') {
+          console.log('Email already exists in identity table:', email);
+        } else {
+          console.error('Failed to insert into identity table:', identityError);
+        }
+      } else {
+        console.log('Successfully added new identity:', identityData.id);
+      }
+
       // Store for session continuity
       sessionStorage.setItem('demo_email', email);
       sessionStorage.setItem('demo_source', window.location.pathname);
