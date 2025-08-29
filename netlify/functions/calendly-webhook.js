@@ -67,7 +67,38 @@ exports.handler = async (event, context) => {
       console.log('📋 Event memberships:', JSON.stringify(eventMemberships, null, 2));
     }
     
-    // Store extracted data in calendly_events table with further simplified columns
+    // Add to identity table FIRST if email exists
+    if (invitee.email) {
+      console.log('👤 Adding email to identity table:', invitee.email);
+      
+      const { data: identityData, error: identityError } = await supabase
+        .from('identity')
+        .insert({
+          email: invitee.email.toLowerCase().trim()
+        })
+        .select()
+        .single();
+
+      if (identityError) {
+        // If it's a unique constraint error, that's expected (email already exists)
+        if (identityError.code === '23505') {
+          console.log('ℹ️ Email already exists in identity table:', invitee.email);
+        } else {
+          console.error('❌ Failed to insert into identity table:', identityError);
+          return {
+            statusCode: 500,
+            body: JSON.stringify({ 
+              error: 'Identity table insert failed',
+              details: identityError.message 
+            })
+          };
+        }
+      } else {
+        console.log('✅ Successfully added new identity:', identityData.id);
+      }
+    }
+    
+    // Then store extracted data in calendly_events table
     const { data: eventData, error: eventError } = await supabase
       .from('calendly_events')
       .insert({
@@ -113,30 +144,6 @@ exports.handler = async (event, context) => {
     }
 
     console.log('✅ Successfully stored calendly event:', eventData.id);
-
-    // Add to identity table if email exists
-    if (invitee.email) {
-      console.log('👤 Adding email to identity table:', invitee.email);
-      
-      const { data: identityData, error: identityError } = await supabase
-        .from('identity')
-        .insert({
-          email: invitee.email.toLowerCase().trim()
-        })
-        .select()
-        .single();
-
-      if (identityError) {
-        // If it's a unique constraint error, that's expected (email already exists)
-        if (identityError.code === '23505') {
-          console.log('ℹ️ Email already exists in identity table:', invitee.email);
-        } else {
-          console.error('❌ Failed to insert into identity table:', identityError);
-        }
-      } else {
-        console.log('✅ Successfully added new identity:', identityData.id);
-      }
-    }
 
     // Now link this calendly event to the form_response record by email
     if (invitee.email) {

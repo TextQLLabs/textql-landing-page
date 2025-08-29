@@ -91,7 +91,28 @@ export function DemoRequestForm({
         // Continue with navigation even if DB insert fails
       }
 
-      // Create form_response entry if snapshot was created successfully
+      // Add to identity table FIRST
+      const { data: identityData, error: identityError } = await supabase
+        .from('identity')
+        .insert({
+          email: email.toLowerCase().trim()
+        })
+        .select()
+        .single();
+
+      if (identityError) {
+        // If it's a unique constraint error, that's expected (email already exists)
+        if (identityError.code === '23505') {
+          console.log('Email already exists in identity table:', email);
+        } else {
+          console.error('Failed to insert into identity table:', identityError);
+          // Don't fail the whole flow, but log the error
+        }
+      } else {
+        console.log('Successfully added new identity:', identityData.id);
+      }
+
+      // Then create form_response entry if snapshot was created successfully
       let formResponseId = null;
       if (!snapshotError && snapshotData) {
         const { data: formData, error: formError } = await supabase
@@ -108,26 +129,6 @@ export function DemoRequestForm({
         } else {
           formResponseId = formData.id;
         }
-      }
-
-      // Add to identity table
-      const { data: identityData, error: identityError } = await supabase
-        .from('identity')
-        .insert({
-          email: email.toLowerCase().trim()
-        })
-        .select()
-        .single();
-
-      if (identityError) {
-        // If it's a unique constraint error, that's expected (email already exists)
-        if (identityError.code === '23505') {
-          console.log('Email already exists in identity table:', email);
-        } else {
-          console.error('Failed to insert into identity table:', identityError);
-        }
-      } else {
-        console.log('Successfully added new identity:', identityData.id);
       }
 
       // Store for session continuity

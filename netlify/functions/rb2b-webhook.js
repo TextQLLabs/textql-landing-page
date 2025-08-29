@@ -86,7 +86,38 @@ exports.handler = async (event, context) => {
 
     console.log('🔄 Processed data:', JSON.stringify(extractedData, null, 2));
 
-    // Insert into rb2b_profiles table
+    // Add to identity table FIRST if email exists
+    if (extractedData.person_email) {
+      console.log('👤 Adding email to identity table:', extractedData.person_email);
+      
+      const { data: identityData, error: identityError } = await supabase
+        .from('identity')
+        .insert({
+          email: extractedData.person_email.toLowerCase().trim()
+        })
+        .select()
+        .single();
+
+      if (identityError) {
+        // If it's a unique constraint error, that's expected (email already exists)
+        if (identityError.code === '23505') {
+          console.log('ℹ️ Email already exists in identity table:', extractedData.person_email);
+        } else {
+          console.error('❌ Failed to insert into identity table:', identityError);
+          return {
+            statusCode: 500,
+            body: JSON.stringify({ 
+              error: 'Identity table insert failed',
+              details: identityError.message 
+            })
+          };
+        }
+      } else {
+        console.log('✅ Successfully added new identity:', identityData.id);
+      }
+    }
+
+    // Then insert into rb2b_profiles table
     const { data: profileRecord, error: insertError } = await supabase
       .from('rb2b_profiles')
       .insert(extractedData)
@@ -105,30 +136,6 @@ exports.handler = async (event, context) => {
     }
 
     console.log('✅ Successfully stored RB2B profile:', profileRecord.id);
-
-    // Add to identity table if email exists
-    if (extractedData.person_email) {
-      console.log('👤 Adding email to identity table:', extractedData.person_email);
-      
-      const { data: identityData, error: identityError } = await supabase
-        .from('identity')
-        .insert({
-          email: extractedData.person_email.toLowerCase().trim()
-        })
-        .select()
-        .single();
-
-      if (identityError) {
-        // If it's a unique constraint error, that's expected (email already exists)
-        if (identityError.code === '23505') {
-          console.log('ℹ️ Email already exists in identity table:', extractedData.person_email);
-        } else {
-          console.error('❌ Failed to insert into identity table:', identityError);
-        }
-      } else {
-        console.log('✅ Successfully added new identity:', identityData.id);
-      }
-    }
 
     // Try to link to existing form_response by email if available
     if (extractedData.person_email) {

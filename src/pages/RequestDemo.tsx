@@ -250,6 +250,27 @@ export default function RequestDemo() {
         throw new Error(`PostHog snapshot failed: ${snapshotError.message}`);
       }
 
+      // Add to identity table FIRST
+      const { data: identityData, error: identityError } = await supabase
+        .from('identity')
+        .insert({
+          email: formData.email.toLowerCase().trim()
+        })
+        .select()
+        .single();
+
+      if (identityError) {
+        // If it's a unique constraint error, that's expected (email already exists)
+        if (identityError.code === '23505') {
+          console.log('Email already exists in identity table:', formData.email);
+        } else {
+          console.error('Failed to insert into identity table:', identityError);
+          // Don't fail the whole flow for identity issues
+        }
+      } else {
+        console.log('Successfully added new identity:', identityData.id);
+      }
+
       let finalFormResponseId = effectiveFormResponseId;
       
       // UPDATE existing form_response if we have an ID, otherwise CREATE new one
@@ -292,26 +313,6 @@ export default function RequestDemo() {
         }
         
         finalFormResponseId = newFormData.id;
-      }
-
-      // Add to identity table
-      const { data: identityData, error: identityError } = await supabase
-        .from('identity')
-        .insert({
-          email: formData.email.toLowerCase().trim()
-        })
-        .select()
-        .single();
-
-      if (identityError) {
-        // If it's a unique constraint error, that's expected (email already exists)
-        if (identityError.code === '23505') {
-          console.log('Email already exists in identity table:', formData.email);
-        } else {
-          console.error('Failed to insert into identity table:', identityError);
-        }
-      } else {
-        console.log('Successfully added new identity:', identityData.id);
       }
       
       // Analytics entry is already created via the posthog_snapshot above
